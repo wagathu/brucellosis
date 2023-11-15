@@ -407,10 +407,24 @@ augment(mod_lag6) %>%
 # Predicted time series versus the actual
 p1 <- augment(mod_lag6) %>%
   ggplot(aes(x = date)) +
-  geom_line(aes(y = human_incidence), color = "dark gray", size = 1) +
-  geom_line(aes(y = .fitted), color = "goldenrod", size = 1) +
+  geom_line(aes(y = human_incidence, color = "Observed"), size = 1) +
+  geom_line(aes(y = .fitted, color = "Fitted"), size = 1) +
   theme_light() +
-  labs(subtitle = "Time series")
+  scale_color_manual(values = c("#4E79A7", "#E41A1C")) +  # Blue and Red
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  labs(color = "") +
+  ylab("human incidence") +
+  guides(col = "none")
 
 # Predicted Versus Actual
 p2 <- augment(mod_lag6) %>%
@@ -432,27 +446,46 @@ augment(mod_lag6.1) %>%
 # Predicted time series versus the actual
 q1 <- augment(mod_lag6.1) %>%
   ggplot(aes(x = date)) +
-  geom_line(aes(y = human_incidence), color = "dark gray", size = 1) +
-  geom_line(aes(y = .fitted), color = "goldenrod", size = 1) +
+  geom_line(aes(y = human_incidence, color = "Observed"), size = 1) +
+  geom_line(aes(y = .fitted, color = "Fitted"), size = 1) +
   theme_light() +
-  labs(subtitle = "Time series")
+  scale_color_manual(values = c("#4E79A7", "#E41A1C")) +  # Blue and Red
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  ) +
+  labs(color = "") +
+  ylab("Human incidence")
 
+q1
 # Predicted Versus Actual
 q2 <- augment(mod_lag6.1) %>%
   ggplot(aes(x = human_incidence, y = .fitted)) +
-  geom_point(color = "goldenrod", size = 1) +
+  geom_point(size = 1) +
   geom_abline(intercept = 0, slope = 1, linetype = 2, size = 1, color = "dark gray") +
   theme_light() +
-  labs(subtitle = "Predicted vs actuals")
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  labs(subtitle = "Predicted vs actuals") 
 
 q = q1 + q2 +
   patchwork::plot_annotation(title = "Fitted values plots")
-
-
-
-
-
-
-
+pq <- wrap_plots(p1 + q1, guides = "collect")
 
 
