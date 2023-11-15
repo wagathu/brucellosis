@@ -1,0 +1,129 @@
+---
+title: "Analysis"
+author: ''
+output:
+  word_document: default
+header-includes: \usepackage{lscape}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+source("analysis.R")
+library(kableExtra)
+```
+
+## Descriptive Statistics
+
+Over the course of 8 years, Nakuru County reported the highest number of brucellosis cases in humans, totaling 309,011. Kisii County followed closely with 267,337 cases. In contrast, Lamu County had the lowest number of cases at 885. Table 1 showcases the top 10 counties with the highest human brucellosis cases.
+
+
+```{r}
+human_cases <- df_county |> 
+  select(county, hum_cases) |> 
+  arrange(desc(hum_cases)) |> 
+  mutate("Human Cases" = comma(hum_cases)) |> 
+  select(-hum_cases) 
+  
+human_cases[1:10,] |> 
+  knitr::kable(caption = "Top 10 counties with the highest human brucellosis cases") 
+  # kable_styling(
+  #   full_width = FALSE,          # Set to TRUE for full width
+  #   bootstrap_options = "striped", # Use Bootstrap striped style
+  #   latex_options = "HOLD_position", # Hold the position in LaTeX output
+  #   position = "center"          # Center-align the table
+  # )
+
+```
+
+\
+Turkana County reported the highest number of brucellosis cases in cattle at 114, followed closely by Narok County with 70 cases and Murang'a County with 26 cases. Kiambu, Kajiado, Isiolo, and Homa Bay had zero reported cases in cattle. Sixteen counties had no cases of brucellosis in cattle, while 31 counties had more than one case of brucellosis in cattle.
+
+In goats, Kwale County led with 528 brucellosis cases, followed by Turkana County with 168 cases. Nyamira, Narok, and Nandi had no reported cases in goats. Thirty one counties had no cases of brucellosis in goats, while 16 counties had more than one case of brucellosis in goats.
+
+For sheep, Marsabit recorded the highest number of cases at 28, followed by Turkana with 17 and Makueni with 12. Some counties, including Taita Taveta, Siaya, and Nyeri, had no reported cases in sheep. Thirty counties had no cases of brucellosis in goats, while 8 counties had more than one case of brucellosis in goats.
+
+Across the species, most cases were clinically confirmed, except for humans where most cases were lab confirmed (table 2).
+
+\newpage
+
+```{r}
+table1.1
+```
+
+
+In camels, Tana River reported the highest number of cases at 13, followed by Marsabit with 8, and Garissa and Isiolo tied at one case. All other counties (43 counties)reported no cases of brucellosis in camels.
+
+```{r}
+
+# cat_cases <- df_county |> 
+#   select(county, cam_cases, ) |> 
+#   arrange(desc(goat_cases)) |> 
+#   mutate("Cattle Cases" = comma(cam_cases)) |> 
+#   #select(-cam_cases) |> 
+#   mutate(status = ifelse(cam_cases >= 1, 1, 0)) |> 
+#   group_by(status) |>  summarise(count= n())
+
+```
+
+Overall, the cumulative count of brucellosis cases reached 4,107,162 in humans, 992 in goats, 412 in cattle, 82 in sheep, and 23 in camels. These details, along with additional descriptive statistics, are encapsulated in the table 3.
+
+```{r}
+table1
+```
+
+## Incidence Rate
+
+The incidence rates were calculated per 1,000,000 population for all species except humans, where the incidence rate was calculated per 1,000 population due to the notably higher case numbers in humans and comparatively lower cases in other species. The mean incidence rate in humans stood at 8.191 per 1,000, while for goats, it was 0.127 per 1,000,000 goats, for cattle, 0.114 per 1,000,000 cattle, for sheep, 0.032 per 1,000,000 sheep, and for camels, 0.011 per 1,000,000 camels (refer to Table 3).
+
+The maximum incidence rate in humans was 84 per 1,000, observed in Elgeyo Marakwet county. In goats, the maximum incidence rate was 4.83 per 1,000,000, reported in Kwale county. For cattle, Mombasa recorded the highest incidence rate of 1.41 per 1,000,000, while Tana River exhibited the maximum incidence rate for camels at 0.73 per 1,000,000. Lastly, the maximum incidence rate for sheep was 0.26 per 1,000,000, observed in Makueni county (table 4).
+
+```{r}
+table2
+```
+
+\newpage
+
+## Trend over time
+
+The trend for the incidence rates over time is shown in the figure below.
+
+```{r, fig.width=10, fig.height=6}
+plt1
+```
+
+<!-- For humans is as shown below -->
+
+<!-- ```{r, fig.width=10, fig.height=6} -->
+<!-- humans_plt -->
+<!-- ``` -->
+
+
+
+## Smoothed Trend
+
+<!-- The incidence rate was smoothed using loess regression technique (`geom_smooth`). however, one disadvantage is that it indicates negative incidence rate in some years. -->
+
+<!-- ```{r, fig.width=10, fig.height=6} -->
+<!-- trend_loess_plt -->
+<!-- ``` -->
+
+The incidence rate was smoothed using moving average of 3 months which resulted to the following plot
+
+```{r, fig.width=10, fig.height=6}
+plt2
+```
+
+<!-- While the smoothed incidence rate trend for humans were as shown below; -->
+
+<!-- ```{r} -->
+<!-- humans_sm_plt -->
+<!-- ``` -->
+
+
+## Spatial
+
+```{r, fig.width = 14, fig.height=18}
+all_plots
+```
+
+
