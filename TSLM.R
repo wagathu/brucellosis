@@ -378,7 +378,7 @@ mod_lag6 <- df_2 |>
   as_tsibble() |>
   model(
     TSLM(
-      human_incidence ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence-1 
+      human_incidence ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence-1
     )
   ) |>
   report()
@@ -410,7 +410,7 @@ p1 <- augment(mod_lag6) %>%
   geom_line(aes(y = human_incidence, color = "Observed"), size = 1) +
   geom_line(aes(y = .fitted, color = "Fitted"), size = 1) +
   theme_light() +
-  scale_color_manual(values = c("#4E79A7", "#E41A1C")) +  # Blue and Red
+  scale_color_manual(values = c("#4E79A7", "#E41A1C")) + 
   theme(
     strip.background = element_rect(fill = "white", colour = "grey"),
     strip.text = element_text(color = "black", size = 12),

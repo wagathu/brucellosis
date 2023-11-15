@@ -336,6 +336,38 @@ humans_sm_plt
 
 # spatial -------------------------------------------------------------------
 
+df_tot_cases <- df_incidence |> 
+  group_by(year = year(date)) |> 
+  summarise(across(contains("cases"), ~sum(., na.rm = T)))
+
+df_tot_pop <- df_incidence |> 
+  select(date, county, contains("pop")) %>%
+  distinct(.) |> 
+  as_tibble() |> 
+  group_by(year = year(date)) %>%
+  summarise(
+    sheep_pop = sum(sheep_pop),
+    goat_pop = sum(goat_pop),
+    cam_pop = sum(cam_pop),
+    catt_pop = sum(catt_pop),
+    hum_pop = sum(hum_pop)
+  ) %>%
+  as_tibble()
+
+df_1 <- df_tot_cases |> 
+  merge(df_tot_pop, by = "date") |> 
+  filter(!is.na(date)) |> 
+  mutate(
+    human_incidence = round((hum_cases/hum_pop) * 1000, 4),
+    catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
+    cam_incidence = round((cam_cases / cam_pop) * 1000000, 4),
+    goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
+    shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
+  ) |> 
+  select(date, contains("incidence")) |> 
+  as_tibble()
+
+
 df_spatial <- df_inci |> 
   filter(!is.na(date)) |> 
   group_by(year = year(date), county) |> 
