@@ -60,6 +60,21 @@ df_1 <- df_tot_cases |>
   as_tibble()
 
 # Correlation -------------------------------------------------------------
+library(data.table)
+urca::ca.jo(df[, .SD, .SDcols != ('human incidence')])
+library(data.table)
+
+dd = data.table::setDT(df_2)
+
+dd = dd[, .SD, .SDcols = !c("human_incidence", 'date')]
+
+library(urca)
+KK = ca.jo(dd)
+summary(KK)
+
+df_2 |> 
+  select( -human_incidence)
+
 
 # Correlation Plot
 cor_lag <- df_1 %>%
@@ -374,11 +389,11 @@ df_2 <- df_1 |>
 
 
 # The model 
-mod_lag6 <- df_2 |>
+mod_lag6 <- df_1 |>
   as_tsibble() |>
   model(
     TSLM(
-      human_incidence ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence-1
+      diff(human_incidence) ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence + season()-1
     )
   ) |>
   report()
