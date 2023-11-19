@@ -1,0 +1,94 @@
+---
+title: "Model Result"
+output:
+  pdf_document: default
+  word_document: default
+header-includes: \usepackage{lscape}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+options(scipen=1, digits=3)
+source("TSLM.R")
+```
+
+
+## Differencing
+
+Applying linear regression to non-stationary time series data results to a spurious regression model which shows a false relationship due to, for instance, a common trend in otherwise unrelated variables. Also, it makes predictors significant in explaining the dependent variable, while in reality, they are not. This means that the results would not be reliable for inference.
+
+We employed the Augmented Dickey-Fuller (ADF) test to assess the stationarity of our data. The test indicated that none of the time series were stationary initially. To prevent potential issues of spurious regression, we addressed this by differencing the data with an order of 1, resulting in a stationary time series.
+
+## Correlation between human incidence and Animal incidence
+
+We conducted an investigation to explore the correlation or association between the incidence of brucellosis in both human and animal species. Our primary objective was to assess the direction of any identified association. To achieve this, we employed lagged predictor variables, specifically incidences in cattle, goat, sheep, and camel, at various time lags (lag 1 to lag 6). For each lag, we calculated the correlations between the predictors and explanatory variables as well as within the predictors. Since the data was collected on a monthly basis, lag 1 corresponds to a one-month interval.
+
+\newpage
+
+```{r, fig.height=20, fig.width=14, fig.cap="Correlation between human and animal incidence at different lags"}
+all_cols
+```
+
+At lag 6, there was a fairly strong positive correlation between human and camel incidences. Also, at this lag, all the predictors had a positive (though weak) correlation with the human incidence, thus, we chose lag 6 as the best lag to model with. There was a significant correlation between goat and cattle incidence, in all the lags.
+
+Linear regression model dictates that the predictors must be independent of each other. Thus, the goat incidence was omitted in the second model.
+
+
+## Modelling
+
+Initially, we conducted individual time series linear regressions between human incidence and each animal incidence rate separately. Subsequently, we performed a comprehensive model incorporating all animal incidence rates as predictors.
+
+
+
+### Indiividual models
+#### Cattle and Human incidence
+
+The results were as follows;
+
+```{r}
+catt_mod_results |> kableExtra::kable(format = "pipe")
+```
+
+#### Goat and Human Incidence
+
+The results were as follows
+
+```{r}
+goat_mod_results |> kableExtra::kable(format = "pipe")
+```
+
+#### Sheep and Human Incidence
+
+The results were as follows
+
+```{r}
+shp_mod_results |> kableExtra::kable(format = "pipe")
+```
+
+#### Camel and Human Incidence
+
+The results were as follows
+
+```{r}
+cam_mod_results |> kableExtra::kable(format = "pipe")
+```
+
+### Full model
+
+We first fitted a model with the goat incidence included. The results were as follows;
+
+```{r}
+mod_lag6_results |> kableExtra::kable(format = "pipe")
+```
+
+
+The high correlation between goat and cattle incidence was affecting the model results where the regression coefficient for cattle was negative. Thus, in the second model, the goat incidence was omitted giving the following results;
+
+```{r}
+mod_lag6_results2 |> kableExtra::kable(format = "pipe")
+```
+
+## Model validation
+
+
+

@@ -16,7 +16,9 @@ if (require(pacman))
     patchwork,
     xts,
     feasts,
-    cowplot
+    cowplot,
+    broom,
+    kableExtra
   )
 }
 
@@ -62,6 +64,13 @@ df_1 <- df_tot_cases |>
   ) |>
   select(date, contains("incidence")) |>
   as_tibble()
+
+# Test for stationarity
+adf.test(df_1$human_incidence)
+adf.test(df_1$catt_incidence)
+adf.test(df_1$cam_incidence)
+adf.test(df_1$goat_incidence)
+adf.test(df_1$shp_incidence)
 
 date <- df_1$date[-1]
 
@@ -410,7 +419,7 @@ cor_lag <- df_diff %>%
   cor() %>%
   ggcorrplot::ggcorrplot(type = "upper",
                          lab = TRUE,
-                         lab_size = 3) +
+                         lab_size = 6) +
   theme_light() +
   labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences",
        x = NULL,
@@ -425,7 +434,7 @@ cor_lag <- df_diff %>%
     plot.title = element_text(
       color = "black",
       hjust = 0.5,
-      size = 12
+      size = 20
     ),
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "right",
@@ -448,7 +457,7 @@ cor_lag1 <- df_diff %>%
   cor() %>%
   ggcorrplot::ggcorrplot(type = "upper",
                          lab = TRUE,
-                         lab_size = 3) +
+                         lab_size = 6) +
   theme_light() +
   labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 1",
        x = NULL,
@@ -463,7 +472,7 @@ cor_lag1 <- df_diff %>%
     plot.title = element_text(
       color = "black",
       hjust = 0.5,
-      size = 12
+      size = 20
     ),
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "right",
@@ -486,7 +495,7 @@ cor_lag2 <- df_diff %>%
   cor() %>%
   ggcorrplot::ggcorrplot(type = "upper",
                          lab = TRUE,
-                         lab_size = 3) +
+                         lab_size = 6) +
   theme_light() +
   labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 2",
        x = NULL,
@@ -501,7 +510,7 @@ cor_lag2 <- df_diff %>%
     plot.title = element_text(
       color = "black",
       hjust = 0.5,
-      size = 12
+      size = 20
     ),
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "right",
@@ -524,7 +533,7 @@ cor_lag3 <- df_diff %>%
   cor() %>%
   ggcorrplot::ggcorrplot(type = "upper",
                          lab = TRUE,
-                         lab_size = 3) +
+                         lab_size = 6) +
   theme_light() +
   labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 3",
        x = NULL,
@@ -539,7 +548,7 @@ cor_lag3 <- df_diff %>%
     plot.title = element_text(
       color = "black",
       hjust = 0.5,
-      size = 12
+      size = 20
     ),
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "right",
@@ -562,7 +571,7 @@ cor_lag4 <- df_diff %>%
   cor() %>%
   ggcorrplot::ggcorrplot(type = "upper",
                          lab = TRUE,
-                         lab_size = 3) +
+                         lab_size = 6) +
   theme_light() +
   labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 4",
        x = NULL,
@@ -577,7 +586,7 @@ cor_lag4 <- df_diff %>%
     plot.title = element_text(
       color = "black",
       hjust = 0.5,
-      size = 12
+      size = 20
     ),
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "right",
@@ -600,7 +609,7 @@ cor_lag5 <- df_diff %>%
   cor() %>%
   ggcorrplot::ggcorrplot(type = "upper",
                          lab = TRUE,
-                         lab_size = 3) +
+                         lab_size = 6) +
   theme_light() +
   labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 5",
        x = NULL,
@@ -615,7 +624,7 @@ cor_lag5 <- df_diff %>%
     plot.title = element_text(
       color = "black",
       hjust = 0.5,
-      size = 12
+      size = 20
     ),
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "right",
@@ -638,7 +647,7 @@ cor_lag6 <- df_diff %>%
   cor() %>%
   ggcorrplot::ggcorrplot(type = "upper",
                          lab = TRUE,
-                         lab_size = 3) +
+                         lab_size = 6) +
   theme_light() +
   labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 6",
        x = NULL,
@@ -652,7 +661,7 @@ cor_lag6 <- df_diff %>%
     plot.title = element_text(
       color = "black",
       hjust = 0.5,
-      size = 12
+      size = 20
     ),
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "right",
@@ -670,19 +679,20 @@ all_cols <- wrap_plots(
   cor_lag6,
   ncol = 3,
   guides = "collect"
-)
-
+) |> 
 plot_grid(
-  all_cols,
-  rel_widths = c(1, 1, 1.5)  # Adjust the values to control relative widths
-)
+  rel_widths = c(7, 7,7)
+) 
+all_cols <- all_cols + theme(plot.title = element_text(size = 16),
+                             axis.text.y = element_text(color = 'black', size = 13)
+                             )
 
 # Time series linear model ------------------------------------------------
 # Lag 6 seems the best for the model
 df_2 <- df_diff |>
   as_tibble() %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 6))) |>
+            list( ~ lag(., n = 3))) |>
   na.omit() |>
   mutate(date = as.Date(date))
 
@@ -697,13 +707,50 @@ mod_lag6 <- df_2 |>
   ) |>
   report()
 
+mod_lag6_results <- tidy(mod_lag6) %>%
+  select(-.model) %>%
+  as_tibble() %>%
+  mutate(term = case_when(
+    term == "goat_incidence" ~ "Goat Incidence",
+    term == "catt_incidence" ~ "Cattle incidence",
+    term == "shp_incidence" ~ "Sheep incidence",
+    term == "cam_incidence" ~ "Camel incidence",
+    TRUE ~ as.character(term)  # Keep unchanged if not specified
+  ),
+  variable = term
+  ) |>  select(6, 2:5) |> 
+  group_by(variable) %>%
+  mutate(
+    conf_low = min(estimate - std.error * 1.96),
+    conf_high = max(estimate + std.error * 1.96)
+  )
+
+
 # The model after removing the goat incidence
 mod_lag6.1 <- df_2 |>
   as_tsibble() |>
   model(TSLM(
-    human_incidence ~ catt_incidence + cam_incidence +  shp_incidence - 1
+    human_incidence ~   cam_incidence +  shp_incidence +goat_incidence
   )) |>
   report()
+
+mod_lag6_results2 <- tidy(mod_lag6.1) %>%
+  select(-.model) %>%
+  as_tibble() %>%
+  mutate(term = case_when(
+    term == "catt_incidence" ~ "Cattle incidence",
+    term == "shp_incidence" ~ "Sheep incidence",
+    term == "cam_incidence" ~ "Camel incidence",
+    TRUE ~ as.character(term)  # Keep unchanged if not specified
+  ),
+  variable = term
+  ) |>  select(6, 2:5) |> 
+  group_by(variable) %>%
+  mutate(
+    conf_low = min(estimate - std.error * 1.96),
+    conf_high = max(estimate + std.error * 1.96)
+  )
+
 
 # Individual models -------------------------------------------------------
 
@@ -717,8 +764,24 @@ catt_mod <-  df_2 |>
   ) |>
   report()
 
+catt_mod_results <- tidy(catt_mod) %>%
+  select(-.model) %>%
+  as_tibble() %>%
+  mutate(term = case_when(
+    term == "catt_incidence" ~ "Cattle Incidence",
+    TRUE ~ as.character(term)  # Keep unchanged if not specified
+  ),
+  variable = term
+  ) |>  select(6, 2:5) |> 
+  group_by(variable) %>%
+  mutate(
+    conf_low = min(estimate - std.error * 1.96),
+    conf_high = max(estimate + std.error * 1.96)
+  )
+
+
 # Human incidence and goat
-catt_mod <-  df_2 |>
+goat_mod <-  df_2 |>
   as_tsibble() |>
   model(
     TSLM(
@@ -727,8 +790,24 @@ catt_mod <-  df_2 |>
   ) |>
   report()
 
+goat_mod_results <- tidy(goat_mod) %>%
+  select(-.model) %>%
+  as_tibble() %>%
+  mutate(term = case_when(
+    term == "goat_incidence" ~ "Goat Incidence",
+    TRUE ~ as.character(term) 
+  ),
+  variable = term
+  ) |>  select(6, 2:5) |> 
+  group_by(variable) %>%
+  mutate(
+    conf_low = min(estimate - std.error * 1.96),
+    conf_high = max(estimate + std.error * 1.96)
+  )
+
+
 # Human incidence and sheep
-catt_mod <-  df_2 |>
+shp_mod <-  df_2 |>
   as_tsibble() |>
   model(
     TSLM(
@@ -737,8 +816,24 @@ catt_mod <-  df_2 |>
   ) |>
   report()
 
+shp_mod_results <- tidy(shp_mod) %>%
+  select(-.model) %>%
+  as_tibble() %>%
+  mutate(term = case_when(
+    term == "shp_incidence" ~ "Sheep Incidence",
+    TRUE ~ as.character(term)
+  ),
+  variable = term
+  ) |>  select(6, 2:5) |> 
+  group_by(variable) %>%
+  mutate(
+    conf_low = min(estimate - std.error * 1.96),
+    conf_high = max(estimate + std.error * 1.96)
+  )
+
+
 # Human incidence and camel
-catt_mod <-  df_2 |>
+cam_mod <-  df_2 |>
   as_tsibble() |>
   model(
     TSLM(
@@ -746,6 +841,22 @@ catt_mod <-  df_2 |>
     )
   ) |>
   report()
+
+cam_mod_results <- tidy(cam_mod) %>%
+  select(-.model) %>%
+  as_tibble() %>%
+  mutate(term = case_when(
+    term == "cam_incidence" ~ "Camel Incidence",
+    TRUE ~ as.character(term) 
+  ),
+  variable = term
+  ) |>  select(6, 2:5) |> 
+  group_by(variable) %>%
+  mutate(
+    conf_low = min(estimate - std.error * 1.96),
+    conf_high = max(estimate + std.error * 1.96)
+  )
+
 
 # Model validation --------------------------------------------------------
 
