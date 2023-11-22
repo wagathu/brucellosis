@@ -189,7 +189,7 @@ adf.test(df_1$cam_incidence)
 adf.test(df_1$goat_incidence)
 adf.test(df_1$shp_incidence)
 
-date <- df_1$date[-1]
+date <- df_1$date[-c(1,2)]
 
 df_diff <- df_1 |> 
   reframe(across(contains("incidence"), ~ diff(.))) |> 
@@ -206,6 +206,12 @@ df_cum <- df_tot_cases |>
          ) |> 
   select(date, contains("incidence"))
 
+df_cum_diff <- df_cum |> 
+  arrange(date) |>  
+  as.data.frame() |>
+  reframe(across(c(human_incidence, animal_incidence), ~ diff(., 2))) |> 
+  mutate(date = as.Date(date))
+
 # Trend -------------------------------------------------------------------
 
 trend_data <- df_1 %>%
@@ -218,6 +224,23 @@ trend_data <- df_1 %>%
     ))
   )
 
+all_plus_hum <- df_cum |> 
+  ggplot(aes(date)) +
+  geom_line(aes(y = human_incidence), col = "red", size = 1) +
+  geom_line(aes(y = animal_incidence), col = "blue", size = 1) +
+  theme_light()+
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) 
+all_plus_hum
 
 # All except humans
 species_plt <- trend_data %>%
@@ -264,7 +287,7 @@ humans_plt <- trend_data %>%
   ylab("Incidence/1,000 population") +
   xlab("Year") +
   labs(col = "Species", title = "Incidence rate for humans")
-
+humans_plt
 
 # Spatial-temporal --------------------------------------------------------
 
@@ -285,7 +308,7 @@ df_spatial <- df_tot_cases_spatial |>
   merge(df_pop_spatial, by = c("year", "county")) |> 
   filter(!is.na(year)) |>
   mutate(
-    human_incidence = round((hum_cases / pop) * 1000000, 4),
+    human_incidence = round((hum_cases / pop) * 1000, 4),
     catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
     cam_incidence = round((cam_cases / cam_pop) * 1000000, 4),
     goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
@@ -818,13 +841,44 @@ df_2 <- df_diff |>
   na.omit() |>
   mutate(date = as.Date(date))
 
+df_cum2 <- df_cum_diff |>
+  as_tibble() %>%
+  mutate_at(vars(animal_incidence),
+            list( ~ lag(., n = 3))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
 
-# The model
+# The models
+## Animal Incidence and human incidence
+animal_human <- df_cum2 |>
+  as_tsibble() |>
+  model(
+    TSLM(
+      (human_incidence) ~ animal_incidence-1
+    )
+  ) |>
+  report()
+
+animal_human_results <- tidy(animal_human) %>%
+  select(-.model) %>%
+  as_tibble() %>%
+  mutate(term = case_when(
+    term == "animal_incidence" ~ "Animal Incidence",
+    TRUE ~ as.character(term)  
+  ),
+  variable = term
+  ) |>  select(6, 2:5) |> 
+  group_by(variable) %>%
+  mutate(
+    conf_low = min(estimate - std.error * 1.96),
+    conf_high = max(estimate + std.error * 1.96)
+  )
+
 mod_lag6 <- df_2 |>
   as_tsibble() |>
   model(
     TSLM(
-      log(human_incidence) ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence + catt_incidence * goat_incidence-1
+      (human_incidence) ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence -1
     )
   ) |>
   report()
