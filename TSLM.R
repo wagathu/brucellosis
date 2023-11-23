@@ -138,6 +138,7 @@ pop <- rKenyaCensus::V1_T2.2 |>
 # We're grouping data by date so that we can obtain a time series
 
 df_incidence2 <- df_incidence |> 
+  filter(diagnosis == "Lab confirmed") |>
   select(date, 
          county, 
          diseases, 
@@ -171,6 +172,9 @@ df_tot_pop <- df_incidence2 |>
 df_1 <- df_tot_cases |>
   merge(df_tot_pop, by = "date") |>
   filter(!is.na(date)) |>
+  mutate(date = as.Date(date)) |> 
+  select( date, contains('cases')) |> 
+  as_tibble()
   mutate(
     human_incidence = round((hum_cases / hum_pop) * 1000, 4),
     catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
@@ -189,7 +193,7 @@ adf.test(df_1$cam_incidence)
 adf.test(df_1$goat_incidence)
 adf.test(df_1$shp_incidence)
 
-date <- df_1$date[-c(1,2)]
+date <- df_1$date[-1]
 
 df_diff <- df_1 |> 
   reframe(across(contains("incidence"), ~ diff(.))) |> 
@@ -209,7 +213,7 @@ df_cum <- df_tot_cases |>
 df_cum_diff <- df_cum |> 
   arrange(date) |>  
   as.data.frame() |>
-  reframe(across(c(human_incidence, animal_incidence), ~ diff(., 2))) |> 
+  reframe(across(c(human_incidence, animal_incidence), ~ diff(., 1))) |> 
   mutate(date = as.Date(date))
 
 # Trend -------------------------------------------------------------------
@@ -837,7 +841,7 @@ all_cols <- all_cols + theme(plot.title = element_text(size = 16),
 df_2 <- df_diff |>
   as_tibble() %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 3))) |>
+            list( ~ lag(., n = 7))) |>
   na.omit() |>
   mutate(date = as.Date(date))
 
@@ -878,7 +882,8 @@ mod_lag6 <- df_2 |>
   as_tsibble() |>
   model(
     TSLM(
-      (human_incidence) ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence -1
+      (human_incidence) ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence
+        
     )
   ) |>
   report()
