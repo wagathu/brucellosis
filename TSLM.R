@@ -172,9 +172,6 @@ df_tot_pop <- df_incidence2 |>
 df_1 <- df_tot_cases |>
   merge(df_tot_pop, by = "date") |>
   filter(!is.na(date)) |>
-  mutate(date = as.Date(date)) |> 
-  select( date, contains('cases')) |> 
-  as_tibble()
   mutate(
     human_incidence = round((hum_cases / hum_pop) * 1000, 4),
     catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
@@ -185,6 +182,7 @@ df_1 <- df_tot_cases |>
   ) |>
   select(date, contains("incidence")) |>
   as_tibble()
+
 
 # Test for stationarity
 adf.test(df_1$human_incidence)
@@ -215,6 +213,39 @@ df_cum_diff <- df_cum |>
   as.data.frame() |>
   reframe(across(c(human_incidence, animal_incidence), ~ diff(., 1))) |> 
   mutate(date = as.Date(date))
+
+# Quartely Moving average -------------------------------------------------
+
+df_ma <- df_tot_cases |>
+  merge(df_tot_pop, by = "date") |>
+  filter(!is.na(date)) |>
+  mutate(date = as.Date(date)) 
+
+df_ma_sum <- df_ma %>%
+  #select( date, contains('cases')) |> 
+  as_tibble() |> 
+  mutate(month_group = cut(date, breaks = "4 months", labels = FALSE)) %>%
+  group_by(month_group) %>%
+  mutate(
+    hum_cases = sum(hum_cases),
+    catt_cases = sum(catt_cases),
+    cam_cases = sum(cam_cases),
+    goat_cases = sum(goat_cases),
+    shp_cases = sum(shp_cases)
+  ) %>%
+  ungroup() |> 
+  group_by(month_group) %>%
+  slice_max(order_by = date) %>%
+  ungroup() |> 
+  mutate(
+    human_incidence = round((hum_cases / hum_pop) * 1000000, 4),
+    catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
+    cam_incidence = round((cam_cases / cam_pop) * 1000000, 4),
+    goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
+    shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4),
+    date = as.Date(date)
+  ) |> 
+  select(date, contains("incidence"))
 
 # Trend -------------------------------------------------------------------
 
