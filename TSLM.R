@@ -105,7 +105,7 @@ pop <- rKenyaCensus::V1_T2.2 |>
     pop2016 = round(pop2017 * (1 - (growth_rate / 100))),
     pop2015 = round(pop2016 * (1 - (growth_rate / 100))),
     pop2014 = round(pop2015 * (1 - (growth_rate / 100)))
-    ) |> 
+  ) |> 
   merge(p19_clean |> select(1:3), by = "County") |> 
   select(County,
          pop2014,
@@ -116,7 +116,7 @@ pop <- rKenyaCensus::V1_T2.2 |>
          pop2019,
          pop2020,
          pop2021
-         ) |>
+  ) |>
   pivot_longer(
     cols = -County,
     values_to = "pop"
@@ -138,7 +138,7 @@ pop <- rKenyaCensus::V1_T2.2 |>
 # We're grouping data by date so that we can obtain a time series
 
 df_incidence2 <- df_incidence |> 
-  filter(diagnosis == "Lab confirmed") |>
+  #filter(diagnosis == "Lab confirmed") |>
   select(date, 
          county, 
          diseases, 
@@ -174,10 +174,10 @@ df_1 <- df_tot_cases |>
   filter(!is.na(date)) |>
   mutate(
     human_incidence = round((hum_cases / hum_pop) * 1000, 4),
-    catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
-    cam_incidence = round((cam_cases / cam_pop) * 1000000, 4),
-    goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
-    shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4),
+    catt_incidence = round((catt_cases / catt_pop) * 100000000, 4),
+    cam_incidence = round((cam_cases / cam_pop) * 100000000, 4),
+    goat_incidence = round((goat_cases / goat_pop) * 100000000, 4),
+    shp_incidence = round((shp_cases / sheep_pop) * 100000000, 4),
     date = as.Date(date)
   ) |>
   select(date, contains("incidence")) |>
@@ -204,8 +204,8 @@ df_cum <- df_tot_cases |>
   mutate(animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases),
          animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop),
          human_incidence = round((hum_cases / hum_pop) * 1000, 4),
-         animal_incidence = round((animal_cases / animal_pop) * 1000000, 4)
-         ) |> 
+         animal_incidence = round((animal_cases / animal_pop) * 10000000, 4)
+  ) |> 
   select(date, contains("incidence"))
 
 df_cum_diff <- df_cum |> 
@@ -860,26 +860,26 @@ all_cols <- wrap_plots(
   ncol = 3,
   guides = "collect"
 ) |> 
-plot_grid(
-  rel_widths = c(7, 7,7)
-) 
+  plot_grid(
+    rel_widths = c(7, 7,7)
+  ) 
 all_cols <- all_cols + theme(plot.title = element_text(size = 16),
                              axis.text.y = element_text(color = 'black', size = 13)
-                             )
+)
 
 # Time series linear model ------------------------------------------------
 # Lag 6 seems the best for the model
 df_2 <- df_diff |>
   as_tibble() %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 7))) |>
+            list( ~ lag(., n = 6))) |>
   na.omit() |>
   mutate(date = as.Date(date))
 
 df_cum2 <- df_cum_diff |>
   as_tibble() %>%
   mutate_at(vars(animal_incidence),
-            list( ~ lag(., n = 3))) |>
+            list( ~ lag(., n = 6))) |>
   na.omit() |>
   mutate(date = as.Date(date))
 
@@ -913,8 +913,8 @@ mod_lag6 <- df_2 |>
   as_tsibble() |>
   model(
     TSLM(
-      (human_incidence) ~ catt_incidence + cam_incidence +  shp_incidence + goat_incidence
-        
+      (human_incidence) ~   cam_incidence +  shp_incidence  + catt_incidence-1
+      
     )
   ) |>
   report()
@@ -927,7 +927,7 @@ mod_lag6_results <- tidy(mod_lag6) %>%
     term == "catt_incidence" ~ "Cattle incidence",
     term == "shp_incidence" ~ "Sheep incidence",
     term == "cam_incidence" ~ "Camel incidence",
-    TRUE ~ as.character(term)  # Keep unchanged if not specified
+    TRUE ~ as.character(term) 
   ),
   variable = term
   ) |>  select(6, 2:5) |> 
