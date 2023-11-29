@@ -135,8 +135,7 @@ pop <- rKenyaCensus::V1_T2.2 |>
 
 # Grouping data -----------------------------------------------------------
 
-# We're grouping data by date so that we can obtain a time series
-
+# Cases per year per county
 df_incidence2 <- df_incidence |> 
   #filter(diagnosis == "Lab confirmed") |>
   select(date, 
@@ -152,10 +151,54 @@ df_incidence2 <- df_incidence |>
   merge(pop, by = c("county", "year")) 
 
 df_tot_cases <- df_incidence2 |>
+  group_by(date, county) |>
+  summarise(across(contains("cases"), ~ sum(., na.rm = T)))
+
+# Population per year, per county
+df_pop <- df_incidence2 |> 
+  select(date, county, contains("pop")) %>%
+  distinct(.) |>
+  as_tibble() |>
+  group_by(date, county) %>%
+  summarise(across(where(is.numeric), ~unique(.)))
+
+df_1 <- df_tot_cases |>
+  merge(df_pop, by = c("date", "county")) |> 
+  filter(!is.na(date)) |>
+  mutate(
+    human_incidence = round((hum_cases / pop) * 1000, 4),
+    catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
+    cam_incidence = round((cam_cases / cam_pop) * 1000000, 4),
+    goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
+    shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
+  ) |>
+  select(date, county, contains("incidence")) |>
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .))) |> 
+  as_tibble() |> 
+  arrange(county)
+
+# Trend -------------------------------------------------------------------
+
+
+df_incidence2_trend <- df_incidence2 |> 
+  #filter(diagnosis == "Lab confirmed") |>
+  select(date, 
+         county, 
+         diseases, 
+         diagnosis, 
+         contains("cases"), 
+         catt_pop, 
+         goat_pop, 
+         sheep_pop, 
+         cam_pop) |>
+  mutate(year = year(date)) |> 
+  merge(pop, by = c("county", "year")) 
+
+df_tot_cases_trend <- df_incidence2_trend |>
   group_by(date) |>
   summarise(across(contains("cases"), ~ sum(., na.rm = T)))
 
-df_tot_pop <- df_incidence2 |>
+df_tot_pop_trend <- df_incidence2_trend |>
   select(date, county, contains("pop")) %>%
   distinct(.) |>
   as_tibble() |>
@@ -169,8 +212,9 @@ df_tot_pop <- df_incidence2 |>
   ) %>%
   as_tibble()
 
-df_1 <- df_tot_cases |>
-  merge(df_tot_pop, by = "date") |>
+
+df_1_trend <- df_tot_cases_trend |>
+  merge(df_tot_pop_trend, by = "date") |>
   filter(!is.na(date)) |>
   mutate(
     human_incidence = round((hum_cases / hum_pop) * 1000, 4),
@@ -183,22 +227,8 @@ df_1 <- df_tot_cases |>
   select(date, contains("incidence")) |>
   as_tibble()
 
-
-# Test for stationarity
-adf.test(df_1$human_incidence)
-adf.test(df_1$catt_incidence)
-adf.test(df_1$cam_incidence)
-adf.test(df_1$goat_incidence)
-adf.test(df_1$shp_incidence)
-
-date <- df_1$date[-1]
-
-df_diff <- df_1 |> 
-  reframe(across(contains("incidence"), ~ diff(.))) |> 
-  mutate(date = as.Date(date))
-
-df_cum <- df_tot_cases |>
-  merge(df_tot_pop, by = "date") |>
+df_cum_trend <- df_tot_cases_trend |>
+  merge(df_tot_pop_trend, by = "date") |>
   filter(!is.na(date)) |>
   rowwise() |> 
   mutate(animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases),
@@ -208,11 +238,85 @@ df_cum <- df_tot_cases |>
   ) |> 
   select(date, contains("incidence"))
 
-df_cum_diff <- df_cum |> 
-  arrange(date) |>  
-  as.data.frame() |>
-  reframe(across(c(human_incidence, animal_incidence), ~ diff(., 1))) |> 
-  mutate(date = as.Date(date))
+trend_data <- df_1_trend %>%
+  pivot_longer(cols = -date) %>%
+  mutate(
+    name = factor(name, levels = unique(name)),
+    name = factor(name, labels = c(
+      "Human Incidence", "Cattle Incidence", "Goat Incidence",
+      "Sheep Incidence", "Camel Incidence"
+    ))
+  )
+
+all_plus_hum <- df_cum_trend |> 
+  ggplot(aes(date)) +
+  geom_line(aes(y = human_incidence), col = "red", linewidth = 1) +
+  geom_line(aes(y = animal_incidence), col = "blue", linewidth = 1) +
+  theme_light()+
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) 
+all_plus_hum
+
+# All except humans
+species_plt <- trend_data %>%
+  filter(name != "Human Incidence") |>
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = value, col = name), linewidth = 1) +
+  geom_point(aes(y = value, col = name), size = 2) +
+  theme_light() +
+  #facet_wrap(~name, scales = "free", ncol = 3) +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  ylab("Incidence/1,000,000 population") +
+  xlab("Year") +
+  labs(col = "Species", title = "Incidence rate for cattle, goats, sheep and camels")
+
+species_plt
+
+# Humans
+humans_plt <- trend_data %>%
+  filter(name == "Human Incidence") |>
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = value), linewidth = 1) +
+  geom_point(aes(y = value), size = 2) +
+  theme_light() +
+  #facet_wrap(~name, scales = "free", ncol = 3) +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  ylab("Incidence/1,000 population") +
+  xlab("Year") +
+  labs(col = "Species", title = "Incidence rate for humans")
+humans_plt
+
+# Spatial -----------------------------------------------------------------
+
 
 # Cases per year per county
 df_tot_cases_spatial <- df_incidence2 |>
@@ -319,6 +423,7 @@ ylorrd_palette2 <-
       "#FEB24C",
       "#FD8D3C",
       "#FC4E2A",
+      "#E31A1C",
       "#BD0026",
       "#800026"
     )
@@ -326,14 +431,14 @@ ylorrd_palette2 <-
 
 cattle <- df_spatial_merged %>%
   mutate(catt_incidence_range = cut(round(catt_incidence, 1),
-                                    breaks = c(0, 0.1, 1, 2, 4, 6, 11, Inf),
-                                    labels = c("0", "0.1-1", "1-2", "2-4", "4-6", "6-11", "> 11"),
+                                    breaks = c(0, 0.1, 1, 2, 4, 6, 11, 50, Inf),
+                                    labels = c("0", "0.1-1", "1-2", "2-4", "4-6", "6-11", "11-50", ">50"),
                                     include.lowest = TRUE) %>%
            as.factor()
   ) |>
   ggplot() +
   geom_sf(aes(fill = catt_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(7)) +
+  scale_fill_manual(values = ylorrd_palette(8)) +
   theme_void() +
   facet_wrap(~year, nrow = 1) +
   theme(
@@ -362,14 +467,14 @@ ylorrd_palette3 <-
 
 goat <- df_spatial_merged %>%
   mutate(goat_incidence_range = cut(round(goat_incidence, 1),
-                                    breaks = c(0, 0.1, 0.5, 1, 2, Inf),
-                                    labels = c("0", "0.1-0.5", "0.5-1", "1-2", "> 2"),
+                                    breaks = c(0, 0.1, 0.5, 1, 2, 40, Inf),
+                                    labels = c("0", "0.1-0.5", "0.5-1", "1-2", "2-40", ">40"),
                                     include.lowest = TRUE) %>%
            as.factor()
   ) |>
   ggplot() +
   geom_sf(aes(fill = goat_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(5)) +
+  scale_fill_manual(values = ylorrd_palette(6)) +
   theme_void() +
   facet_wrap(~year, nrow = 1) +
   theme(
@@ -397,14 +502,14 @@ ylorrd_palette4 <-
 
 sheep <- df_spatial_merged %>%
   mutate(shp_incidence_range = cut(round(shp_incidence, 2),
-                                   breaks = c(0, 0.1, 0.2, 0.3, Inf),
-                                   labels = c("0", "0.1-0.2", "0.2-0.3", "> 0.3"),
+                                   breaks = c(0, 0.1, 0.5, 1, 10, Inf),
+                                   labels = c("0", "0.1-0.5", "0.5-1", "1-10", "> 10"),
                                    include.lowest = TRUE) %>%
            as.factor()
   ) |>
   ggplot() +
   geom_sf(aes(fill = shp_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(4)) +
+  scale_fill_manual(values = ylorrd_palette(5)) +
   theme_void() +
   facet_wrap(~year, nrow = 1) +
   theme(
@@ -432,8 +537,8 @@ ylorrd_palette5 <-
 
 camels <- df_spatial_merged %>%
   mutate(cam_incidence_range = cut(round(cam_incidence, 2),
-                                   breaks = c(0, 0.01, 0.1, 0.2, Inf),
-                                   labels = c("0", "0.01-0.1", "0.1-0.2", "> 0.2"),
+                                   breaks = c(0, 0.1, 1, 5, Inf),
+                                   labels = c("0", "0.1-1", "1-5", "> 5"),
                                    include.lowest = TRUE) %>%
            as.factor()
   ) |>
@@ -462,3 +567,115 @@ all_plots <-
   ) &
   theme(plot.caption = element_text(size = 16, colour = "black"))
 
+
+
+# Models for selected few counties ----------------------------------------
+
+# 1. Turkana
+df_isiolo <- df_1 |> 
+  filter(county == "Isiolo") |>
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 2))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
+
+adf.test(df_turkana$human_incidence)
+
+mod_turkana <- df_isiolo |>
+  as_tsibble() |>
+  model(
+    TSLM(
+      (human_incidence) ~   catt_incidence +  goat_incidence + shp_incidence + cam_incidence
+      
+    )
+  ) |>
+  report()
+
+# All counties model --------------------------------------------------------------
+
+df_2 <- df_1 |> 
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 3))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
+
+
+fit_county_model <- function(county_name, data) {
+  # Subset the data for the specific county
+  county_data <- filter(data, county == county_name)
+  
+  # Check if all incidences are zero
+  if (all(county_data$catt_incidence == 0 &
+          county_data$cam_incidence == 0 &
+          county_data$goat_incidence == 0 &
+          county_data$shp_incidence == 0)) {
+    message(paste("Skipping model for", county_name, "as all incidences are zero."))
+    return(NULL)
+  }
+  
+  # Fit the model
+  mod_county <- county_data |>
+    as_tsibble() |>
+    model(
+      TSLM(
+        human_incidence ~ catt_incidence + goat_incidence + shp_incidence
+      )
+    ) |>
+    tidy() |>
+    select(-.model) |>
+    as_tibble() |>
+    mutate(term = case_when(
+      term == "goat_incidence" ~ "Goat Incidence",
+      term == "catt_incidence" ~ "Cattle incidence",
+      term == "shp_incidence" ~ "Sheep incidence",
+      term == "cam_incidence" ~ "Camel incidence",
+      TRUE ~ as.character(term) 
+    ),
+    variable = term
+    ) |>  
+    select(6, 2:5) |> 
+    group_by(variable) %>%
+    mutate(
+      conf_low = min(estimate - std.error * 1.645),
+      conf_high = max(estimate + std.error * 1.645)
+    )
+  
+  return(mod_county)
+}
+
+
+
+county_names <- unique(df_2$county)
+
+# Create a list to store the models for each county
+models_list <- list()
+
+# Create an empty data frame to store coefficients
+coefficients_df <- data.frame(county = character(), 
+                              variable = character(),
+                              estimate = numeric(),
+                              stringsAsFactors = FALSE)
+
+for (county_name in county_names) {
+  message(paste("Fitting model for", county_name))
+  
+  # Fit the model
+  mod_county <- fit_county_model(county_name, df_2)
+  
+  # Check if model fitting was successful
+  if (!is.null(mod_county)) {
+    # Extract coefficients, round off, and add to the data frame
+    coefficients_df <- bind_rows(coefficients_df, 
+                                 mod_county %>% 
+                                   mutate(county = county_name,
+                                          estimate = round(estimate, 3)))
+  }
+}
+
+coefficients_df <- coefficients_df |>
+  mutate(across(c(3:8), ~round(., 3)))
+  
+
+  
