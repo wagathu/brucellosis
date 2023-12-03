@@ -177,6 +177,20 @@ df_1 <- df_tot_cases |>
   as_tibble() |> 
   arrange(county)
 
+
+df_cum <- df_tot_cases |>
+  merge(df_pop, by = c("date", "county")) |> 
+  filter(!is.na(date)) |> 
+  rowwise() |> 
+  mutate(
+    animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases, na.rm = T),
+    animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop, na.rm = T),
+    animal_incidence = round((animal_cases / animal_pop) * 1000000, 4),
+    human_incidence = round((hum_cases / pop) * 1000, 4)
+  ) |> 
+  select(date, county, contains("incidence")) |> 
+  as_tibble()
+
 # Trend -------------------------------------------------------------------
 
 
@@ -345,6 +359,18 @@ df_spatial <- df_tot_cases_spatial |>
   mutate(across(is.numeric, ~ifelse(is.na(.), 0, .))) |> 
   as_tibble()
 
+df_spatial_cum <- df_tot_cases_spatial |>
+  merge(df_pop_spatial, by = c("year", "county")) |> 
+  rowwise() |> 
+  mutate(
+    animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases, na.rm = T),
+    animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop, na.rm = T),
+    animal_incidence = round((animal_cases / animal_pop) * 1000000, 4),
+    human_incidence = round((hum_cases / pop) * 1000, 4)
+  ) |> 
+  select(year, county, contains("incidence")) |> 
+  as_tibble()
+
 # Checking for mismatch of county names in the shapefiles and in our data
 setdiff(shp$Name, df_spatial$county)
 
@@ -360,10 +386,15 @@ df_spatial_merged <- df_spatial |>
   merge(shp, by.x = "county", by.y = 'Name') |> 
   st_as_sf()
 
+df_spatial_merged_cum <- df_spatial_cum |> 
+  merge(shp, by.x = "county", by.y = 'Name') |> 
+  st_as_sf()
+
 # Plotting
 
 # Convert year to factor for better plotting
 df_spatial_merged$year <- as.factor(df_spatial_merged$year)
+df_spatial_merged_cum$year <- as.factor(df_spatial_merged_cum$year)
 
 # Display the first few rows of the updated data frame
 ylorrd_palette <- colorRampPalette(
@@ -384,6 +415,50 @@ ylorrd_palette <- colorRampPalette(
   space = "rgb"
 )
 
+# All animals incidence
+animals <- df_spatial_merged_cum |>
+  mutate(
+    animal_incidence_range = cut(
+      animal_incidence,
+      breaks = c(0, 1, 5, 10, 20, 30, 40, 50, 60, Inf),
+      labels = c("0", "1-5", "5-10", "10-20", "20-30", "30-40", "40-50", "50-60", "> 60"),
+      include.lowest = TRUE
+    ) |>
+      as.factor()
+  ) |>
+  ggplot() +
+  geom_sf(aes(fill = animal_incidence_range)) +
+  scale_fill_manual(values = c(
+    "0" = 'white',
+    '1-5' = '#FFEDA0',
+    '5-10' = '#FFCC00',
+    '10-20' = '#FEB24C',
+    '20-30' = '#FFAA00',
+    '30-40' = '#FD8D3C',
+    '40-50' = '#FC4E2A',
+    '50-60' = '#E31A1C',
+    '> 60' = '#800026'
+    
+  )) +
+  theme_void() +
+  facet_wrap( ~ year, nrow = 2) +
+  theme(
+    plot.title = element_text(
+      color = "black",
+      hjust = .5,
+      size = 16
+    ),
+    legend.position = "bottom",
+    legend.text = element_text(size = 10),
+    legend.title = element_text(size = 10, colour = "black"),
+    legend.key.size = unit(0.3, "cm"),
+    strip.text = element_text(colour = "black", size = 16)
+  ) +
+  ggtitle("Animals") +
+  labs(fill = "Animals")
+animals
+
+# Humans
 human <- df_spatial_merged |>
   mutate(
     human_incidence_range = cut(
@@ -580,13 +655,34 @@ df_isiolo <- df_1 |>
   na.omit() |>
   mutate(date = as.Date(date))
 
-adf.test(df_turkana$human_incidence)
+adf.test(df_isiolo$human_incidence)
 
 mod_turkana <- df_isiolo |>
   as_tsibble() |>
   model(
     TSLM(
       (human_incidence) ~   catt_incidence +  goat_incidence + shp_incidence + cam_incidence
+      
+    )
+  ) |>
+  report()
+
+# All the animal incidence
+df_isiolo <- df_cum |> 
+  filter(county == "Isiolo") |>
+  as_tibble() %>%
+  mutate_at(vars(animal_incidence),
+            list( ~ lag(., n = 2))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
+
+adf.test(df_isiolo$human_incidence)
+
+mod_turkana <- df_isiolo |>
+  as_tsibble() |>
+  model(
+    TSLM(
+      (human_incidence) ~   animal_incidence
       
     )
   ) |>
@@ -601,11 +697,51 @@ df_2 <- df_1 |>
   na.omit() |>
   mutate(date = as.Date(date))
 
+df_cum_2 <- df_cum |> 
+  as_tibble() %>%
+  mutate_at(vars(animal_incidence),
+            list( ~ lag(., n = 1))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
 
-fit_county_model <- function(county_name, data) {
+
+fit_county_model <- function(county_name, data, type) {
   # Subset the data for the specific county
   county_data <- filter(data, county == county_name)
   
+  if(type == "full")
+  {
+    # Check if all incidences are zero
+    if (all(county_data$animal_incidence == 0)) {
+      message(paste("Skipping model for", county_name, "as all incidences are zero."))
+      return(NULL)
+    }
+    
+    # Fit the model
+    mod_county <- county_data |>
+      as_tsibble() |>
+      model(
+        TSLM(
+          human_incidence ~ animal_incidence
+        )
+      ) |>
+      tidy() |>
+      select(-.model) |>
+      as_tibble() |>
+      mutate(term = case_when(
+        term == "animal_incidence" ~ "Animal Incidence",
+        TRUE ~ as.character(term) 
+      ),
+      variable = term
+      ) |>  
+      select(6, 2:5) |> 
+      group_by(variable) %>%
+      mutate(
+        conf_low = min(estimate - std.error * 1.645),
+        conf_high = max(estimate + std.error * 1.645)
+      )
+  }
+  else if(type == "individual") {
   # Check if all incidences are zero
   if (all(county_data$catt_incidence == 0 &
           county_data$cam_incidence == 0 &
@@ -620,7 +756,7 @@ fit_county_model <- function(county_name, data) {
     as_tsibble() |>
     model(
       TSLM(
-        human_incidence ~ catt_incidence + goat_incidence + shp_incidence
+        human_incidence ~ catt_incidence + goat_incidence + shp_incidence +cam_incidence
       )
     ) |>
     tidy() |>
@@ -641,7 +777,7 @@ fit_county_model <- function(county_name, data) {
       conf_low = min(estimate - std.error * 1.645),
       conf_high = max(estimate + std.error * 1.645)
     )
-  
+  }
   return(mod_county)
 }
 
@@ -652,7 +788,7 @@ county_names <- unique(df_2$county)
 # Create a list to store the models for each county
 models_list <- list()
 
-# Create an empty data frame to store coefficients
+# Initialize the data frame for each county
 coefficients_df <- data.frame(county = character(), 
                               variable = character(),
                               estimate = numeric(),
@@ -661,8 +797,10 @@ coefficients_df <- data.frame(county = character(),
 for (county_name in county_names) {
   message(paste("Fitting model for", county_name))
   
+
+  
   # Fit the model
-  mod_county <- fit_county_model(county_name, df_2)
+  mod_county <- fit_county_model(county_name, df_2, type = "individual")
   
   # Check if model fitting was successful
   if (!is.null(mod_county)) {
@@ -675,7 +813,61 @@ for (county_name in county_names) {
 }
 
 coefficients_df <- coefficients_df |>
+  mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
   mutate(across(c(3:8), ~round(., 3)))
-  
 
+# Animal incidence combined -----------------------------------------------
+
+county_names2 <- unique(df_cum_2$county)
+
+# Create a list to store the models for each county
+models_list <- list()
+
+# Initialize the data frame for each county
+coefficients_df2 <- data.frame(county = character(), 
+                              variable = character(),
+                              estimate = numeric(),
+                              stringsAsFactors = FALSE)
+
+for (county_name in county_names2) {
+  message(paste("Fitting model for", county_name))
   
+  
+  
+  # Fit the model
+  mod_county <- fit_county_model(county_name, df_cum_2, type = "full")
+  
+  # Check if model fitting was successful
+  if (!is.null(mod_county)) {
+    # Extract coefficients, round off, and add to the data frame
+    coefficients_df2 <- bind_rows(coefficients_df2, 
+                                 mod_county %>% 
+                                   mutate(county = county_name,
+                                          estimate = round(estimate, 3)))
+  }
+}
+
+coefficients_df2 <- coefficients_df2 |>
+  mutate(across(c(3:8), ~round(., 3))) |> 
+  mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
+  as_tibble()
+
+# Further analysis --------------------------------------------------------
+
+# 1. Counties where the Animal incidence is significant and not negative
+
+sgn_animal <- coefficients_df2 |> 
+  filter(significant == "Significant" & estimate > 0)
+
+# Bomet
+bomet_model <- fit_county_model("Bomet", df_cum_2, type = "full")
+
+df_cum_2 |> 
+  filter(county == "Bomet") |>
+  as_tsibble() |>
+  model(
+    TSLM(
+      human_incidence ~ animal_incidence
+    )
+  ) |>
+  report()
