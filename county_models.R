@@ -191,6 +191,61 @@ df_cum <- df_tot_cases |>
   select(date, county, contains("incidence")) |> 
   as_tibble()
 
+
+# Descriptive Statistics  -------------------------------------------------
+
+table1.1 <- df_incidence |> 
+  select(county, diagnosis, contains("cases")) |> 
+  pivot_longer(cols = -c(county, diagnosis)) %>%
+  group_by(name) |> 
+  group_by(name, Diagnosis = diagnosis) |> 
+  summarise(Cases = sum(value, na.rm = T)) |> 
+  mutate(
+    Species = recode(
+      name,
+      "cam_cases" = 'Camels',
+      "hum_cases" = 'Humans',
+      "goat_cases" = 'Goats',
+      "shp_cases" = "Sheep",
+      "catt_cases" = "Cattle"
+    ) 
+  ) |> 
+  ungroup() |> 
+  select(-name) |> 
+  group_by(Species, Diagnosis) |> 
+  group_by(Species) |> 
+  mutate(`Percent(%)` = round((Cases/sum(Cases)) * 100, 2)) |> 
+  select(3, 1,2,4) |> 
+  knitr::kable(align = "c", caption = "Number of cases according to the type of Diagnosis", format = "pipe")
+
+
+
+# The descriptive statistics are for the Incidence Rate National Wide
+table2 <- df_1 %>%
+  select(county, contains("incidence")) |> 
+  pivot_longer(cols = -1) %>%
+  group_by(name) %>%
+  summarise(
+    `Mean Incidence Rate` = mean(value, na.rm = TRUE),
+    minimum = min(value, na.rm = TRUE),
+    median = median(value, na.rm = TRUE),
+    max = max(value, na.rm = TRUE),
+    sd = sd(value, na.rm = TRUE)
+  ) %>%
+  arrange(desc(`Mean Incidence Rate`)) %>%
+  mutate(
+    name = c("Human", "Goat", "Cattle", "Camel", "Sheep"),
+    Cases = comma(`Mean Incidence Rate`),
+    Minimum = comma(minimum),
+    Median = comma(median),
+    Maximum = comma(max),
+    `Standard Deviation` = comma(sd)
+  ) %>%
+  select(Species = name, `Mean Incidence Rate`, Minimum, Median, Maximum, `Standard Deviation`) |> 
+  knitr::kable(align = "c", caption = "Descriptive Statistics for Incidence Rate", format = "pipe")
+
+table(df_inci$diagnosis)
+
 # Trend -------------------------------------------------------------------
 
 
