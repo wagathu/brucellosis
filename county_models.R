@@ -693,14 +693,14 @@ mod_turkana <- df_isiolo |>
 df_2 <- df_1 |> 
   as_tibble() %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 3))) |>
-  na.omit() |>
+            list( ~ dplyr::lag(., n = 3))) |>
+  na.omit() |> 
   mutate(date = as.Date(date))
 
 df_cum_2 <- df_cum |> 
   as_tibble() %>%
   mutate_at(vars(animal_incidence),
-            list( ~ lag(., n = 1))) |>
+            list( ~ dplyr::lag(., n = 1))) |>
   na.omit() |>
   mutate(date = as.Date(date))
 
@@ -845,7 +845,7 @@ for (county_name in county_names2) {
                                    mutate(county = county_name,
                                           estimate = round(estimate, 3)))
   }
-}
+}s
 
 coefficients_df2 <- coefficients_df2 |>
   mutate(across(c(3:8), ~round(., 3))) |> 
