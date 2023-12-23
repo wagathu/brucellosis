@@ -22,7 +22,8 @@ if (require(pacman))
     readxl,
     stringi,
     stringr,
-    rKenyaCensus
+    rKenyaCensus,
+    knitr
   )
 }
 
@@ -190,64 +191,7 @@ df_cum <- df_tot_cases |>
   ) |> 
   select(date, county, contains("incidence")) |> 
   as_tibble()
-
-
-# Descriptive Statistics  -------------------------------------------------
-
-table1.1 <- df_incidence |> 
-  select(county, diagnosis, contains("cases")) |> 
-  pivot_longer(cols = -c(county, diagnosis)) %>%
-  group_by(name) |> 
-  group_by(name, Diagnosis = diagnosis) |> 
-  summarise(Cases = sum(value, na.rm = T)) |> 
-  mutate(
-    Species = recode(
-      name,
-      "cam_cases" = 'Camels',
-      "hum_cases" = 'Humans',
-      "goat_cases" = 'Goats',
-      "shp_cases" = "Sheep",
-      "catt_cases" = "Cattle"
-    ) 
-  ) |> 
-  ungroup() |> 
-  select(-name) |> 
-  group_by(Species, Diagnosis) |> 
-  group_by(Species) |> 
-  mutate(`Percent(%)` = round((Cases/sum(Cases)) * 100, 2)) |> 
-  select(3, 1,2,4) |> 
-  knitr::kable(align = "c", caption = "Number of cases according to the type of Diagnosis", format = "pipe")
-
-
-
-# The descriptive statistics are for the Incidence Rate National Wide
-table2 <- df_1 %>%
-  select(county, contains("incidence")) |> 
-  pivot_longer(cols = -1) %>%
-  group_by(name) %>%
-  summarise(
-    `Mean Incidence Rate` = mean(value, na.rm = TRUE),
-    minimum = min(value, na.rm = TRUE),
-    median = median(value, na.rm = TRUE),
-    max = max(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE)
-  ) %>%
-  arrange(desc(`Mean Incidence Rate`)) %>%
-  mutate(
-    name = c("Human", "Goat", "Cattle", "Camel", "Sheep"),
-    Cases = comma(`Mean Incidence Rate`),
-    Minimum = comma(minimum),
-    Median = comma(median),
-    Maximum = comma(max),
-    `Standard Deviation` = comma(sd)
-  ) %>%
-  select(Species = name, `Mean Incidence Rate`, Minimum, Median, Maximum, `Standard Deviation`) |> 
-  knitr::kable(align = "c", caption = "Descriptive Statistics for Incidence Rate", format = "pipe")
-
-table(df_inci$diagnosis)
-
 # Trend -------------------------------------------------------------------
-
 
 df_incidence2_trend <- df_incidence2 |> 
   #filter(diagnosis == "Lab confirmed") |>
@@ -287,14 +231,22 @@ df_1_trend <- df_tot_cases_trend |>
   filter(!is.na(date)) |>
   mutate(
     human_incidence = round((hum_cases / hum_pop) * 1000, 4),
-    catt_incidence = round((catt_cases / catt_pop) * 100000000, 4),
-    cam_incidence = round((cam_cases / cam_pop) * 100000000, 4),
-    goat_incidence = round((goat_cases / goat_pop) * 100000000, 4),
-    shp_incidence = round((shp_cases / sheep_pop) * 100000000, 4),
+    catt_incidence = round((catt_cases / catt_pop) * 1000000, 4),
+    cam_incidence = round((cam_cases / cam_pop) * 1000000, 4),
+    goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
+    shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4),
     date = as.Date(date)
   ) |>
   select(date, contains("incidence")) |>
   as_tibble()
+
+## The differenced one
+date <- df_1_trend$date[-1]
+
+df_1_trend_diff <- df_1_trend |> 
+  reframe(across(contains("incidence"), ~ diff(.))) |> 
+  mutate(date = as.Date(date))
+
 
 df_cum_trend <- df_tot_cases_trend |>
   merge(df_tot_pop_trend, by = "date") |>
@@ -303,9 +255,16 @@ df_cum_trend <- df_tot_cases_trend |>
   mutate(animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases),
          animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop),
          human_incidence = round((hum_cases / hum_pop) * 1000, 4),
-         animal_incidence = round((animal_cases / animal_pop) * 10000000, 4)
+         animal_incidence = round((animal_cases / animal_pop) * 1000000, 4)
   ) |> 
   select(date, contains("incidence"))
+
+# The differenced one
+df_cum_trend_diff <- df_cum_trend |> 
+  arrange(date) |>  
+  as.data.frame() |>
+  reframe(across(c(human_incidence, animal_incidence), ~ diff(., 1))) |> 
+  mutate(date = as.Date(date))
 
 trend_data <- df_1_trend %>%
   pivot_longer(cols = -date) %>%
@@ -319,9 +278,9 @@ trend_data <- df_1_trend %>%
 
 all_plus_hum <- df_cum_trend |> 
   ggplot(aes(date)) +
-  geom_line(aes(y = human_incidence), col = "red", linewidth = 1) +
-  geom_line(aes(y = animal_incidence), col = "blue", linewidth = 1) +
-  theme_light()+
+  geom_point(aes(y = animal_incidence), col = "black", size = 1) +
+  geom_line(aes(y = animal_incidence), col = "black", linewidth = 1) +
+  theme_light() +
   theme(
     strip.background = element_rect(fill = "white", colour = "grey"),
     strip.text = element_text(color = "black", size = 12),
@@ -332,7 +291,8 @@ all_plus_hum <- df_cum_trend |>
     axis.title.y = element_text(color = "black", size = 10),
     legend.position = "bottom",
     legend.text = element_text(color = "black")
-  ) 
+  ) +
+  ylab("Animal Incidence")
 all_plus_hum
 
 # All except humans
@@ -383,6 +343,312 @@ humans_plt <- trend_data %>%
   xlab("Year") +
   labs(col = "Species", title = "Incidence rate for humans")
 humans_plt
+
+
+# Testing for stationary -------------------------------------------------
+
+# At county Level
+adf1 <- adf.test(df_1$human_incidence)
+adf2 <- adf.test(df_1$catt_incidence)
+adf3 <- adf.test(df_1$cam_incidence)
+adf4 <- adf.test(df_1$goat_incidence)
+adf5 <- adf.test(df_1$shp_incidence)
+
+adf_res <- data.frame(
+  variable = c(
+    "Human Incidence",
+    "Cattle Incidence",
+    "Camel Incidence",
+    "Goat Incidence",
+    "Sheep Incidence"
+  ),
+  statistic = c(
+    adf1$statistic,
+    adf2$statistic,
+    adf3$statistic,
+    adf4$statistic,
+    adf5$statistic
+  ),
+  
+  `P Value` = c(
+    adf1$p.value,
+    adf2$p.value,
+    adf3$p.value,
+    adf4$p.value,
+    adf5$p.value
+  )
+  
+  
+) %>%
+  mutate(across(where(is.numeric), ~round(., 3))) |> 
+knitr::kable(
+    align = "l",
+    caption = "Results of Augmented Dickey-Fuller Test for Stationarity at County Level",
+    format = "pipe",
+    latex_options = "hold_position"
+  )
+
+# At National Level
+adf_trend1 <- adf.test(df_1_trend$human_incidence)
+adf_trend2 <- adf.test(df_1_trend$catt_incidence)
+adf_trend3 <- adf.test(df_1_trend$cam_incidence)
+adf_trend4 <- adf.test(df_1_trend$goat_incidence)
+adf_trend5 <- adf.test(df_1_trend$shp_incidence)
+
+adf_trend_res <- data.frame(
+  Variable = c(
+    "Human Incidence",
+    "Cattle Incidence",
+    "Camel Incidence",
+    "Goat Incidence",
+    "Sheep Incidence"
+  ),
+  Statistic = c(
+    adf_trend1$statistic,
+    adf_trend2$statistic,
+    adf_trend3$statistic,
+    adf_trend4$statistic,
+    adf_trend5$statistic
+  ),
+  
+  `P Value` = c(
+    adf_trend1$p.value,
+    adf_trend2$p.value,
+    adf_trend3$p.value,
+    adf_trend4$p.value,
+    adf_trend5$p.value
+  )
+  
+  
+) |>
+  mutate(across(where(is.numeric), ~round(., 3))) |> 
+  knitr::kable(
+    align = "l",
+    caption = "Results of Augmented Dickey-Fuller Test for Stationarity at National Level",
+    format = "pipe",
+    latex_options = "hold_position"
+  )
+
+## All incidences combined
+
+adf_combined <- adf.test(df_cum$animal_incidence)
+adf_combined_trend <- adf.test(df_cum_trend$animal_incidence)
+
+
+adf_combined_results <- data.frame(
+  "Level" = c("County", "National"),
+  "Statistic" = c(adf_combined$statistic, adf_combined_trend$statistic),
+  "P Value" = c(adf_combined$p.value, adf_combined_trend$p.value)
+)
+
+# Moving Average Smoothing ------------------------------------------------
+
+
+# Select columns containing "incidence"
+incidence_cols <- grep("incidence", names(df_1_trend), value = TRUE)
+
+# Apply moving average smoothing to selected columns
+smoothed_df <- df_1_trend %>%
+  mutate(across(all_of(incidence_cols), ~zoo::rollmean(., k = 4, fill = NA), .names = "smoothed_{.col}")) |> 
+  na.omit()
+
+# Print the first few rows of the smoothed data
+head(smoothed_df)
+
+order <- c(
+  "smoothed_human_incidence",
+  "smoothed_catt_incidence",
+  "smoothed_goat_incidence",
+  "smoothed_shp_incidence",
+  "smoothed_cam_incidence"
+)
+
+trend_data_smoothed <- smoothed_df %>%
+  select(date, contains("smoothed")) %>%
+  pivot_longer(cols = -date) %>%
+  mutate(
+    name = factor(name, levels = order),
+    name = factor(name, labels = c(
+      "Human Incidence", "Cattle Incidence", "Goat Incidence",
+      "Sheep Incidence", "Camel Incidence"
+    ))
+  ) 
+
+species_sm_plt <- trend_data_smoothed |> 
+  filter(name != "Human Incidence") |> 
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = value, col = name), linewidth = 1) +
+  # facet_wrap(~name, scales = "free", ncol = 3) +
+  theme_light() +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  ylab("Incidence/1,000,000 population") +
+  xlab("Year") +
+  labs(col = "Species", title = "Smoothed Incidence rate for cattle, goats, sheep and camels")
+
+species_sm_plt
+
+# With points
+species_sm_plt_points <- trend_data_smoothed |> 
+  filter(name != "Human Incidence") |> 
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = value, col = name), linewidth = 1) +
+  geom_point(data = trend_data |> 
+               filter(name != "Human Incidence"),
+             
+             aes(y = value, col = name), size = 1) +
+  # facet_wrap(~name, scales = "free", ncol = 3) +
+  theme_light() +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  ylab("Incidence/1,000,000 population") +
+  xlab("Year") +
+  labs(col = "Species", title = "Smoothed Incidence rate for cattle, goats, sheep and camels")
+
+species_sm_plt_points
+
+humans_sm_plt <- trend_data_smoothed |> 
+  filter(name == "Human Incidence") |> 
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = value), linewidth = 1) +
+  geom_point(data = df_1_trend, aes(y = human_incidence), col = "red") +
+  # facet_wrap(~name, scales = "free", ncol = 3) +
+  theme_light() +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  ylab("Incidence/1,000 population") +
+  xlab("Year") +
+  labs(col = "Species", title = "Smoothed incidence rate for humans")
+humans_sm_plt
+
+## For all animal incidence combined
+df_cum_trend <- df_cum_trend |> 
+  mutate(date = as.Date(date))
+
+incidence_cols_cum <- grep("incidence", names(df_cum_trend), value = TRUE)
+
+# Apply moving average smoothing to selected columns
+# Select columns containing "incidence"
+incidence_cols <- grep("incidence", names(df_cum_trend), value = TRUE)
+
+# Apply moving average smoothing to selected columns
+smoothed_df_combined <- df_cum_trend %>%
+  as_tibble() |>
+  mutate(across(
+    all_of(incidence_cols),
+    ~ zoo::rollmean(., k = 2, fill = NA),
+    .names = "smoothed_{.col}"
+  )) |>
+  na.omit()
+
+animal_sm_plt <- smoothed_df_combined |> 
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = smoothed_animal_incidence), linewidth = 1) +
+  geom_point(data = df_cum_trend, aes(y = animal_incidence), col = "red") +
+  # facet_wrap(~name, scales = "free", ncol = 3) +
+  theme_light() +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  ylab("Incidence/1,000,000 population") +
+  xlab("Year") +
+  labs(col = "Species", title = "Smoothed incidence rate for animal incidence combined")
+animal_sm_plt
+
+# Descriptive Statistics  -------------------------------------------------
+
+table1.1 <- df_incidence |> 
+  select(county, diagnosis, contains("cases")) |> 
+  pivot_longer(cols = -c(county, diagnosis)) %>%
+  group_by(name) |> 
+  group_by(name, Diagnosis = diagnosis) |> 
+  summarise(Cases = sum(value, na.rm = T)) |> 
+  mutate(
+    Species = recode(
+      name,
+      "cam_cases" = 'Camels',
+      "hum_cases" = 'Humans',
+      "goat_cases" = 'Goats',
+      "shp_cases" = "Sheep",
+      "catt_cases" = "Cattle"
+    ) 
+  ) |> 
+  ungroup() |> 
+  select(-name) |> 
+  group_by(Species, Diagnosis) |> 
+  group_by(Species) |> 
+  mutate(`Percent(%)` = round((Cases/sum(Cases)) * 100, 2)) |> 
+  select(3, 1,2,4) |> 
+  knitr::kable(align = "l", 
+               caption = "Number of cases according to the type of Diagnosis", 
+               format = "pipe",
+               latex_options = "hold_position")
+
+
+
+# The descriptive statistics are for the Incidence Rate National Wide
+table2 <- df_1 %>%
+  select(county, contains("incidence")) |> 
+  pivot_longer(cols = -1) %>%
+  group_by(name) %>%
+  summarise(
+    `Mean Incidence Rate` = mean(value, na.rm = TRUE),
+    minimum = min(value, na.rm = TRUE),
+    median = median(value, na.rm = TRUE),
+    max = max(value, na.rm = TRUE),
+    sd = sd(value, na.rm = TRUE)
+  ) %>%
+  arrange(desc(`Mean Incidence Rate`)) %>%
+  mutate(
+    name = c("Human", "Goat", "Cattle", "Camel", "Sheep"),
+    Cases = comma(`Mean Incidence Rate`),
+    Minimum = comma(minimum),
+    Median = comma(median),
+    Maximum = comma(max),
+    `Standard Deviation` = comma(sd)
+  ) %>%
+  select(Species = name, `Mean Incidence Rate`, Minimum, Median, Maximum, `Standard Deviation`) |> 
+  knitr::kable(align = "l", 
+               caption = "Descriptive Statistics for Incidence Rate", 
+               format = "pipe", latex_options = "hold_position")
+
+
+
 
 # Spatial -----------------------------------------------------------------
 
@@ -496,7 +762,7 @@ animals <- df_spatial_merged_cum |>
     
   )) +
   theme_void() +
-  facet_wrap( ~ year, nrow = 2) +
+  facet_wrap( ~ year, nrow = 1) +
   theme(
     plot.title = element_text(
       color = "black",
@@ -544,6 +810,18 @@ human <- df_spatial_merged |>
   ggtitle("Humans") +
   labs(fill = "Humans")
 human
+
+
+animals_humans <-
+  wrap_plots(human,
+             animals,
+             ncol = 1,
+             guides = "keep") +
+  plot_annotation(caption = "For humans, the incidence rate is per
+                  1,000 population while for animal,
+                  the incidence rate is per 1,000,000 population
+                  ") &
+  theme(plot.caption = element_text(size = 16, colour = "black"))
 
 ylorrd_palette2 <-
   colorRampPalette(
@@ -699,6 +977,434 @@ all_plots <-
 
 
 
+# Correlation -------------------------------------------------------------
+# library(data.table)
+# urca::ca.jo(df[, .SD, .SDcols != ('human incidence')])
+# library(data.table)
+# 
+# dd = data.table::setDT(df_2)
+# 
+# dd = dd[, .SD, .SDcols = !c("human_incidence", 'date')]
+# 
+# library(urca)
+# KK = ca.jo(dd)
+# summary(KK)
+
+# Correlation Plot
+cor_lag <- df_1_trend %>%
+  as_tibble() %>%
+  select(-date) %>%
+  setNames(c("Human",
+             "Cattle",
+             "Camel",
+             "Goat",
+             "Sheep")) |>
+  cor() %>%
+  ggcorrplot::ggcorrplot(type = "upper",
+                         lab = TRUE,
+                         lab_size = 6) +
+  theme_light() +
+  labs(subtitle = "Correlation between human incidence \nand animal incidences",
+       x = NULL,
+       y = NULL) +
+  guides(fill = "none") +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 35
+    ),
+    plot.subtitle = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 14
+    ),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  )
+cor_lag
+
+# Correlation Plot at lag 1
+cor_lag1 <- df_1_trend %>%
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 1))) |>
+  na.omit() |>
+  select(-date) %>%
+  setNames(c("Human",
+             "Cattle",
+             "Camel",
+             "Goat",
+             "Sheep")) |>
+  cor() %>%
+  ggcorrplot::ggcorrplot(type = "upper",
+                         lab = TRUE,
+                         lab_size = 6) +
+  theme_light() +
+  labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 1",
+       x = NULL,
+       y = NULL) +
+  guides(fill = "none") +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 20
+    ),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  )
+cor_lag1
+
+# Correlation Plot at lag 2
+cor_lag2 <- df_1_trend %>%
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 2))) |>
+  na.omit() |>
+  select(-date) %>%
+  setNames(c("Human",
+             "Cattle",
+             "Camel",
+             "Goat",
+             "Sheep")) |>
+  cor() %>%
+  ggcorrplot::ggcorrplot(type = "upper",
+                         lab = TRUE,
+                         lab_size = 6) +
+  theme_light() +
+  labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 2",
+       x = NULL,
+       y = NULL) +
+  guides(fill = "none") +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 20
+    ),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  )
+cor_lag2
+
+# Correlation Plot at lag 3
+cor_lag3 <- df_1_trend %>%
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 3))) |>
+  na.omit() |>
+  select(-date) %>%
+  setNames(c("Human",
+             "Cattle",
+             "Camel",
+             "Goat",
+             "Sheep")) |>
+  cor() %>%
+  ggcorrplot::ggcorrplot(type = "upper",
+                         lab = TRUE,
+                         lab_size = 6) +
+  theme_light() +
+  labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 3",
+       x = NULL,
+       y = NULL) +
+  guides(fill = "none") +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 20
+    ),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  )
+cor_lag3
+
+# Correlation Plot at lag 4
+cor_lag4 <- df_1_trend %>%
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 4))) |>
+  na.omit() |>
+  select(-date) %>%
+  setNames(c("Human",
+             "Cattle",
+             "Camel",
+             "Goat",
+             "Sheep")) |>
+  cor() %>%
+  ggcorrplot::ggcorrplot(type = "upper",
+                         lab = TRUE,
+                         lab_size = 6) +
+  theme_light() +
+  labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 4",
+       x = NULL,
+       y = NULL) +
+  guides(fill = "none") +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 20
+    ),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  )
+cor_lag4
+
+# Correlation Plot at lag 5
+cor_lag5 <- df_1_trend %>%
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 5))) |>
+  na.omit() |>
+  select(-date) %>%
+  setNames(c("Human",
+             "Cattle",
+             "Camel",
+             "Goat",
+             "Sheep")) |>
+  cor() %>%
+  ggcorrplot::ggcorrplot(type = "upper",
+                         lab = TRUE,
+                         lab_size = 6) +
+  theme_light() +
+  labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 5",
+       x = NULL,
+       y = NULL) +
+  guides(fill = "none") +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 20
+    ),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  )
+cor_lag5
+
+# Correlation Plot at lag 6
+cor_lag6 <- df_1_trend %>%
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 6))) |>
+  na.omit() |>
+  select(-date) %>%
+  setNames(c("Human",
+             "Cattle",
+             "Camel",
+             "Goat",
+             "Sheep")) |>
+  cor() %>%
+  ggcorrplot::ggcorrplot(type = "upper",
+                         lab = TRUE,
+                         lab_size = 6) +
+  theme_light() +
+  labs(subtitle = "Correlation between\nhuman incidence \nand animal incidences at lag 6",
+       x = NULL,
+       y = NULL) +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(
+      color = "black",
+      hjust = 0.5,
+      size = 20
+    ),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "right",
+    legend.text = element_text(color = "black")
+  )
+cor_lag6
+
+all_cols <- wrap_plots(
+  cor_lag,
+  cor_lag1,
+  cor_lag2,
+  cor_lag3,
+  cor_lag4,
+  cor_lag5,
+  cor_lag6,
+  ncol = 3,
+  guides = "collect"
+) |> 
+  plot_grid(
+    rel_widths = c(7, 7,7)
+  ) 
+all_cols <- all_cols + theme(plot.title = element_text(size = 16),
+                             axis.text.y = element_text(color = 'black', size = 13)
+)
+
+# General Model without and with differencing --------------------------------------
+
+## This model fits the data without differencing, at difference lags, (0-6) and for individual 
+## animal incidences.
+
+run_lag_models <- function(df, max_lag = 6, ...) {
+  
+  result_df <- tibble()
+  
+  for (lag_value in 0:max_lag) {
+    df_lagged <- df |>
+      as_tibble() %>%
+      mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+                list( ~ lag(., n = lag_value))) |>
+      na.omit() |>
+      mutate(date = as.Date(date))
+    
+    mod <- df_lagged |>
+      as_tsibble() |>
+      model(
+        TSLM(
+          (human_incidence) ~ cam_incidence + shp_incidence + catt_incidence + goat_incidence
+        )
+      ) |>
+      report()
+    
+    mod_results <- tidy(mod) %>%
+      select(-.model) %>%
+      as_tibble() %>%
+      mutate(term = case_when(
+        term == "goat_incidence" ~ "Goat Incidence",
+        term == "catt_incidence" ~ "Cattle incidence",
+        term == "shp_incidence" ~ "Sheep incidence",
+        term == "cam_incidence" ~ "Camel incidence",
+        TRUE ~ as.character(term) 
+      ),
+      variable = term
+      ) |>  select(6, 2:5) |> 
+      group_by(variable) %>%
+      mutate(
+        conf_low = min(estimate - std.error * 1.645),
+        conf_high = max(estimate + std.error * 1.645)
+      ) %>%
+      mutate(lag = lag_value)
+    
+    result_df <- bind_rows(result_df, mod_results) |> 
+      mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high), ~round(., 3))) |> 
+      mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+  }
+  
+  return(result_df)
+}
+
+non_diff_indivi <- run_lag_models(df_1_trend)
+diff_indivi <- run_lag_models(df_1_trend_diff)
+write_csv(non_diff_indivi, "non_diff_individual.csv")
+write_csv(diff_indivi, "diff_individual.csv")
+
+# If you want a model at a specific lag, you can use the following code
+df_2 <- df_1_trend |> 
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 2))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
+
+mod_lag <- df_2 |> 
+  as_tsibble() |>
+  model(
+    TSLM(
+      (human_incidence) ~ cam_incidence + shp_incidence + catt_incidence + goat_incidence
+    )
+  ) |>
+  report()
+
+## The following function fits the model, without differencing, at difference lags, (0-6) and for
+## animal incidences combined
+
+lag_models_full <- function(df, max_lag = 6, ...) {
+  
+  result_df <- tibble()
+  
+  for (lag_value in 0:max_lag) {
+    df_lagged <- df |>
+      as_tibble() %>%
+      mutate_at(vars(animal_incidence),
+                list( ~ lag(., n = lag_value))) |>
+      na.omit() |>
+      mutate(date = as.Date(date))
+    
+    mod <- df_lagged |>
+      as_tsibble() |>
+      model(
+        TSLM(
+          (human_incidence) ~ animal_incidence
+        )
+      ) |>
+      report()
+    
+    mod_results <- tidy(mod) %>%
+      select(-.model) %>%
+      as_tibble() %>%
+      mutate(term = case_when(
+        term == "animal_incidence" ~ "Animal Incidence",
+        TRUE ~ as.character(term) 
+      ),
+      variable = term
+      ) |>  select(6, 2:5) |> 
+      group_by(variable) %>%
+      mutate(
+        conf_low = min(estimate - std.error * 1.645),
+        conf_high = max(estimate + std.error * 1.645)
+      ) %>%
+      mutate(lag = lag_value)
+    
+    result_df <- bind_rows(result_df, mod_results) |> 
+      mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high), ~round(., 3))) |> 
+      mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+  }
+  
+  return(result_df)
+}
+
+
+non_diff_full <- lag_models_full(df_cum_trend)
+diff_full <- lag_models_full(df_cum_trend_diff)
+
+write_csv(non_diff_full, "non_diff_full.csv")
+write_csv(diff_full, "diff_full.csv")
+
 # Models for selected few counties ----------------------------------------
 
 # 1. Turkana
@@ -745,18 +1451,20 @@ mod_turkana <- df_isiolo |>
 
 # All counties model --------------------------------------------------------------
 
-df_2 <- df_1 |> 
+# Lag 2
+df_2_2 <- df_1 |> 
   as_tibble() %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ dplyr::lag(., n = 3))) |>
+            list( ~ dplyr::lag(., n = 2))) |>
   na.omit() |> 
   mutate(date = as.Date(date))
 
-df_cum_2 <- df_cum |> 
+# Lag 4
+df_2_4 <- df_1 |> 
   as_tibble() %>%
-  mutate_at(vars(animal_incidence),
-            list( ~ dplyr::lag(., n = 1))) |>
-  na.omit() |>
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ dplyr::lag(., n = 4))) |>
+  na.omit() |> 
   mutate(date = as.Date(date))
 
 
@@ -836,93 +1544,155 @@ fit_county_model <- function(county_name, data, type) {
   return(mod_county)
 }
 
-
-
-county_names <- unique(df_2$county)
+county_names <- unique(df_2_2$county)
 
 # Create a list to store the models for each county
 models_list <- list()
 
 # Initialize the data frame for each county
-coefficients_df <- data.frame(county = character(), 
+coefficients_df_lag2 <- data.frame(county = character(), 
                               variable = character(),
                               estimate = numeric(),
                               stringsAsFactors = FALSE)
 
+# At lag 2
 for (county_name in county_names) {
   message(paste("Fitting model for", county_name))
   
 
   
   # Fit the model
-  mod_county <- fit_county_model(county_name, df_2, type = "individual")
+  mod_county <- fit_county_model(county_name, df_2_2, type = "individual")
   
   # Check if model fitting was successful
   if (!is.null(mod_county)) {
     # Extract coefficients, round off, and add to the data frame
-    coefficients_df <- bind_rows(coefficients_df, 
+    coefficients_df_lag2 <- bind_rows(coefficients_df_lag2, 
                                  mod_county %>% 
                                    mutate(county = county_name,
                                           estimate = round(estimate, 3)))
   }
 }
 
-coefficients_df <- coefficients_df |>
+coefficients_df_lag2 <- coefficients_df_lag2 |>
   mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
   mutate(across(c(3:8), ~round(., 3)))
+write_csv(coefficients_df_lag2, "individual_animal_incidence_per_county_lag2.csv")
 
-# Animal incidence combined -----------------------------------------------
+# At lag 4
+coefficients_df_lag4 <- data.frame(county = character(), 
+                                   variable = character(),
+                                   estimate = numeric(),
+                                   stringsAsFactors = FALSE)
 
-county_names2 <- unique(df_cum_2$county)
-
-# Create a list to store the models for each county
-models_list <- list()
-
-# Initialize the data frame for each county
-coefficients_df2 <- data.frame(county = character(), 
-                              variable = character(),
-                              estimate = numeric(),
-                              stringsAsFactors = FALSE)
-
-for (county_name in county_names2) {
+for (county_name in county_names) {
   message(paste("Fitting model for", county_name))
   
   
   
   # Fit the model
-  mod_county <- fit_county_model(county_name, df_cum_2, type = "full")
+  mod_county <- fit_county_model(county_name, df_2_4, type = "individual")
   
   # Check if model fitting was successful
   if (!is.null(mod_county)) {
     # Extract coefficients, round off, and add to the data frame
-    coefficients_df2 <- bind_rows(coefficients_df2, 
+    coefficients_df_lag4 <- bind_rows(coefficients_df_lag4, 
                                  mod_county %>% 
                                    mutate(county = county_name,
                                           estimate = round(estimate, 3)))
   }
-}s
+}
 
-coefficients_df2 <- coefficients_df2 |>
+coefficients_df_lag4 <- coefficients_df_lag4 |>
+  mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
+  mutate(across(c(3:8), ~round(., 3)))
+write_csv(coefficients_df_lag4, "individual_animal_incidence_per_county_lag4.csv")
+
+# Animal incidence combined -----------------------------------------------
+
+# Lag 2
+df_cum_2_2 <- df_cum |> 
+  as_tibble() %>%
+  mutate_at(vars(animal_incidence),
+            list( ~ dplyr::lag(., n = 2))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
+
+df_cum_2_4 <- df_cum |> 
+  as_tibble() %>%
+  mutate_at(vars(animal_incidence),
+            list( ~ dplyr::lag(., n = 4))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
+
+# At lag 2
+county_names2_2 <- unique(df_cum_2_2$county)
+
+# Create a list to store the models for each county
+models_list <- list()
+
+# Initialize the data frame for each county
+coefficients_df2_lag2 <- data.frame(county = character(), 
+                              variable = character(),
+                              estimate = numeric(),
+                              stringsAsFactors = FALSE)
+
+for (county_name in county_names2_2) {
+  message(paste("Fitting model for", county_name))
+  
+  
+  
+  # Fit the model
+  mod_county <- fit_county_model(county_name, df_cum_2_2, type = "full")
+  
+  # Check if model fitting was successful
+  if (!is.null(mod_county)) {
+    # Extract coefficients, round off, and add to the data frame
+    coefficients_df2_lag2 <- bind_rows(coefficients_df2_lag2, 
+                                 mod_county %>% 
+                                   mutate(county = county_name,
+                                          estimate = round(estimate, 3)))
+  }
+}
+
+coefficients_df2_lag2 <- coefficients_df2_lag2 |>
   mutate(across(c(3:8), ~round(., 3))) |> 
   mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
   as_tibble()
+write_csv(coefficients_df2_lag2, "all_animal_incidence_per_county_lag2.csv")
 
-# Further analysis --------------------------------------------------------
+# At lag 4
+county_names2_4 <- unique(df_cum_2_4$county)
 
-# 1. Counties where the Animal incidence is significant and not negative
+# Create a list to store the models for each county
+models_list <- list()
 
-sgn_animal <- coefficients_df2 |> 
-  filter(significant == "Significant" & estimate > 0)
+# Initialize the data frame for each county
+coefficients_df2_lag4 <- data.frame(county = character(), 
+                                    variable = character(),
+                                    estimate = numeric(),
+                                    stringsAsFactors = FALSE)
 
-# Bomet
-bomet_model <- fit_county_model("Bomet", df_cum_2, type = "full")
+for (county_name in county_names2_4) {
+  message(paste("Fitting model for", county_name))
+  
+  
+  
+  # Fit the model
+  mod_county <- fit_county_model(county_name, df_cum_2_4, type = "full")
+  
+  # Check if model fitting was successful
+  if (!is.null(mod_county)) {
+    # Extract coefficients, round off, and add to the data frame
+    coefficients_df2_lag4 <- bind_rows(coefficients_df2_lag4, 
+                                       mod_county %>% 
+                                         mutate(county = county_name,
+                                                estimate = round(estimate, 3)))
+  }
+}
 
-df_cum_2 |> 
-  filter(county == "Bomet") |>
-  as_tsibble() |>
-  model(
-    TSLM(
-      human_incidence ~ animal_incidence
-    )
-  ) |>
-  report()
+coefficients_df2_lag4 <- coefficients_df2_lag4 |>
+  mutate(across(c(3:8), ~round(., 3))) |> 
+  mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
+  as_tibble()
+write_csv(coefficients_df2_lag4, "all_animal_incidence_per_county_lag4.csv")

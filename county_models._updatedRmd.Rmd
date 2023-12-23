@@ -1,0 +1,891 @@
+---
+title: "Brucellosis Incidence Rate"
+output:
+  word_document: default
+date: "2023-12-05"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+source("county_models.R")
+
+```
+
+## Descriptive Statistics
+
+*The results reported in this file were coded in the* **county_models.R** *file*
+
+Among Camels, the majority of cases (91.30%) are clinically confirmed, with a smaller proportion (8.70%) being lab confirmed; no cases were post-mortem. In the case of Cattle, clinical confirmation dominates (55.34%), followed by lab confirmation (41.26%), and a minor portion through post-mortem (3.40%). Goats show a significant reliance on clinical confirmation (82.16%), while lab confirmation accounts for 17.84%, and no post-mortem cases were reported. Humans exhibit a considerable reliance on lab confirmation (77.98%), with clinical confirmation comprising 22.02%, and no post-mortem cases. Sheep cases are predominantly clinically confirmed (79.27%), with lab-confirmed cases making up 20.73%, and no instances of post-mortem diagnosis. 
+
+```{r}
+table1.1
+```
+
+The descriptive statistics for the incidence rate of Brucellosis among Camels, Cattle, Goats, Humans, and Sheep are presented in the table 2. The human incidence was calculated per 1,000 population while the incidence for the other species was calculated per 1,000,000 population.
+
+```{r table 2, fig.cap="Descritive Statistics for the Incidence Rate of Brucellosis among Camels, Cattle, Goats, Humans, and Sheep"}
+table2
+```
+
+## Test for stationarity and Differencing
+
+The Augmented Dickey-Fuller test was used to test for stationarity. The test was conducted for the data both at National and County level. At county level, the results were as shown below
+
+```{r}
+adf_res
+
+```
+
+At county level, all the variables were stationary at 5% level of significance. At national level, the results were as shown below
+
+```{r}
+adf_trend_res
+```
+
+At national level, the human incidence variable was not stationary at 5% level of significance. Thus, to make it stationary, the variables were differenced at lag 1
+
+## Trend
+
+The trend for all animal incidence rate combined was as shown below
+
+```{r, fig.width=10, fig.height=10}
+all_plus_hum
+```
+
+
+The trend for  humans as well as individual species was as shown below
+
+```{r, fig.width=10, fig.height=10}
+humans_plt/species_plt
+
+```
+
+The incidences were also smoothed using the moving average method, at 4 months. The plot for animal incidence combined and smoothed was as shown below;
+
+```{r, fig.width=10, fig.height=10}
+animal_sm_plt
+```
+
+While, for human and other species smoothed were as shown below;
+
+```{r, fig.width=10, fig.height=10}
+humans_sm_plt/species_sm_plt
+```
+
+With points
+
+```{r}
+species_sm_plt_points
+
+```
+
+
+## Spatial
+
+The spatial distribution of the incidence rate of Brucellosis in animals combined and humans was as shown below
+
+\newpage
+
+```{r, fig.width=20, fig.height=20}
+animals_humans
+```
+
+\newpage
+
+The spatial distribution of the incidence rate of Brucellosis among Camels, Cattle, Goats, Humans, and Sheep are presented in the below,
+
+\newpage
+
+```{r, fig.width=20, fig.height=25}
+all_plots
+```
+
+\newpage
+
+
+## Correlation
+
+The correlation between the incidence rate of Brucellosis among Camels, Cattle, Goats, Humans, and Sheep were calculated in different lags. There was a high correlation between cattle and goat incidence across all lags. This correlation plot was used to determine the best lag to test for association between the human incidence and animal incidences. The incidence rates for this plot were not differenced.
+
+The correlation plot shows the correlation between the human incidence rate and other species incidence rate. Also, it shows the correlation among the independent variables, which are the animal species.
+
+To check for a correlation between a variable and another variable, you check the variable on the x-axis and then the other variable of interest on the y-axis. The corresponding value at the box in the intersection the correlation between the two.
+
+Correlation is a statistical measure that describes the extent to which two variables change together. In other words, it quantifies the degree to which there is a relationship between two variables.The most common measure of correlation is the correlation coefficient. It ranges from -1 to 1, where: 1: Perfect positive correlation (as one variable increases, the other variable increases). 0: No correlation and -1: Perfect negative correlation (as one variable increases, the other variable decreases).
+
+Interpretation:
+
+- Positive correlation: As one variable increases, the other tends to increase.
+
+- Negative correlation: As one variable increases, the other tends to decrease.
+
+- No correlation: Changes in one variable do not predict changes in the other.
+
+**Correlation does not imply causality** - This statement emphasizes that just because two variables are correlated does not mean that one causes the other. Correlation indicates a statistical association or relationship, but it does not provide information about the cause-and-effect relationship.
+
+Example: Ice cream sales and drowning incidents are positively correlated (both increase in summer), but it would be incorrect to conclude that buying more ice cream causes more drownings, and that's the main difference between the linear regression and correlation.
+
+\newpage
+
+```{r, fig.width= 22, fig.height=25}
+all_cols
+```
+
+\newpage
+
+## Models
+### 1. Non Differenced Case
+We first fit a time series linear model to the original data (original data implying non-differenced) at different lags. Lag 1 to Lag 6. The results of the models were as tabulated in the tables below. Note that the significance was calculated at **10% level of significance**.
+
+In the folder,you can find the full data frames as follows;
+
+1. *non_diff_individual.csv* - Results for non-differenced individual species model.
+2. *non_diff_full.csv* - Results for non-differenced all species combined  species model.
+3. *diff_individual.csv* - Results for differenced individual species model.
+4. *diff_full.csv* - Results for differenced all species combined model.
+
+
+```{r}
+non_diff_indivi |>
+  filter(lag == 0) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results for no lag (lag = 0)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |> 
+  row_spec(0, bold = TRUE, background = "#1E90FF", color = "white") %>%
+  kableExtra::kable_styling(full_width = FALSE)
+
+non_diff_indivi |>
+  filter(lag == 1) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    format = "pipe",
+    caption = "Time Series Linear Model results at lag 1",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+
+non_diff_indivi |>
+  filter(lag == 2) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 2",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+non_diff_indivi |>
+  filter(lag == 3) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 3",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+\newpage
+
+```{r}
+non_diff_indivi |>
+  filter(lag == 4) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 4",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+non_diff_indivi |>
+  filter(lag == 5) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 5",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+non_diff_indivi |>
+  filter(lag == 6) |>
+  select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 6",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+**A model was also fit for all the animal incidences combined, and at different lags (lag 1 to lag 6), as shown in the tables below;**
+
+```{r}
+non_diff_full |>
+  filter(lag == 0) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results for no lag (lag = 0)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |> 
+  row_spec(0, bold = TRUE, background = "#1E90FF", color = "white") %>%
+  kableExtra::kable_styling(full_width = FALSE)
+
+non_diff_full |>
+  filter(lag == 1) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    format = "pipe",
+    caption = "Time Series Linear Model results at lag 1",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+
+non_diff_full |>
+  filter(lag == 2) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 2",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+non_diff_full |>
+  filter(lag == 3) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 3",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+
+```{r}
+non_diff_full |>
+  filter(lag == 4) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 4",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+non_diff_full |>
+  filter(lag == 5) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 5",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+non_diff_full |>
+  filter(lag == 6) |>
+  select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 6",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+### 2. Differenced Case
+
+Time series models were also fit for the differenced data, and at different lags (lag 1 to lag 6), as shown in the tables below;
+
+```{r}
+diff_indivi |>
+  filter(lag == 0) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results for no lag (lag = 0) (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |> 
+  row_spec(0, bold = TRUE, background = "#1E90FF", color = "white") %>%
+  kableExtra::kable_styling(full_width = FALSE)
+
+diff_indivi |>
+  filter(lag == 1) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    format = "pipe",
+    caption = "Time Series Linear Model results at lag 1 (differenced)",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+
+diff_indivi |>
+  filter(lag == 2) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 2 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+diff_indivi |>
+  filter(lag == 3) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 3 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+\newpage
+
+```{r}
+diff_indivi |>
+  filter(lag == 4) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 4 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+diff_indivi |>
+  filter(lag == 5) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 5 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+diff_indivi |>
+  filter(lag == 6) |>
+  select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 6 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+**A model was also fit for all the animal incidences combined, differenced and at different lags (lag 1 to lag 6), as shown in the tables below;**
+
+```{r}
+diff_full |>
+  filter(lag == 0) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results for no lag (lag = 0) (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |> 
+  row_spec(0, bold = TRUE, background = "#1E90FF", color = "white") %>%
+  kableExtra::kable_styling(full_width = FALSE)
+
+diff_full |>
+  filter(lag == 1) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    format = "pipe",
+    caption = "Time Series Linear Model results at lag 1 (differenced)",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+
+diff_full |>
+  filter(lag == 2) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 2 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  kableExtra::kable_styling(full_width = FALSE) |>
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+diff_full |>
+  filter(lag == 3) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 3 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+
+```{r}
+diff_full |>
+  filter(lag == 4) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 4 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+diff_full |>
+  filter(lag == 5) |>
+    select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 5 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+diff_full |>
+  filter(lag == 6) |>
+  select(-lag) |>
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 6 (differenced)",
+    format = "pipe",
+    pipe_options = "hold_position"
+  ) |>
+  #kableExtra::kable_styling(full_width = FALSE)
+  row_spec(
+    0,
+    bold = TRUE,
+    background = "#1E90FF",
+    color = "white"
+  )
+
+```
+
+## Model for Each specific County
+
+### For individuL Species
+Time series linear regression model was fit for all the counties giving the following results. Some counties didn't have results because they contained zero incidences in all the predictors (cattle, goat, sheep, and camel incidence). Also, the models have also been tested only at **lag 3**. The NA in the dataframe, indicates that the variable had zero incidence.
+
+In the folder, you will find the results of the models as follows;
+
+1. *individual_animal_incidence_per_county_lag2.csv* - Results for individual animal incidences per county (at lag 2).
+
+2. *all_animal_incidence_per_county_lag2.csv* - Results for all animal incidences per county at lag2.
+
+3. *individual_animal_incidence_per_county_lag4.csv* - Results for individual animal incidences per county (at lag 4).
+
+4. *all_animal_incidence_per_county_lag4.csv* - Results for all animal incidences per county at lag4.
+
+The models were fit at lag 2 and lag 4. The results were as follows;
+
+## Lag 2
+
+```{r, }
+library(kableExtra)
+
+coefficients_df_lag2 %>%
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 2, for each county",
+    format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+  # kableExtra::kable_styling(
+  #   bootstrap_options = c("striped", "hover"),
+  #   position = "left",
+  #   full_width = F,
+  #   fixed_thead = T,
+  #   latex_options = c("striped", "HOLD_position", "repeat_header")
+  # ) |>
+  # row_spec(
+  #   0,
+  #   bold = TRUE,
+  #   background = "#1E90FF",
+  #   color = "white"
+  # )
+```
+
+
+### For all the species combined
+
+The model (at lag 2) for all the animal incidences combined were as follows;
+
+
+```{r}
+coefficients_df2_lag2 %>%
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 2, for each county for all the animal incidences combined",
+     format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+  # kableExtra::kable_styling(
+  #   bootstrap_options = c("striped", "hover"),
+  #   position = "left",
+  #   full_width = F,
+  #   fixed_thead = T,
+  #   latex_options = c("striped", "HOLD_position", "repeat_header")
+  # ) |>
+  # row_spec(
+  #   0,
+  #   bold = TRUE,
+  #   background = "#1E90FF",
+  #   color = "white"
+  # )
+```
+
+## Lag 4
+
+
+```{r, }
+### For individuL Species
+coefficients_df_lag4 %>%
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 2, for each county",
+    format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+```
+
+### For all the species combined
+
+The model (at lag 4) for all the animal incidences combined were as follows;
+
+```{r}
+coefficients_df2_lag4 %>%
+  knitr::kable(
+    align = "l",
+    caption = "Time Series Linear Model results at lag 3, for each county for all the animal incidences combined",
+     format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  )
+```
+
+`
+# Significant Variales per County
+ The siginificant variables per county were selected, both for individual species and all the species combined at lag 2 and at lag 4. At lag 2, the results are as follows;
+ 
+## Lag 2
+ 
+```{r}
+coefficients_df_lag2 %>%
+  filter(significant == "Significant") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables for individual species at lag 2, for each county",
+    format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+```
+ 
+For combined species, the significant variables per county were as follows;
+
+```{r}
+coefficients_df2_lag2 %>%
+  filter(significant == "Significant") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables at lag 2, for each county for all the animal incidences combined",
+     format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+```
+
+## Lag 4
+ 
+```{r}
+coefficients_df_lag4 %>%
+  filter(significant == "Significant") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables for individual species at lag 4, for each county",
+    format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+```
+ 
+For combined species, the significant variables per county were as follows;
+
+```{r}
+coefficients_df2_lag4 %>%
+  filter(significant == "Significant") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables at lag 4, for each county for all the animal incidences combined",
+     format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+```
+
+## Significant Variables without the intercept
+
+## At lag 2
+
+We selected the significant variables for each county, omitting the intercept. Note, this does not imply that we run a regression without the intercept, but rather is for showing a sizeable table for the significant variables, thus, from the above results, we just removed the rows for the intercept. The results are as follows;
+
+1. For individual species
+
+```{r}
+coefficients_df_lag2 %>%
+  filter(significant == "Significant") %>%
+  filter(variable != "(Intercept)") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables for individual species at lag 2, for each county",
+    format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+
+```
+
+2. For all the species combined
+
+```{r}
+coefficients_df2_lag2 %>%
+  filter(significant == "Significant") %>%
+  filter(variable != "(Intercept)") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables at lag 2, for each county for all the animal incidences combined",
+     format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+```
+
+## At lag 4
+
+1. For individual species
+
+```{r}
+coefficients_df_lag4 %>%
+  filter(significant == "Significant") %>%
+  filter(variable != "(Intercept)") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables for individual species at lag 4, for each county",
+    format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+
+```
+
+2. For all the species combined
+
+```{r}  
+coefficients_df2_lag4 %>%
+  filter(significant == "Significant") %>%
+  filter(variable != "(Intercept)") %>%
+  knitr::kable(
+    align = "l",
+    caption = "Significant variables at lag 4, for each county for all the animal incidences combined",
+     format = "pipe"
+    # centering = FALSE,
+    # booktabs = TRUE,
+    # longtable = TRUE,
+  ) 
+```

@@ -1,0 +1,15 @@
+variable,estimate,std.error,statistic,p.value,conf_low,conf_high,lag,significance
+(Intercept),0.951,0.033,29.148,0,0.897,1.005,0,Significant
+Animal Incidence,0.097,0.064,1.52,0.132,-0.008,0.203,0,Not Significant
+(Intercept),0.965,0.032,30.084,0,0.912,1.018,1,Significant
+Animal Incidence,0.052,0.063,0.832,0.407,-0.051,0.155,1,Not Significant
+(Intercept),0.973,0.031,31.141,0,0.922,1.025,2,Significant
+Animal Incidence,0.05,0.061,0.83,0.409,-0.05,0.15,2,Not Significant
+(Intercept),0.979,0.03,32.372,0,0.929,1.028,3,Significant
+Animal Incidence,0.075,0.058,1.281,0.204,-0.021,0.171,3,Not Significant
+(Intercept),0.991,0.029,33.894,0,0.943,1.039,4,Significant
+Animal Incidence,0.045,0.056,0.797,0.427,-0.048,0.137,4,Not Significant
+(Intercept),1.006,0.028,35.708,0,0.959,1.052,5,Significant
+Animal Incidence,0,0.054,0.002,0.999,-0.088,0.089,5,Not Significant
+(Intercept),1.011,0.026,38.232,0,0.967,1.054,6,Significant
+Animal Incidence,0.042,0.05,0.827,0.411,-0.041,0.124,6,Not Significant
