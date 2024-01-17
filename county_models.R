@@ -23,7 +23,8 @@ if (require(pacman))
     stringi,
     stringr,
     rKenyaCensus,
-    knitr
+    knitr,
+    purrr
   )
 }
 
@@ -149,11 +150,52 @@ df_incidence2 <- df_incidence |>
          sheep_pop, 
          cam_pop) |>
   mutate(year = year(date)) |> 
-  merge(pop, by = c("county", "year")) 
+  merge(pop, by = c("county", "year"))
+ # mutate(across(where(is.numeric), ~ifelse(. == 0, NA, .)))
+
+# Identifying the outliers in the number of cases
+numeric_columns <- df_incidence2 %>%
+  select(contains('cases')) |> 
+  keep(is.numeric)
+
+numeric_columns %>%
+  map(~summary(.))
+
+numeric_columns %>%
+  imap(
+    ~ ggplot(data = data.frame(y = .x)) +
+      geom_boxplot(aes(x = 1, y = y)) +
+      labs(title = .y) +
+      theme_light()
+  )
+
+
+df_incidence2 <- df_incidence2 |> 
+  mutate(
+    catt_cases = ifelse(catt_cases >= 69, mean(catt_cases), catt_cases),
+    goat_cases = ifelse(goat_cases > 28, mean(goat_cases), goat_cases),
+  )
+
+numeric_columns <- df_incidence2 %>%
+  select(contains('cases')) |> 
+  keep(is.numeric)
+
+numeric_columns %>%
+  map(~summary(.))
+
+numeric_columns %>%
+  imap(
+    ~ ggplot(data = data.frame(y = .x)) +
+      geom_boxplot(aes(x = 1, y = y)) +
+      labs(title = .y) +
+      theme_light()
+  )
+
 
 df_tot_cases <- df_incidence2 |>
   group_by(date, county) |>
-  summarise(across(contains("cases"), ~ sum(., na.rm = T)))
+  summarise(across(contains("cases"), ~ sum(., na.rm = T))) |> 
+  mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
 
 # Population per year, per county
 df_pop <- df_incidence2 |> 
@@ -174,9 +216,25 @@ df_1 <- df_tot_cases |>
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
   ) |>
   select(date, county, contains("incidence")) |>
-  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .))) |> 
+  #mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .))) |> 
   as_tibble() |> 
   arrange(county)
+
+# Outliers
+numeric_columns <- df_1 %>%
+  select(contains('incidence')) |> 
+  keep(is.numeric)
+
+numeric_columns %>%
+  map(~summary(.))
+
+numeric_columns %>%
+  imap(
+    ~ ggplot(data = data.frame(y = .x)) +
+      geom_boxplot(aes(x = 1, y = y)) +
+      labs(title = .y) +
+      theme_light()
+  )
 
 
 df_cum <- df_tot_cases |>
@@ -186,11 +244,14 @@ df_cum <- df_tot_cases |>
   mutate(
     animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases, na.rm = T),
     animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop, na.rm = T),
+    animal_cases = ifelse(animal_cases == 0, NA, animal_cases),
     animal_incidence = round((animal_cases / animal_pop) * 1000000, 4),
     human_incidence = round((hum_cases / pop) * 1000, 4)
   ) |> 
   select(date, county, contains("incidence")) |> 
-  as_tibble()
+  as_tibble() |> 
+  mutate()
+
 # Trend -------------------------------------------------------------------
 
 df_incidence2_trend <- df_incidence2 |> 
@@ -209,7 +270,8 @@ df_incidence2_trend <- df_incidence2 |>
 
 df_tot_cases_trend <- df_incidence2_trend |>
   group_by(date) |>
-  summarise(across(contains("cases"), ~ sum(., na.rm = T)))
+  summarise(across(contains("cases"), ~ sum(., na.rm = T))) |> 
+  mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
 
 df_tot_pop_trend <- df_incidence2_trend |>
   select(date, county, contains("pop")) %>%
@@ -238,13 +300,16 @@ df_1_trend <- df_tot_cases_trend |>
     date = as.Date(date)
   ) |>
   select(date, contains("incidence")) |>
-  as_tibble()
+  as_tibble() |> 
+  mutate(
+    
+  )
 
 ## The differenced one
 date <- df_1_trend$date[-1]
 
 df_1_trend_diff <- df_1_trend |> 
-  reframe(across(contains("incidence"), ~ diff(.))) |> 
+  reframe(across(contains("incidence"), ~ diff(., na.rm = T))) |> 
   mutate(date = as.Date(date))
 
 
@@ -252,8 +317,9 @@ df_cum_trend <- df_tot_cases_trend |>
   merge(df_tot_pop_trend, by = "date") |>
   filter(!is.na(date)) |>
   rowwise() |> 
-  mutate(animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases),
-         animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop),
+  mutate(animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases, na.rm = T),
+         animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop, na.rm = T),
+         animal_cases = ifelse(animal_cases == 0, NA, animal_cases),
          human_incidence = round((hum_cases / hum_pop) * 1000, 4),
          animal_incidence = round((animal_cases / animal_pop) * 1000000, 4)
   ) |> 
@@ -263,7 +329,7 @@ df_cum_trend <- df_tot_cases_trend |>
 df_cum_trend_diff <- df_cum_trend |> 
   arrange(date) |>  
   as.data.frame() |>
-  reframe(across(c(human_incidence, animal_incidence), ~ diff(., 1))) |> 
+  reframe(across(c(human_incidence, animal_incidence), ~ diff(., 1, na.rm = T))) |> 
   mutate(date = as.Date(date))
 
 trend_data <- df_1_trend %>%
@@ -277,6 +343,8 @@ trend_data <- df_1_trend %>%
   )
 
 all_plus_hum <- df_cum_trend |> 
+  #filter(!is.na(animal_incidence)) |> 
+  mutate(animal_incidence = ifelse(is.na(animal_incidence), 0, animal_incidence)) |> 
   ggplot(aes(date)) +
   geom_point(aes(y = animal_incidence), col = "black", size = 1) +
   geom_line(aes(y = animal_incidence), col = "black", linewidth = 1) +
@@ -292,12 +360,14 @@ all_plus_hum <- df_cum_trend |>
     legend.position = "bottom",
     legend.text = element_text(color = "black")
   ) +
-  ylab("Animal Incidence")
+  ylab("Animal Incidence") +
+  ggtitle('Animal Incidence')
 all_plus_hum
 
 # All except humans
 species_plt <- trend_data %>%
   filter(name != "Human Incidence") |>
+  mutate(value = ifelse(is.na(value), 0, value)) |> 
   ggplot(aes(x = date)) +
   geom_line(aes(y = value, col = name), linewidth = 1) +
   geom_point(aes(y = value, col = name), size = 2) +
@@ -323,6 +393,8 @@ species_plt
 # Humans
 humans_plt <- trend_data %>%
   filter(name == "Human Incidence") |>
+  mutate(value = ifelse(is.na(value), 0, value)) |> 
+  
   ggplot(aes(x = date)) +
   geom_line(aes(y = value), linewidth = 1) +
   geom_point(aes(y = value), size = 2) +
@@ -348,11 +420,11 @@ humans_plt
 # Testing for stationary -------------------------------------------------
 
 # At county Level
-adf1 <- adf.test(df_1$human_incidence)
-adf2 <- adf.test(df_1$catt_incidence)
-adf3 <- adf.test(df_1$cam_incidence)
-adf4 <- adf.test(df_1$goat_incidence)
-adf5 <- adf.test(df_1$shp_incidence)
+adf1 <- adf.test(na.omit(df_1$human_incidence))
+adf2 <- adf.test(na.omit(df_1$catt_incidence))
+adf3 <- adf.test(na.omit(df_1$cam_incidence))
+adf4 <- adf.test(na.omit(df_1$goat_incidence))
+adf5 <- adf.test(na.omit(df_1$shp_incidence))
 
 adf_res <- data.frame(
   variable = c(
@@ -389,11 +461,11 @@ knitr::kable(
   )
 
 # At National Level
-adf_trend1 <- adf.test(df_1_trend$human_incidence)
-adf_trend2 <- adf.test(df_1_trend$catt_incidence)
-adf_trend3 <- adf.test(df_1_trend$cam_incidence)
-adf_trend4 <- adf.test(df_1_trend$goat_incidence)
-adf_trend5 <- adf.test(df_1_trend$shp_incidence)
+adf_trend1 <- adf.test(na.omit(df_1_trend$human_incidence))
+adf_trend2 <- adf.test(na.omit(df_1_trend$catt_incidence))
+adf_trend3 <- adf.test(na.omit(df_1_trend$cam_incidence))
+adf_trend4 <- adf.test(na.omit(df_1_trend$goat_incidence))
+adf_trend5 <- adf.test(na.omit(df_1_trend$shp_incidence))
 
 adf_trend_res <- data.frame(
   Variable = c(
@@ -431,7 +503,7 @@ adf_trend_res <- data.frame(
 
 ## All incidences combined
 
-adf_combined <- adf.test(df_cum$animal_incidence)
+adf_combined <- adf.test(na.omit(df_cum$animal_incidence))
 adf_combined_trend <- adf.test(df_cum_trend$animal_incidence)
 
 
@@ -449,6 +521,7 @@ incidence_cols <- grep("incidence", names(df_1_trend), value = TRUE)
 
 # Apply moving average smoothing to selected columns
 smoothed_df <- df_1_trend %>%
+  mutate(across(incidence_cols, ~ifelse(is.na(.), 0, .))) |> 
   mutate(across(all_of(incidence_cols), ~zoo::rollmean(., k = 4, fill = NA), .names = "smoothed_{.col}")) |> 
   na.omit()
 
@@ -503,6 +576,7 @@ species_sm_plt_points <- trend_data_smoothed |>
   ggplot(aes(x = date)) +
   geom_line(aes(y = value, col = name), linewidth = 1) +
   geom_point(data = trend_data |> 
+               mutate(value = ifelse(is.na(value), 0, value)) |> 
                filter(name != "Human Incidence"),
              
              aes(y = value, col = name), size = 1) +
@@ -560,6 +634,7 @@ incidence_cols <- grep("incidence", names(df_cum_trend), value = TRUE)
 
 # Apply moving average smoothing to selected columns
 smoothed_df_combined <- df_cum_trend %>%
+  mutate(animal_incidence = ifelse(is.na(animal_incidence), 0, animal_incidence)) |> 
   as_tibble() |>
   mutate(across(
     all_of(incidence_cols),
@@ -571,7 +646,9 @@ smoothed_df_combined <- df_cum_trend %>%
 animal_sm_plt <- smoothed_df_combined |> 
   ggplot(aes(x = date)) +
   geom_line(aes(y = smoothed_animal_incidence), linewidth = 1) +
-  geom_point(data = df_cum_trend, aes(y = animal_incidence), col = "red") +
+  geom_point(data = df_cum_trend |> 
+               mutate(animal_incidence = ifelse(is.na(animal_incidence), 0, animal_incidence)) 
+               , aes(y = animal_incidence), col = "red") +
   # facet_wrap(~name, scales = "free", ncol = 3) +
   theme_light() +
   theme(
@@ -656,7 +733,9 @@ table2 <- df_1 %>%
 # Cases per year per county
 df_tot_cases_spatial <- df_incidence2 |>
   group_by(year = year(date), county) |>
-  summarise(across(contains("cases"), ~ sum(., na.rm = T)))
+  summarise(across(contains("cases"), ~ sum(., na.rm = T))) |> 
+  mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
+
 
 # Population per year, per county
 df_pop_spatial <- df_incidence2 |> 
@@ -677,7 +756,7 @@ df_spatial <- df_tot_cases_spatial |>
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
   ) |>
   select(year, county, contains("incidence")) |>
-  mutate(across(is.numeric, ~ifelse(is.na(.), 0, .))) |> 
+  #mutate(across(is.numeric, ~ifelse(is.na(.), 0, .))) |> 
   as_tibble()
 
 df_spatial_cum <- df_tot_cases_spatial |>
@@ -686,6 +765,7 @@ df_spatial_cum <- df_tot_cases_spatial |>
   mutate(
     animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases, na.rm = T),
     animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop, na.rm = T),
+    animal_cases = ifelse(animal_cases == 0, NA, animal_cases),
     animal_incidence = round((animal_cases / animal_pop) * 1000000, 4),
     human_incidence = round((hum_cases / pop) * 1000, 4)
   ) |> 
@@ -1328,7 +1408,9 @@ run_lag_models <- function(df, max_lag = 6, ...) {
   return(result_df)
 }
 
-non_diff_indivi <- run_lag_models(df_1_trend)
+non_diff_indivi <- run_lag_models(df_1_trend |> 
+                                    mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .)))
+                                    )
 diff_indivi <- run_lag_models(df_1_trend_diff)
 write_csv(non_diff_indivi, "non_diff_individual.csv")
 write_csv(diff_indivi, "diff_individual.csv")
@@ -1399,7 +1481,8 @@ lag_models_full <- function(df, max_lag = 6, ...) {
 }
 
 
-non_diff_full <- lag_models_full(df_cum_trend)
+non_diff_full <- lag_models_full(df_cum_trend |> 
+                                 mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .))))
 diff_full <- lag_models_full(df_cum_trend_diff)
 
 write_csv(non_diff_full, "non_diff_full.csv")
