@@ -1,79 +1,77 @@
 county,variable,estimate,std.error,statistic,p.value,conf_low,conf_high,significant
-Bungoma,(Intercept),1.718,0.083,20.719,0,1.582,1.855,Significant
-Bungoma,Animal Incidence,0.111,0.168,0.657,0.513,-0.166,0.388,Not Significant
-Busia,(Intercept),0.615,0.082,7.494,0,0.48,0.75,Significant
-Busia,Animal Incidence,0.073,0.141,0.519,0.605,-0.158,0.304,Not Significant
-Elgeyo Marakwet,(Intercept),3.882,0.197,19.693,0,3.558,4.207,Significant
-Elgeyo Marakwet,Animal Incidence,0.366,0.828,0.442,0.66,-0.996,1.729,Not Significant
-Embu,(Intercept),0.479,0.039,12.269,0,0.415,0.544,Significant
-Embu,Animal Incidence,0.13,0.164,0.793,0.43,-0.14,0.399,Not Significant
-Homa Bay,(Intercept),0.641,0.038,16.772,0,0.578,0.704,Significant
-Homa Bay,Animal Incidence,0.443,0.234,1.896,0.061,0.059,0.828,Significant
-Isiolo,(Intercept),1.581,0.127,12.494,0,1.373,1.789,Significant
-Isiolo,Animal Incidence,3.86,1.168,3.305,0.001,1.938,5.781,Significant
-Kakamega,(Intercept),0.489,0.017,28.239,0,0.461,0.518,Significant
-Kakamega,Animal Incidence,0.932,0.762,1.223,0.224,-0.321,2.186,Not Significant
-Kericho,(Intercept),2.157,0.101,21.361,0,1.991,2.323,Significant
-Kericho,Animal Incidence,0.34,4.97,0.068,0.946,-7.836,8.515,Not Significant
-Kiambu,(Intercept),0.338,0.013,26.548,0,0.317,0.359,Significant
-Kiambu,Animal Incidence,-0.037,0.035,-1.072,0.287,-0.095,0.02,Not Significant
-Kisii,(Intercept),2.307,0.095,24.337,0,2.151,2.463,Significant
-Kisii,Animal Incidence,0.087,0.097,0.899,0.371,-0.072,0.246,Not Significant
-Kisumu,(Intercept),0.569,0.025,22.665,0,0.528,0.61,Significant
-Kisumu,Animal Incidence,-0.08,0.06,-1.335,0.185,-0.178,0.019,Not Significant
-Kitui,(Intercept),0.708,0.04,17.538,0,0.641,0.774,Significant
-Kitui,Animal Incidence,0.157,0.127,1.236,0.22,-0.052,0.365,Not Significant
-Laikipia,(Intercept),0.945,0.058,16.179,0,0.849,1.041,Significant
-Laikipia,Animal Incidence,-0.567,0.479,-1.182,0.24,-1.355,0.222,Not Significant
-Machakos,(Intercept),0.443,0.022,20.351,0,0.407,0.478,Significant
-Machakos,Animal Incidence,0.002,0.001,3.521,0.001,0.001,0.003,Significant
-Mandera,(Intercept),0.534,0.035,15.242,0,0.476,0.591,Significant
-Mandera,Animal Incidence,-0.001,0.274,-0.005,0.996,-0.452,0.449,Not Significant
-Marsabit,(Intercept),1.276,0.05,25.718,0,1.194,1.358,Significant
-Marsabit,Animal Incidence,0.104,0.096,1.081,0.283,-0.054,0.262,Not Significant
-Meru,(Intercept),0.341,0.021,16.435,0,0.307,0.376,Significant
-Meru,Animal Incidence,0.025,0.039,0.64,0.524,-0.039,0.089,Not Significant
-Migori,(Intercept),1.196,0.062,19.339,0,1.095,1.298,Significant
-Migori,Animal Incidence,0.03,0.086,0.352,0.726,-0.112,0.172,Not Significant
-Mombasa,(Intercept),0.054,0.007,7.765,0,0.043,0.066,Significant
-Mombasa,Animal Incidence,-0.003,0.106,-0.03,0.976,-0.177,0.171,Not Significant
-Murang'a,(Intercept),0.128,0.008,16.145,0,0.115,0.141,Significant
-Murang'a,Animal Incidence,-0.022,0.081,-0.275,0.784,-0.155,0.111,Not Significant
-Nairobi,(Intercept),0.211,0.01,20.496,0,0.194,0.228,Significant
-Nairobi,Animal Incidence,-0.001,0.002,-0.435,0.665,-0.003,0.002,Not Significant
-Nakuru,(Intercept),1.592,0.05,31.55,0,1.509,1.675,Significant
-Nakuru,Animal Incidence,0.034,0.02,1.741,0.085,0.002,0.066,Significant
-Narok,(Intercept),1.592,0.075,21.215,0,1.468,1.715,Significant
-Narok,Animal Incidence,0.193,0.1,1.931,0.057,0.029,0.358,Significant
-Nyamira,(Intercept),1.719,0.075,22.99,0,1.596,1.842,Significant
-Nyamira,Animal Incidence,0.24,0.31,0.775,0.44,-0.269,0.75,Not Significant
-Nyandarua,(Intercept),1.413,0.061,23.35,0,1.314,1.513,Significant
-Nyandarua,Animal Incidence,0.047,0.084,0.561,0.576,-0.091,0.186,Not Significant
-Nyeri,(Intercept),0.191,0.008,22.686,0,0.177,0.205,Significant
-Nyeri,Animal Incidence,-0.002,0.001,-1.275,0.206,-0.004,0.001,Not Significant
-Siaya,(Intercept),0.434,0.023,18.895,0,0.396,0.471,Significant
-Siaya,Animal Incidence,-0.008,0.017,-0.46,0.647,-0.036,0.02,Not Significant
-Taita Taveta,(Intercept),0.337,0.026,12.908,0,0.294,0.38,Significant
-Taita Taveta,Animal Incidence,0.096,0.063,1.52,0.132,-0.008,0.199,Not Significant
-Tana River,(Intercept),0.357,0.044,8.037,0,0.284,0.43,Significant
-Tana River,Animal Incidence,0.034,0.186,0.184,0.855,-0.271,0.34,Not Significant
-Tharaka Nithi,(Intercept),1.486,0.1,14.91,0,1.322,1.65,Significant
-Tharaka Nithi,Animal Incidence,0.229,0.492,0.465,0.643,-0.581,1.039,Not Significant
-Trans Nzoia,(Intercept),2.228,0.083,26.858,0,2.092,2.365,Significant
-Trans Nzoia,Animal Incidence,0.11,0.159,0.69,0.492,-0.152,0.371,Not Significant
-Turkana,(Intercept),1.008,0.039,25.532,0,0.943,1.073,Significant
-Turkana,Animal Incidence,0.044,0.078,0.561,0.576,-0.085,0.172,Not Significant
-Uasin Gishu,(Intercept),2.225,0.118,18.88,0,2.031,2.419,Significant
-Uasin Gishu,Animal Incidence,-0.322,0.391,-0.824,0.412,-0.966,0.321,Not Significant
-Vihiga,(Intercept),0.714,0.041,17.29,0,0.646,0.782,Significant
-Vihiga,Animal Incidence,0.01,0.017,0.557,0.579,-0.019,0.038,Not Significant
-Wajir,(Intercept),0.763,0.042,18.004,0,0.693,0.832,Significant
-Wajir,Animal Incidence,-0.084,0.053,-1.578,0.118,-0.172,0.004,Not Significant
-West Pokot,(Intercept),3.525,0.188,18.781,0,3.217,3.834,Significant
-West Pokot,Animal Incidence,0.45,0.414,1.086,0.281,-0.232,1.131,Not Significant
-Baringo,(Intercept),1.651,0.085,19.509,0,1.512,1.79,Significant
-Baringo,Animal Incidence,2.932,2.984,0.983,0.328,-1.976,7.84,Not Significant
-Bomet,(Intercept),0.958,0.041,23.198,0,0.89,1.026,Significant
-Bomet,Animal Incidence,-0.116,0.106,-1.091,0.278,-0.291,0.059,Not Significant
-Kilifi,(Intercept),0.033,0.004,7.729,0,0.026,0.04,Significant
-Kilifi,Animal Incidence,-0.009,0.029,-0.308,0.759,-0.057,0.039,Not Significant
+Wajir,(Intercept),0.071,NA,NA,NA,NA,NA,NA
+Wajir,Animal Incidence,0.027,NA,NA,NA,NA,NA,NA
+Siaya,(Intercept),0.035,NA,NA,NA,NA,NA,NA
+Siaya,Animal Incidence,0.026,NA,NA,NA,NA,NA,NA
+Kisumu,(Intercept),0.249,NA,NA,NA,NA,NA,NA
+Kisumu,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Isiolo,(Intercept),0.567,1.057,0.536,0.629,-1.172,2.306,Not Significant
+Isiolo,Animal Incidence,5.47,2.287,2.392,0.097,1.709,9.232,Significant
+Nairobi,(Intercept),0.168,NA,NA,NA,NA,NA,NA
+Nairobi,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Kisii,(Intercept),-0.072,NA,NA,NA,NA,NA,NA
+Kisii,Animal Incidence,0.428,NA,NA,NA,NA,NA,NA
+Trans Nzoia,(Intercept),2.271,NA,NA,NA,NA,NA,NA
+Trans Nzoia,Animal Incidence,0.099,NA,NA,NA,NA,NA,NA
+Tana River,(Intercept),0.385,0.06,6.443,0,0.286,0.483,Significant
+Tana River,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Narok,(Intercept),2.092,0.398,5.254,0.013,1.437,2.748,Significant
+Narok,Animal Incidence,0.103,0.125,0.824,0.47,-0.102,0.308,Not Significant
+Busia,(Intercept),0.566,0.05,11.24,0,0.484,0.649,Significant
+Busia,Animal Incidence,0.096,0.027,3.541,0.009,0.051,0.141,Significant
+Marsabit,(Intercept),1.691,0.131,12.859,0,1.475,1.907,Significant
+Marsabit,Animal Incidence,-0.032,0.076,-0.422,0.688,-0.156,0.092,Not Significant
+Turkana,(Intercept),1.12,0.314,3.572,0.023,0.604,1.636,Significant
+Turkana,Animal Incidence,-0.01,0.159,-0.061,0.954,-0.271,0.252,Not Significant
+Mombasa,(Intercept),0.052,NA,NA,NA,NA,NA,NA
+Mombasa,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Baringo,(Intercept),2.44,NA,NA,NA,NA,NA,NA
+Baringo,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Bungoma,(Intercept),2.099,0.118,17.738,0.003,1.904,2.293,Significant
+Bungoma,Animal Incidence,-0.004,0.05,-0.083,0.941,-0.087,0.079,Not Significant
+Kilifi,(Intercept),0.021,NA,NA,NA,NA,NA,NA
+Kilifi,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Nyamira,(Intercept),2.038,0.152,13.404,0.006,1.788,2.288,Significant
+Nyamira,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Meru,(Intercept),0.246,0.277,0.887,0.469,-0.21,0.702,Not Significant
+Meru,Animal Incidence,0.324,0.472,0.686,0.563,-0.452,1.099,Not Significant
+Kitui,(Intercept),0.983,0.062,15.862,0.004,0.881,1.085,Significant
+Kitui,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Murang'a,(Intercept),0.107,NA,NA,NA,NA,NA,NA
+Murang'a,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Nakuru,(Intercept),1.938,NA,NA,NA,NA,NA,NA
+Nakuru,Animal Incidence,0.017,NA,NA,NA,NA,NA,NA
+Embu,(Intercept),0.688,0.258,2.669,0.228,0.264,1.113,Significant
+Embu,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Kakamega,(Intercept),0.692,NA,NA,NA,NA,NA,NA
+Kakamega,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Elgeyo Marakwet,(Intercept),3.458,0.176,19.673,0.032,3.168,3.747,Significant
+Elgeyo Marakwet,Animal Incidence,0.672,0.134,5.009,0.125,0.451,0.892,Significant
+Vihiga,(Intercept),0.641,0.047,13.63,0,0.563,0.718,Significant
+Vihiga,Animal Incidence,0.014,0.018,0.763,0.465,-0.016,0.043,Not Significant
+Homa Bay,(Intercept),1.13,0.271,4.164,0.15,0.684,1.577,Significant
+Homa Bay,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Mandera,(Intercept),0.457,0.19,2.411,0.095,0.145,0.769,Significant
+Mandera,Animal Incidence,0.131,0.348,0.377,0.731,-0.441,0.704,Not Significant
+Taita Taveta,(Intercept),1.36,NA,NA,NA,NA,NA,NA
+Taita Taveta,Animal Incidence,-0.268,NA,NA,NA,NA,NA,NA
+Laikipia,(Intercept),0.763,0.086,8.82,0.013,0.62,0.905,Significant
+Laikipia,Animal Incidence,-0.271,0.149,-1.82,0.21,-0.516,-0.026,Significant
+Tharaka Nithi,(Intercept),1.799,0.022,80.673,0.008,1.762,1.836,Significant
+Tharaka Nithi,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Uasin Gishu,(Intercept),1.762,0.251,7.026,0.006,1.349,2.174,Significant
+Uasin Gishu,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Bomet,(Intercept),0.893,0.147,6.081,0.026,0.651,1.134,Significant
+Bomet,Animal Incidence,-0.091,0.08,-1.146,0.371,-0.222,0.04,Not Significant
+Kiambu,(Intercept),0.283,0.024,12.049,0.053,0.245,0.322,Significant
+Kiambu,Animal Incidence,-0.012,0.012,-1.043,0.487,-0.032,0.007,Not Significant
+Nyeri,(Intercept),0.131,0.025,5.235,0.035,0.09,0.172,Significant
+Nyeri,Animal Incidence,-0.001,0.001,-0.573,0.624,-0.002,0.001,Not Significant
+West Pokot,(Intercept),4.9,0.002,2085.17,0,4.896,4.904,Significant
+West Pokot,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Machakos,(Intercept),0.333,NA,NA,NA,NA,NA,NA
+Machakos,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Kericho,(Intercept),2.223,NA,NA,NA,NA,NA,NA
+Kericho,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Migori,(Intercept),1.404,NA,NA,NA,NA,NA,NA
+Migori,Animal Incidence,NA,NA,NA,NA,NA,NA,NA

@@ -1,15 +1,22 @@
-variable,estimate,std.error,statistic,p.value,conf_low,conf_high,lag,significance
-(Intercept),0.01,0.013,0.729,0.468,-0.012,0.032,0,Not Significant
-Animal Incidence,0.033,0.019,1.762,0.082,0.002,0.064,0,Significant
-(Intercept),0.01,0.014,0.704,0.483,-0.013,0.032,1,Not Significant
-Animal Incidence,-0.021,0.019,-1.097,0.276,-0.053,0.011,1,Not Significant
-(Intercept),0.01,0.014,0.687,0.494,-0.013,0.032,2,Not Significant
-Animal Incidence,-0.013,0.019,-0.672,0.503,-0.045,0.019,2,Not Significant
-(Intercept),0.01,0.014,0.739,0.462,-0.013,0.033,3,Not Significant
-Animal Incidence,0.027,0.019,1.394,0.167,-0.005,0.059,3,Not Significant
-(Intercept),0.01,0.014,0.707,0.481,-0.013,0.033,4,Not Significant
-Animal Incidence,0.007,0.02,0.373,0.71,-0.025,0.04,4,Not Significant
-(Intercept),0.011,0.014,0.777,0.439,-0.012,0.034,5,Not Significant
-Animal Incidence,-0.043,0.019,-2.247,0.027,-0.074,-0.012,5,Significant
-(Intercept),0.011,0.014,0.74,0.461,-0.013,0.034,6,Not Significant
-Animal Incidence,0.034,0.02,1.721,0.089,0.001,0.066,6,Significant
+variable,estimate,std.error,statistic,p.value,conf_low,conf_high,lag,significance,r_squared,adj_r_squared,AIC
+(Intercept),0.009,0.013,0.692,0.49,-0.013,0.031,0,Not Significant,NA,NA,NA
+Animal Incidence,0.267,0.12,2.226,0.029,0.07,0.465,0,Significant,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,0,NA,0.05328808106911192,0.042529991081260765,-369.88170589982406
+(Intercept),0.01,0.014,0.71,0.48,-0.013,0.032,1,Not Significant,NA,NA,NA
+Animal Incidence,-0.209,0.125,-1.671,0.098,-0.415,-0.003,1,Significant,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,1,NA,0.031086841279289734,0.019949908420430873,-362.66956760390514
+(Intercept),0.01,0.014,0.685,0.495,-0.013,0.032,2,Not Significant,NA,NA,NA
+Animal Incidence,-0.001,0.128,-0.006,0.995,-0.211,0.209,2,Not Significant,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,2,NA,4.869626791762104e-7,-0.011627414351708332,-354.75717347979725
+(Intercept),0.01,0.014,0.739,0.462,-0.013,0.033,3,Not Significant,NA,NA,NA
+Animal Incidence,0.174,0.127,1.369,0.175,-0.035,0.383,3,Not Significant,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,3,NA,0.021578328160193973,0.010067484962078654,-351.80865943501817
+(Intercept),0.01,0.014,0.712,0.479,-0.013,0.033,4,Not Significant,NA,NA,NA
+Animal Incidence,-0.14,0.128,-1.089,0.279,-0.35,0.071,4,Not Significant,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,4,NA,0.01392440966993474,0.0021854145469577535,-346.0525801758344
+(Intercept),0.011,0.014,0.756,0.452,-0.013,0.034,5,Not Significant,NA,NA,NA
+Animal Incidence,0.06,0.129,0.46,0.647,-0.153,0.272,5,Not Significant,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,5,NA,0.002540322930512574,-0.009477263540204062,-340.2551393065997
+(Intercept),0.01,0.015,0.721,0.473,-0.013,0.034,6,Not Significant,NA,NA,NA
+Animal Incidence,0.051,0.144,0.352,0.726,-0.187,0.288,6,Not Significant,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,6,NA,0.0015050645491690785,-0.010671702956328799,-335.10377666079967

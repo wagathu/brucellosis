@@ -24,7 +24,8 @@ if (require(pacman))
     stringr,
     rKenyaCensus,
     knitr,
-    purrr
+    purrr,
+    RColorBrewer
   )
 }
 
@@ -1109,6 +1110,9 @@ all_plots <-
 # summary(KK)
 
 # Correlation Plot
+df_1_trend <- df_1_trend |> 
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
+
 cor_lag <- df_1_trend %>%
   as_tibble() %>%
   select(-date) %>%
@@ -1390,8 +1394,35 @@ all_cols <- wrap_plots(
     rel_widths = c(7, 7,7)
   ) 
 all_cols <- all_cols + theme(plot.title = element_text(size = 16),
-                             axis.text.y = element_text(color = 'black', size = 13)
-)
+                             axis.text.y = element_text(color = 'black', size = 13))
+
+
+# Choosing the model with the highest correlation ----------------------------------------
+
+lag_values <- 0:6  # Assuming you want lag values from 0 to 6
+cor_dats <- list(
+
+    cor_lag$data,
+    cor_lag1$data,
+    cor_lag2$data,
+    cor_lag3$data,
+    cor_lag4$data,
+    cor_lag5$data,
+    cor_lag6$data
+  )
+result_table <- tibble(
+  Lag = lag_values,
+  `Average Correlation` = cor_dats %>%
+    map(~ filter(.x, Var1 == "Human")) %>%
+    map_dbl(~mean(.$value))
+) |>
+  knitr::kable(align = "l", 
+               caption = "Average correlation between human incidence and other species incidence", 
+               format = "pipe",
+               latex_options = "hold_position")
+
+print(result_table)
+ # This helps us to choose the lag with the highest average correlation
 
 # General Model without and with differencing --------------------------------------
 
@@ -1438,18 +1469,25 @@ run_lag_models <- function(df, max_lag = 6, ...) {
       ) %>%
       mutate(lag = lag_value)
     
-    result_df <- bind_rows(result_df, mod_results) |> 
-      mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high), ~round(., 3))) |> 
-      mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+    adj_r_squared <- glance(mod) %>%
+      select(r_squared, AIC, adj_r_squared)
+    
+    mod_results <- bind_cols(mod_results, adj_r_squared) |>
+      mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high, adj_r_squared), ~round(., 3))) |>
+      mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
+      select(c(1:8, 12, 9:11))
+      
+    result_df <- bind_rows(result_df, mod_results)
   }
   
   return(result_df)
 }
 
-non_diff_indivi <- run_lag_models(df_1_trend |> 
-                                    mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .)))
+non_diff_indivi <- run_lag_models(df_1_trend 
+                                    #mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .)))
                                     )
-diff_indivi <- run_lag_models(df_1_trend_diff)
+diff_indivi <- run_lag_models(df_1_trend_diff |> 
+                                mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .))))
 write_csv(non_diff_indivi, "non_diff_individual.csv")
 write_csv(diff_indivi, "diff_individual.csv")
 
@@ -1510,9 +1548,15 @@ lag_models_full <- function(df, max_lag = 6, ...) {
       ) %>%
       mutate(lag = lag_value)
     
+    adj_r_squared <- glance(mod) |> 
+      select(r_squared, adj_r_squared, AIC) |> 
+      mutate(lag = lag_value)
+    
     result_df <- bind_rows(result_df, mod_results) |> 
       mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high), ~round(., 3))) |> 
       mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+        result_df <- bind_rows(result_df, adj_r_squared)
+
   }
   
   return(result_df)
@@ -1526,49 +1570,35 @@ diff_full <- lag_models_full(df_cum_trend_diff)
 write_csv(non_diff_full, "non_diff_full.csv")
 write_csv(diff_full, "diff_full.csv")
 
-# Models for selected few counties ----------------------------------------
+## Getting the AIC, R-Squared and Adjusted R squared for each lag
 
-# 1. Turkana
-df_isiolo <- df_1 |> 
-  filter(county == "Isiolo") |>
-  as_tibble() %>%
-  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 2))) |>
-  na.omit() |>
-  mutate(date = as.Date(date))
+Table_lag_indivi <- non_diff_indivi |> 
+  select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
+  mutate(across(c(`R-Squared(%)` , `Adjusted R-Squared(%)`, ), ~ (. * 100))) |> 
+    mutate(across(where(is.numeric), ~round(., 2))) |> 
+  unique() |> 
+  arrange(desc(`Adjusted R-Squared(%)`)) |> 
+  knitr::kable(
+    align = "l",
+    caption = "The AIC, R-Squared and Adjusted R-Squared for each lag for individual species. The data as been arranged in decreasing order of Adjusted R-Squared",
+    format = "pipe",
+    latex_options = "hold_position"
+  )
 
-adf.test(df_isiolo$human_incidence)
 
-mod_turkana <- df_isiolo |>
-  as_tsibble() |>
-  model(
-    TSLM(
-      (human_incidence) ~   catt_incidence +  goat_incidence + shp_incidence + cam_incidence
-      
-    )
-  ) |>
-  report()
+Table_lag_full <- non_diff_full |> 
+  select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
+  mutate(across(c(`R-Squared(%)` , `Adjusted R-Squared(%)`, ), ~ (. * 100))) |> 
+    mutate(across(where(is.numeric), ~round(., 2))) |> 
+  unique() |> 
+  arrange(desc(`Adjusted R-Squared(%)`)) |> 
+    knitr::kable(
+    align = "l",
+    caption = "The AIC, R-Squared and Adjusted R-Squared for each lag for combined species. The data as been arranged in decreasing order of Adjusted R-Squared",
+    format = "pipe",
+    latex_options = "hold_position"
+  )
 
-# All the animal incidence
-df_isiolo <- df_cum |> 
-  filter(county == "Isiolo") |>
-  as_tibble() %>%
-  mutate_at(vars(animal_incidence),
-            list( ~ lag(., n = 2))) |>
-  na.omit() |>
-  mutate(date = as.Date(date))
-
-adf.test(df_isiolo$human_incidence)
-
-mod_turkana <- df_isiolo |>
-  as_tsibble() |>
-  model(
-    TSLM(
-      (human_incidence) ~   animal_incidence
-      
-    )
-  ) |>
-  report()
 
 # All counties model --------------------------------------------------------------
 

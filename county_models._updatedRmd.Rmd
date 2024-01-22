@@ -3,6 +3,7 @@ title: "Brucellosis Incidence Rate"
 output:
   word_document: default
 date: "2023-12-05"
+toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -10,6 +11,7 @@ knitr::opts_chunk$set(echo = F, warning = F, message = F)
 source("county_models.R")
 
 ```
+
 
 ## Descriptive Statistics
 
@@ -889,3 +891,29 @@ coefficients_df2_lag4 %>%
     # longtable = TRUE,
   ) 
 ```
+
+
+# Choosing the most Favourable Lag
+
+The table below illustrates the average correlation between human brucellosis incidence and the incidence of other species. The correlation values were computed by summing the correlations between human incidence and each other species and then dividing by the total number of variables. The results indicate that lag 3 is the most favorable lag for the model, as it demonstrates the highest average correlation among all lags.
+
+```{r}
+result_table
+
+```
+
+
+After fitting the time series model to each of the lag, the R-squared, adjusted R-squared and the AIC of the model at each lag was calculated giving the following results for the individual species
+
+```{r}
+Table_lag_indivi
+```
+
+
+Lag 3, has the second highest adjusted R-squared. The model for the data with no lag had the highest adjusted R-squared. This was the same for the combined animal cases as shown in the table below:
+
+```{r}
+Table_lag_full
+```
+
+The adjusted R-squared is interepreted as, taking lag 3 as an example: _2.6% of the total variation in the human brucellosis incidence is explained by animal brucellosis incidence_. The higher the adjusted R-squared the better the model.
