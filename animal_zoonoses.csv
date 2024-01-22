@@ -1,0 +1,2178 @@
+county,sub_county,year_1,month_2,disease_condition,nature_of_diagnosis_clinical_lab_pm,species,no_sick,deaths,diagnosis,date
+Kilifi,Kilifi South,2017,February,Anthrax,Laboratory,Bovine,5,2,Lab confirmed,2017-02-01
+Bomet,Bomet,2014,November,Rabies,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Bomet,sotik,2014,November,Rabies,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Embu,Embu West,2014,July,Anthrax,Clinical,Bovine,7,7,Clinically confirmed,2014-07-01
+Kericho,Kericho East,2014,November,Rabies,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Kericho,kericho West,2014,November,Rabies,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Kericho,kericho,2014,November,Rabies,Lab,canine,1,0,Lab confirmed,2014-11-01
+Kericho,kericho,2014,November,Rabies,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Kericho,Buret,2014,November,Rabies,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Kericho,Buret,2014,November,Rabies,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Kericho,Kipkelion West,2014,November,Rabies,Lab,canine,1,0,Lab confirmed,2014-11-01
+Kericho,Soin/Sigowet,2014,June,Anthrax,Lab,Bovine,1,1,Lab confirmed,2014-06-01
+Kiambu,Githuguri,2014,December,Rabies,Lab,Bovine,1,1,Lab confirmed,2014-12-01
+Makueni,kaiti,2014,December,Rabies,Lab,canine,1,0,Lab confirmed,2014-12-01
+Makueni,Makindu,2014,November,Rvf,Lab,Caprine,18,2,Lab confirmed,2014-11-01
+Murang'a,Murang'a East,2014,August,Rabies,Clinical,Canine,3,1,Clinically confirmed,2014-08-01
+Nairobi,Kasarani-,2014,July,Anthrax,Clinical,Bovine,5,2,Clinically confirmed,2014-07-01
+Nakuru,Naivasha,2014,July,Anthrax,Clinical,Bovine,26,6,Clinically confirmed,2014-07-01
+Nakuru,Naivasha,2014,July,Rabies,Clinical,Canine,6,0,Clinically confirmed,2014-07-01
+Nakuru,Njoro,2014,July,Rabies,Clinical,Canine,9,0,Clinically confirmed,2014-07-01
+Nakuru,Nakuru West,2014,June,Anthrax,Clinical,Bovine,26,6,Clinically confirmed,2014-06-01
+Nakuru,Naivasha,2014,June,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2014-06-01
+Nakuru,Naivasha,2014,June,Rabies,Clinical,Canine,1,1,Clinically confirmed,2014-06-01
+Nakuru,Naivasha,2014,September,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2014-09-01
+Nakuru,Kiptoror Ward,2014,July,Anthrax,clinical,Bovine,6,6,Clinically confirmed,2014-07-01
+Nakuru,Nakuru West,2014,July,Anthrax,Lab,Caprine/Ovine,2,0,Lab confirmed,2014-07-01
+Narok,Narok North,2014,July,Rabies,Clinical,Canine,2,0,Clinically confirmed,2014-07-01
+Nyeri,Nyeri central,2014,November,Brucellosis,Lab,Bovine,1,0,Lab confirmed,2014-11-01
+Bomet,Abosi,2014,September,Rabies,Clinical,Canine,1,0,Clinically confirmed,2014-09-01
+Uasin Gishu,UasinGishu,2014,October,Brucellosis,Lab,Bovine,2,0,Lab confirmed,2014-10-01
+West Pokot,Pokot North,2014,June,Rabies,Clinical,Caprine,2,1,Clinically confirmed,2014-06-01
+West Pokot,Pokot North,2014,June,Rabies,Clinical,Canine,1,1,Clinically confirmed,2014-06-01
+Bomet,Sotik,2015,December,Rabies,Clinical,BOVINE,1,0,Clinically confirmed,2015-12-01
+Bomet,Sotik,2015,May,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-05-01
+Bomet,Sotik,2015,May,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-05-01
+Bomet,Sotik,2015,May,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-05-01
+Busia,Busia,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Elgeyo Marakwet,Ainabkoi,2015,October,Rabies,Lab,RAT,1,1,Lab confirmed,2015-10-01
+Elgeyo Marakwet,Elgeyo Marakwet,2015,February,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-02-01
+Garissa,Garissa,2015,March,Brucellosis,Lab,Camelidae,1,0,Lab confirmed,2015-03-01
+Garissa,Fafi,2015,December,Rvf,Lab,Caprine,1,0,Lab confirmed,2015-12-01
+Garissa,Fafi,2015,December,Rvf,Lab,Ovine,1,0,Lab confirmed,2015-12-01
+Garissa,Fafi,2015,December,Brucellosis,Lab,Caprine,1,0,Lab confirmed,2015-12-01
+Garissa,Fafi,2015,December,Brucellosis,Lab,Ovine,1,0,Lab confirmed,2015-12-01
+Kajiado,Kitengela,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Kajiado,Magadi,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Nyeri,Othaya,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Nyeri,Karatina,2015,July,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-07-01
+Kericho,Bureti,2015,October,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-10-01
+Kericho,Kericho West,2015,December,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-12-01
+Kericho,Kericho west,2015,February,Anthrax,Lab,caprine,5,5,Lab confirmed,2015-02-01
+Kericho,Bureti,2015,May,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-05-01
+Kericho,Kericho East,2015,May,Rabies,Lab,Bovine,2,2,Lab confirmed,2015-05-01
+Kericho,Kericho East,2015,June,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-06-01
+Kericho,Kericho West,2015,August,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-08-01
+Kericho,Kericho West,2015,August,Rabies,Lab,Bobine,1,1,Lab confirmed,2015-08-01
+Kericho,Kericho East,2015,Sep,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-09-01
+Kericho,Kericho West,2015,Sep,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-09-01
+Kiambu,Githunguri,2015,February,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-02-01
+Kiambu,Kiambaa,2015,March,Rabies,Lab,Canine,1,1,Lab confirmed,2015-03-01
+Kiambu,Githunguri,2015,July,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-07-01
+Kiambu,Githunguri,2015,July,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-07-01
+Kiambu,Ruiru,2015,July,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-07-01
+Kilifi,kaloleni,2015,December,Rabies,Lab,Cani,1,0,Lab confirmed,2015-12-01
+Kilifi,Kaloleni,2015,March,Rvf,Lab,Ovine,1,0,Lab confirmed,2015-03-01
+Kilifi,Malindi,2015,August,Brucellosis,Lab,Caprine,7,0,Lab confirmed,2015-08-01
+Kilifi,Mariakani,2015,Sep,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2015-09-01
+Kirinyaga,Kirinyaga East,2015,February,Brucellosis,Lab,Bovine,2,0,Lab confirmed,2015-02-01
+Kirinyaga,Kirinyaga West,2015,March,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-03-01
+Kisumu,Nyakach,2015,June,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2015-06-01
+Kitui,Mutomo,2015,July,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-07-01
+Laikipia,Laikipia West,2015,April,Rabies,Clinical,Bovine & canine,5,0,Clinically confirmed,2015-04-01
+Laikipia,laikipia North,2015,April,Anthrax,Lab,Bovine,10,0,Lab confirmed,2015-04-01
+Laikipia,laikipia North,2015,May,Anthrax,Lab,Bovine,10,8,Lab confirmed,2015-05-01
+Laikipia,laikipia North,2015,May,Anthrax,Lab,Bovine,10,8,Lab confirmed,2015-05-01
+Laikipia,Laikipia West,2015,August,Rabies,Clinical,Canine,1,1,Clinically confirmed,2015-08-01
+Laikipia,Laikipia West,2015,August,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2015-08-01
+Machakos,Machakos,2015,March,Rvf,Lab,Ovine,3,0,Lab confirmed,2015-03-01
+Mandera,Mandera south,2015,March,Brucellosis,Clinical,Goats,100,0,Clinically confirmed,2015-03-01
+Meru,Imenti Central,2015,March,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2015-03-01
+Meru,Igembe Central,2015,March,Rabies,Clinical,Canine,2,2,Clinically confirmed,2015-03-01
+Meru,Imenti Central,2015,March,Anthrax,Clinical,Bovine,5,0,Clinically confirmed,2015-03-01
+Meru,Imenti Central,2015,April,Anthrax,Clinical,Bovine,2,0,Clinically confirmed,2015-04-01
+Meru,Imenti North,2015,April,Anthrax,Lab,Bovine,1,0,Lab confirmed,2015-04-01
+Meru,Igembe Central,2015,April,Rabies,Clinical,dogs,2,0,Clinically confirmed,2015-04-01
+Meru,IMENTI SOUTH,2015,June,Rabies,Clinical,BOVINE,2,2,Clinically confirmed,2015-06-01
+Mombasa,Mariakani,2015,March,Brucellosis,Lab,Bovine,5,0,Lab confirmed,2015-03-01
+Mombasa,Mariakani,2015,March,Rvf,Lab,Bovine,31,0,Lab confirmed,2015-03-01
+Murang'a,KANDARA,2015,December,Anthrax,Clinical,BOVINE,3,3,Clinically confirmed,2015-12-01
+Murang'a,MARAGUA,2015,December,Anthrax,Clinical,BOVINE,1,1,Clinically confirmed,2015-12-01
+Murang'a,KIGUMO,2015,December,Anthrax,Clinical,BOVINE,1,1,Clinically confirmed,2015-12-01
+Murang'a,KAHURO,2015,December,Anthrax,Lab,BOVINE,1,1,Lab confirmed,2015-12-01
+Murang'a,KIGUMO,2015,December,Anthrax,Clinical,BOVINE,4,4,Clinically confirmed,2015-12-01
+Murang'a,GATANGA,2015,December,Rabies,Clinical,BOVINE,4,4,Clinically confirmed,2015-12-01
+Murang'a,MARAGUA,2015,December,Rvf,Clinical,BOVINE,1,0,Clinically confirmed,2015-12-01
+Murang'a,KAHURO,2015,December,Anthrax,Lab,BOVINE,1,0,Lab confirmed,2015-12-01
+Murang'a,GATANGA,2015,December,Rabies,Clinical,BOVINE,1,1,Clinically confirmed,2015-12-01
+Murang'a,Muranga,2015,February,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-02-01
+Murang'a,Muranga,2015,February,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-02-01
+Murang'a,Murang'a,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Murang'a,Maragua,2015,Sep,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2015-09-01
+Kitui,Mwingi Central,2015,July,Rabies,Lab,Caprine,1,1,Lab confirmed,2015-07-01
+Nairobi,Langata,2015,February,Rabies,Lab,Feline,1,1,Lab confirmed,2015-02-01
+Nairobi,Langata,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Nairobi,Langata,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Nairobi,Langata,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Nairobi,Langata,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Nairobi,Langata,2015,July,Rabies,Lab,Canine,1,1,Lab confirmed,2015-07-01
+Nairobi,Langata,2015,July,Rabies,Lab,Ovine,1,1,Lab confirmed,2015-07-01
+Nakuru,Gilgil,2015,October,Rabies,PM,Canine,1,0,Post Mortem,2015-10-01
+Nakuru,Nakuru West,2015,March,Rabies,Lab,Canine,1,1,Lab confirmed,2015-03-01
+Nakuru,Nakuru East,2015,July,Anthrax,Lab,Bovine,1,ND,Lab confirmed,2015-07-01
+Nakuru,Rongai,2015,July,Anthrax,Lab,Bovine,1,ND,Lab confirmed,2015-07-01
+Nakuru,Nakuru,2015,July,Anthrax,Lab,Bufallo,1,ND,Lab confirmed,2015-07-01
+Nakuru,Nakuru,2015,July,Anthrax,Lab,Buffalo,1,ND,Lab confirmed,2015-07-01
+Nakuru,Nakuru,2015,July,Anthrax,Lab,Buffalo,1,ND,Lab confirmed,2015-07-01
+Nakuru,Nakuru,2015,July,Anthrax,Lab,Rhino,1,ND,Lab confirmed,2015-07-01
+Nakuru,Nakuru,2015,July,Anthrax,Lab,Buffalo,1,ND,Lab confirmed,2015-07-01
+Narok,transmara East,2015,December,Anthrax,Clinical,Bovine,24,18,Clinically confirmed,2015-12-01
+Narok,Narok west,2015,December,Anthrax,Clinical,Bovine,8,4,Clinically confirmed,2015-12-01
+Nyamira,West Mugirango,2015,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2015-12-01
+Nyeri,MATHIRA EAST,2015,December,Anthrax,Lab,CAPRINE,1,1,Lab confirmed,2015-12-01
+Nyeri,Kieni West,2015,February,Brucellosis,Lab,Bovine,5,0,Lab confirmed,2015-02-01
+Nyeri,Mathira east,2015,February,Brucellosis,Lab,Bovine,6,0,Lab confirmed,2015-02-01
+Nyeri,Teu,2015,February,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-02-01
+Nyeri,Kieni West,2015,May,Rabies,Clinical,Canine,1,1,Clinically confirmed,2015-05-01
+Nyeri,Nyeri South,2015,May,Rabies,Clinical,Bovine,2,0,Clinically confirmed,2015-05-01
+Nyeri,Mukurweini,2015,May,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2015-05-01
+Nyeri,Mukurweini,2015,May,Anthrax,Clinical,Bovine,1,0,Clinically confirmed,2015-05-01
+Nyeri,Kieni West,2015,June,Rabies,Clinical,dog,1,1,Clinically confirmed,2015-06-01
+Taita Taveta,voi,2015,March,Rvf,Lab,Caprine,6,0,Lab confirmed,2015-03-01
+Taita Taveta,Bachuma,2015,August,Rvf,Lab,Ovine,1,0,Lab confirmed,2015-08-01
+Taita Taveta,Bachuma,2015,August,Rvf,Lab,Caprine,1,0,Lab confirmed,2015-08-01
+Taita Taveta,Voi,2015,August,Rabies,Lab,Canine(Jackal),1,1,Lab confirmed,2015-08-01
+Tharaka Nithi,Igambangombe,2015,December,Rabies,Clinical,BOVINE,1,0,Clinically confirmed,2015-12-01
+Tharaka Nithi,Chuka Igambangombe,2015,June,Anthrax,Clinical,Bovine,2,0,Clinically confirmed,2015-06-01
+Trans Nzoia,Trans-Nzoia,2015,March,Rvf,Lab,Ovine,72,0,Lab confirmed,2015-03-01
+Uasin Gishu,Uasin Gishu,2015,March,Brucellosis,Lab,Bovine,8,0,Lab confirmed,2015-03-01
+Uasin Gishu,Uasin Gishu,2015,March,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-03-01
+Uasin Gishu,Uasin Gishu,2015,July,Rabies,Lab,Bovine,1,1,Lab confirmed,2015-07-01
+Uasin Gishu,Moiben,2015,October,Anthrax,Lab,Bovine,1,0,Lab confirmed,2015-10-01
+NA,Kapseret,2015,October,Anthrax,Lab,Bovine,2,0,Lab confirmed,2015-10-01
+NA,Kesses,2015,October,Rabies,Clinical,Bovine,2,0,Clinically confirmed,2015-10-01
+NA,Hadado,2015,October,Rabies,Clinical,Canine,1,0,Clinically confirmed,2015-10-01
+Baringo,Ravine,2016,June,Rabies,Lab Diagnosis,Canine,1,1,Lab confirmed,2016-06-01
+Bomet,sotik,2016,January,Rabies,CLINICAL,Canine,1,0,Clinically confirmed,2016-01-01
+Bomet,Sotik,2016,February,Rabies,CLINICAL,Equine,1,1,Clinically confirmed,2016-02-01
+Bomet,Sotik,2016,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-09-01
+Bomet,Sotik,2016,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-09-01
+Bomet,Sotik,2016,August,Rabies,Clinical,Equine,1,1,Clinically confirmed,2016-08-01
+Bomet,Sotik,2016,August,Rabies,Clinical,Canine,1,1,Clinically confirmed,2016-08-01
+Bomet,Sotik,2016,August,Rabies,Laboratory,Bovine,2,2,Lab confirmed,2016-08-01
+Bomet,Sotik,2016,October,Rabies,Laboratory,Equine,1,1,Lab confirmed,2016-10-01
+Bomet,Sotik,2016,October,Rabies,Laboratory,Caprine,1,1,Lab confirmed,2016-10-01
+Bomet,sotik,2016,October,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-10-01
+Bomet,sotik,2016,October,Anthrax,Laboratory,Bovine,1,2,Lab confirmed,2016-10-01
+Bomet,Sotik,2016,October,Rabies,Lab,Bovine,1,1,Lab confirmed,2016-10-01
+Bomet,Sotik,2016,October,Anthrax,Lab,Bovine,1,2,Lab confirmed,2016-10-01
+Bomet,Sotik,2016,November,Rabies,clinical,Canine,1,0,Clinically confirmed,2016-11-01
+Bomet,Sotik,2016,November,Rabies,Clinical,Canine,1,1,Clinically confirmed,2016-11-01
+Bomet,Sotik,2016,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-11-01
+Bomet,Sotik,2016,November,Rabies,Laboratory,Donkey,1,1,Lab confirmed,2016-11-01
+Bomet,Sotik,2016,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-11-01
+Bomet,Sotik,2016,November,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2016-11-01
+Bomet,Sotik,2016,November,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2016-11-01
+Bomet,Sotik,2016,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-11-01
+Bomet,Sotik,2016,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-11-01
+Bomet,Sotik,2016,November,Rabies,Laboratory,Donkey,1,1,Lab confirmed,2016-11-01
+Bomet,Sotik,2016,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-11-01
+Busia,Matayos,2016,July,Rvf,Clinical,Bovine,1,0,Clinically confirmed,2016-07-01
+Busia,Matayos,2016,July,Rvf,Clinical,Bovine,14,0,Clinically confirmed,2016-07-01
+Embu,Embu East,2016,August,Rabies,Clinical,Caprine,2,0,Clinically confirmed,2016-08-01
+Embu,Embu North,2016,August,Rabies,Clinical,Canine,4,NA,Clinically confirmed,2016-08-01
+Embu,RUNYEJES,2016,August,Rabies,Clinical,Canine,4,0,Clinically confirmed,2016-08-01
+Kajiado,loitokitok,2016,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2016-12-01
+Kakamega,Lurambi,2016,January,Rabies,CLINICAL,Canine,1,1,Clinically confirmed,2016-01-01
+Kakamega,Lurambi,2016,January,Rabies,CLINICAL,Canine,1,1,Clinically confirmed,2016-01-01
+Kakamega,Ikolomani,2016,November,Rabies,Clinical,Porcine,2,0,Clinically confirmed,2016-11-01
+Kericho,Bureti,2016,August,Anthrax,Laboratory,Bovine,3,3,Lab confirmed,2016-08-01
+Kericho,Kericho West,2016,November,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-11-01
+Kericho,Kericho West,2016,December,Rabies,Laboratory,BOVINE,1,1,Lab confirmed,2016-12-01
+Kilifi,Kaloleni,2016,September,Anthrax,Laboratory,Bovine,3,1,Lab confirmed,2016-09-01
+Kisii,Kitutu Central,2016,January,Anthrax,CLINICAL,Bovine,1,0,Clinically confirmed,2016-01-01
+Kisii,Kitutu Central,2016,February,Rabies,CLINICAL,Canine,1,0,Clinically confirmed,2016-02-01
+Kisii,Kitutu Central,2016,February,Anthrax,CLINICAL,Bovine,1,0,Clinically confirmed,2016-02-01
+Kisii,Nyaribari chache,2016,August,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-08-01
+Kisii,Masaba South,2016,August,Rabies,Laboratory,Equine,1,1,Lab confirmed,2016-08-01
+Kisii,Nyaribari Chache,2016,August,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-08-01
+Kisii,Nyaribari Masaba,2016,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-09-01
+Kisumu,Kisumu East,2016,August,Rabies,Laboratory,Canine,6,6,Lab confirmed,2016-08-01
+Kisumu,Kisumu West,2016,August,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-08-01
+Kitui,Yatta,2016,August,Rabies,Clinical,Equine,1,1,Clinically confirmed,2016-08-01
+Kitui,Kitui central,2016,September,Rabies,Clinical,Canine,1,1,Clinically confirmed,2016-09-01
+Kwale,Matuga,2016,January,Rabies,CLINICAL,Canine,1,0,Clinically confirmed,2016-01-01
+Lamu,Lamu East,2016,February,Rabies,CLINICAL,Equine,1,1,Clinically confirmed,2016-02-01
+Lamu,Lamu west,2016,March,Rabies,CLINICAL,Canine,4,1,Clinically confirmed,2016-03-01
+Lamu,Lamu west,2016,March,Rabies,CLINICAL,Canine,1,0,Clinically confirmed,2016-03-01
+Lamu,Lamu west,2016,March,Rabies,CLINICAL,Canine,1,1,Clinically confirmed,2016-03-01
+Lamu,Lamu west,2016,March,Rabies,CLINICAL,Canine,2,0,Clinically confirmed,2016-03-01
+Lamu,Lamu West,2016,April,Anthrax,LABORATORY,BOVINE,6,0,Lab confirmed,2016-04-01
+Lamu,Lamu west,2016,April,Rabies,Clinical signs/Lab,Canine,5,0,Lab confirmed,2016-04-01
+Lamu,Lamu west,2016,April,Rabies,Clinical,Canine,2,1,Clinically confirmed,2016-04-01
+Lamu,Lamu west,2016,April,Anthrax,Lab,Caprine,2,5,Lab confirmed,2016-04-01
+Lamu,lamu east,2016,May,Rabies,clinical,canine,1,0,Clinically confirmed,2016-05-01
+Lamu,lamu west,2016,May,Rabies,Clinical,Donkey,1,1,Clinically confirmed,2016-05-01
+Lamu,lamu,2016,May,Rabies,Clinical,Caprine+Donkey,2,2,Clinically confirmed,2016-05-01
+Lamu,LamuWest,2015,May,Rabies,LABORATORY,CAPRINE,1,1,Lab confirmed,2015-05-01
+Lamu,lamu west,2016,May,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-05-01
+Lamu,Lamu west,2016,June,Anthrax,Laboratory,Bovine,5,3,Lab confirmed,2016-06-01
+Lamu,Lamu East,2016,June,Rabies,Lab Diagnosis,Canine,1,1,Lab confirmed,2016-06-01
+Lamu,Mokowe,2016,July,Rabies,Laboratory,Canine,1,0,Lab confirmed,2016-07-01
+Lamu,Mokowe,2016,July,Rabies,Laboratory,Canine,1,0,Lab confirmed,2016-07-01
+Lamu,Lamu West,2016,July,Rabies,Laboratory,Caprine,1,0,Lab confirmed,2016-07-01
+Lamu,Lamu West,2016,October,Rabies,Laboratory,Canine,1,1,Lab confirmed,2016-10-01
+Makueni,Nzaui,2016,May,Rabies,clinical,canine,1,0,Clinically confirmed,2016-05-01
+Machakos,machakos,2016,August,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2016-08-01
+Machakos,machakos,2016,October,Rabies,clinical,bovine,1,1,Clinically confirmed,2016-10-01
+Makueni,Kibwezi West,2016,May,Rabies,NA,Dog,1,1,Clinically confirmed,2016-05-01
+Makueni,Kibwezi East,2016,May,Anthrax,PM &LB,Bovine,1,7,Lab confirmed,2016-05-01
+Makueni,Kibwezi East,2016,May,Anthrax,lab,bovine,1,2,Lab confirmed,2016-05-01
+Makueni,Kibwezi East,2016,May,Anthrax,lab,bovine,1,5,Lab confirmed,2016-05-01
+Makueni,Kibwezi East,2016,May,Rabies,clinical,Canine,1,1,Clinically confirmed,2016-05-01
+Makueni,Mbooni,2016,May,Rabies,Clinical,Canine,4,1,Clinically confirmed,2016-05-01
+Makueni,Mbooni,2016,May,Rabies,clinical,Bovine,1,1,Clinically confirmed,2016-05-01
+Makueni,Mbooni,2016,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2016-07-01
+Makueni,Mbooni,2016,July,Rabies,Clinical,Canine,4,0,Clinically confirmed,2016-07-01
+Makueni,Makueni,2016,July,Rabies,Clinical,Canine,4,0,Clinically confirmed,2016-07-01
+Makueni,kilome,2016,May,Anthrax,Lab,Bovine,1,1,Lab confirmed,2016-05-01
+Makueni,kilome,2016,May,Anthrax,PM &LB,Bovine,1,7,Lab confirmed,2016-05-01
+Makueni,kilome,2016,May,Anthrax,PM &LB,Bovine,1,7,Lab confirmed,2016-05-01
+Marsabit,Laisamis,2016,February,Rabies,CLINICAL,Canine,3,0,Clinically confirmed,2016-02-01
+Marsabit,Saku,2016,February,Rabies,CLINICAL,Canine,4,2,Clinically confirmed,2016-02-01
+Marsabit,Laisamis,2016,February,Rabies,CLINICAL,Camel,7,0,Clinically confirmed,2016-02-01
+Marsabit,Laisamis,2016,February,Rabies,CLINICAL,Equine,11,3,Clinically confirmed,2016-02-01
+Marsabit,NORTH HORR,2016,August,Rabies,Clinical,Equine,1,1,Clinically confirmed,2016-08-01
+Marsabit,North horr,2016,August,Rabies,Clinical,Equine,1,1,Clinically confirmed,2016-08-01
+Marsabit,North horr,2016,August,Rabies,Clinical,Equine,1,1,Clinically confirmed,2016-08-01
+Marsabit,North horr,2016,November,Anthrax,Clinical,Ovine,1,24,Clinically confirmed,2016-11-01
+Marsabit,North horr,2016,November,Anthrax,Clinical,Bovine,1,21,Clinically confirmed,2016-11-01
+Marsabit,saku,2016,December,Rabies,Clinical,Canine,3,3,Clinically confirmed,2016-12-01
+Marsabit,saku,2016,December,Rabies,Clinical,Caprine,1,1,Clinically confirmed,2016-12-01
+Marsabit,saku,2016,December,Rabies,Clinical,Ovine,2,0,Clinically confirmed,2016-12-01
+Marsabit,saku,2016,December,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2016-12-01
+Meru,Igembe South,2016,July,Rabies,Clinical,Bovine,2,1,Clinically confirmed,2016-07-01
+Meru,Imenti South,2016,September,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2016-09-01
+Meru,Imenti South,2016,September,Anthrax,Laboratory,Bovine,1,2,Lab confirmed,2016-09-01
+Meru,Imenti South,2016,September,Anthrax,postmortem,Porcine,1,2,Post Mortem,2016-09-01
+Meru,Imenti North,2016,September,Rabies,Clinical,Canine,1,0,Clinically confirmed,2016-09-01
+Meru,SOUTH IMENTI,2016,September,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-09-01
+Meru,Imenti South,2016,September,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2016-09-01
+Meru,Igembe South,2016,July,Rabies,Clinical,Bovine,2,1,Clinically confirmed,2016-07-01
+Meru,Imenti North,2016,October,Anthrax,Lab,Bovine,1,1,Lab confirmed,2016-10-01
+Mombasa,Kisauni,2016,March,Anthrax,Lab,Caprine,1,1,Lab confirmed,2016-03-01
+Mombasa,Kisauni,2016,January,Rabies,Lab,Canine,1,N/A,Lab confirmed,2016-01-01
+Mombasa,Kisauni,2016,March,Anthrax,Lab,Caprine,1,1,Lab confirmed,2016-03-01
+Mombasa,Kisauni,2016,September,Rabies,Laboratory,Canine,1,NA,Lab confirmed,2016-09-01
+Mombasa,Kisauni,2016,August,Rabies,Laboratory,Canine,1,NA,Lab confirmed,2016-08-01
+Murang'a,Kiharu,2016,March,Rabies,CLINICAL,Canine,1,NIL,Clinically confirmed,2016-03-01
+Murang'a,Kiharu,2016,March,Anthrax,Lab,Bovine,1,1,Lab confirmed,2016-03-01
+Murang'a,Kiharu,2016,March,Anthrax,Lab,Bovine,1,1,Lab confirmed,2016-03-01
+Murang'a,Maragua,2016,May,Anthrax,Clinical,Bovine,7,7,Clinically confirmed,2016-05-01
+Murang'a,KIHARU,2016,July,Rvf,Clinical,Caprine,12,5,Clinically confirmed,2016-07-01
+Murang'a,Kigumo,2016,October,Rabies,CLINICAL,CANINE,1,0,Clinically confirmed,2016-10-01
+Murang'a,Maragua,2016,October,Anthrax,CLINICAL,BOVINE,1,1,Clinically confirmed,2016-10-01
+Nairobi,LANGATA,2016,May,Anthrax,Laboratory,Bovine,3,3,Lab confirmed,2016-05-01
+Nakuru,Bahati,2016,February,Rabies,Lab,Canine,1,1,Lab confirmed,2016-02-01
+Nakuru,Rongai,2016,January,Rabies,Lab,Canine,1,2,Lab confirmed,2016-01-01
+Laikipia,Rumuruti,2016,March,Rabies,Lab,Canine,1,1,Lab confirmed,2016-03-01
+Nakuru,Rongai,2016,July,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-07-01
+Nakuru,Rongai,2016,July,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-07-01
+Nakuru,RONGAI,2016,August,Anthrax,postmortem,Bovine,1,NA,Post Mortem,2016-08-01
+Nakuru,RONGAI,2016,August,Anthrax,Clinical,Bovine,1,NA,Clinically confirmed,2016-08-01
+Nyeri,Mathira West,2016,March,Anthrax,Lab,Bovine,1,1,Lab confirmed,2016-03-01
+Nyeri,Mathira West,2016,March,Anthrax,Lab,Bovine,1,1,Lab confirmed,2016-03-01
+Nyeri,TETU,2016,August,Anthrax,Laboratory,Bovine,1,2,Lab confirmed,2016-08-01
+West Pokot,North Pokot,2016,December,Rvf,Clinical,Caprine,20,10,Clinically confirmed,2016-12-01
+West Pokot,pokot central,2016,December,Rabies,Clinical,Caprine,2,5,Clinically confirmed,2016-12-01
+West Pokot,pokot south,2016,December,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2016-12-01
+Siaya,Gem,2016,February,Rabies,CLINICAL,Canine,1,1,Clinically confirmed,2016-02-01
+Siaya,Gem,2016,May,Rabies,clinical,Bovine,1,1,Clinically confirmed,2016-05-01
+Taita Taveta,Voi,2016,November,Rabies,Laboratory,White tailed Mongoose,1,1,Lab confirmed,2016-11-01
+Tana River,TANA RIVER,2016,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2016-07-01
+Tana River,Tanadelta,2016,August,Brucellosis,Clinical,Caprine,4,1,Clinically confirmed,2016-08-01
+Tana River,Tanadelta,2016,August,Brucellosis,Clinical,Caprine,4,1,Clinically confirmed,2016-08-01
+Tana River,TANA RIVER,2016,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2016-07-01
+Tharaka Nithi,Igambangombe,2016,January,Rabies,CLINICAL,Canine,1,,Clinically confirmed,2016-01-01
+Tharaka Nithi,Igambangombe,2016,January,Rabies,CLINICAL,Canine,1,,Clinically confirmed,2016-01-01
+Tharaka Nithi,Igembe North,2016,February,Anthrax,pm,Bovine,1,1,Post Mortem,2016-02-01
+Turkana,Turkana South,2016,April,Anthrax,Laboratory,Caprine,11,0,Lab confirmed,2016-04-01
+Uasin Gishu,Soy,2016,May,Anthrax,PM &LB,Bovine,1,7,Lab confirmed,2016-05-01
+Uasin Gishu,Moiben,2016,February,Rabies,CLINICAL,Bovine,1,1,Clinically confirmed,2016-02-01
+Uasin Gishu,Ainabkoi,2016,March,Anthrax,Lab,Ovine,2,17,Lab confirmed,2016-03-01
+Uasin Gishu,Moiben,2016,July,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2016-07-01
+Uasin Gishu,Ainabkoi,2016,December,Rabies,Lab,Canine,2,2,Lab confirmed,2016-12-01
+West Pokot,poker central,2016,May,Anthrax,Lab,Bovine,2,2,Lab confirmed,2016-05-01
+West Pokot,West Pokot,2016,December,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2016-12-01
+Nyeri,Mukurweini,2016,March,Rabies,CLINICAL,Canine,1,1,Clinically confirmed,2016-03-01
+Baringo,Eldama Ravine,2017,December,Rabies,Lab,Bovine,1,0,Lab confirmed,2017-12-01
+Bomet,Konoin,2017,February,Rabies,Laboratory,BOVINE,1,1,Lab confirmed,2017-02-01
+Bomet,Sotik,2017,June,Rabies,Clinical,Bovine,2,2,Clinically confirmed,2017-06-01
+Bomet,Sotik,2017,June,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2017-06-01
+Bomet,Sotik,2017,June,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2017-06-01
+Bomet,Sotik,2017,October,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-10-01
+Bomet,Konoin,2017,October,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-10-01
+Bomet,Sotik,2017,October,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-10-01
+Bomet,Bomet East,2017,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-10-01
+Bomet,Sotik,2017,October,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2017-10-01
+Bomet,Bomet East,2017,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-10-01
+Bomet,Bomet East,2017,October,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-10-01
+Bomet,Sotik,2017,October,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-10-01
+Bomet,Chebalungu,2017,November,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-11-01
+Bomet,Bomet East,2017,October,Rabies,Clinical,Ovine,1,1,Clinically confirmed,2017-10-01
+Bomet,Bomet East,2017,October,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-10-01
+Bomet,Bomet East,2017,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-10-01
+Bomet,Bomet East,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Bomet East,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Sotik,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Bomet East,2017,November,Rabies,Laboratory,Caprine,1,1,Lab confirmed,2017-11-01
+Bomet,Sotik,2017,November,Rabies,Laboratory,Caprine,1,0,Lab confirmed,2017-11-01
+Bomet,chebalungu,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Bomet East,2017,November,Rabies,Clinical,Equine,1,1,Clinically confirmed,2017-11-01
+Bomet,Bomet East,2017,November,Rabies,Clinical,Caprine,3,3,Clinically confirmed,2017-11-01
+Bomet,Chebalungu,2017,November,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Sotik,2017,November,Rabies,Clinical,Bovine,3,3,Clinically confirmed,2017-11-01
+Bomet,Sotik,2017,November,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-11-01
+Bomet,Chebalungu,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Chebalungu,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Bomet East,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Chebalungu,2017,November,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-11-01
+Bomet,Sotik,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Bomet East,2017,November,Rabies,Clinical,Equine,1,1,Clinically confirmed,2017-11-01
+Bomet,Konoin,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Bomet,Sotik,2017,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2017-11-01
+Bomet,Konoin,2017,December,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-12-01
+Bomet,Konoin,2017,December,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-12-01
+Bomet,Sotik,2017,December,Rabies,Laboratory,Bovine,2,2,Lab confirmed,2017-12-01
+Bomet,Chebalungu,2017,December,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-12-01
+Elgeyo Marakwet,Marakwet West,2017,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-12-01
+Elgeyo Marakwet,Marakwet west,2017,December,Anthrax,Clinical,Bovine,2,1,Clinically confirmed,2017-12-01
+Elgeyo Marakwet,Keiyo North,2017,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-12-01
+Embu,Runyenjes,2017,July,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-07-01
+Garissa,Fafi,2017,November,Brucellosis,Clinical,Caprine,10,0,Clinically confirmed,2017-11-01
+Kajiado,Kajiado north,2017,March,Anthrax,Laboratory,Bovine,3,3,Lab confirmed,2017-03-01
+Kakamega,Shinyalu,2017,February,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-02-01
+Kakamega,Shinyalu,2017,February,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-02-01
+Kakamega,Ikolomani,2017,March,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2017-03-01
+Kakamega,Butere,2017,June,Rabies,Clinical,CANINE,1,0,Clinically confirmed,2017-06-01
+Kakamega,Butere,2017,June,Rabies,Clinical,CANINE,1,0,Clinically confirmed,2017-06-01
+Kakamega,Butere,2017,June,Rabies,Clinical,CANINE,1,0,Clinically confirmed,2017-06-01
+Kakamega,Lurambi,2017,July,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-07-01
+Kakamega,Butere,2017,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-07-01
+Kakamega,Butere,2017,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-07-01
+Kericho,Ainamoi,2017,February,Rabies,Laboratory,CANINE,1,1,Lab confirmed,2017-02-01
+Kericho,Kericho East,2017,March,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-03-01
+Kericho,Kericho East,2016,January,Rabies,Laboratory,BOVINE,1,1,Lab confirmed,2016-01-01
+Kericho,Bureti,2017,January,Rabies,Laboratory,BOVINE,1,1,Lab confirmed,2017-01-01
+Kericho,Sotik,2017,January,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-01-01
+Kericho,Kericho East,2017,March,Rabies,Laboratory,CANINE,1,1,Lab confirmed,2017-03-01
+Kiambu,Githunguri,2017,December,Anthrax,Lab,Bovine,1,1,Lab confirmed,2017-12-01
+Kilifi,Bahari,2017,February,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-02-01
+Kilifi,Kilifi south,2017,May,Rabies,Clinical,CANINE,1,1,Clinically confirmed,2017-05-01
+Kisumu,Seme,2017,November,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-11-01
+Kisumu,Kisumu West,2017,October,Rabies,Laboratory,Bovine,2,2,Lab confirmed,2017-10-01
+Kisumu,Nyando,2017,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-12-01
+Kitui,kyangwithya West,2017,February,Rabies,Clinical,Canine,3,1,Clinically confirmed,2017-02-01
+Kwale,Kinango,2017,March,Rabies,Laboratory,Canine,1,1,Lab confirmed,2017-03-01
+Kwale,dd,2017,December,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2017-12-01
+Machakos,Machakos,2017,January,Rabies,Clinical,bovine,1,1,Clinically confirmed,2017-01-01
+Machakos,Yatta,2017,January,Rabies,Clinical,canine,1,0,Clinically confirmed,2017-01-01
+Machakos,Yatta,2017,January,Rabies,Clinical,canine,1,0,Clinically confirmed,2017-01-01
+Machakos,Matungulu,2017,April,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-04-01
+Machakos,Kithimani,2017,April,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2017-04-01
+Machakos,Matungulu,2017,April,Rabies,Clinical,CAPRINE,1,0,Clinically confirmed,2017-04-01
+Machakos,Machakos,2017,May,Rabies,Clinical,CANINE,1,1,Clinically confirmed,2017-05-01
+Makueni,Mbooni,2017,February,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2017-02-01
+Makueni,Kibwezi West,2017,March,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2017-03-01
+Makueni,Mbooni,2017,April,Rabies,Clinical,CANINE,1,0,Clinically confirmed,2017-04-01
+Makueni,Makueni,2017,April,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2017-04-01
+Makueni,Kibwezi West,2017,April,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2017-04-01
+Makueni,Makueni,2017,May,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2017-05-01
+Makueni,Kilome,2017,May,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2017-05-01
+Makueni,Mbooni,2017,October,Rvf,Clinical,Ovine,1,0,Clinically confirmed,2017-10-01
+Makueni,Kibwezi West,2017,September,Rvf,Clinical,Bovine,2,0,Clinically confirmed,2017-09-01
+Makueni,Kibwezi West,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Marsabit,saku,2017,March,Anthrax,Laboratory,Bovine,1,2,Lab confirmed,2017-03-01
+Marsabit,Saku,2017,May,Rabies,Clinical,CANINE,1,1,Clinically confirmed,2017-05-01
+Marsabit,Saku,2017,September,Rabies,Clinical,Bovine,5,0,Clinically confirmed,2017-09-01
+Marsabit,Saku,2017,September,Rabies,Clinical,Equine,1,1,Clinically confirmed,2017-09-01
+Meru,Igembe Central,2017,September,Anthrax,Laboratory,Bovine,10,0,Lab confirmed,2017-09-01
+Meru,Igembe Central,2017,September,Anthrax,Laboratory,Bovine,10,0,Lab confirmed,2017-09-01
+Meru,Igembe North,2017,November,Rabies,Laboratory,Bovine,1,0,Lab confirmed,2017-11-01
+Meru,Tigania East,2017,November,Rabies,Laboratory,Bovine,1,0,Lab confirmed,2017-11-01
+Meru,Imenti North,2017,December,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2017-12-01
+Meru,Tigania west,2017,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-12-01
+Meru,Buuri,2017,December,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2017-12-01
+Meru,Buuri,2017,December,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2017-12-01
+Mombasa,Kisauni,2017,March,Rabies,Laboratory,Canine,1,0,Lab confirmed,2017-03-01
+Mombasa,Kisauni,2017,September,Rabies,Laboratory,Canine,5,1,Lab confirmed,2017-09-01
+Mombasa,Kisauni,2017,September,Rabies,Laboratory,Canine,5,1,Lab confirmed,2017-09-01
+Mombasa,Nyali,2017,September,Rabies,Laboratory,Canine,1,1,Lab confirmed,2017-09-01
+Mombasa,Kisauni,2017,October,Anthrax,Laboratory,Porcine,1,1,Lab confirmed,2017-10-01
+Murang'a,KIHARU,2017,February,Anthrax,Laboratory,BOVINE,1,1,Lab confirmed,2017-02-01
+Murang'a,KIHARU,2017,February,Rabies,Clinical,CANINE,1,1,Clinically confirmed,2017-02-01
+Murang'a,MARAGUA,2017,February,Rabies,Clinical,CANINE,2,2,Clinically confirmed,2017-02-01
+Murang'a,Mathioya,2017,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-02-01
+Murang'a,Kiharu,2017,February,Anthrax,Clinical,Bovine,1,0,Clinically confirmed,2017-02-01
+Murang'a,kiharu,2017,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-02-01
+Murang'a,kandara,2017,March,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2017-03-01
+Murang'a,kandara,2017,june,Anthrax,Clinical,Bovine,2,2,Clinically confirmed,2017-06-01
+Nairobi,nairobi,2017,April,Anthrax,Laboratory,Buffalo,1,6,Lab confirmed,2017-04-01
+Nakuru,Njoro,2017,March,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-03-01
+Nakuru,Nakuru North,2017,March,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-03-01
+Nakuru,Nakuru Town  East,2017,June,Anthrax,Laboratory,Buffalo,1,1,Lab confirmed,2017-06-01
+Nakuru,Nakuru north,2017,June,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-06-01
+Nakuru,Gilgil,2017,May,Rabies,Laboratory,CAPRINE,1,1,Lab confirmed,2017-05-01
+Nakuru,Rongai,2017,May,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2017-05-01
+Nakuru,Nakuru West,2017,July,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2017-07-01
+Nakuru,Nakuru West,2017,September,Anthrax,Laboratory,Canine,1,1,Lab confirmed,2017-09-01
+Nakuru,Nakuru West,2017,September,Anthrax,Laboratory,Canine,1,1,Lab confirmed,2017-09-01
+Nakuru,Nakuru West,2017,October,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2017-10-01
+Nakuru,Rongai,2017,October,Anthrax,Laboratory,Bovine,10,4,Lab confirmed,2017-10-01
+Nakuru,Rongai,2017,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2017-11-01
+Nakuru,Nakuru Town,2017,November,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Nakuru,Subukia,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Nakuru,Kuresoi South,2017,December,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2017-12-01
+Nyandarua,Mirangine,2017,April,Rabies,Laboratory,Ovine,17,10,Lab confirmed,2017-04-01
+Nyeri,Mukurweini,2017,March,Rabies,Clinical,Dog,1,1,Clinically confirmed,2017-03-01
+Nyeri,Tetu,2017,February,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-02-01
+Nyeri,kieni east,2017,February,Rabies,Clinical,Canine,1,1,Clinically confirmed,2017-02-01
+Nyeri,Nyeri South,2017,December,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-12-01
+West Pokot,pokot central,2017,January,Rabies,Clinical,Caprine,2,1,Clinically confirmed,2017-01-01
+West Pokot,north pokot,2017,January,Rabies,Clinical,Camel,1,1,Clinically confirmed,2017-01-01
+West Pokot,pokot North,2017,February,Anthrax,Clinical,Bovine,3,5,Clinically confirmed,2017-02-01
+Siaya,Gem,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Siaya,Gem,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Siaya,Bondo,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Siaya,Rarieda,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Siaya,Rarieda,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Siaya,Siaya,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Siaya,Siaya,2017,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-11-01
+Siaya,Rarieda,2017,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2017-11-01
+Tharaka Nithi,tharaka,2017,December,Anthrax,Clinical,Ovine,1,1,Clinically confirmed,2017-12-01
+Uasin Gishu,Ainabkoi,2017,January,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2017-01-01
+Uasin Gishu,Soy,2017,June,Anthrax,NA,Bovine,1,NA,Clinically confirmed,2017-06-01
+Uasin Gishu,Kapseret,2017,June,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2017-06-01
+Uasin Gishu,Kapseret,2017,September,Anthrax,Post Mortem,Bovine,69,1,Post Mortem,2017-09-01
+Uasin Gishu,Kapseret,2017,September,Anthrax,Post Mortem,Bovine,69,1,Post Mortem,2017-09-01
+Bomet,Chebalungu,2018,January,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-01-01
+Bomet,Sotik,2018,January,Rabies,Laboratory,Bovine,2,2,Lab confirmed,2018-01-01
+Bomet,Sotik,2018,January,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-01-01
+Bomet,Sotik,2018,January,Rabies,Laboratory,Caprine,1,1,Lab confirmed,2018-01-01
+Bomet,Chebalungu,2018,January,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-01-01
+Bomet,Chebalungu,2018,January,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-01-01
+Bomet,Sotik,2018,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-01-01
+Bomet,Bomet Central,2018,April,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-04-01
+Bomet,Bomet East,2018,April,Rabies,Clinical,Canine,2,1,Clinically confirmed,2018-04-01
+Bomet,Bomet Central,2018,April,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-04-01
+Bomet,Sotik,2018,April,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-04-01
+Bomet,Chepalungu,2018,April,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-04-01
+Bomet,Bomet East,2018,April,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-04-01
+Bomet,Bomet East,2018,April,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-04-01
+Bomet,Sotik,2018,April,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-04-01
+Bomet,Bomet East,2018,April,Rabies,Clinical,Canine,2,0,Clinically confirmed,2018-04-01
+Bomet,Chepalungu,2018,June,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2018-06-01
+Bomet,Chepalungu,2018,June,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-06-01
+Bomet,Sotik,2018,June,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-06-01
+Bomet,Sotik,2018,June,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-06-01
+Bomet,Sotik,2018,June,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-06-01
+Bomet,Sotik,2018,June,Rabies,Clinical,Ovine,1,1,Clinically confirmed,2018-06-01
+Bomet,Konoin,2018,June,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-06-01
+Bomet,Chepalungu,2018,June,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-06-01
+Bomet,Chepalungu,2018,June,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-06-01
+Bomet,Chepalungu,2018,June,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-06-01
+Bomet,Sotik,2018,June,Rabies,Clinical,Ovine,1,1,Clinically confirmed,2018-06-01
+Bomet,Bomet East,2018,June,Rabies,Clinical,Ovine,1,4,Clinically confirmed,2018-06-01
+Bomet,Sotik,2018,June,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2018-06-01
+Bomet,Bomet East,2018,June,Rabies,Clinical,Ovine,1,1,Clinically confirmed,2018-06-01
+Bomet,Bomet East,2018,June,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-06-01
+Bomet,Konoin,2018,June,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-06-01
+Bomet,Bomet Central,2018,July,Anthrax,Post Mortem,Bovine,16,0,Post Mortem,2018-07-01
+Bomet,Konoin,2018,July,Brucellosis,Clinical,Bovine,3,0,Clinically confirmed,2018-07-01
+Bomet,Bomet East,2018,July,Rabies,Clinical,Ovine,4,3,Clinically confirmed,2018-07-01
+Bomet,Chepalungu,2018,July,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-07-01
+Bomet,Sotik,2018,July,Rabies,Clinical,Ovine,3,1,Clinically confirmed,2018-07-01
+Bomet,Sotik,2018,August,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-08-01
+Bomet,Sotik,2018,August,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-08-01
+Bomet,Sotik,2018,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-09-01
+Bomet,Ndanai,2018,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-09-01
+Bomet,Sotik,2018,September,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-09-01
+Bomet,Chepalungu,2018,September,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-09-01
+Bomet,Konoin,2018,October,Rabies,Clinical,Canine,13,0,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,October,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,October,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Bomet,Chepalungu,2018,October,Rabies,Clinical,Ovine,1,0,Clinically confirmed,2018-10-01
+Bomet,Chepalungu,2018,October,Rabies,Clinical,Caprine,1,2,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,October,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,October,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,October,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-10-01
+Bomet,Sotik,2018,December,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-12-01
+Bomet,Sotik,2018,December,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-12-01
+Bomet,Sotik,2018,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-12-01
+Embu,Embu West,2017,January,Rabies,Clinical,Canine,1,6,Clinically confirmed,2017-01-01
+Embu,Embu West,2017,January,Rabies,Clinical,Feline,1,4,Clinically confirmed,2017-01-01
+Embu,Embu West,2017,January,Rabies,Clinical,Canine,1,6,Clinically confirmed,2017-01-01
+Embu,Embu West,2017,January,Rabies,Clinical,Canine,1,6,Clinically confirmed,2017-01-01
+Embu,Mbeere South,2017,January,Rabies,Clinical,Canine,1,9,Clinically confirmed,2017-01-01
+Embu,Mbeere South,2017,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-01-01
+Embu,Mbeere South,2017,January,Rabies,Clinical,Canine,1,9,Clinically confirmed,2017-01-01
+Embu,Mbeere South,2017,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2017-01-01
+Embu,Embu East,2018,October,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-10-01
+Embu,Runyejes,2018,October,Anthrax,Post Mortem,Bovine,1,0,Post Mortem,2018-10-01
+Isiolo,Garbatulla,2018,June,Rvf,Clinical,Bovine,1,SEVERAL,Clinically confirmed,2018-06-01
+Kakamega,Lurambi,2018,June,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-06-01
+Kakamega,Butere,2018,August,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-08-01
+Kakamega,Matete,2018,September,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-09-01
+Kericho,Kericho West,2018,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-09-01
+Kericho,Soin/sigowet,2018,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-09-01
+Kericho,Belgut,2018,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-09-01
+Kericho,Ainamoi,2018,September,Rabies,Laboratory,Bovine,1,2,Lab confirmed,2018-09-01
+Kericho,Kericho East,2018,October,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-10-01
+Kilifi,Malindi,2018,February,Rabies,Laboratory,Canine,1,1,Lab confirmed,2018-02-01
+Kilifi,Magarini,2018,June,Rvf,Clinical,Caprine,5,0,Clinically confirmed,2018-06-01
+Kilifi,Malindi,2018,June,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-06-01
+Kilifi,Kaloleni,2018,June,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-06-01
+Kilifi,Kaloleni,2018,June,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-06-01
+Kilifi,Malindi,2018,July,Rvf,Clinical,Bovine,33,1,Clinically confirmed,2018-07-01
+Kilifi,Malindi,2018,July,Rvf,Clinical,Ovine,30,7,Clinically confirmed,2018-07-01
+Kilifi,Malindi,2018,July,Rvf,Clinical,Caprine,51,7,Clinically confirmed,2018-07-01
+Kilifi,Magarini,2018,July,Rabies,Clinical,Canine,5,1,Clinically confirmed,2018-07-01
+Kilifi,Magarini,2018,July,Rvf,Clinical,Ovine,30,7,Clinically confirmed,2018-07-01
+Kilifi,Magarini,2018,July,Rvf,Clinical,Caprine,305,5,Clinically confirmed,2018-07-01
+Kilifi,Ganze,2018,July,Brucellosis,Clinical,Bovine,14,1,Clinically confirmed,2018-07-01
+Kilifi,Malindi,2018,August,Rvf,Clinical,Caprine,21,1,Clinically confirmed,2018-08-01
+Kilifi,Magarini,2018,July,Rvf,Clinical,Caprine,4,4,Clinically confirmed,2018-07-01
+Kilifi,Rabai,2018,August,Rabies,Laboratory,Canine,1,4,Lab confirmed,2018-08-01
+Kilifi,Malindi,2018,December,Rvf,Clinical,Bovine,2,1,Clinically confirmed,2018-12-01
+Kilifi,Malindi,2018,December,Rabies,Clinical,Canine,2,1,Clinically confirmed,2018-12-01
+Kirinyaga,Kirinyaga East,2018,April,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-04-01
+Kisii,South Migirango,2018,September,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-09-01
+Kisii,Bonchari,2018,October,Rabies,Clinical,Bovine,2,2,Clinically confirmed,2018-10-01
+Kisii,Bonchari,2018,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-10-01
+Kisumu,Seme,2018,February,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-02-01
+Kisumu,Kisumu West,2018,February,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-02-01
+Kisumu,Kisumu West,2018,February,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-02-01
+Kisumu,Seme,2018,March,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-03-01
+Kisumu,Nyando,2018,June,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-06-01
+Kisumu,Kisumu Central,2018,June,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-06-01
+Kisumu,Kisumu west,2018,October,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2018-10-01
+Kisumu,Seme,2018,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-10-01
+Kwale,Kinango,2018,February,Rabies,Laboratory,Canine,1,1,Lab confirmed,2018-02-01
+Kwale,Msambwe,2018,February,Rabies,Laboratory,Equine,1,1,Lab confirmed,2018-02-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,27,3,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,27,21,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,41,8,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Bovine,1,7,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,69,58,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Bovine,14,2,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,63,27,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,21,4,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,27,21,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,41,8,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,June,Rvf,Clinical,Caprine,27,3,Clinically confirmed,2018-06-01
+Kwale,Kinango,2018,July,Rvf,Clinical,Caprine,5,0,Clinically confirmed,2018-07-01
+Kwale,Kinango,2018,July,Brucellosis,Clinical,Caprine,63,120,Clinically confirmed,2018-07-01
+Kwale,Msambweni,2018,July,Brucellosis,Clinical,Caprine,15,1,Clinically confirmed,2018-07-01
+Kwale,Kinango,2018,July,Rvf,Clinical,Caprine,8,5,Clinically confirmed,2018-07-01
+Kwale,Kinango,2018,July,Brucellosis,Clinical,Caprine,450,63,Clinically confirmed,2018-07-01
+Kwale,Msambweni,2018,August,Rabies,Laboratory,Canine,1,1,Lab confirmed,2018-08-01
+Kwale,Matuga,2018,August,Rvf,Clinical,Bovine,1,0,Clinically confirmed,2018-08-01
+Kwale,Matuga,2018,August,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-08-01
+Kwale,Kinango,2018,August,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2018-08-01
+Kwale,Kinango,2018,September,Rabies,Laboratory,Caprine,1,1,Lab confirmed,2018-09-01
+Kwale,Kinango,2018,September,Rabies,Clinical,Bovine,2,0,Clinically confirmed,2018-09-01
+Kwale,Kinango,2018,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-10-01
+Kwale,Msambweni,2018,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-11-01
+Laikipia,Samburu East,2018,March,Anthrax,Clinical,Bovine,1,0,Clinically confirmed,2018-03-01
+Machakos,Kangundo,2018,April,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-04-01
+Machakos,Kangundo,2018,July,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-07-01
+Makueni,Mbooni,2018,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-01-01
+Makueni,Mbooni,2018,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-02-01
+Makueni,Mbooni,2018,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-02-01
+Makueni,Mbooni,2018,March,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2018-03-01
+Makueni,Mbooni,2018,March,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-03-01
+Makueni,Mbooni,2018,July,Rvf,Clinical,Caprine,4,4,Clinically confirmed,2018-07-01
+Makueni,Kaiti,2018,September,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-09-01
+Makueni,Kilome,2018,September,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-09-01
+Makueni,Kibwezi West,2018,November,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2018-11-01
+Makueni,Kibwezi West,2018,November,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2018-11-01
+Makueni,Mbooni,2018,November,Rabies,Clinical,Canine,2,0,Clinically confirmed,2018-11-01
+Meru,Imenti North,2018,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-01-01
+Meru,Buuri,2018,January,Rabies,Clinical,Equine,1,0,Clinically confirmed,2018-01-01
+Meru,Imenti north,2018,January,Anthrax,Clinical,Bovine,8,1,Clinically confirmed,2018-01-01
+Meru,Imenti South,2018,February,Anthrax,PM,Bovine,1,2,Post Mortem,2018-02-01
+Meru,Imenti South,2018,February,Anthrax,Post Mortem,Bovine,1,2,Post Mortem,2018-02-01
+Meru,Igembe North,2018,October,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Meru,South Imenti,2018,October,Anthrax,Clinical,Porcine,1,2,Clinically confirmed,2018-10-01
+Meru,Igembe South,2018,October,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-10-01
+Meru,Tigania East,2018,October,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Meru,Igembe Central,2018,October,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2018-10-01
+Meru,Igembe North,2018,October,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Meru,North Imenti,2018,October,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Meru,South Imenti,2018,October,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Meru,Igembe North,2018,October,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-10-01
+Meru,Igembe South,2018,November,Anthrax,Clinical,Bovine,1,3,Clinically confirmed,2018-11-01
+Meru,Igembe North,2018,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-11-01
+Meru,Central Imenti,2018,November,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-11-01
+Meru,South Imenti,2018,December,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-12-01
+Mombasa,Kisauni,2018,June,Anthrax,Laboratory,Porcine,1,1,Lab confirmed,2018-06-01
+Mombasa,Kisauni,2018,August,Rabies,Laboratory,Canine,1,1,Lab confirmed,2018-08-01
+Mombasa,Nyali,2018,August,Rabies,Laboratory,Canine,1,1,Lab confirmed,2018-08-01
+Nakuru,Nakuru Town,2018,January,Anthrax,Clinical,Ovine,1,1,Clinically confirmed,2018-01-01
+Nakuru,Nakuru Town,2018,January,Rabies,Clinical,Canine,2,0,Clinically confirmed,2018-01-01
+Nakuru,Nakuru Town,2018,January,Rabies,Clinical,Bovine,2,0,Clinically confirmed,2018-01-01
+Nakuru,Nakuru Town,2018,January,Rabies,Clinical,Ovine,1,2,Clinically confirmed,2018-01-01
+Nakuru,Nakuru Town,2018,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-02-01
+Nakuru,Naivasha,2018,February,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-02-01
+Nakuru,Naivasha,2018,February,Rabies,Clinical,Canine,45,6,Clinically confirmed,2018-02-01
+Nakuru,Nakuru North,2018,March,Rabies,Clinical,Canine,1,1,Clinically confirmed,2018-03-01
+Nakuru,Naivasha,2018,May,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-05-01
+Nakuru,Njoro,2018,June,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-06-01
+Nakuru,Naivasha,2018,June,Rabies,Clinical,Canine,2,0,Clinically confirmed,2018-06-01
+Nakuru,Njoro,2018,July,Rvf,Clinical,Bovine,1,0,Clinically confirmed,2018-07-01
+Narok,Transmara West,2018,July,Brucellosis,Clinical,Bovine,70,8,Clinically confirmed,2018-07-01
+Narok,Emurua Dikirr,2018,August,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-08-01
+Narok,Transmara West,2018,August,Rvf,Clinical,Caprine,3,4,Clinically confirmed,2018-08-01
+Narok,Narok South,2018,September,Rvf,Clinical,Ovine,1,0,Clinically confirmed,2018-09-01
+Narok,Transmara West,2018,August,Rabies,Clinical,Canine,3,1,Clinically confirmed,2018-08-01
+Narok,Narok South,2018,November,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-11-01
+Narok,Narok South,2018,November,Anthrax,Clinical,Bovine,1,3,Clinically confirmed,2018-11-01
+Narok,Narok West,2018,November,Rabies,Clinical,Canine,3,2,Clinically confirmed,2018-11-01
+Narok,Narok South,2018,December,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-12-01
+Nyeri,Mathira West,2018,August,Rabies,Laboratory,Caprine,1,0,Lab confirmed,2018-08-01
+Nyeri,Nyeri Central,2018,August,Anthrax,Laboratory,Bovine,1,0,Lab confirmed,2018-08-01
+Nyeri,Nyeri Town,2018,September,Rvf,Clinical,Caprine,1,0,Clinically confirmed,2018-09-01
+Nyeri,Mathira East,2018,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-11-01
+West Pokot,West Pokot,2018,March,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-03-01
+West Pokot,West Pokot,2018,March,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-03-01
+Samburu,Samburu Central,2018,February,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-02-01
+Samburu,Samburu Central,2018,July,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-07-01
+Siaya,Bondo,2017,January,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2017-01-01
+Siaya,Bondo,2018,January,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2018-01-01
+Siaya,Bondo,2018,January,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2018-01-01
+Siaya,Gem,2018,January,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-01-01
+Siaya,Rarieda,2018,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-01-01
+Siaya,Siaya,2018,February,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-02-01
+Siaya,Rarieda,2018,February,Anthrax,Clinical,Bovine,2,1,Clinically confirmed,2018-02-01
+Siaya,Bondo,2018,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-02-01
+Siaya,Bondo,2018,February,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-02-01
+Siaya,Siaya,2018,February,Rabies,Clinical,Caprine,2,1,Clinically confirmed,2018-02-01
+Siaya,Rarieda,2018,February,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2018-02-01
+Siaya,Rarieda,2018,February,Rvf,Clinical,Bovine,3,0,Clinically confirmed,2018-02-01
+Siaya,Rarieda,2018,March,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2018-03-01
+Siaya,Bondo,2018,June,Brucellosis,Post Mortem,Bovine,1,0,Post Mortem,2018-06-01
+Siaya,Alego Usonga,2018,June,Rvf,Laboratory,Ovine,1,1,Lab confirmed,2018-06-01
+Siaya,Alego Usonga,2018,July,Rvf,Clinical,Caprine,5,2,Clinically confirmed,2018-07-01
+Siaya,Alego Usonga,2018,July,Rvf,Clinical,Bovine,6,1,Clinically confirmed,2018-07-01
+Siaya,Alego Usonga,2018,July,Rvf,Clinical,Ovine,1,1,Clinically confirmed,2018-07-01
+Siaya,Gem,2018,July,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2018-07-01
+Siaya,Alego Usonga,2018,August,Rvf,Clinical,Caprine,1,0,Clinically confirmed,2018-08-01
+Siaya,Bondo,2018,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-11-01
+Siaya,Alego Usonga,2018,November,Rabies,Clinical,Canine,1,0,Clinically confirmed,2018-11-01
+Siaya,Alego Usonga,2018,December,Rvf,Clinical,Caprine,1,0,Clinically confirmed,2018-12-01
+Siaya,Alego Usonga,2018,December,Rvf,Clinical,Caprine,1,0,Clinically confirmed,2018-12-01
+Tana River,Tana Delta,2018,June,Rvf,Laboratory,Caprine,9,1,Lab confirmed,2018-06-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2018,September,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2018-09-01
+Tharaka Nithi,Tharaka,2018,September,Rvf,Clinical,Caprine,1,0,Clinically confirmed,2018-09-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2018,October,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2018-10-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2018,October,Anthrax,Clinical,Bovine,1,5,Clinically confirmed,2018-10-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2018,October,Anthrax,Laboratory,Bovine,1,3,Lab confirmed,2018-10-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2018,October,Anthrax,Clinical,Bovine,1,7,Clinically confirmed,2018-10-01
+Tharaka Nithi,Maara,2018,October,Anthrax,Laboratory,Bovine,1,3,Lab confirmed,2018-10-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2018,November,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2018-11-01
+Uasin Gishu,Soy,2018,July,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-07-01
+Uasin Gishu,Moiben,2018,September,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2018-09-01
+Wajir,Eldas,2018,June,Rvf,Laboratory,Ovine,200,500,Lab confirmed,2018-06-01
+Wajir,Wajir South,2018,July,Rvf,Laboratory,Ovine,200,300,Lab confirmed,2018-07-01
+Baringo,Baringo South,2019,May,Brucellosis,Clinical,Sheep,3,2,Clinically confirmed,2019-05-01
+Baringo,Baringo South,2019,May,Brucellosis,Laboratory,Cattle,12,0,Lab confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,12,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Tiaty,2019,May,Anthrax,Clinical,Camel,5,5,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo Central,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo Central,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,4,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,9,3,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,1,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Goats,3,9,Clinically confirmed,2019-05-01
+Baringo,Eldama Ravine,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo Central,2019,june,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Baringo,Eldama Ravine,2019,june,Rabies,Post Mortem,Cattle,2,13,Post Mortem,2019-06-01
+Baringo,Eldama Ravine,2019,june,Anthrax,Post Mortem,Cattle,1,50,Post Mortem,2019-06-01
+Baringo,Eldama Ravine,2019,june,Anthrax,Post Mortem,Cattle,1,150,Post Mortem,2019-06-01
+Baringo,Baringo North,2019,September,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-09-01
+Baringo,Baringo North,2019,September,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-09-01
+Baringo,Baringo South,2019,May,Brucellosis,Clinical,Sheep,3,2,Clinically confirmed,2019-05-01
+Baringo,Baringo South,2019,May,Brucellosis,Laboratory,Cattle,12,0,Lab confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,12,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Tiaty,2019,May,Anthrax,Clinical,Camel,5,5,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo Central,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo Central,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,4,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,9,3,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,1,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2019-05-01
+Baringo,Eldama Ravine,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Baringo,Baringo North,2019,May,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-05-01
+Baringo,Baringo Central,2019,june,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Baringo,Eldama Ravine,2019,june,Rabies,Post Mortem,Cattle,2,13,Post Mortem,2019-06-01
+Baringo,Eldama Ravine,2019,june,Anthrax,Post Mortem,Cattle,1,50,Post Mortem,2019-06-01
+Baringo,Eldama Ravine,2019,june,Anthrax,Post Mortem,Cattle,1,150,Post Mortem,2019-06-01
+Baringo,Baringo Central,2019,july,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-07-01
+Baringo,Baringo North,2019,july,Brucellosis,Clinical,Goats,4,0,Clinically confirmed,2019-07-01
+Baringo,Baringo South,2019,july,Brucellosis,Clinical,Goats,2,0,Clinically confirmed,2019-07-01
+Bomet,Chepalungu,2019,February,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Brucellosis,Post Mortem,Bovine,1,0,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Rabies,Post Mortem,Ovine,2,1,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Brucellosis,Post Mortem,Bovine,1,0,Post Mortem,2019-02-01
+Bomet,Bomet Central,2019,February,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2019-02-01
+Bomet,Sotik,2019,March,Anthrax,Clinical,Bovine,2,1,Clinically confirmed,2019-03-01
+Bomet,Bomet East,2019,March,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2019-03-01
+Bomet,Sotik,2019,March,Rabies,Clinical,Canine,2,1,Clinically confirmed,2019-03-01
+Bomet,Sotik,2019,January,Rabies,Clinical,Canine,3,0,Clinically confirmed,2019-01-01
+Bomet,Bomet East,2019,January,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2019-01-01
+Bomet,Konoin,2019,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-01-01
+Bomet,Chepalungu,2019,May,Rabies,Clinical,Cattle,10,0,Clinically confirmed,2019-05-01
+Bomet,Sotik,2019,May,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-05-01
+Bomet,Sotik,2019,May,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2019-05-01
+Bomet,Sotik,2019,May,Rabies,Clinical,Donkey,1,1,Clinically confirmed,2019-05-01
+Bomet,Konoin,2019,May,Rabies,Clinical,Dogs,3,3,Clinically confirmed,2019-05-01
+Bomet,Bomet East,2019,May,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-05-01
+Bomet,Sotik,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Bomet,Sotik,2019,June,Rabies,Clinical,Cattle,2,1,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,June,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,June,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,June,Rabies,Laboratory,Goats,1,1,Lab confirmed,2019-06-01
+Bomet,Sotik,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,june,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Bomet,Chepalungu,2019,November,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-11-01
+Bomet,Bomet Central,2019,November,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-11-01
+Bomet,Sotik,2019,October,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-10-01
+Bomet,Sotik,2019,October,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-10-01
+Bomet,Konoin,2019,October,Rabies,Clinical,Cattle,1,NA,Clinically confirmed,2019-10-01
+Bomet,Konoin,2019,October,Rabies,Clinical,Cattle,1,NA,Clinically confirmed,2019-10-01
+Bomet,Sotik,2019,October,Rabies,Clinical,Cattle,1,NA,Clinically confirmed,2019-10-01
+Bomet,Sotik,2019,December,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-12-01
+Bomet,Sotik,2019,August,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-08-01
+Bomet,Bomet East,2019,August,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-08-01
+Bomet,Sotik,2019,August,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-08-01
+Bomet,Chebalungu,2019,September,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-09-01
+Bomet,Chepalungu,2019,May,Rabies,Clinical,Cattle,10,0,Clinically confirmed,2019-05-01
+Bomet,Sotik,2019,May,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-05-01
+Bomet,Sotik,2019,May,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-05-01
+Bomet,Sotik,2019,May,Rabies,Clinical,Equine,1,1,Clinically confirmed,2019-05-01
+Bomet,Konoin,2019,May,Rabies,Clinical,Dog,3,3,Clinically confirmed,2019-05-01
+Bomet,Bomet East,2019,May,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-05-01
+Bomet,Sotik,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Bomet,Sotik,2019,June,Rabies,Clinical,Cattle,2,1,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,June,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,June,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,June,Rabies,Laboratory,Caprine,1,1,Lab confirmed,2019-06-01
+Bomet,Sotik,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Bomet,Sotik,2019,june,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Bomet,Chepalungu,2019,February,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Brucellosis,Post Mortem,Cattle,1,0,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Rabies,Post Mortem,Sheep,2,1,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-02-01
+Bomet,Sotik,2019,February,Brucellosis,Post Mortem,Cattle,1,0,Post Mortem,2019-02-01
+Bomet,Bomet Central,2019,February,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-02-01
+Bomet,Sotik,2019,March,Anthrax,Clinical,Cattle,2,1,Clinically confirmed,2019-03-01
+Bomet,Bomet East,2019,March,Rabies,Clinical,Caprine,1,0,Clinically confirmed,2019-03-01
+Bomet,Sotik,2019,March,Rabies,Clinical,Dog,2,1,Clinically confirmed,2019-03-01
+Bomet,Sotik,2019,January,Rabies,Clinical,Dog,3,0,Clinically confirmed,2019-01-01
+Bomet,Bomet East,2019,January,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-01-01
+Bomet,Konoin,2019,January,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-01-01
+Bomet,Bomet,2019,july,Rabies,Laboratory,Sheep,1,1,Lab confirmed,2019-07-01
+Bomet,Bomet,2019,july,Rabies,Laboratory,Feline,1,1,Lab confirmed,2019-07-01
+Bomet,Bomet,2019,july,Rabies,Laboratory,Cattle,2,2,Lab confirmed,2019-07-01
+Bomet,Bomet,2019,july,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-07-01
+Bomet,Bomet East,2019,july,Brucellosis,Clinical,Cattle,3,0,Clinically confirmed,2019-07-01
+Bomet,Chepalungu,2019,july,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2019-07-01
+Bomet,Konoin,2019,july,Rabies,Clinical,Goats,1,1,Clinically confirmed,2019-07-01
+Bomet,Konoin,2019,july,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-07-01
+Bomet,Konoin,2019,july,Rabies,Clinical,Equine,1,0,Clinically confirmed,2019-07-01
+Bomet,Sotik,2019,july,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-07-01
+Bomet,Sotik,2019,july,Rabies,Clinical,Goats,1,0,Clinically confirmed,2019-07-01
+Bomet,Sotik,2019,july,Rabies,Clinical,Goats,1,0,Clinically confirmed,2019-07-01
+Busia,Budalangi,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Busia,Budalangi,2019,December,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-12-01
+Embu,mbeere south,2019,September,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2019-09-01
+Embu,manyatta,2019,September,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2019-09-01
+Embu,Runyenjes,2018,January,Rvf,Laboratory,Bovine,1,NA,Lab confirmed,2018-01-01
+Garissa,Garissa Township,2019,November,Rvf,Clinical,Sheep,1,2,Clinically confirmed,2019-11-01
+Homa Bay,Kabondo Kasipul,2019,October,Rvf,Clinical,Cattle,2,NA,Clinically confirmed,2019-10-01
+Homa Bay,Mbita,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Homa Bay,Mbita,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Homa Bay,Mbita,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Homa Bay,Mbita,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Kajiado,Kajiado North,2019,January,Rabies,Laboratory,Canine,1,NA,Lab confirmed,2019-01-01
+Kajiado,Kajiado North,2019,January,Rabies,Laboratory,Dog,1,NA,Lab confirmed,2019-01-01
+Kakamega,Butere,2019,November,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2019-11-01
+Kakamega,Butere,2019,December,Rabies,Clinical,Cattle,1,2,Clinically confirmed,2019-12-01
+Kakamega,Butere,2019,December,Rabies,Clinical,Cattle,1,2,Clinically confirmed,2019-12-01
+Kericho,Ainamoi,2019,May,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2019-05-01
+Kericho,Sigowet/Soin,2019,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kericho,Kipkelion East,2019,May,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-05-01
+Kericho,Sigowet/Soin,2019,May,Rabies,Clinical,Cattle,2,1,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Bureti,2019,June,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-06-01
+Kericho,Bureti,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Kericho,Bureti,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Kericho,Bureti,2019,june,Rabies,Clinical,Cattle,1,4,Clinically confirmed,2019-06-01
+Kericho,Kericho West,2019,November,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-11-01
+Kericho,Kipkelion East,2019,November,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2019-11-01
+Kericho,Ainamoi,2019,December,Anthrax,Laboratory,Cattle,1,0,Lab confirmed,2019-12-01
+Kericho,Ainamoi,2019,December,Anthrax,Laboratory,Cattle,1,0,Lab confirmed,2019-12-01
+Kericho,Buret,2019,December,Anthrax,Laboratory,Cattle,1,0,Lab confirmed,2019-12-01
+Kericho,Kericho West,2019,August,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-08-01
+Kericho,Sigowet/Soin,2019,August,Rabies,Laboratory,Cattle,3,7,Lab confirmed,2019-08-01
+Kericho,Kericho West,2019,August,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-08-01
+Kericho,Belgut,2019,September,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-09-01
+Kericho,Ainamoi,2019,May,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2019-05-01
+Kericho,Sigowet/Soin,2019,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kericho,Kipkelion East,2019,May,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-05-01
+Kericho,Sigowet/Soin,2019,May,Rabies,Clinical,Cattle,2,1,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Bureti,2019,June,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-06-01
+Kericho,Bureti,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kericho,Ainamoi,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Kericho,Bureti,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Kericho,Bureti,2019,june,Rabies,Clinical,Cattle,1,4,Clinically confirmed,2019-06-01
+Kericho,Belgut,2019,july,Rabies,Clinical,Cattle,1,2,Clinically confirmed,2019-07-01
+Kiambu,Kikuyu,2019,January,Anthrax,Laboratory,Bovine,1,NA,Lab confirmed,2019-01-01
+Kiambu,Lari,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kiambu,Lari,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kiambu,Kabete,2019,May,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2019-05-01
+Kiambu,Gatundu South,2019,June,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Kiambu,Kikuyu,2019,January,Anthrax,Laboratory,Bovine,1,NA,Lab confirmed,2019-01-01
+Kiambu,Gatundu North,2019,October,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2019-10-01
+Kiambu,Gatundu South,2019,August,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-08-01
+Kiambu,Lari,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kiambu,Lari,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Kiambu,Kabete,2019,May,Rabies,Clinical,Dog,2,0,Clinically confirmed,2019-05-01
+Kiambu,Gatundu South,2019,June,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Kiambu,Kikuyu,2019,January,Anthrax,Laboratory,Cattle,1,NA,Lab confirmed,2019-01-01
+Kilifi,Malindi,2019,February,Rvf,Clinical,Bovine,3,1,Clinically confirmed,2019-02-01
+Kilifi,Malindi,2019,February,Rvf,Clinical,Caprine,5,1,Clinically confirmed,2019-02-01
+Kilifi,Kilifi North,2019,February,Rabies,Clinical,Caprine,2,0,Clinically confirmed,2019-02-01
+Kilifi,Malindi,2019,January,Rvf,Clinical,Caprine,3,1,Clinically confirmed,2019-01-01
+Kilifi,Malindi,2019,February,Rvf,Laboratory,Caprine,1,-,Lab confirmed,2019-02-01
+Kilifi,Malindi,2019,February,Rvf,Clinical,Cattle,3,1,Clinically confirmed,2019-02-01
+Kilifi,Malindi,2019,February,Rvf,Clinical,Caprine,5,1,Clinically confirmed,2019-02-01
+Kilifi,Kilifi North,2019,February,Rabies,Clinical,Caprine,2,0,Clinically confirmed,2019-02-01
+Kilifi,Malindi,2019,January,Rvf,Clinical,Caprine,3,1,Clinically confirmed,2019-01-01
+Kirinyaga,Kirinyaga East,2019,February,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2019-02-01
+Kirinyaga,Kirinyaga East,2019,May,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2019-05-01
+Kirinyaga,Kirinyaga west,2019,November,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-11-01
+Kirinyaga,Kirinyaga West,2019,December,Anthrax,Laboratory,Pig,3,0,Lab confirmed,2019-12-01
+Kirinyaga,Kirinyaga East,2019,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-05-01
+Kirinyaga,Kirinyaga East,2019,February,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-02-01
+Kisii,Bomachoge Borabu,2019,November,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Kisii,Bomachoge Borabu,2019,November,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Kisii,Bomachoge Borabu,2019,November,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Kisii,Nyaribari Chache,2019,October,Anthrax,Clinical,Cattle,2,NA,Clinically confirmed,2019-10-01
+Kisii,Bonchari,2019,October,Rabies,Clinical,Cattle,1,NA,Clinically confirmed,2019-10-01
+Kisii,Bomachoge Borabu,2019,October,Brucellosis,Clinical,Cattle,1,NA,Clinically confirmed,2019-10-01
+Kisii,Bomachoge Chache,2019,October,Brucellosis,Clinical,Cattle,1,NA,Clinically confirmed,2019-10-01
+Kisii,Kitutu chache,2019,December,Rabies,Laboratory,Cattle,1,0,Lab confirmed,2019-12-01
+Kisumu,Kisumu East,2018,January,Rabies,Laboratory,Canine,1,1,Lab confirmed,2018-01-01
+Kisumu,Seme,2019,January,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2019-01-01
+Kisumu,Seme,2019,September,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-09-01
+Kisumu,Kisumu East,2018,January,Rabies,Laboratory,Dog,1,1,Lab confirmed,2018-01-01
+Kisumu,Seme,2019,January,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2019-01-01
+Kitui,Kitui Rural,2019,November,Rabies,Laboratory,Dog,1,1,Lab confirmed,2019-11-01
+Kitui,Mwingi Central,2019,August,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-08-01
+Kwale,Msambweni,2019,May,Rvf,Clinical,Goats,3,0,Clinically confirmed,2019-05-01
+Kwale,Kinango,2019,june,Rabies,Clinical,Cats,1,0,Clinically confirmed,2019-06-01
+Kwale,Msambweni,2019,May,Rvf,Clinical,Caprine,3,0,Clinically confirmed,2019-05-01
+Kwale,Kinango,2019,june,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-06-01
+Laikipia,Tigithi,2019,January,Rabies,Laboratory,Canine,1,1,Lab confirmed,2019-01-01
+Laikipia,Tigithi,2019,January,Rabies,Laboratory,Dog,1,1,Lab confirmed,2019-01-01
+Makueni,Makueni,2019,February,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2019-02-01
+Makueni,Kibwezi West,2019,February,Rabies,Clinical,Canine,2,0,Clinically confirmed,2019-02-01
+Makueni,Mbooni,2019,February,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2019-02-01
+Makueni,Kilome,2019,March,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Ovine,14,0,Clinically confirmed,2019-03-01
+Makueni,Kilome,2019,March,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Brucellosis,Clinical,Ovine,12,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Caprine,1,9,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Ovine,12,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Caprine,9,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Ovine,22,9,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Caprine,1,9,Clinically confirmed,2019-03-01
+Makueni,Mbooni,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Makueni,Kibwezi East,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Makueni,Kilome,2019,june,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Makueni,Makueni,2019,November,Brucellosis,Clinical,Dog,1,0,Clinically confirmed,2019-11-01
+Makueni,Makueni,2019,November,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Makueni,Mbooni,2019,October,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-10-01
+Makueni,Kilome,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Makueni,Makueni,2019,December,Brucellosis,Clinical,Dog,1,0,Clinically confirmed,2019-12-01
+Makueni,Mbooni,2019,August,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-08-01
+Makueni,Mbooni,2019,August,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-08-01
+Makueni,Mbooni,2019,September,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-09-01
+Makueni,Mbooni,2019,September,Rabies,Clinical,Cats,1,0,Clinically confirmed,2019-09-01
+Makueni,Makueni,2019,September,Rabies,Clinical,Cats,1,0,Clinically confirmed,2019-09-01
+Makueni,Mbooni,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Makueni,Kibwezi East,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Makueni,Kilome,2019,june,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Makueni,Makueni,2019,February,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-02-01
+Makueni,Kibwezi West,2019,February,Rabies,Clinical,Dog,2,0,Clinically confirmed,2019-02-01
+Makueni,Mbooni,2019,February,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2019-02-01
+Makueni,Kilome,2019,March,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2019-03-01
+Makueni,Kilome,2019,March,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Brucellosis,Clinical,Sheep,12,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Caprine,1,9,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Sheep,12,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Caprine,9,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Sheep,22,9,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-03-01
+Makueni,Kaiti,2019,March,Rvf,Clinical,Caprine,1,9,Clinically confirmed,2019-03-01
+Mandera,Mandera North,2019,August,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-08-01
+Mandera,Mandera North,2019,August,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2019-08-01
+Mandera,Lafey,2019,September,Brucellosis,Clinical,Sheep,2,0,Clinically confirmed,2019-09-01
+Mandera,Lafey,2019,September,Brucellosis,Clinical,Goats,2,3,Clinically confirmed,2019-09-01
+Mandera,Lafey,2019,September,Brucellosis,Clinical,Goats,8,0,Clinically confirmed,2019-09-01
+Mandera,Lafey,2019,September,Brucellosis,Clinical,Goats,3,1,Clinically confirmed,2019-09-01
+Mandera,Banissa,2019,july,Brucellosis,Clinical,Cattle,12,0,Clinically confirmed,2019-07-01
+Mandera,Mandera East,2019,july,Brucellosis,Clinical,Goats,2,0,Clinically confirmed,2019-07-01
+Meru,Central Imenti,2019,February,Rabies,Post Mortem,Canine,5,1,Post Mortem,2019-02-01
+Meru,Buuri,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Meru,Igembe North,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Meru,Buuri,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Meru,Igembe North,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Meru,Central Imenti,2019,February,Rabies,Post Mortem,Dog,5,1,Post Mortem,2019-02-01
+Meru,Igembe North,2019,july,Anthrax,Clinical,Sheep,1,1,Clinically confirmed,2019-07-01
+Migori,Kuria East,2019,November,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Migori,Kuria East,2019,November,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Migori,Nyatike,2019,October,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-10-01
+Mombasa,Kisauni,2019,October,Anthrax,Laboratory,Cattle,1,3,Lab confirmed,2019-10-01
+Mombasa,Kisauni,2019,October,Anthrax,Laboratory,Cattle,1,10,Lab confirmed,2019-10-01
+Mombasa,Kisauni,2019,October,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2019-10-01
+Murang'a,Mathioya,2019,January,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2019-01-01
+Murang'a,Kiharu,2019,January,Rvf,Laboratory,Bovine,1,NA,Lab confirmed,2019-01-01
+Murang'a,Kandara,2019,November,Brucellosis,Laboratory,Cattle,5,NIL,Lab confirmed,2019-11-01
+Murang'a,Maragua,2019,October,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-10-01
+Murang'a,Kiharu,2019,June,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-06-01
+Murang'a,Mathioya,2019,January,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2019-01-01
+Murang'a,Kiharu,2019,June,Rabies,Clinical,Canine,1,1,Clinically confirmed,2019-06-01
+Nakuru,Nakuru West,2019,February,Anthrax,Clinical,Ovine,12,2,Clinically confirmed,2019-02-01
+Nakuru,Nakuru Town West,2019,February,Anthrax,Laboratory,Ovine,1,1,Lab confirmed,2019-02-01
+Nakuru,Nakuru Town West,2019,February,Anthrax,Laboratory,Ovine,1,1,Lab confirmed,2019-02-01
+Nakuru,Molo,2019,March,Brucellosis,Laboratory,Bovine,1,0,Lab confirmed,2019-03-01
+Nakuru,Naivasha,2019,May,Brucellosis,Clinical,Cattle,3,0,Clinically confirmed,2019-05-01
+Nakuru,Naivasha,2019,May,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Goats,10,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rvf,Clinical,Cattle,5,28,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town West,2019,May,Rabies,Clinical,Dogs,4,2,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,2,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Dogs,3,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,3,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Laboratory,Cattle,3,2,Lab confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,3,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rabies,Clinical,Dogs,3,3,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2019-05-01
+Nakuru,Njoro,2019,May,Anthrax,Clinical,Cattle,10,2,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nakuru,Naivasha,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Nakuru,Subukia,2019,August,Anthrax,Laboratory,Cattle,6,6,Lab confirmed,2019-08-01
+Nakuru,Naivasha,2019,May,Brucellosis,Clinical,Cattle,3,0,Clinically confirmed,2019-05-01
+Nakuru,Naivasha,2019,May,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Caprine,10,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rvf,Clinical,Cattle,5,28,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town West,2019,May,Rabies,Clinical,Dog,4,2,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,2,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Dog,3,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,3,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Laboratory,Cattle,3,2,Lab confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,3,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rabies,Clinical,Dog,3,3,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2019-05-01
+Nakuru,Njoro,2019,May,Anthrax,Clinical,Cattle,10,2,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru Town East,2019,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nakuru,Nakuru West,2019,February,Anthrax,Clinical,Sheep,12,2,Clinically confirmed,2019-02-01
+Nakuru,Nakuru Town West,2019,February,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2019-02-01
+Nakuru,Nakuru Town West,2019,February,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2019-02-01
+Nakuru,Molo,2019,March,Brucellosis,Laboratory,Cattle,1,0,Lab confirmed,2019-03-01
+Nandi,Emgwen,2019,May,Rabies,Clinical,Cattle,3,1,Clinically confirmed,2019-05-01
+Nandi,Chesumei,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Nandi,Emgwen,2019,May,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2019-05-01
+Nandi,Chesumei,2019,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Laboratory,Cattle,1,2,Lab confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Nandi Hills,2019,May,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Emgwen,2019,june,Anthrax,Clinical,Cattle,2,1,Clinically confirmed,2019-06-01
+Nandi,Mosop,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Nandi,Emgwen,2019,june,Anthrax,Clinical,Cattle,1,24,Clinically confirmed,2019-06-01
+Nandi,Tinderet,2019,june,Rabies,Post Mortem,Cattle,1,0,Post Mortem,2019-06-01
+Nandi,Mosop,2019,june,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Nandi,Emgwen,2019,October,Rabies,Clinical,Cattle,1,NA,Clinically confirmed,2019-10-01
+Nandi,Emgwen,2019,September,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-09-01
+Nandi,Tinderet,2019,September,Anthrax,Clinical,Cattle,1,5,Clinically confirmed,2019-09-01
+Nandi,Emgwen,2019,May,Rabies,Clinical,Cattle,3,1,Clinically confirmed,2019-05-01
+Nandi,Chesumei,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Nandi,Emgwen,2019,May,Rabies,Clinical,Dog,1,1,Clinically confirmed,2019-05-01
+Nandi,Chesumei,2019,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Laboratory,Cattle,1,2,Lab confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Nandi Hills,2019,May,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Aldai,2019,May,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2019-05-01
+Nandi,Emgwen,2019,june,Anthrax,Clinical,Cattle,2,1,Clinically confirmed,2019-06-01
+Nandi,Mosop,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Nandi,Emgwen,2019,june,Anthrax,Clinical,Cattle,1,24,Clinically confirmed,2019-06-01
+Nandi,Tinderet,2019,june,Rabies,Post Mortem,Cattle,1,0,Post Mortem,2019-06-01
+Nandi,Mosop,2019,june,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Nandi,Aldai,2019,july,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-07-01
+Narok,Narok South,2019,February,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Ovine,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,March,Rabies,Clinical,Ovine,2,0,Clinically confirmed,2019-03-01
+Narok,Narok East,2019,March,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2019-03-01
+Narok,Narok South,2019,March,Rabies,Clinical,Equine,4,1,Clinically confirmed,2019-03-01
+Narok,Transmara West,2019,May,Anthrax,Laboratory,Cattle,1,2,Lab confirmed,2019-05-01
+Narok,Narok South,2019,May,Rabies,Clinical,Goats,2,0,Clinically confirmed,2019-05-01
+Narok,Narok South,2019,May,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2019-05-01
+Narok,Transmara West,2019,May,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2019-05-01
+Narok,Narok West,2019,August,Anthrax,Post Mortem,Cattle,1,4,Post Mortem,2019-08-01
+Narok,Transmara West,2019,September,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-09-01
+Narok,Transmara West,2019,May,Anthrax,Laboratory,Cattle,1,2,Lab confirmed,2019-05-01
+Narok,Narok South,2019,May,Rabies,Clinical,Caprine,2,0,Clinically confirmed,2019-05-01
+Narok,Narok South,2019,May,Rabies,Clinical,Dog,2,0,Clinically confirmed,2019-05-01
+Narok,Transmara West,2019,May,Rabies,Clinical,Dog,2,0,Clinically confirmed,2019-05-01
+Narok,Narok South,2019,February,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Sheep,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,February,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-02-01
+Narok,Narok South,2019,March,Rabies,Clinical,Sheep,2,0,Clinically confirmed,2019-03-01
+Narok,Narok East,2019,March,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-03-01
+Narok,Narok South,2019,March,Rabies,Clinical,Equine,4,1,Clinically confirmed,2019-03-01
+Narok,Transmara West,2019,july,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2019-07-01
+Nyandarua,Ndaragua,2018,February,Rvf,Laboratory,Bovine,2,0,Lab confirmed,2018-02-01
+Nyandarua,Ndaragwa,2019,February,Rvf,Laboratory,Bovine,1,0,Lab confirmed,2019-02-01
+Nyandarua,Ol Kalou,2019,February,Rvf,Laboratory,Ovine,1,0,Lab confirmed,2019-02-01
+Nyeri,Nyeri Town,2019,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-02-01
+Nyeri,Mukurweini,2019,January,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-01-01
+Nyeri,Kieni,2019,January,Rvf,Clinical,Bovine,1,1,Clinically confirmed,2019-01-01
+Nyeri,Tetu,2019,May,Rabies,Laboratory,Cannine,1,1,Lab confirmed,2019-05-01
+Nyeri,Tetu,2019,December,Rabies,Laboratory,Goats,1,0,Lab confirmed,2019-12-01
+Nyeri,Kieni,2019,September,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-09-01
+Nyeri,Tetu,2019,May,Rabies,Laboratory,Dog,1,1,Lab confirmed,2019-05-01
+Nyeri,Nyeri Town,2019,February,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-02-01
+Nyeri,Mukurweini,2019,January,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-01-01
+Nyeri,Kieni,2019,January,Rvf,Clinical,Cattle,1,1,Clinically confirmed,2019-01-01
+Nyeri,NYERI,2019,july,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2019-07-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Feline,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,March,Rabies,Clinical,Canine,1,0,Clinically confirmed,2019-03-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Camel,4,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,November,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-11-01
+Samburu,Samburu West,2019,November,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-11-01
+Samburu,Samburu West,2019,November,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-11-01
+Samburu,Samburu West,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Samburu,Samburu West,2019,October,Rabies,Clinical,Cats,1,NA,Clinically confirmed,2019-10-01
+Samburu,Samburu West,2019,October,Rabies,Clinical,Dog,1,NA,Clinically confirmed,2019-10-01
+Samburu,Samburu West,2019,October,Rabies,Clinical,Cats,1,NA,Clinically confirmed,2019-10-01
+Samburu,Samburu West,2019,August,Rabies,Clinical,Cats,1,1,Clinically confirmed,2019-08-01
+Samburu,Samburu West,2019,August,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-08-01
+Samburu,Samburu West,2019,August,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-08-01
+Samburu,Samburu North,2019,September,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-09-01
+Samburu,Samburu West,2019,September,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-09-01
+Samburu,Samburu West,2019,September,Rabies,Clinical,Cats,1,0,Clinically confirmed,2019-09-01
+Samburu,Samburu West,2019,September,Rabies,Clinical,Camel,2,0,Clinically confirmed,2019-09-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Camel,4,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,May,Rabies,Clinical,Dog,2,0,Clinically confirmed,2019-05-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Feline,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,February,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-02-01
+Samburu,Samburu West,2019,March,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-03-01
+Samburu,Samburu West,2019,july,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-07-01
+Siaya,Alego Usonga,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Siaya,Bondo,2019,November,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Siaya,Alego Usonga,2019,September,Rvf,Clinical,Sheep,1,0,Clinically confirmed,2019-09-01
+Siaya,Alego Usonga,2019,September,Rvf,Clinical,Goats,1,0,Clinically confirmed,2019-09-01
+Siaya,Alego Usonga,2019,june,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-06-01
+Siaya,Alego Usonga,2019,july,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-07-01
+Tharaka Nithi,Maara,2019,February,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2019-02-01
+Tharaka Nithi,Maara,2019,March,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2019-03-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,March,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2019-03-01
+Tharaka Nithi,Maara,2019,January,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2019-01-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,May,Brucellosis,Clinical,Goats,2,0,Clinically confirmed,2019-05-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,june,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2019-06-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,November,Brucellosis,Post Mortem,Cattle,1,0,Post Mortem,2019-11-01
+Tharaka Nithi,Maara,2019,November,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-11-01
+Tharaka Nithi,Maara,2019,November,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Tharaka Nithi,Maara,2019,November,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-11-01
+Tharaka Nithi,Maara,2019,November,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-11-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,November,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2019-11-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,November,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2019-11-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,December,Anthrax,Post Mortem,Cattle,5,0,Post Mortem,2019-12-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,August,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2019-08-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,August,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-08-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,May,Brucellosis,Clinical,Caprine,2,0,Clinically confirmed,2019-05-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,june,Rabies,Clinical,Dog,1,0,Clinically confirmed,2019-06-01
+Tharaka Nithi,Maara,2019,February,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2019-02-01
+Tharaka Nithi,Maara,2019,March,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2019-03-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,March,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2019-03-01
+Tharaka Nithi,Maara,2019,January,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2019-01-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2019,july,Brucellosis,Clinical,Goats,1,0,Clinically confirmed,2019-07-01
+Turkana,Turkana North,2019,june,Rabies,Clinical,Dogs,5,58,Clinically confirmed,2019-06-01
+Turkana,Turkana North,2019,june,Rabies,Clinical,Dog,5,58,Clinically confirmed,2019-06-01
+Uasin Gishu,Moiben,2019,January,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2019-01-01
+Uasin Gishu,Eldoret,2019,May,Rabies,Laboratory,Cattle,4,4,Lab confirmed,2019-05-01
+Uasin Gishu,Moiben,2019,January,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2019-01-01
+Wajir,Wajir North,2019,February,Brucellosis,Clinical,Caprine,4,0,Clinically confirmed,2019-02-01
+Wajir,Wajir North,2019,February,Rabies,Clinical,Equine,25,3,Clinically confirmed,2019-02-01
+Wajir,Wajir West,2019,May,Rabies,Clinical,Goats,1,1,Clinically confirmed,2019-05-01
+Wajir,Eldas,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Wajir,Wajir West,2019,May,Rabies,Clinical,Caprine,1,1,Clinically confirmed,2019-05-01
+Wajir,Eldas,2019,May,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2019-05-01
+Wajir,Wajir North,2019,February,Brucellosis,Clinical,Caprine,4,0,Clinically confirmed,2019-02-01
+Wajir,Wajir North,2019,February,Rabies,Clinical,Equine,25,3,Clinically confirmed,2019-02-01
+Baringo,Baringo North,2020,March,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Baringo,Eldama Ravine,2020,July,Rabies,Laboratory,Bovine,1,0,Lab confirmed,2020-07-01
+Baringo,Baringo Central,2020,October,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2020-10-01
+Baringo,Eldama Ravine,2020,October,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2020-10-01
+Bomet,Sotik,2020,February,Rabies,Laboratory,Canine,1,1,Lab confirmed,2020-02-01
+Bomet,Sotik,2020,February,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-02-01
+Bomet,Sotik,2020,February,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-02-01
+Bomet,Sotik,2020,March,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-03-01
+Bomet,Sotik,2020,January,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2020-01-01
+Bomet,Sotik,2020,January,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2020-01-01
+Bomet,Sotik,2020,April,Rabies,Clinical,Dog,1,1,Clinically confirmed,2020-04-01
+Bomet,Bomet Central,2020,May,Rabies,Clinical,Canine,2,0,Clinically confirmed,2020-05-01
+Bomet,Bomet Central,2020,May,Rabies,Post Mortem,Bovine,1,0,Post Mortem,2020-05-01
+Bomet,Sotik,2020,May,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-05-01
+Bomet,Chepalungu,2020,May,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-05-01
+Bomet,Chepalungu,2020,June,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2020-06-01
+Bomet,Sotik,2020,June,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-06-01
+Bomet,Sotik,2020,June,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-06-01
+Bomet,Sotik,2020,June,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-06-01
+Bomet,Bomet Central,2020,August,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2020-08-01
+Bomet,Chepalungu,2020,November,Anthrax,Post Mortem,Bovine,1,1,Post Mortem,2020-11-01
+Bomet,Bomet East,2020,December,Rabies,Laboratory,Bovine,7,5,Lab confirmed,2020-12-01
+Bomet,Chebalingu,2020,December,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-12-01
+Bomet,Bomet East,2020,October,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2020-10-01
+Bungoma,Bungoma,2020,March,Brucellosis,Laboratory,Goats,2,0,Lab confirmed,2020-03-01
+Elgeyo Marakwet,Keiyo North,2019,June,Anthrax,Laboratory,Camelidae,1,1,Lab confirmed,2019-06-01
+Embu,Mbeere South,2020,February,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-02-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,1,1,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,1,4,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,7,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rabies,Clinical,Dogs,1,2,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,1,2,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,1,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,1,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,11,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,1,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,11,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,2,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,2,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,2,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,2,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,2,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,2,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,12,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,3,9,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,9,3,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,1,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,31,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Goats,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Post Mortem,Sheep,2,0,Post Mortem,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,12,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,2,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Sheep,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,2,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Embu,Runyenjes,2020,March,Brucellosis,Clinical,Donkey,1,0,Clinically confirmed,2020-03-01
+Embu,Mbeere South,2020,April,Anthrax,Clinical/Post Mortem,Cattle,1,1,Clinically confirmed,2020-04-01
+Embu,Mbeere South,2020,April,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2020-04-01
+Embu,Mbeere South,2020,April,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2020-04-01
+Embu,Runyenjes,2020,May,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2020-05-01
+Embu,Manyatta,2020,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-07-01
+Embu,Manyatta,2020,July,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-07-01
+Embu,Mbeere South,2020,October,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2020-10-01
+Garissa,Garissa Township,2020,February,Rvf,Clinical,Cattle,10,1,Clinically confirmed,2020-02-01
+Garissa,Dadaab,2020,November,Brucellosis,Clinical,Caprine,2,0,Clinically confirmed,2020-11-01
+Isiolo,Isiolo,2020,January,Brucellosis,Laboratory,Camel,1,0,Lab confirmed,2020-01-01
+Kiambu,Gatundu North,2020,May,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2020-05-01
+Kakamega,Kwisero,2019,January,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2019-01-01
+Kakamega,Khwisero,2020,May,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2020-05-01
+Kakamega,Butere,2020,June,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-06-01
+Kakamega,Khwisero,2020,August,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2020-08-01
+Kakamega,Butere,2020,July,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-07-01
+Kakamega,Navakholo,2020,July,Rabies,Clinical,Bovine,3,3,Clinically confirmed,2020-07-01
+Kakamega,Navakholo,2020,July,Rabies,Laboratory,Bovine,3,3,Lab confirmed,2020-07-01
+Kakamega,Khwisero,2020,November,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-11-01
+Kakamega,Butere,2020,November,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-11-01
+Kakamega,Butere,2020,November,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-11-01
+Kakamega,Butere,2020,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-10-01
+Kakamega,Khwisero,2020,October,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-10-01
+Kericho,Ainamoi,2020,February,Rabies,Laboratory,Caprine,1,1,Lab confirmed,2020-02-01
+Kericho,Roret,2020,April,Rabies,Laboratory,Dog,1,1,Lab confirmed,2020-04-01
+Kericho,Kericho West,2020,August,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-08-01
+Kericho,Kericho West,2020,August,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-08-01
+Kericho,Soin sigowet,2020,December,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-12-01
+Kericho,Buret,2020,December,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-12-01
+Kilifi,Kaloleni,2020,December,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-12-01
+Kilifi,Kaloleni,2020,October,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-10-01
+Kisii,Kisii,2020,March,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-03-01
+Kisii,Nyamache,2020,January,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2020-01-01
+Kisii,Bomachoge Borabu,2020,January,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2020-01-01
+Kisii,Nyaribari Masaba,2020,January,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2020-01-01
+Kisii,Nyaribari Masaba,2020,May,Rvf,Clinical,Bovine,1,0,Clinically confirmed,2020-05-01
+Kisumu,Muhoroni,2020,August,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-08-01
+Kisumu,Muhoroni,2020,August,Rabies,Laboratory,Bovine,1,0,Lab confirmed,2020-08-01
+Kisumu,Muhoroni,2020,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-07-01
+Kisumu,Seme,2020,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-07-01
+Kisumu,Muhoroni,2020,July,Rabies,Laboratory,Ovine,1,1,Lab confirmed,2020-07-01
+Kisumu,Muhoroni,2020,July,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-07-01
+Kisumu,Nyando,2020,December,Rabies,Laboratory,Canine,2,2,Lab confirmed,2020-12-01
+Kisumu,Muhoroni,2020,October,Rabies,Clinical,"Canine, feline",1,0,Clinically confirmed,2020-10-01
+Kisumu,Nyakach,2020,October,Rabies,Clinical,"Canine, feline",1,0,Clinically confirmed,2020-10-01
+Kisumu,Nyakach,2020,October,Rabies,Clinical,"Canine, feline",1,0,Clinically confirmed,2020-10-01
+Kisumu,Kisumu Central,2020,October,Rabies,Clinical,"Canine, feline",1,0,Clinically confirmed,2020-10-01
+Kitui,Kitui south,2020,November,Rabies,Clinical,Canine,1,NA,Clinically confirmed,2020-11-01
+Kitui,Mwingi Central,2020,November,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2020-11-01
+Kitui,Mwingi North,2020,November,Rabies,Clinical,Caprine,2,0,Clinically confirmed,2020-11-01
+Kitui,Kitui Rural,2020,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-11-01
+Kitui,Kitui Rural,2020,November,Rabies,Clinical,Canine,1,1,Clinically confirmed,2020-11-01
+Kitui,Mwingi West,2020,November,Rabies,Clinical,Canine,2,0,Clinically confirmed,2020-11-01
+Kitui,Mwingi West,2020,December,Rabies,Clinical,caprine,1,0,Clinically confirmed,2020-12-01
+Kitui,Kitui East,2020,December,Rabies,Clinical,Donkey,1,1,Clinically confirmed,2020-12-01
+Kitui,Kitui Rural,2020,December,Rabies,Clinical,canine,1,0,Clinically confirmed,2020-12-01
+Kitui,Kitui Rural,2020,December,Rabies,Clinical,canine,1,0,Clinically confirmed,2020-12-01
+Kitui,Kitui East,2020,October,Rabies,Clinical,Dogs,1,NA,Clinically confirmed,2020-10-01
+Kitui,Mwingi North,2020,October,Rabies,Clinical,Dogs,1,NA,Clinically confirmed,2020-10-01
+Kitui,Kitui Rural,2020,October,Rabies,Clinical,Cattle,1,NA,Clinically confirmed,2020-10-01
+Kitui,Mwingi North,2020,October,Rabies,Clinical,Cattle,1,NA,Clinically confirmed,2020-10-01
+Kitui,Kitui central,2020,October,Rabies,Clinical,dogs,2,0,Clinically confirmed,2020-10-01
+Kitui,Kitui central,2020,October,Rabies,Clinical,goat,1,0,Clinically confirmed,2020-10-01
+Kitui,Mwingi Central,2020,October,Brucellosis,Clinical,Goats,2,0,Clinically confirmed,2020-10-01
+Kitui,Kitui East,2020,October,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2020-10-01
+Kitui,Mwingi Central,2020,October,Rvf,Clinical,Goats,1,0,Clinically confirmed,2020-10-01
+Kitui,Mwingi North,2020,October,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-10-01
+Kitui,Kitui Rural,2020,October,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2020-10-01
+Kitui,Mwingi North,2020,October,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2020-10-01
+Kitui,Kitui Central,2020,October,Anthrax,Clinical,Cattle,2,2,Clinically confirmed,2020-10-01
+Kwale,Kinango,2020,May,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-05-01
+Kwale,Kinango,2020,August,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-08-01
+Kwale,Msambweni,2020,July,Rabies,Clinical,Canine,3,3,Clinically confirmed,2020-07-01
+Kwale,Msambweni,2020,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-07-01
+Kwale,Kinango,2020,December,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2020-12-01
+Kwale,Msambweni,2020,October,Rabies,Laboratory,Canine,1,1,Lab confirmed,2020-10-01
+Kwale,Kinango,2020,October,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-10-01
+Kwale,Kinango,2020,October,Rabies,Clinical,Goats,1,0,Clinically confirmed,2020-10-01
+Laikipia,Laikipia East,2020,February,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-02-01
+Lamu,Lamu West,2020,November,Anthrax,Laboratory,Bovine,1,1,Lab confirmed,2020-11-01
+Lamu,Lamu West,2020,November,Rabies,Clinical,Canine,2,1,Clinically confirmed,2020-11-01
+Lamu,Lamu West,2020,December,Rabies,Clinical,caprine,1,1,Clinically confirmed,2020-12-01
+Lamu,Lamu West,2020,December,Rabies,Clinical,canine,1,1,Clinically confirmed,2020-12-01
+Machakos,Kathiani,2020,June,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2020-06-01
+Machakos,Kathiani,2020,August,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-08-01
+Machakos,Kathiani,2020,July,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-07-01
+Machakos,Kangundo,2020,July,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-07-01
+Machakos,Kangundo,2020,July,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-07-01
+Machakos,Kathiani,2020,July,Rabies,Clinical,Canine,2,0,Clinically confirmed,2020-07-01
+Machakos,Kathiani,2020,July,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2020-07-01
+Machakos,Kangundo,2020,October,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2020-10-01
+Machakos,Kathiani,2020,October,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2020-10-01
+Makueni,Mbooni,2020,January,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2020-01-01
+Makueni,Mbooni,2020,January,Rabies,Clinical,Cattle,2,2,Clinically confirmed,2020-01-01
+Makueni,Kibwezi West,2020,August,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-08-01
+Makueni,Makueni,2020,August,Brucellosis,Clinical,Caprine,1,0,Clinically confirmed,2020-08-01
+Makueni,Makueni,2020,October,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2020-10-01
+Meru,Buuri,2020,August,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2020-08-01
+Meru,IMENTI NORTH,2020,October,Anthrax,Laboratory,PORCINE,10,11,Lab confirmed,2020-10-01
+Mombasa,Nyali,2020,November,Rabies,Laboratory,Canine,1,1,Lab confirmed,2020-11-01
+Murang'a,Kiharu,2020,March,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2020-03-01
+Murang'a,Gatanga,2020,March,Anthrax,Clinical,Cattle,1,4,Clinically confirmed,2020-03-01
+Murang'a,Kiharu,2020,March,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Murang'a,Mathioya,2020,March,Brucellosis,Clinical,Cattle,20,0,Clinically confirmed,2020-03-01
+Murang'a,Mathioya,2020,June,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2020-06-01
+Murang'a,Kiharu,2020,June,Rabies,Clinical,Canine,1,0,Clinically confirmed,2020-06-01
+Nandi,Aldai,2020,January,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2020-01-01
+Nandi,Chesumei,2020,January,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2020-01-01
+Nandi,Emgwen,2020,July,Rabies,Clinical,Bovine,1,0,Clinically confirmed,2020-07-01
+Narok,Narok South,2020,November,Rabies,Clinical,Canine,2,1,Clinically confirmed,2020-11-01
+Narok,Narok South,2020,December,Rabies,Clinical,canine,8,1,Clinically confirmed,2020-12-01
+Nyamira,South Gucha,2020,March,Rabies,Laboratory,Bovine,1,1,Lab confirmed,2020-03-01
+Nyamira,Borabu,2020,April,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2020-04-01
+Nyeri,MATHIRA EAST,2020,March,Anthrax,Laboratory,PORCINE,4,2,Lab confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,14,0,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,1,4,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,5,0,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Post Mortem,Cattle,1,0,Post Mortem,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2020-03-01
+Nyeri,Tetu,2020,March,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Nyeri,Mathira East,2020,January,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2020-01-01
+Nyeri,Nyeri Central,2020,January,Anthrax,Laboratory,Pigs,1,0,Lab confirmed,2020-01-01
+Nyeri,Mathira,2020,January,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2020-01-01
+Samburu,Samburu West,2020,February,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-02-01
+Samburu,Samburu,2020,March,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-03-01
+Samburu,Samburu West,2020,January,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2020-01-01
+Samburu,Samburu West,2020,August,Rabies,Clinical,Canine,4,0,Clinically confirmed,2020-08-01
+Samburu,Samburu West,2020,August,Brucellosis,Clinical,Ovine,8,0,Clinically confirmed,2020-08-01
+Siaya,Alego Usonga,2020,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2020-04-01
+Taita Taveta,Mwatate,2020,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-11-01
+Taita Taveta,Mwatate,2020,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-11-01
+Taita Taveta,Mwatate,2020,December,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-12-01
+Taita Taveta,Wundanyi,2020,December,Rabies,Clinical,caprine,1,0,Clinically confirmed,2020-12-01
+Taita Taveta,Mwatate,2020,October,Rabies,Clinical,Dogs,11,1,Clinically confirmed,2020-10-01
+Taita Taveta,Voi,2020,October,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-10-01
+Taita Taveta,Voi,2020,October,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-10-01
+Taita Taveta,Voi,2020,October,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-10-01
+Taita Taveta,Voi,2020,October,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-10-01
+Taita Taveta,Voi,2020,October,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2020-10-01
+Taita Taveta,Mwatate,2020,December,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-12-01
+Tana River,Bura,2020,July,Brucellosis,Clinical,Camel,9,0,Clinically confirmed,2020-07-01
+Tana River,Bura,2020,July,Brucellosis,Clinical,Camel,4,1,Clinically confirmed,2020-07-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2020,June,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2020-06-01
+Trans Nzoia,Cherangany,2020,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-11-01
+Trans Nzoia,Cherangany,2020,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-11-01
+Trans Nzoia,Cherangany,2020,December,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-12-01
+Trans Nzoia,Kiminini,2020,December,Anthrax,Clinical,Bovine,1,1,Clinically confirmed,2020-12-01
+Trans Nzoia,Kiminini,2020,December,Rabies,Clinical,canine,2,2,Clinically confirmed,2020-12-01
+Turkana,Turkana- West,2020,April,Brucellosis,Laboratory,Sheep,9,2,Lab confirmed,2020-04-01
+Turkana,Turkana_central,2020,April,Brucellosis,Laboratory,Goats,2,0,Lab confirmed,2020-04-01
+Turkana,Loima,2020,May,Brucellosis,Laboratory,Caprine,10,0,Lab confirmed,2020-05-01
+Turkana,Central,2020,May,Brucellosis,Laboratory,Caprine,5,0,Lab confirmed,2020-05-01
+Turkana,Central,2020,May,Brucellosis,Laboratory,Caprine,1,0,Lab confirmed,2020-05-01
+Turkana,Central,2020,May,Brucellosis,Laboratory,Bovine,1,0,Lab confirmed,2020-05-01
+Turkana,Central,2020,May,Brucellosis,Laboratory,Caprine,1,0,Lab confirmed,2020-05-01
+Turkana,Central,2020,May,Brucellosis,Laboratory,Ovine,1,0,Lab confirmed,2020-05-01
+Turkana,Central,2020,June,Brucellosis,Laboratory,Caprine,1,0,Lab confirmed,2020-06-01
+Turkana,Central,2020,August,Brucellosis,Laboratory,Caprine,4,0,Lab confirmed,2020-08-01
+Turkana,Central,2020,July,Brucellosis,Laboratory,Bovine,1,0,Lab confirmed,2020-07-01
+Turkana,Central,2020,July,Brucellosis,Laboratory,Bovine,5,0,Lab confirmed,2020-07-01
+Turkana,Central,2020,July,Brucellosis,Laboratory,Caprine,1,0,Lab confirmed,2020-07-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Ovine,14,0,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Caprine,12,9,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Caprine,3,9,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Ovine,12,0,Clinically confirmed,2020-11-01
+Turkana,Turkana East,2020,November,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2020-11-01
+Turkana,Turkana West,2020,December,Brucellosis,Clinical,caprine,1,0,Clinically confirmed,2020-12-01
+Turkana,NORTH,2020,October,Brucellosis,Laboratory,CAPRINE,11,0,Lab confirmed,2020-10-01
+Turkana,NORTH,2020,October,Brucellosis,Laboratory,BOVINE,12,0,Lab confirmed,2020-10-01
+Turkana,NORTH,2020,October,Brucellosis,Laboratory,CAPRINE,11,0,Lab confirmed,2020-10-01
+Turkana,NORTH,2020,October,Brucellosis,Laboratory,CAPRINE,7,0,Lab confirmed,2020-10-01
+Turkana,NORTH,2020,October,Brucellosis,Laboratory,BOVINE,9,0,Lab confirmed,2020-10-01
+Vihiga,Vihiga,2020,April,Rabies,Laboratory,Dog,1,1,Lab confirmed,2020-04-01
+West Pokot,Kacheliba,2020,November,Brucellosis,Clinical,Bovine,2,0,Clinically confirmed,2020-11-01
+West Pokot,Kapenguria,2020,November,Rabies,Clinical,Bovine,1,1,Clinically confirmed,2020-11-01
+West Pokot,Kapenguria,2020,November,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-11-01
+West Pokot,Pokot South,2020,December,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Brucellosis,Post Mortem,Bovine,2,0,Post Mortem,2020-12-01
+West Pokot,Pokot South,2020,December,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2020-12-01
+West Pokot,Kacheliba,2020,December,Rvf,Clinical,Bovine,5,0,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2020-12-01
+West Pokot,Kacheliba,2020,December,Rvf,Clinical,ovine,14,0,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Clinical,Bovine,1,2,Clinically confirmed,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Post Mortem,Bovine,1,2,Post Mortem,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Post Mortem,Bovine,1,2,Post Mortem,2020-12-01
+West Pokot,Kacheliba,2020,December,Brucellosis,Post Mortem,Bovine,5,5,Post Mortem,2020-12-01
+West Pokot,Pokot South,2020,December,Anthrax,Post Mortem,Bovine,1,2,Post Mortem,2020-12-01
+West Pokot,Sigor,2020,December,Brucellosis,Clinical,Bovine,3,0,Clinically confirmed,2020-12-01
+West Pokot,Kapenguria,2020,December,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-12-01
+West Pokot,Kapenguria,2020,December,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2020-12-01
+NA,Kangema,2020,March,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2020-03-01
+Bomet,Chepalungu,2021,January,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2021-01-01
+Bomet,Bomet Central,2021,January,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2021-01-01
+Bomet,Chebalungu,2021,March,Rabies,Laboratory,cattle,1,1,Lab confirmed,2021-03-01
+Bomet,Chepalungu,2021,March,Rabies,Laboratory,cattle,1,1,Lab confirmed,2021-03-01
+Bomet,Chepalungu,2021,March,Rabies,Laboratory,cattle,1,1,Lab confirmed,2021-03-01
+Bomet,Sotik,2021,March,Rabies,Laboratory,cattle,1,1,Lab confirmed,2021-03-01
+Bomet,Chepalungu,2021,March,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-03-01
+Bomet,Sotik,2021,March,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2021-03-01
+Bomet,Bomet East,2021,April,Rabies,Clinical,Donkey,1,0,Clinically confirmed,2021-04-01
+Bomet,Sotik,2021,April,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-04-01
+Bomet,Sotik,2021,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-05-01
+Bomet,Sotik,2021,May,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2021-05-01
+Bomet,Chepalungu,2021,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-05-01
+Bomet,Sotik,2021,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-05-01
+Bomet,Bomet Central,2021,May,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-05-01
+Bomet,Sotik,2021,June,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-06-01
+Bomet,Sotik,2021,June,Rabies,Laboratory,Dog,1,1,Lab confirmed,2021-06-01
+Bomet,Sotik,2021,June,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-06-01
+Bomet,Sotik,2021,June,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2021-06-01
+Bungoma,Mt. Elgon,2021,April,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Bungoma,Kimilili,2021,April,Rabies,Clinical,Dog,1,0,Clinically confirmed,2021-04-01
+Bungoma,Kimilili,2021,April,Rabies,Clinical,Dog,1,0,Clinically confirmed,2021-04-01
+Bungoma,Bumula,2021,April,Rabies,Clinical,Sheep,2,0,Clinically confirmed,2021-04-01
+Bungoma,Bumula,2021,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-05-01
+Bungoma,Mt. Elgon,2021,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-05-01
+Bungoma,Mt. Elgon,2021,June,Rabies,Laboratory,Dog,200,0,Lab confirmed,2021-06-01
+Bungoma,Mt. Elgon,2021,June,Rabies,Laboratory,Donkey,50,0,Lab confirmed,2021-06-01
+Bungoma,Kabuchai,2021,June,Rabies,Clinical,Goat,4,2,Clinically confirmed,2021-06-01
+Bungoma,Kimilili,2021,June,Rabies,Laboratory,Dog,2,0,Lab confirmed,2021-06-01
+Busia,Butula,2021,May,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-05-01
+Garissa,Dadaab,2021,March,Brucellosis,Clinical,Goats,3,0,Clinically confirmed,2021-03-01
+Garissa,Dadaab,2021,March,Brucellosis,Clinical,Sheep,2,0,Clinically confirmed,2021-03-01
+Garissa,Dadaab,2021,March,Brucellosis,Clinical,Goats,2,0,Clinically confirmed,2021-03-01
+Garissa,Dadaab,2021,March,Brucellosis,Clinical,Sheep,1,0,Clinically confirmed,2021-03-01
+Garissa,Dadaab,2021,March,Brucellosis,Clinical,Sheep,5,0,Clinically confirmed,2021-03-01
+Garissa,Dadaab,2021,March,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2021-03-01
+Kajiado,Kajiado central,2021,April,Rabies,Laboratory,Cattle,1,0,Lab confirmed,2021-04-01
+Kajiado,Kajiado Central,2021,April,Rabies,Clinical,Cattle,15,1,Clinically confirmed,2021-04-01
+Kajiado,Kajiado west,2021,April,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-04-01
+Kajiado,Kajiado west,2021,April,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-04-01
+Kajiado,Kajiado North,2021,April,Rabies,Laboratory,Dog,1,None,Lab confirmed,2021-04-01
+Kajiado,Kajiado East,2021,May,Brucellosis,Clinical,Sheep,1,0,Clinically confirmed,2021-05-01
+Kakamega,Butere,2021,January,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-01-01
+Kakamega,Lurambi,2021,Feb,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2021-02-01
+Kakamega,Likuyani,2021,Feb,Rvf,Clinical,Cattle,4,2,Clinically confirmed,2021-02-01
+Kakamega,Malava,2021,Feb,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-02-01
+Kakamega,Lugari,2021,Feb,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2021-02-01
+Kakamega,Matungu,2021,Feb,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2021-02-01
+Kakamega,Shinyalu,2021,Feb,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-02-01
+Kakamega,Lurambi,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Lugari,2021,Feb,Rvf,Clinical,Sheep,2,2,Clinically confirmed,2021-02-01
+Kakamega,Shinyalu,2021,Feb,Rvf,Clinical,Sheep,30,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,1,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Shinyalu,2021,Feb,Rvf,Clinical,Goats,12,2,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,14,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Sheep,12,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Kakamega,Malava,2021,Feb,Brucellosis,Post Mortem,Cattle,3,1,Post Mortem,2021-02-01
+Kakamega,Matungu,2021,Feb,Rvf,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Kakamega,Lugari,2021,Feb,Rvf,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Kakamega,Shinyalu,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Kakamega,Ikolomani,2021,Feb,Anthrax,Clinical,Cattle,8,0,Clinically confirmed,2021-02-01
+Kakamega,Likuyani,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Kakamega,Lugari,2021,Feb,Rvf,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Kakamega,Butere,2021,Feb,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Kakamega,Lurambi,2021,March,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-03-01
+Kakamega,Butere,2021,March,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-03-01
+Kakamega,Lurambi,2021,March,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2021-03-01
+Kakamega,Ikolomani,2021,April,Brucellosis,Laboratory,Cattle,1,0,Lab confirmed,2021-04-01
+Kakamega,Butere,2021,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Kericho,Kipkelion West,2021,March,Rabies,Laboratory,cattle,1,1,Lab confirmed,2021-03-01
+Kericho,Soin/Sigowet,2021,April,Rabies,Laboratory,dogs,1,1,Lab confirmed,2021-04-01
+Kericho,Kericho East,2021,April,Anthrax,Laboratory,cattle,1,1,Lab confirmed,2021-04-01
+Kericho,Kericho East,2021,April,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2021-04-01
+Kericho,Kipkelion East,2021,June,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-06-01
+Kiambu,Kikuyu,2021,March,Rabies,Laboratory,dogs,1,NA,Lab confirmed,2021-03-01
+Kilifi,Kaloleni,2021,Feb,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-02-01
+Kilifi,K.South,2021,Feb,Rabies,Laboratory,Dogs,1,1,Lab confirmed,2021-02-01
+Kilifi,Malindi,2021,March,Rabies,Laboratory,dogs,1,1,Lab confirmed,2021-03-01
+Kilifi,Kaloleni,2021,April,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2021-04-01
+Kilifi,Malindi,2021,April,Rabies,Laboratory,Dog,1,1,Lab confirmed,2021-04-01
+Kilifi,Malindi,2021,June,Rabies,Laboratory,Dog,1,1,Lab confirmed,2021-06-01
+Kilifi,Malindi,2021,June,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2021-06-01
+Kirinyaga,KIRINYAGA CENTRAL,2021,January,Anthrax,Laboratory,Pigs,10,8,Lab confirmed,2021-01-01
+Kisii,South Mugirango,2021,Feb,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-02-01
+Kisii,Kitutu Chache North,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Kisii,Nyaribari Masaba,2021,April,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Kisumu,Nyando,2021,January,Rabies,Clinical,"Dogs, cats",1,0,Clinically confirmed,2021-01-01
+Kisumu,Kisumu Central,2021,January,Rabies,Clinical,"Dogs, cats",1,0,Clinically confirmed,2021-01-01
+Kisumu,Muhoroni,2021,January,Rabies,Clinical,dogs/donkey,1,0,Clinically confirmed,2021-01-01
+Kisumu,Nyando,2021,January,Rabies,Clinical,"Dogs, cats",1,0,Clinically confirmed,2021-01-01
+Kisumu,Kisumu Central,2021,January,Rabies,Clinical,"Dogs, cats",1,0,Clinically confirmed,2021-01-01
+Kisumu,Muhoroni,2021,January,Rabies,Clinical,"Dogs, cats",1,0,Clinically confirmed,2021-01-01
+Kisumu,Nyakach,2021,April,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2021-04-01
+Kisumu,Seme,2021,April,Rabies,Clinical,Dog,1,1,Clinically confirmed,2021-04-01
+Kisumu,Nyakach,2021,April,Rvf,Clinical,Sheep,1,0,Clinically confirmed,2021-04-01
+Kisumu,Kisumu East,2021,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-05-01
+Kisumu,Kisumu East,2021,May,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-05-01
+Kitui,Kwavonza/Yatta,2021,January,Rabies,Clinical,Goats,1,0,Clinically confirmed,2021-01-01
+Kitui,Kitui South,2021,January,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-01-01
+Kitui,Kitui Rural,2021,January,Rabies,Clinical,Goats,1,0,Clinically confirmed,2021-01-01
+Kitui,Kitui East,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Kitui,Mwingi Central,2021,March,Brucellosis,Clinical,Goats,1,0,Clinically confirmed,2021-03-01
+Kitui,Kitui central,2021,May,Rabies,Laboratory,Goat,1,-,Lab confirmed,2021-05-01
+Kitui,Mwingi Central,2021,May,Rabies,Laboratory,Dog,1,0,Lab confirmed,2021-05-01
+Kitui,Kitui East,2021,June,Anthrax,Post Mortem,Cattle,6,2,Post Mortem,2021-06-01
+Kitui,Kitui East,2021,June,Anthrax,clinical,Cattle,2,2,Clinically confirmed,2021-06-01
+Kitui,Mwingi central,2021,June,Rabies,clinical,Dog,1,1,Clinically confirmed,2021-06-01
+Kwale,Kinango,2021,January,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-01-01
+Kwale,Kinango,2021,Feb,Rabies,Clinical,Goats,1,0,Clinically confirmed,2021-02-01
+Kwale,Matuga,2021,April,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-04-01
+Kwale,Kinango,2021,April,Rabies,Laboratory,Dog,1,1,Lab confirmed,2021-04-01
+Laikipia,laikipia North,2021,April,Brucellosis,Laboratory,Cattle,8,0,Lab confirmed,2021-04-01
+Laikipia,Laikipia East,2021,April,Brucellosis,Clinical,Sheep,2,-,Clinically confirmed,2021-04-01
+Lamu,Lamu West,2021,January,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-01-01
+Lamu,Lamu West,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Lamu,Lamu West,2021,Feb,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-02-01
+Lamu,Lamu West,2021,Feb,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-02-01
+Machakos,Kangundo,2021,January,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-01-01
+Machakos,Kangundo,2021,January,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-01-01
+Machakos,Kangundo,2021,January,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-01-01
+Machakos,Kangundo,2021,Feb,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-02-01
+Machakos,Kathiani,2021,March,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2021-03-01
+Machakos,Kangundo,2021,March,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-03-01
+Makueni,Kibwezi West,2021,January,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-01-01
+Makueni,Makueni,2021,March,Rabies,Clinical,Dogs,3,0,Clinically confirmed,2021-03-01
+Makueni,Makueni,2021,May,Rabies,Laboratory,Dog,1,-,Lab confirmed,2021-05-01
+Makueni,mbooni,2021,May,Rabies,Laboratory,Dog,1,-,Lab confirmed,2021-05-01
+Makueni,Kibwezi East,2021,June,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-06-01
+Mandera,Lafey,2021,January,Brucellosis,Clinical,Goats,1,0,Clinically confirmed,2021-01-01
+Mandera,Lafey,2021,January,Brucellosis,Clinical,Goats,2,0,Clinically confirmed,2021-01-01
+Mandera,Lafey,2021,January,Brucellosis,Clinical,Goats,3,1,Clinically confirmed,2021-01-01
+Mandera,Lafey,2021,January,Brucellosis,Clinical,Goats,6,1,Clinically confirmed,2021-01-01
+Mandera,Mandera North,2020,Feb,Rvf,Laboratory,Camel,14,8,Lab confirmed,2020-02-01
+Mandera,Mandera North,2020,Feb,Rvf,Laboratory,Camel,25,9,Lab confirmed,2020-02-01
+Mombasa,Nyali,2021,April,Anthrax,Laboratory,Goat,1,1,Lab confirmed,2021-04-01
+Mombasa,Nyali,2021,April,Anthrax,Laboratory,Goat,1,1,Lab confirmed,2021-04-01
+Mombasa,Kisauni,2021,April,Rabies,Laboratory,Dog,1,1,Lab confirmed,2021-04-01
+Mombasa,Kisauni,2021,May,Rabies,Laboratory,Dog,1,1,Lab confirmed,2021-05-01
+Murangá,KIHARU,2021,January,Anthrax,Laboratory,Goats,1,5,Lab confirmed,2021-01-01
+Murang'a,MARAGUA,2021,June,Rabies,CLINICAL,Dog,1,NIL,Clinically confirmed,2021-06-01
+Nairobi,Makadara,2021,March,Rabies,Laboratory,dogs,1,1,Lab confirmed,2021-03-01
+Nairobi,Langata,2021,April,Rabies,Laboratory,Dog,1,-,Lab confirmed,2021-04-01
+Nakuru,Nakuru Town East,2021,Feb,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Nakuru,Rongai,2021,Feb,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2021-02-01
+Nakuru,Rongai,2021,Feb,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2021-02-01
+Nakuru,Rongai,2021,Feb,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2021-02-01
+Nakuru,Rongai,2021,Feb,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2021-02-01
+Nakuru,Rongai,2021,Feb,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2021-02-01
+Nakuru,Naivasha,2021,Feb,Rabies,Laboratory,Dogs,1,1,Lab confirmed,2021-02-01
+Nakuru,Kuresoi South,2021,April,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2021-04-01
+Nakuru,Naivasha,2021,May,Rabies,CLINICAL,Dog,1,1,Clinically confirmed,2021-05-01
+Nandi,Chesumei,2021,January,Anthrax,Post Mortem,Cattle,1,1,Post Mortem,2021-01-01
+Nandi,Nandi Hills,2021,June,Rabies,Clinical,Cattle,4,0,Clinically confirmed,2021-06-01
+Narok,Narok South,2021,January,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2021-01-01
+Narok,Narok South,2021,March,Rabies,Clinical,Dogs,2,0,Clinically confirmed,2021-03-01
+Narok,Narok South,2021,March,Rabies,Clinical,Dogs,3,0,Clinically confirmed,2021-03-01
+Narok,Narok South,2021,May,Rabies,Clinical,Dog,8,0,Clinically confirmed,2021-05-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Clinical,Sheep,6,0,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Post Mortem,Goats,3,9,Post Mortem,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rvf,Clinical,Goats,12,9,Clinically confirmed,2021-02-01
+Nyamira,Borabu,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Nyamira,Borabu,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Nyamira,Borabu,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Nyamira,Borabu,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Nyamira,Borabu,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Nyamira,Borabu,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Brucellosis,Post Mortem,Cattle,1,0,Post Mortem,2021-02-01
+Nyamira,Kitutu Masaba,2021,Feb,Brucellosis,Clinical,Cattle,1,1,Clinically confirmed,2021-02-01
+Nyamira,Borabu,2021,Feb,Anthrax,Clinical,Cattle,1,4,Clinically confirmed,2021-02-01
+Nyamira,Kitutu Masaba,2021,March,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-03-01
+Nyamira,West Mugirango,2021,March,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-03-01
+Nyamira,Kitutu Masaba,2021,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Nyamira,Kitutu Masaba,2021,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Nyamira,West Mugirango,2021,April,Rabies,Post Mortem,Dog,2,1,Post Mortem,2021-04-01
+Nyamira,Kitutu Masaba,2021,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Nyamira,West Mugirango,2021,April,Rabies,Post Mortem,Cattle,2,1,Post Mortem,2021-04-01
+Nyamira,Nyamira South,2021,June,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-06-01
+Nyamira,West Mugirango,2021,May,Rabies,Clinical,Cattle,1,4,Clinically confirmed,2021-05-01
+Nyamira,West Mugirango,2021,June,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2021-06-01
+Nyamira,Nyamira South,2021,June,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-06-01
+Nyamira,Nyamira South,2021,June,Rabies,Laboratory,Goat,1,1,Lab confirmed,2021-06-01
+Nyamira,West Mugirango,2021,June,Rabies,Clinical,Goat,1,0,Clinically confirmed,2021-06-01
+Nyamira,Borabu,2021,June,Brucellosis,Clinical,Cattle,19,0,Clinically confirmed,2021-06-01
+Nyandarua,Olkalau,2021,March,Rvf,Laboratory,sheep,16,16,Lab confirmed,2021-03-01
+Nyeri,MKURWE-INI,2021,Feb,Anthrax,Laboratory,Cattle,1,2,Lab confirmed,2021-02-01
+Nyeri,MUKURWE-INI,2021,May,Anthrax,Laboratory,Cattle,1,1,Lab confirmed,2021-05-01
+Samburu,Samburu West,2021,March,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-03-01
+Samburu,Samburu North,2021,March,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-03-01
+Samburu,Samburu East,2021,March,Brucellosis,Clinical,Goats,10,0,Clinically confirmed,2021-03-01
+Samburu,Samburu West,2021,April,Rabies,Clinical,Dog,1,0,Clinically confirmed,2021-04-01
+Siaya,Gem,2021,June,Rabies,Clinical,Dog,1,0,Clinically confirmed,2021-06-01
+Taita Taveta,Voi,2021,January,Rabies,Clinical,canine,2,0,Clinically confirmed,2021-01-01
+Taita Taveta,Taveta,2021,January,Rvf,Clinical,Cattle,1,0,Clinically confirmed,2021-01-01
+Taita Taveta,Wundanyi,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Taita Taveta,Taveta,2021,Feb,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-02-01
+Tharaka Nithi,Maara,2021,January,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2021-01-01
+Tharaka Nithi,Maara,2021,Feb,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2021-02-01
+Tharaka Nithi,Chuka/Igambang'Ombe,2021,Feb,Anthrax,Clinical,Pigs,1,0,Clinically confirmed,2021-02-01
+Tharaka Nithi,Maara,2021,March,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2021-03-01
+Tharaka Nithi,Maara,2021,June,Anthrax,Post Mortem,Cattle,2,1,Post Mortem,2021-06-01
+Trans Nzoia,Kiminini,2021,January,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-01-01
+Trans Nzoia,Cherangany,2021,January,Rabies,Clinical,Sheep,1,0,Clinically confirmed,2021-01-01
+Trans Nzoia,Kiminini,2021,March,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-03-01
+Trans Nzoia,Endebess,2021,April,Rabies,Clinical,Dog,1,0,Clinically confirmed,2021-04-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Cattle,2,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Cattle,3,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,1,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,2,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Cattle,2,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,2,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,3,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,1,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,1,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,5,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Cattle,1,0,Lab confirmed,2021-01-01
+Turkana,Central,2021,January,Brucellosis,Laboratory,Goats,2,0,Lab confirmed,2021-01-01
+Turkana,CENTRAL,2021,January,Brucellosis,Laboratory,Sheep,3,0,Lab confirmed,2021-01-01
+Turkana,CENTRAL,2021,January,Brucellosis,Laboratory,Sheep,1,0,Lab confirmed,2021-01-01
+Turkana,CENTRAL,2021,January,Brucellosis,Laboratory,Sheep,2,0,Lab confirmed,2021-01-01
+Turkana,CENTRAL,2021,January,Brucellosis,Laboratory,Goats,5,0,Lab confirmed,2021-01-01
+Turkana,CENTRAL,2021,January,Brucellosis,Laboratory,Cattle,2,0,Lab confirmed,2021-01-01
+Turkana,CENTRAL,2021,January,Brucellosis,Laboratory,Goats,3,0,Lab confirmed,2021-01-01
+Turkana,CENTRAL,2021,January,Brucellosis,Laboratory,Goats,2,0,Lab confirmed,2021-01-01
+Turkana,Turkana West,2021,Feb,Brucellosis,Clinical,Sheep,1,0,Clinically confirmed,2021-02-01
+Turkana,T SOUTH,2021,May,Brucellosis,Laboratory,Cattle,6,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,7,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,5,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,8,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,3,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,14,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,4,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,9,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,11,2,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Cattle,2,0,Lab confirmed,2021-05-01
+Turkana,T SOUTH,2021,May,Brucellosis,Laboratory,Goat,7,0,Lab confirmed,2021-05-01
+Turkana,T SOUTH,2021,May,Brucellosis,Laboratory,Goat,8,0,Lab confirmed,2021-05-01
+Turkana,T SOUTH,2021,May,Brucellosis,Laboratory,Goat,4,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Goat,7,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Goat,4,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Goat,16,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Goat,13,1,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Goat,21,3,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Goat,11,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,May,Brucellosis,Laboratory,Goat,5,0,Lab confirmed,2021-05-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,13,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,2,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,4,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,2,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,5,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,4,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,3,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,2,0,Lab confirmed,2021-06-01
+Turkana,Central,2021,June,Brucellosis,Laboratory,Goat,3,0,Lab confirmed,2021-06-01
+Turkana,Central,2021,June,Brucellosis,Laboratory,Goat,1,0,Lab confirmed,2021-06-01
+Turkana,Central,2021,June,Brucellosis,Laboratory,Cattle,2,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Cattle,3,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,1,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,2,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,1,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Cattle,1,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Cattle,4,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,2,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Goat,1,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Cattle,1,0,Lab confirmed,2021-06-01
+Turkana,CENTRAL,2021,June,Brucellosis,Laboratory,Cattle,1,0,Lab confirmed,2021-06-01
+Turkana,Central,2021,April,Brucellosis,Laboratory,Cattle,1,0,Lab confirmed,2021-04-01
+Turkana,Central,2021,April,Brucellosis,Laboratory,Goat,1,0,Lab confirmed,2021-04-01
+Vihiga,Sabatia,2021,Feb,Rvf,Clinical,Cattle,2,1,Clinically confirmed,2021-02-01
+Vihiga,Emuhaya,2021,Feb,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2021-02-01
+Vihiga,Sabatia,2021,Feb,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Vihiga,Emuhaya,2021,Feb,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2021-02-01
+Vihiga,Sabatia,2021,Feb,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Vihiga,Emuhaya,2021,Feb,Anthrax,Clinical,Cattle,1,0,Clinically confirmed,2021-02-01
+Vihiga,Emuhaya,2021,Feb,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2021-02-01
+Vihiga,Sabatia,2021,Feb,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-02-01
+Vihiga,Emuhaya,2021,Feb,Anthrax,Post Mortem,Cattle,1,2,Post Mortem,2021-02-01
+Vihiga,Emuhaya,2021,Feb,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-02-01
+Vihiga,Hamisi,2021,March,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-03-01
+Vihiga,Emuhaya,2021,March,Anthrax,Clinical,Cattle,1,1,Clinically confirmed,2021-03-01
+Vihiga,Vihiga,2021,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Wajir,Wajir North,2021,March,Rabies,Clinical,Goats,7,0,Clinically confirmed,2021-03-01
+West Pokot,Kapenguria,2021,January,Brucellosis,Clinical,Bovine,1,0,Clinically confirmed,2021-01-01
+West Pokot,Pokot South,2021,Feb,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2021-02-01
+West Pokot,Pokot South,2021,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+West Pokot,Kapenguria,2021,April,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-04-01
+Kiambu,Thika,2016,December,Rabies,lab,bovine,1,1,Lab confirmed,2016-12-01
+Kisumu,KISUMU WEST,2017,March,Rabies,Clinical,CANINE,1,none,Clinically confirmed,2017-03-01
+Kisumu,KISUMU WEST,2017,March,Rabies,Clinical,CANINE,1,none,Clinically confirmed,2017-03-01
+Marsabit,Laisamis,2021,December,Brucellosis,Clinical,Goats,8,0,Clinically confirmed,2021-12-01
+Marsabit,Laisamis,2021,December,Brucellosis,Clinical,Goats,5,0,Clinically confirmed,2021-12-01
+Marsabit,Laisamis,2021,December,Brucellosis,Clinical,Goats,11,0,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga West,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga West,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga West,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,12,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,12,9,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga West,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Kirinyaga,Mwea East,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Laikipia,Laikipia East,2021,December,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga West,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Kirinyaga,Mwea West,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Mwea West,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Tana River,Galole,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Mombasa,Mvita,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Samburu,Samburu North,2021,December,Rabies,Clinical,Donkey,1,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Anthrax,Clinical,Cattle,2,2,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Bungoma,Kabuchai,2021,December,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-12-01
+Nakuru,Naivasha,2021,December,Rvf,Clinical,Cattle,6,0,Clinically confirmed,2021-12-01
+Nyamira,Kitutu Masaba,2021,December,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-12-01
+Nakuru,Naivasha,2021,December,Anthrax,Clinical,Cattle,6,2,Clinically confirmed,2021-12-01
+Bungoma,Kabuchai,2021,December,Rabies,Clinical,Cattle,1,1,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga central,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga central,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga central,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga central,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga central,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga central,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,2,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,23,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Tana River,Bura,2021,December,Rvf,Clinical,Goats,12,0,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga central,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Kajiado,Kajiado West,2021,December,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Bungoma,Kabuchai,2021,December,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-12-01
+Marsabit,Moyale,2021,December,Brucellosis,Clinical,Camel,1,1,Clinically confirmed,2021-12-01
+Bomet,Bomet East,2021,December,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Bomet,Bomet East,2021,December,Rabies,Clinical,Cattle,1,0,Clinically confirmed,2021-12-01
+Marsabit,North Horr,2021,December,Rabies,Clinical,Camel,2,2,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Cattle,5,0,Clinically confirmed,2021-12-01
+Nairobi,Embakasi East,2021,December,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-12-01
+Nairobi,Dagoretti North,2021,December,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Goats,3,9,Clinically confirmed,2021-12-01
+Kirinyaga,Kirinyaga East,2021,December,Rvf,Clinical,Sheep,14,0,Clinically confirmed,2021-12-01
+Kitui,Mwingi Central,2021,December,Brucellosis,Clinical,Goats,3,0,Clinically confirmed,2021-12-01
+Bomet,Sotik,2021,December,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-12-01
+Bomet,Sotik,2021,December,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-12-01
+Kericho,Kericho East,2021,December,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-12-01
+Nairobi,Kasarani,2021,December,Rvf,Laboratory,Cattle,1,1,Lab confirmed,2021-12-01
+Kiambu,Kiambu,2021,December,Rabies,Laboratory,Dogs,1,1,Lab confirmed,2021-12-01
+Nairobi,Langata,2021,December,Rabies,Laboratory,Dogs,1,1,Lab confirmed,2021-12-01
+Kiambu,Githunguri,2021,December,Anthrax,Laboratory,Sheep,1,1,Lab confirmed,2021-12-01
+Laikipia,LAIKIPIA WEST,2021,11,Rabies,LABORATORY,CANINE,1,0,Lab confirmed,2021-11-01
+Laikipia,LAIKIPIA WEST,2021,11,Rabies,LABORATORY,CANINE,1,0,Lab confirmed,2021-11-01
+Marsabit,North Horr,2021,10,Rabies,Clinical,Cattle,1,4,Clinically confirmed,2021-10-01
+Marsabit,North Horr,2021,10,Anthrax,Clinical,Cattle,5,2,Clinically confirmed,2021-10-01
+Bungoma,Kimilili,2021,10,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Sheep,3,0,Clinically confirmed,2021-10-01
+Bungoma,Kimilili,2021,10,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-10-01
+Bungoma,Kimilili,2021,10,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,16,0,Clinically confirmed,2021-10-01
+Bungoma,Kabuchai,2021,10,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-10-01
+Marsabit,Saku,2021,10,Rabies,Clinical,Cattle,11,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,7,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,15,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Sheep,8,20,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Sheep,17,0,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Brucellosis,Clinical,Goats,4,0,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Brucellosis,Clinical,Goats,3,0,Clinically confirmed,2021-10-01
+Marsabit,Saku,2021,10,Rabies,Clinical,Dogs,1,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Sheep,8,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,6,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,3,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,5,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,5,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Camel,7,0,Clinically confirmed,2021-10-01
+Elgeyo Marakwet,Marakwet East,2021,10,Rabies,Clinical,Sheep,3,0,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Brucellosis,Clinical,Goats,6,0,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2021-10-01
+Nyandarua,Ol Kalou,2021,10,Brucellosis,Clinical,Cattle,2,0,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Brucellosis,Clinical,Cattle,2,4,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Brucellosis,Clinical,Goats,9,0,Clinically confirmed,2021-10-01
+Bungoma,Kanduyi,2021,10,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-10-01
+Bungoma,Kanduyi,2021,10,Rabies,Clinical,Dogs,1,1,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Brucellosis,Clinical,Goats,6,0,Clinically confirmed,2021-10-01
+Marsabit,Moyale,2021,10,Rabies,Clinical,Cattle,2,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,10,Brucellosis,Clinical,Goats,6,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,11,Brucellosis,Clinical,Goats,3,0,Clinically confirmed,2021-11-01
+Kitui,Mwingi Central,2021,10,Rabies,Clinical,Donkey,1,0,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,11,Brucellosis,Clinical,Goats,3,0,Clinically confirmed,2021-11-01
+Marsabit,Laisamis,2021,11,Brucellosis,Clinical,Goats,4,0,Clinically confirmed,2021-11-01
+Marsabit,Laisamis,2021,11,Brucellosis,Clinical,Goats,5,0,Clinically confirmed,2021-11-01
+Marsabit,Laisamis,2021,11,Rabies,Clinical,Goats,1,0,Clinically confirmed,2021-11-01
+Marsabit,Moyale,2021,11,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-11-01
+Samburu,Samburu West,2021,11,Rabies,Clinical,Sheep,1,0,Clinically confirmed,2021-11-01
+Elgeyo Marakwet,Marakwet West,2021,11,Brucellosis,Clinical,Cattle,1,0,Clinically confirmed,2021-11-01
+Marsabit,Laisamis,2021,11,Brucellosis,Clinical,Goats,4,0,Clinically confirmed,2021-11-01
+Siaya,Bondo,2021,11,Rabies,Laboratory,Cattle,1,1,Lab confirmed,2021-11-01
+Marsabit,Moyale,2021,11,Brucellosis,Clinical,Goats,9,0,Clinically confirmed,2021-11-01
+Bungoma,Kabuchai,2021,11,Brucellosis,Clinical,Goats,2,0,Clinically confirmed,2021-11-01
+Marsabit,Saku,2021,11,Brucellosis,Clinical,Goats,6,0,Clinically confirmed,2021-11-01
+Marsabit,Laisamis,2021,October,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,October,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-10-01
+Marsabit,Laisamis,2021,October,Anthrax,Clinical,Cattle,1,2,Clinically confirmed,2021-10-01

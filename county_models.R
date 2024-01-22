@@ -194,8 +194,8 @@ numeric_columns %>%
 
 df_tot_cases <- df_incidence2 |>
   group_by(date, county) |>
-  summarise(across(contains("cases"), ~ sum(., na.rm = T))) |> 
-  mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
+  summarise(across(contains("cases"), ~ sum(., na.rm = T))) 
+  #mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
 
 # Population per year, per county
 df_pop <- df_incidence2 |> 
@@ -319,7 +319,7 @@ df_cum_trend <- df_tot_cases_trend |>
   rowwise() |> 
   mutate(animal_cases = sum(catt_cases, goat_cases, shp_cases, cam_cases, na.rm = T),
          animal_pop = sum(catt_pop, goat_pop, sheep_pop, cam_pop, na.rm = T),
-         animal_cases = ifelse(animal_cases == 0, NA, animal_cases),
+        # animal_cases = ifelse(animal_cases == 0, NA, animal_cases),
          human_incidence = round((hum_cases / hum_pop) * 1000, 4),
          animal_incidence = round((animal_cases / animal_pop) * 1000000, 4)
   ) |> 
@@ -743,7 +743,8 @@ df_pop_spatial <- df_incidence2 |>
   distinct(.) |>
   as_tibble() |>
   group_by(year = year(date), county) %>%
-  summarise(across(where(is.numeric), ~unique(.)))
+  summarise(across(where(is.numeric), ~unique(.))) |> 
+  mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
 
 df_spatial <- df_tot_cases_spatial |>
   merge(df_pop_spatial, by = c("year", "county")) |> 
@@ -783,12 +784,25 @@ setdiff(shp$Name, df_spatial$county)
 length(unique(df_spatial$county))
 
 # Merging
+
 df_spatial_merged <- df_spatial |> 
-  merge(shp, by.x = "county", by.y = 'Name') |> 
+  merge(shp, by.x = "county", by.y = 'Name') 
+indi_incidence_columns <- grep("incidence", names(df_spatial_merged), value = TRUE)
+
+df_spatial_merged <- df_spatial_merged |> 
+    mutate(across(all_of(indi_incidence_columns), 
+                ~ cut(., breaks = quantile(., na.rm = TRUE), include.lowest = TRUE),
+                .names = "{col}_range")) |> 
   st_as_sf()
 
 df_spatial_merged_cum <- df_spatial_cum |> 
-  merge(shp, by.x = "county", by.y = 'Name') |> 
+  merge(shp, by.x = "county", by.y = 'Name') 
+
+all_incidence_columns <- grep("incidence", names(df_spatial_merged_cum), value = TRUE)
+df_spatial_merged_cum <- df_spatial_merged_cum |> 
+      mutate(across(all_of(all_incidence_columns), 
+                ~ cut(., breaks = quantile(., na.rm = TRUE), include.lowest = TRUE),
+                .names = "{col}_range")) |> 
   st_as_sf()
 
 # Plotting
@@ -797,50 +811,31 @@ df_spatial_merged_cum <- df_spatial_cum |>
 df_spatial_merged$year <- as.factor(df_spatial_merged$year)
 df_spatial_merged_cum$year <- as.factor(df_spatial_merged_cum$year)
 
-# Display the first few rows of the updated data frame
-ylorrd_palette <- colorRampPalette(
-  c(
-    "white",
-    "#FFEDA0",
-    "#FED976",
-    "#FFCC00",
-    "#FEB24C",
-    "#FFAA00",
-    "#FD8D3C",
-    "#FC4E2A",
-    "#E31A1C",
-    "#BD0026",
-    "#800026"
-  ),
-  interpolate = "linear",
-  space = "rgb"
-)
-
 # All animals incidence
+cate_animal <- length(levels(df_spatial_merged_cum$animal_incidence_range))
 animals <- df_spatial_merged_cum |>
-  mutate(
-    animal_incidence_range = cut(
-      animal_incidence,
-      breaks = c(0, 1, 5, 10, 20, 30, 40, 50, 60, Inf),
-      labels = c("0", "1-5", "5-10", "10-20", "20-30", "30-40", "40-50", "50-60", "> 60"),
-      include.lowest = TRUE
-    ) |>
-      as.factor()
-  ) |>
+  mutate(animal_incidence_range = ifelse(is.na(animal_incidence_range), 
+                                         "0", 
+                                         as.character(animal_incidence_range)) %>%
+           factor(., levels = c(
+             "0",
+             "[0.113,0.865]",
+             "(0.865,1.85]", 
+             "(1.85,5.62]",
+             "(5.62,67.4]"
+           ))) |> 
   ggplot() +
   geom_sf(aes(fill = animal_incidence_range)) +
-  scale_fill_manual(values = c(
-    "0" = 'white',
-    '1-5' = '#FFEDA0',
-    '5-10' = '#FFCC00',
-    '10-20' = '#FEB24C',
-    '20-30' = '#FFAA00',
-    '30-40' = '#FD8D3C',
-    '40-50' = '#FC4E2A',
-    '50-60' = '#E31A1C',
-    '> 60' = '#800026'
-    
-  )) +
+  scale_fill_manual(values = c("white", brewer.pal(cate_animal, "YlOrRd")),
+                    labels = c(
+                      "0" = "0",
+                      "[0.113,0.865]" = "0.113 - 0.865",
+                      "(0.865,1.85]" = "0.865 - 1.85",
+                      "(1.85,5.62]" = "1.85 - 5.62",
+                      "(5.62,67.4]"  = "5.62 - 67.4"
+                    ),
+                    
+                    na.value = "white") +
   theme_void() +
   facet_wrap( ~ year, nrow = 1) +
   theme(
@@ -856,25 +851,38 @@ animals <- df_spatial_merged_cum |>
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Animals") +
-  labs(fill = "Animals")
+  labs(fill = "Animals") 
 animals
 
 # Humans
-human <- df_spatial_merged |>
-  mutate(
-    human_incidence_range = cut(
-      human_incidence,
-      breaks = c(0, 1, 5, 10, 20, 30, 40, 50, 60, Inf),
-      labels = c("0", "1-5", "5-10", "10-20", "20-30", "30-40", "40-50", "50-60", "> 60"),
-      include.lowest = TRUE
-    ) |>
-      as.factor()
-  ) |>
+cate_human <-
+  length(levels(df_spatial_merged_cum$human_incidence_range))
+humans <- df_spatial_merged_cum |>
+  # mutate(human_incidence_range = ifelse(is.na(human_incidence_range),
+  #                                        "0",
+  #                                        as.character(human_incidence_range)) %>%
+  #          factor(., levels = c(
+  #            "0",
+  #            "[0.113,0.865]",
+  #            "(0.865,1.85]",
+  #            "(1.85,5.62]",
+  #            "(5.62,67.4]"
+  #          ))) |>
   ggplot() +
   geom_sf(aes(fill = human_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(9)) +
+  scale_fill_manual(
+    values = c(brewer.pal(cate_human, "YlOrRd")),
+    labels =
+      function(breaks) {
+        str_replace_all(breaks, "\\[|\\)|\\]|\\(", "") %>% str_replace_all(., ",", " - ")
+      }
+    
+    ,
+    
+    na.value = "white"
+  ) +
   theme_void() +
-  facet_wrap( ~ year, nrow = 1) +
+  facet_wrap(~ year, nrow = 1) +
   theme(
     plot.title = element_text(
       color = "black",
@@ -889,11 +897,12 @@ human <- df_spatial_merged |>
   ) +
   ggtitle("Humans") +
   labs(fill = "Humans")
-human
+humans
+
 
 
 animals_humans <-
-  wrap_plots(human,
+  wrap_plots(humans,
              animals,
              ncol = 1,
              guides = "keep") +
@@ -903,34 +912,42 @@ animals_humans <-
                   ") &
   theme(plot.caption = element_text(size = 16, colour = "black"))
 
-ylorrd_palette2 <-
-  colorRampPalette(
-    c(
-      "white",
-      "#FFFFCC",
-      "#FEB24C",
-      "#FD8D3C",
-      "#FC4E2A",
-      "#E31A1C",
-      "#BD0026",
-      "#800026"
-    )
-  )
-
-cattle <- df_spatial_merged %>%
-  mutate(catt_incidence_range = cut(round(catt_incidence, 1),
-                                    breaks = c(0, 0.1, 1, 2, 4, 6, 11, 50, Inf),
-                                    labels = c("0", "0.1-1", "1-2", "2-4", "4-6", "6-11", "11-50", ">50"),
-                                    include.lowest = TRUE) %>%
-           as.factor()
-  ) |>
+cate_catt <- length(levels(df_spatial_merged$catt_incidence_range))
+cattle <- df_spatial_merged |>
+  mutate(catt_incidence_range = ifelse(is.na(catt_incidence_range), 
+                                         "0", 
+                                         as.character(catt_incidence_range)) %>%
+           factor(., levels = c(
+             "0",
+             "[0.704,2.38]",
+             "(2.38,5.45]", 
+             "(5.45,10]",
+             "(10,235]"
+           ))) |> 
   ggplot() +
   geom_sf(aes(fill = catt_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(8)) +
+  scale_fill_manual(values = c("white", brewer.pal(cate_catt, "YlOrRd")),
+                    # labels = c(
+                    #   "0" = "0",
+                    #   "[0.113,0.865]" = "0.113 - 0.865",
+                    #   "(0.865,1.85]" = "0.865 - 1.85",
+                    #   "(1.85,5.62]" = "1.85 - 5.62",
+                    #   "(5.62,67.4]"  = "5.62 - 67.4"
+                    # ),
+                        labels =
+      function(breaks) {
+        str_replace_all(breaks, "\\[|\\)|\\]|\\(", "") %>% str_replace_all(., ",", " - ")
+      },
+    
+                    na.value = "white") +
   theme_void() +
-  facet_wrap(~year, nrow = 1) +
+  facet_wrap( ~ year, nrow = 1) +
   theme(
-    plot.title = element_text(color = "black", hjust = .5, size = 16),
+    plot.title = element_text(
+      color = "black",
+      hjust = .5,
+      size = 16
+    ),
     legend.position = "bottom",
     legend.text = element_text(size = 10),
     legend.title = element_text(size = 10, colour = "black"),
@@ -938,70 +955,80 @@ cattle <- df_spatial_merged %>%
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Cattle") +
-  labs(fill = "Cattle")
+  labs(fill = "Cattle") 
 cattle
 
-ylorrd_palette3 <-
-  colorRampPalette(
-    c(
-      "white",
-      "#FEB24C",
-      "#FD8D3C",
-      "#FC4E2A",
-      "#BD0026",
-      "#800026"
-    )
-  )
-
-goat <- df_spatial_merged %>%
-  mutate(goat_incidence_range = cut(round(goat_incidence, 1),
-                                    breaks = c(0, 0.1, 0.5, 1, 2, 40, Inf),
-                                    labels = c("0", "0.1-0.5", "0.5-1", "1-2", "2-40", ">40"),
-                                    include.lowest = TRUE) %>%
-           as.factor()
-  ) |>
+# Goats
+cate_goat <- length(levels(df_spatial_merged$goat_incidence_range))
+goat <- df_spatial_merged |>
+  mutate(goat_incidence_range = ifelse(is.na(goat_incidence_range), 
+                                         "0", 
+                                         as.character(goat_incidence_range)) %>%
+           factor(., levels = c(
+             "0",
+             "[0.13,0.724]",
+             "(0.724,1.63]", 
+             "(1.63,8.05]",
+             "(8.05,24.3]"
+           ))) |> 
   ggplot() +
   geom_sf(aes(fill = goat_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(6)) +
+  scale_fill_manual(values = c("white", brewer.pal(cate_goat, "YlOrRd")),
+                        labels =
+      function(breaks) {
+        str_replace_all(breaks, "\\[|\\)|\\]|\\(", "") %>% str_replace_all(., ",", " - ")
+      },
+    
+                    na.value = "white") +
   theme_void() +
-  facet_wrap(~year, nrow = 1) +
+  facet_wrap( ~ year, nrow = 1) +
   theme(
-    plot.title = element_text(color = "black", hjust = .5, size = 16),
+    plot.title = element_text(
+      color = "black",
+      hjust = .5,
+      size = 16
+    ),
     legend.position = "bottom",
     legend.text = element_text(size = 10),
     legend.title = element_text(size = 10, colour = "black"),
     legend.key.size = unit(0.3, "cm"),
     strip.text = element_text(colour = "black", size = 16)
   ) +
-  ggtitle("Goat") +
-  labs(fill = "Goat")
+  ggtitle("Goats") +
+  labs(fill = "Goat") 
 goat
 
 
-ylorrd_palette4 <-
-  colorRampPalette(
-    c(
-      "white",
-      "#FEB24C",
-      "#FC4E2A",
-      "#800026"
-    )
-  )
-
-sheep <- df_spatial_merged %>%
-  mutate(shp_incidence_range = cut(round(shp_incidence, 2),
-                                   breaks = c(0, 0.1, 0.5, 1, 10, Inf),
-                                   labels = c("0", "0.1-0.5", "0.5-1", "1-10", "> 10"),
-                                   include.lowest = TRUE) %>%
-           as.factor()
-  ) |>
+#sheep
+cate_shp <- length(levels(df_spatial_merged$shp_incidence_range))
+sheep <- df_spatial_merged |>
+  mutate(shp_incidence_range = ifelse(is.na(shp_incidence_range), 
+                                         "0", 
+                                         as.character(shp_incidence_range)) %>%
+           factor(., levels = c(
+             "0",
+             "[0.182,0.701]",
+             "(0.701,2.48]", 
+             "(2.48,4.65]",
+             "(4.65,45.1]"
+           ))) |> 
   ggplot() +
   geom_sf(aes(fill = shp_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(5)) +
+  scale_fill_manual(values = c("white", brewer.pal(cate_shp, "YlOrRd")),
+                        labels =
+      function(breaks) {
+        str_replace_all(breaks, "\\[|\\)|\\]|\\(", "") %>% str_replace_all(., ",", " - ")
+      },
+    
+                    na.value = "white") +
   theme_void() +
-  facet_wrap(~year, nrow = 1) +
+  facet_wrap( ~ year, nrow = 1) +
   theme(
-    plot.title = element_text(color = "black", hjust = .5, size = 16),
+    plot.title = element_text(
+      color = "black",
+      hjust = .5,
+      size = 16
+    ),
     legend.position = "bottom",
     legend.text = element_text(size = 10),
     legend.title = element_text(size = 10, colour = "black"),
@@ -1009,34 +1036,39 @@ sheep <- df_spatial_merged %>%
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Sheep") +
-  labs(fill = "Sheep")
+  labs(fill = "Sheep") 
 sheep
 
-
-ylorrd_palette5 <-
-  colorRampPalette(
-    c(
-      "white",
-      "#FEB24C",
-      "#FC4E2A",
-      "#800026"
-    )
-  )
-
-camels <- df_spatial_merged %>%
-  mutate(cam_incidence_range = cut(round(cam_incidence, 2),
-                                   breaks = c(0, 0.1, 1, 5, Inf),
-                                   labels = c("0", "0.1-1", "1-5", "> 5"),
-                                   include.lowest = TRUE) %>%
-           as.factor()
-  ) |>
+# Camels
+cate_cam <- length(levels(df_spatial_merged$cam_incidence_range))
+camels <- df_spatial_merged |>
+  mutate(cam_incidence_range = ifelse(is.na(cam_incidence_range), 
+                                         "0", 
+                                         as.character(cam_incidence_range)) %>%
+           factor(., levels = c(
+             "0",
+             "[0.613,1.9]",
+             "(1.9,2.84]", 
+             "(2.84,33]",
+             "(33,122]"
+           ))) |> 
   ggplot() +
   geom_sf(aes(fill = cam_incidence_range)) +
-  scale_fill_manual(values = ylorrd_palette(4)) +
+  scale_fill_manual(values = c("white", brewer.pal(cate_cam, "YlOrRd")),
+                        labels =
+      function(breaks) {
+        str_replace_all(breaks, "\\[|\\)|\\]|\\(", "") %>% str_replace_all(., ",", " - ")
+      },
+    
+                    na.value = "white") +
   theme_void() +
-  facet_wrap(~year, nrow = 1) +
+  facet_wrap( ~ year, nrow = 1) +
   theme(
-    plot.title = element_text(color = "black", hjust = .5, size = 16),
+    plot.title = element_text(
+      color = "black",
+      hjust = .5,
+      size = 16
+    ),
     legend.position = "bottom",
     legend.text = element_text(size = 10),
     legend.title = element_text(size = 10, colour = "black"),
@@ -1044,15 +1076,21 @@ camels <- df_spatial_merged %>%
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Camels") +
-  labs(fill = "Camels")
+  labs(fill = "Camels") 
 camels
 
+
 all_plots <-
-  wrap_plots(human, cattle, goat, sheep, camels, ncol = 1, guides = "keep") +
+  wrap_plots(humans,
+             cattle,
+             goat,
+             sheep,
+             camels,
+             ncol = 1,
+             guides = "keep") +
   plot_annotation(caption = "For humans, the incidence rate is per 1,000 population while for other species,
                   the incidence rate is per 1,000,000 population
-                  "
-  ) &
+                  ") &
   theme(plot.caption = element_text(size = 16, colour = "black"))
 
 

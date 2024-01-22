@@ -1,0 +1,826 @@
+---
+title: "Brucellosis sso
+ciations"
+author: "Kahariri"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# You do not need to set a working directory for a 
+#setwd("C:/Users/Skahariri/kahariri Dropbox/samuel kahariri/phd/Time series Analysis")
+# import packages
+library(pacman)
+p_load(tidyverse)
+p_load(sf)
+p_load(lme4)
+p_load(tsibble)
+p_load(fabletools)
+p_load(fable)
+p_load(fma)
+p_load(MTS) # For multivariable ARIMA
+p_load(tseries)
+p_load(vars)
+p_load(urca)
+p_load(mFilter)
+p_load(forecast)
+#p_load(MASS)
+```
+
+```{r, include=F}
+# import data
+
+## agro-ecological zones
+agro_zones <- read_csv("eco_zones_county.csv") %>%
+  separate(eco_zone,c("eco_zone1", "eco_zone2"), sep=";") %>%
+  pivot_longer(contains("eco_zone"), names_to="eco_zne", values_to="eco_zone") %>%
+  dplyr::select(-eco_zne)%>%
+  filter(!is.na(eco_zone)) %>%
+  mutate(eco_zone=trimws(eco_zone),
+         eco_zone=str_to_title(eco_zone)) %>%
+  mutate(county=recode(county, "Elgeiyo Marakwet"="Elgeyo Marakwet"))
+
+human_pop <-read_csv("hum_pop_14.21.csv")%>%
+  group_by(y) %>%
+  mutate(total_pop=sum(hum_pop, na.rm=T))%>%
+  dplyr::select(y, total_pop)%>%
+  distinct()
+  
+
+## human data
+human_zoonoses <- read_csv("Zoonosis_2014_2021_county.csv") %>%
+  janitor::clean_names()%>%
+  mutate(organisationunitname=str_remove(organisationunitname,"County"))%>%
+  mutate(organisationunitname=trimws(organisationunitname))%>%
+  dplyr::rename(county=organisationunitname)%>%
+  pivot_longer(cols=c("brucellosis", "moh_705a_rev_2020_rift_valley_fever", "moh_705a_rev_2020_suspected_anthrax", "moh_706_brucella"),
+               names_to="diseases", values_to="disease_values")%>%
+  mutate(diseases=recode(diseases, "moh_705a_rev_2020_rift_valley_fever"="Rvf","moh_705a_rev_2020_suspected_anthrax"="Anthrax",
+                         "moh_706_brucella"="Brucella"))%>%
+  mutate(diagnosis=ifelse(diseases%in%"Brucella", "Laboratory", "Clinical"))%>%
+  dplyr::select(periodname, county, diseases, disease_values, diagnosis)%>%
+  mutate(diseases=recode(diseases,"Brucella"= "brucellosis"))%>%
+  mutate(date=as.Date(paste0("01","-",periodname), "%d-%y-%b"))%>%
+  filter(!date<"2014-01-01")%>%
+  filter(!is.na(disease_values))%>%
+  dplyr::select(date, county, diseases, disease_values, diagnosis)%>%
+  mutate(species="Human") %>%
+  mutate(county=recode(county, "Muranga"="Murang'a"))%>%
+  filter(diseases%in%"brucellosis") %>%
+  group_by(date, county)%>%
+  mutate(total_human=sum(disease_values, na.rm=T)) %>%
+  ungroup()%>%
+  left_join(agro_zones, by="county")%>%
+  mutate(year=str_sub(date, 1, 4))%>%
+  mutate(year=as.numeric(year))%>%
+  left_join(human_pop, by=c("year"="y"))%>%
+  mutate(incidence=round(total_human/total_pop*100000))
+
+## animal data
+animal_zoonoses <- read_csv("animal_zoonoses.csv") %>%
+  dplyr::select(date, county, disease_condition,species, no_sick, diagnosis) %>%
+  mutate(date=lubridate::ymd(date)) %>%
+  dplyr::rename(animal_diagnosis=diagnosis)%>%
+  filter(disease_condition%in%"Brucellosis")%>%
+  group_by(date, county)%>%
+  mutate(total_animal=sum(no_sick, na.rm=T)) %>%
+  ungroup()
+
+
+brucellosis <- full_join(animal_zoonoses, human_zoonoses, by=c("county", "date")) %>%
+  dplyr::rename(cases_animals=no_sick, cases_human=disease_values) %>%
+  dplyr::select( -species.y, -diseases, -disease_condition, -cases_animals)#%>%
+ 
+# group_by(date, eco_zone)
+
+#write_csv(brucellosis, "brucellosis.csv")
+
+### Univariable analysis
+## association1: monthly cases of brucellosis in humans and animals
+## weak association (p value= 0.056)
+## 1 month lag: 0.0724
+bruc_combined <- brucellosis %>%
+  dplyr::select(date, total_animal, incidence)%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))
+
+ts_bruc_combined<- as_tsibble(bruc_combined, validate=T, index = date)
+```
+
+
+
+
+
+
+```{r}
+
+# lag 0 #0.056
+ts_bruc_combined %>%
+model(TSLM(total_human~total_animal)) %>%
+  report() 
+# lag 1 # 0.0338
+ts_bruc_combined %>%
+model(TSLM(total_human~lag1_animal)) %>%
+  report()
+# lag 2 ##P value 0.0688
+ts_bruc_combined %>%
+model(TSLM(total_human~lag2_animal)) %>%
+  report()
+# lag 3 ##P value 0.0784
+ts_bruc_combined %>%
+model(TSLM(total_human~lag3_animal)) %>%
+  report()
+
+  # lag 4 ##P value 0.0572
+ts_bruc_combined %>%
+model(TSLM(total_human~lag4_animal)) %>%
+  report()
+```
+
+
+```{r}
+## agro-ecological zone
+bruc_agro <- brucellosis %>%
+  dplyr::select(date, eco_zone, incidence)%>%
+  distinct()%>%
+  group_by(date, eco_zone) %>%
+  mutate(total_human=sum(incidence, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence)%>%
+  distinct() 
+ts_bruc_eco<- as_tsibble(bruc_agro, validate=F, index = date)
+# lag 0
+ts_bruc_eco %>%
+model(TSLM(total_human~eco_zone)) %>%
+  report()
+
+
+```
+
+```{r}
+## clinical data for animals
+
+bruc_clinical <- brucellosis %>%
+  dplyr::select(date, total_animal,animal_diagnosis,eco_zone, incidence)%>%
+  filter(animal_diagnosis%in%"Clinically confirmed")%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence, -animal_diagnosis)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))
+
+ts_bruc_clinical<- as_tsibble(bruc_clinical, validate=F, index = date)
+# lag 0
+ts_bruc_clinical %>%
+model(TSLM(total_human~total_animal)) %>%
+  report()
+# lag 1 # 0.248
+ts_bruc_clinical %>%
+model(TSLM(total_human~lag1_animal)) %>%
+  report()
+# lag 2 ##P value 0.25
+ts_bruc_clinical %>%
+model(TSLM(total_human~lag2_animal)) %>%
+  report()
+# lag 3 ##P value 0.183
+ts_bruc_clinical %>%
+model(TSLM(total_human~lag3_animal)) %>%
+  report()
+
+  # lag 4 ##P value 0.124
+ts_bruc_clinical %>%
+model(TSLM(total_human~lag4_animal)) %>%
+  report()
+```
+
+
+```{r}
+## lab data for animals
+
+bruc_lab <- brucellosis %>%
+  dplyr::select(date, total_animal,animal_diagnosis,eco_zone, incidence)%>%
+  filter(animal_diagnosis%in%"Lab confirmed")%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence, -animal_diagnosis)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))
+
+ts_bruc_lab<- as_tsibble(bruc_lab, validate=F, index = date)
+# lag 0 <0.001
+model<-ts_bruc_lab %>%
+model(TSLM(total_human~total_animal)) %>%
+  report()
+# lag 1 # <0.001
+ts_bruc_lab %>%
+model(TSLM(total_human~lag1_animal)) %>%
+  report()
+# lag 2 ##P value <0.001
+ts_bruc_lab %>%
+model(TSLM(total_human~lag2_animal)) %>%
+  report()
+# lag 3 ##P value <0.001
+ts_bruc_lab %>%
+model(TSLM(total_human~lag3_animal)) %>%
+  report()
+
+  # lag 4 ##P value 0.124
+ts_bruc_clinical %>%
+model(TSLM(total_human~lag4_animal)) %>%
+  report()
+```
+
+```{r}
+## species data for animals: cattle
+ 
+bruc_cattle <- brucellosis %>%
+  dplyr::select(date, total_animal,species.x, eco_zone, incidence)%>%
+  filter(species.x%in%"Bovine")%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence, -species.x)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))
+
+ts_bruc_cattle<- as_tsibble(bruc_cattle, validate=F, index = date)
+# lag 0 <0.001
+ts_bruc_cattle %>%
+model(TSLM(total_human~total_animal)) %>%
+  report()
+# lag 1 # <0.001
+ts_bruc_cattle %>%
+model(TSLM(total_human~lag1_animal)) %>%
+  report()
+# lag 2 ##P value <0.001
+ts_bruc_cattle %>%
+model(TSLM(total_human~lag2_animal)) %>%
+  report()
+# lag 3 ##P value <0.001
+ts_bruc_cattle %>%
+model(TSLM(total_human~lag3_animal)) %>%
+  report()
+
+  # lag 4 ##P value 0.124
+ts_bruc_cattle %>%
+model(TSLM(total_human~lag4_animal)) %>%
+  report() 
+```
+
+
+```{r}
+## species data for animals: camel
+ 
+bruc_camel <- brucellosis %>%
+  dplyr::select(date, total_animal,species.x, eco_zone, incidence)%>%
+  filter(species.x%in%"Camel")%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence, -species.x)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))
+
+ts_bruc_camel<- as_tsibble(bruc_camel, validate=F, index = date)
+# lag 0 0.6257 
+ts_bruc_camel %>%
+model(TSLM(total_human~total_animal)) %>%
+  report()
+# lag 1 # <0.866
+ts_bruc_camel %>%
+model(TSLM(total_human~lag1_animal)) %>%
+  report()
+# lag 2 ##P value <2e-16
+ts_bruc_camel %>%
+model(TSLM(total_human~lag2_animal)) %>%
+  report()
+# lag 3 ##P value 0.667
+ts_bruc_camel %>%
+model(TSLM(total_human~lag3_animal)) %>%
+  report()
+
+  # lag 4 ##P value 0.124
+ts_bruc_camel %>%
+model(TSLM(total_human~lag4_animal)) %>%
+  report() 
+```
+
+```{r}
+# species data for animals: small ruminant
+
+bruc_smallruminant <- brucellosis %>%
+  mutate(species.x= ifelse(species.x %in% c("Caprine", "Ovine"), "Small ruminants", "species.x"))%>%
+  dplyr::select(date, total_animal,species.x, eco_zone, incidence)%>%
+  filter(species.x%in%"Small ruminants")%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence, -species.x)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))
+
+ts_bruc_sheep<- as_tsibble(bruc_smallruminant, validate=F, index = date)
+# lag 0 <0.62339
+ts_bruc_sheep %>%
+model(TSLM(total_human~total_animal)) %>%
+  report()
+# lag 1 # 0.955
+ts_bruc_sheep %>%
+model(TSLM(total_human~lag1_animal)) %>%
+  report()
+# lag 2 ##P value 0.62158
+ts_bruc_sheep %>%
+model(TSLM(total_human~lag2_animal)) %>%
+  report()
+# lag 3 ##P value 0.71655 
+ts_bruc_sheep %>%
+model(TSLM(total_human~lag3_animal)) %>%
+  report()
+
+  # lag 4 ##P value 0.6976
+ts_bruc_sheep %>%
+model(TSLM(total_human~lag4_animal)) %>%
+  report() 
+```
+
+
+```{r}
+## species data for animals: goats
+ 
+bruc_goat <- brucellosis %>%
+  dplyr::select(date, total_animal,species.x, incidence)%>%
+  filter(species.x%in%"Caprine")%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence, -species.x)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))
+
+ts_bruc_goat<- as_tsibble(bruc_goat, validate=F, index = date)
+# lag 0  0.812 
+ts_bruc_goat %>%
+model(TSLM(total_human~total_animal)) %>%
+  report()
+# lag 1 # 0.754
+ts_bruc_goat %>%
+model(TSLM(total_human~lag1_animal)) %>%
+  report()
+# lag 2 ##P value 0.712
+ts_bruc_goat %>%
+model(TSLM(total_human~lag2_animal)) %>%
+  report()
+# lag 3 ##P value 0.822
+ts_bruc_goat %>%
+model(TSLM(total_human~lag3_animal)) %>%
+  report()
+
+  # lag 4 ##P value 0.946
+ts_bruc_goat %>%
+model(TSLM(total_human~lag4_animal)) %>%
+  report() 
+```
+
+
+
+```{r}
+## Moving Averages
+###############################################################
+## I have corrected this, do the same for the ones below.
+
+##Human~spp AVG
+bruc_avg <- brucellosis %>%
+  dplyr::select(date, total_animal, incidence)%>%
+  distinct()%>%
+  group_by(date) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence)%>%
+  distinct() %>%
+  mutate(mo1_animal=zoo::rollmean(total_animal, k=1, fill=NA))%>%
+  mutate(mo2_animal=zoo::rollmean(total_animal, k=2, fill=NA)) %>%
+  mutate(mo3_animal=zoo::rollmean(total_animal, k=3, fill=NA))
+
+ts_bruc_avg<- as_tsibble(bruc_avg, validate=T, index = date)
+# Mvg Avg 1
+ts_bruc_avg %>%
+model(TSLM(total_human~mo1_animal)) %>%
+  report()
+
+# Mvg Avg 2
+ts_bruc_avg %>%
+model(TSLM(total_human~mo2_animal)) %>%
+  report()
+
+# Mvg Avg 3
+
+ts_bruc_avg %>%
+model(TSLM(total_human~mo3_animal)) %>%
+  report()
+
+```
+
+
+```{r}
+## agro-ecological zone
+bruc_avg_ez <- bruc_avg <- brucellosis %>%
+  dplyr::select(date, total_animal, incidence, eco_zone)%>%
+  distinct()%>%
+  group_by(date, eco_zone) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence)%>%
+  distinct() %>%
+  mutate(mo1_animal=zoo::rollmean(total_animal, k=1, fill=NA))%>%
+  mutate(mo2_animal=zoo::rollmean(total_animal, k=2, fill=NA)) %>%
+  mutate(mo3_animal=zoo::rollmean(total_animal, k=3, fill=NA))%>%
+  distinct()
+
+ 
+ts_bruc_avg_ez<- as_tsibble(bruc_avg_ez, validate=F, index = date)
+
+ts_bruc_avg_ez %>%
+model(TSLM(total_human~eco_zone)) %>%
+  report()
+
+#######################################################################
+#Human~ animal species
+
+bruc_avg_spp <- bruc_avg <- brucellosis %>%
+  dplyr::select(date, total_animal, incidence, eco_zone, species.x)%>%
+  distinct()%>%
+  group_by(date, species.x) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence)%>%
+  distinct() #%>%
+ 
+ts_bruc_avg_spp<- as_tsibble(bruc_avg_spp, validate=F, index = date)
+
+
+ts_bruc_avg_spp %>%
+model(TSLM(total_human~species.x)) %>%
+  report()
+
+
+
+```
+
+
+
+
+
+```{r}
+## Multivariable
+
+bruc_comb <- brucellosis %>%
+  dplyr::select(date, species.x, total_animal, incidence, eco_zone)%>%
+  distinct()%>%
+  group_by(date, eco_zone) %>%
+  mutate(total_human=sum(incidence, na.rm=T),
+         total_animal=sum(total_animal, na.rm=T)) %>%
+  ungroup()%>%
+  dplyr::select(-incidence)%>%
+  distinct() %>%
+  mutate(lag1_animal=lag(total_animal, n=1))%>%
+  mutate(lag2_animal=lag(total_animal, n=2)) %>%
+  mutate(lag3_animal=lag(total_animal, n=3))%>%
+  mutate(lag4_animal=lag(total_animal, n=4))%>%
+  mutate(mo1_animal=zoo::rollmean(total_animal, k=1, fill=NA))%>%
+  mutate(mo2_animal=zoo::rollmean(total_animal, k=2, fill=NA)) %>%
+  mutate(mo3_animal=zoo::rollmean(total_animal, k=3, fill=NA))
+
+ts_bruc_comb<- as_tsibble(bruc_comb, validate=F, index = date)
+
+#Human~ecozone +lag0
+# Adjusted R squared= 0.3937
+ts_bruc_comb %>%
+model(TSLM(total_human~total_animal+eco_zone)) %>%
+  report()
+
+#Human~ecozone +lag1
+# Adjusted R squared= 0.3709
+ts_bruc_comb %>%
+model(TSLM(total_human~lag1_animal+eco_zone)) %>%
+  report()
+##Human~ecozone +lag2
+# Adjusted R squared= 0.3884
+ts_bruc_comb %>%
+model(TSLM(total_human~lag2_animal+eco_zone)) %>%
+  report()
+
+#Human~ecozone + species
+# Adjusted R squared= 0.2491
+ts_bruc_comb %>%
+model(TSLM(total_human~eco_zone+species.x)) %>%
+  report()
+
+
+
+```
+
+
+```{r}
+
+
+
+
+ 
+#ts_bruc_avg_ez<- as_tsibble(bruc_avg_ez, validate=F, index = date)
+
+#ts_bruc_avg_ez<- zoo::read.zoo(bruc_avg_ez)
+
+#Human~ecozone +avg1
+# Adjusted R squared= 0.3937
+ts_bruc_comb %>%
+model(TSLM(total_human~eco_zone+mo1_animal)) %>%
+  report()
+##Human~ecozone +avg2
+# Adjusted R squared=  0.4108
+ts_bruc_comb %>%
+model(TSLM(total_human~eco_zone+mo2_animal)) %>%
+  report()
+
+#Human~ecozone + avg3
+# Adjusted R squared= 0.4125
+ts_bruc_comb %>%
+model(TSLM(total_human~eco_zone+mo3_animal)) %>%
+  report()
+```
+
+
+
+```{r}
+# Forecast
+bruc_data1 <- bruc_comb %>%
+  dplyr::select(date, total_human,eco_zone,mo3_animal)%>%
+ # group_by(date)%>%
+#  mutate(total_human=sum(total_human, na.rm=T))%>%
+ # ungroup()%>%
+  distinct()
+
+ts_bruc_data1 <- as_tsibble(bruc_data1, validate=F, index = date, key=eco_zone)
+autoplot(ts_bruc_data1)#+facet_grid()
+
+model2 <- ts_bruc_data1 %>%
+model(lm=TSLM(total_human~mo3_animal),
+      arima=ARIMA(total_human),
+       ets=ETS(total_human)
+      )
+
+
+
+
+future_scenarios <-new_data(ts_bruc_data1, n=10)
+future_scenarios$mo3_animal <- sample(ts_bruc_data1[!is.na(ts_bruc_data1$mo3_animal),]$mo3_animal, 50)
+#future_scenarios$eco_zone <- sample(ts_bruc_data1$eco_zone, 50)
+future_scenarios <- future_scenarios %>%
+  group_by(eco_zone) %>%
+  mutate(date=seq.Date(from=as.Date("2022-01-01"),  by="1 month", length.out=10))
+
+future_scenarios<- distinct(future_scenarios)
+
+future_scenarios <- as_tsibble(future_scenarios,validate = T,  index = date, key=eco_zone)
+
+
+forecast_data <- fabletools::forecast(model, new_data=future_scenarios)
+
+
+ts_bruc_data1 %>%
+  fabletools::autoplot(total_human) +
+  fabletools::autolayer(forecast_data[forecast_data$.model%in%"lm2",])+
+  facet_grid(eco_zone~.)+
+  theme_bw()
+
+ggsave("ts_all_bruc.png", width=16, height=9)
+
+
+### tests for seasonality
+isSeasonal(ts_bruc_data1$total_human, freq = 96)
+```
+
+```{r, multivariable_ARIMA}
+
+# combined data
+
+bruc_combined_data <- bruc_comb %>%
+  dplyr:: select(date,eco_zone,total_human,  mo1_animal) %>%
+  distinct() %>%
+  arrange(date) %>%
+  mutate(eco_zone=as.numeric(recode(eco_zone, "Agropastoral"="1", "Farming"="2", "Fishing"="3", "Pastoral"="4", "Riverine"="5")))
+ # filter(eco_zone=="Agropastoral") %>%
+#  dplyr::select(-date, -eco_zone)
+
+ts_data <- as_tsibble(bruc_combined_data, key=eco_zone, index=date)
+
+stnry = diffM(ts_data[, 3])
+
+var1 <- vars::VAR(ts_data, p=2, ic="AIC")
+
+bruc_combined_data_1 <- bruc_comb %>%
+  dplyr:: select(date,eco_zone,total_human,  mo1_animal) %>%
+  distinct() %>%
+  arrange(date) %>%
+  filter(eco_zone=="Farming") %>%
+  dplyr::select(-date, -eco_zone)
+
+
+ts_bruc_combined_data2 <- ts(bruc_combined_data_1, frequency=12, start=c(2014,1), end=c(2021,12))
+
+plot(ts_bruc_combined_data2)
+
+apply(bruc_combined_data, 2, adf.test)
+
+stnry = diffM(ts_bruc_combined_data2) #difference operation on a vector of time series. Default order of differencing is 1.
+apply(stnry, 2, adf.test)
+
+plot(stnry)
+
+bruc_comb1 <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo1_animal) %>%
+  filter(eco_zone=="Farming") %>%
+  dplyr::select(-eco_zone) %>%
+  #mutate(mo3_animal=is.na(mo3_animal),0,mo3_animal) %>%
+  distinct()
+
+bruc_comb1a <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo2_animal) %>%
+  filter(eco_zone=="Farming") %>%
+  dplyr::select(-eco_zone) %>%
+  #mutate(mo3_animal=is.na(mo3_animal),0,mo3_animal) %>%
+  distinct()
+
+
+
+
+ts_bruc_comb1 <- ts(bruc_comb1, frequency=12, start=c(2014,1))
+ts_bruc_comb1a <- ts(bruc_comb1a, frequency=12, start=c(2014,1))
+#ts_bruc_comb1b <- ts(bruc_comb1b, frequency=12, start=c(2014,1))
+
+ 
+#apply(ts_bruc_comb1, 2, adf.test)
+
+#farm <- diffM(bruc_comb1)
+# <- diffM(bruc_comb1a)
+#farm2 <- diffM(ts_bruc_comb1b)
+
+#var.a <- vars::VAR(stnry,ic="AIC", type="none")
+#farm1a <- MTS::VAR(stnry1)
+
+
+#VARpred(farm1a,2)
+
+##############################################
+# Farming Eco zone
+bruc_farm <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo3_animal) %>%
+  filter(eco_zone=="Farming") %>%
+  dplyr::select(-eco_zone) %>%
+  mutate(mo3_animal=is.na(mo3_animal),0,mo3_animal) %>%
+  distinct()
+
+ts_bruc_farm <- ts(bruc_farm, frequency=12, start=c(2014,1))
+
+apply(ts_bruc_farm, 2, adf.test)
+
+farm <- diffM(bruc_farm)
+
+farm1 <- MTS::VAR(farm)
+
+
+# Agropastoral eco_zone
+
+bruc_agro <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo2_animal) %>%
+  filter(eco_zone=="Agropastoral") %>%
+  dplyr::select(-eco_zone) %>%
+  distinct()
+
+ts_bruc_agro <- ts(bruc_agro, frequency=12, start=c(2014,1))
+
+apply(ts_bruc_agro, 2, adf.test)
+
+agro <- diffM(bruc_agro)
+
+agro1 <- MTS::VAR(agro)
+
+# Fishing eco_zone
+bruc_fish <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo2_animal) %>%
+  filter(eco_zone=="Fishing") %>%
+  dplyr::select(-eco_zone) %>%
+  distinct()
+
+ts_bruc_fish <- ts(bruc_fish, frequency=12, start=c(2014,1))
+
+apply(ts_bruc_fish, 2, adf.test)
+
+fish <- diffM(bruc_fish)
+
+fish1 <- MTS::VAR(fish)
+
+# Pastoral eco zone
+
+bruc_past <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo2_animal) %>%
+  filter(eco_zone=="Pastoral") %>%
+  dplyr::select(-eco_zone) %>%
+  distinct()
+
+ts_bruc_past <- ts(bruc_past, frequency=12, start=c(2014,1))
+
+apply(ts_bruc_past, 2, adf.test)
+
+past <- diffM(bruc_past)
+
+past1 <- MTS::VAR(past)
+
+# Riverrine eco_zone
+
+bruc_river <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo2_animal) %>%
+  filter(eco_zone=="Riverine") %>%
+  dplyr::select(-eco_zone) %>%
+  distinct()%>%
+  mutate(mo2_animal=!is.na(mo2_animal))
+
+ts_bruc_river <- ts(bruc_past, frequency=12, start=c(2014,1))
+
+apply(ts_bruc_river, 2, adf.test)
+
+river <- diffM(bruc_river)
+
+river1 <- MTS::VAR(river)
+
+# Plotting the forecast
+##################################################################################
+bruc_comb1b <- bruc_comb %>%
+  dplyr:: select(eco_zone,total_human,  mo3_animal) %>%
+  filter(eco_zone=="Farming") %>%
+  dplyr::select(-eco_zone) %>%
+  mutate(mo3_animal=is.na(mo3_animal),0,mo3_animal) %>%
+  distinct()
+
+ts_bruc_farm1 <- ts(bruc_comb1b, frequency=12, start=c(2014,1))
+
+## Lag selection
+lagselect <- VARselect(ts_bruc_farm1, lag.max = 12
+                       , type = "const")
+lagselect$selection
+
+## Building VAR
+model_farm <- VAR(ts_bruc_farm1, p = 1, type = "const", season = NULL, exog = NULL)
+
+summary(model_farm)
+```
+
+
+
+
+
