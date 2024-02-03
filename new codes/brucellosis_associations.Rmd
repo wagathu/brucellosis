@@ -43,39 +43,39 @@ agro_zones <- read_csv("eco_zones_county.csv") %>%
   mutate(county=recode(county, "Elgeiyo Marakwet"="Elgeyo Marakwet"))
 
 human_pop <-read_csv("hum_pop_14.21.csv")%>%
-  group_by(year = y) %>%
+  group_by(y) %>%
   mutate(total_pop=sum(hum_pop, na.rm=T))%>%
-  dplyr::select(year, total_pop)%>%
+  dplyr::select(y, total_pop)%>%
   distinct()
   
 
 ## human data
-human_zoonoses2 <- read_csv("Zoonosis_2014_2021_county.csv") %>%
+human_zoonoses <- read_csv("Zoonosis_2014_2021_county.csv") %>%
   janitor::clean_names()%>%
-  mutate(organisationunitname=str_remove(organisationunitname,"County")) %>%
-  mutate(organisationunitname=trimws(organisationunitname)) %>%
-  dplyr::rename(county=organisationunitname) %>%
+  mutate(organisationunitname=str_remove(organisationunitname,"County"))%>%
+  mutate(organisationunitname=trimws(organisationunitname))%>%
+  dplyr::rename(county=organisationunitname)%>%
   pivot_longer(cols=c("brucellosis", "moh_705a_rev_2020_rift_valley_fever", "moh_705a_rev_2020_suspected_anthrax", "moh_706_brucella"),
                names_to="diseases", values_to="disease_values")%>%
   mutate(diseases=recode(diseases, "moh_705a_rev_2020_rift_valley_fever"="Rvf","moh_705a_rev_2020_suspected_anthrax"="Anthrax",
-                         "moh_706_brucella"="Brucella")) %>%
+                         "moh_706_brucella"="Brucella"))%>%
   mutate(diagnosis=ifelse(diseases%in%"Brucella", "Laboratory", "Clinical"))%>%
   dplyr::select(periodname, county, diseases, disease_values, diagnosis)%>%
-  mutate(diseases=recode(diseases,"Brucella"= "brucellosis")) %>%
-  mutate(date=dmy(paste0("01","-",periodname))) |> 
-  filter(!date<"2014-01-01") %>%
-  filter(!is.na(disease_values)) %>%
+  mutate(diseases=recode(diseases,"Brucella"= "brucellosis"))%>%
+  mutate(date=as.Date(paste0("01","-",periodname), "%d-%y-%b"))%>%
+  filter(!date<"2014-01-01")%>%
+  filter(!is.na(disease_values))%>%
   dplyr::select(date, county, diseases, disease_values, diagnosis)%>%
   mutate(species="Human") %>%
-  mutate(county=recode(county, "Muranga"="Murang'a")) %>%
+  mutate(county=recode(county, "Muranga"="Murang'a"))%>%
   filter(diseases%in%"brucellosis") %>%
-  group_by(date, county) %>%
+  group_by(date, county)%>%
   mutate(total_human=sum(disease_values, na.rm=T)) %>%
-  ungroup()
+  ungroup()%>%
   left_join(agro_zones, by="county")%>%
   mutate(year=str_sub(date, 1, 4))%>%
   mutate(year=as.numeric(year))%>%
-  left_join(human_pop, by=c("year")) %>%
+  left_join(human_pop, by=c("year"="y"))%>%
   mutate(incidence=round(total_human/total_pop*100000))
 
 ## animal data
@@ -578,6 +578,7 @@ model(TSLM(total_human~eco_zone+species.x)) %>%
 
 #Human~ecozone +avg1
 # Adjusted R squared= 0.3937
+
 ts_bruc_comb %>%
 model(TSLM(total_human~eco_zone+mo1_animal)) %>%
   report()

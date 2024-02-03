@@ -29,123 +29,346 @@ p_load(forecast)
 #p_load(MASS)
 ```
 
-```{r, include=F}
-# import data
 
+
+```{r zones}
 ## agro-ecological zones
-agro_zones <- read_csv("eco_zones_county.csv") %>%
-  separate(eco_zone,c("eco_zone1", "eco_zone2"), sep=";") %>%
-  pivot_longer(contains("eco_zone"), names_to="eco_zne", values_to="eco_zone") %>%
-  dplyr::select(-eco_zne)%>%
-  filter(!is.na(eco_zone)) %>%
-  mutate(eco_zone=trimws(eco_zone),
-         eco_zone=str_to_title(eco_zone)) %>%
-  mutate(county=recode(county, "Elgeiyo Marakwet"="Elgeyo Marakwet"))
+agro_zones <- read_csv("data/agro-eco_zone/eco_zones_county.csv")
+# Cleaning Ecological zones
 
-human_pop <-read_csv("hum_pop_14.21.csv")%>%
-  group_by(year = y) %>%
-  mutate(total_pop=sum(hum_pop, na.rm=T))%>%
-  dplyr::select(year, total_pop)%>%
-  distinct()
-  
+agro_zones <- agro_zones |>
+  mutate(county = ifelse(county == "Elgeiyo Marakwet", "Elgeyo Marakwet", county))
+#setdiff(eco_zones$county, df_cum$county)
 
-## human data
-human_zoonoses2 <- read_csv("Zoonosis_2014_2021_county.csv") %>%
-  janitor::clean_names()%>%
-  mutate(organisationunitname=str_remove(organisationunitname,"County")) %>%
-  mutate(organisationunitname=trimws(organisationunitname)) %>%
-  dplyr::rename(county=organisationunitname) %>%
-  pivot_longer(cols=c("brucellosis", "moh_705a_rev_2020_rift_valley_fever", "moh_705a_rev_2020_suspected_anthrax", "moh_706_brucella"),
-               names_to="diseases", values_to="disease_values")%>%
-  mutate(diseases=recode(diseases, "moh_705a_rev_2020_rift_valley_fever"="Rvf","moh_705a_rev_2020_suspected_anthrax"="Anthrax",
-                         "moh_706_brucella"="Brucella")) %>%
-  mutate(diagnosis=ifelse(diseases%in%"Brucella", "Laboratory", "Clinical"))%>%
-  dplyr::select(periodname, county, diseases, disease_values, diagnosis)%>%
-  mutate(diseases=recode(diseases,"Brucella"= "brucellosis")) %>%
-  mutate(date=dmy(paste0("01","-",periodname))) |> 
-  filter(!date<"2014-01-01") %>%
-  filter(!is.na(disease_values)) %>%
-  dplyr::select(date, county, diseases, disease_values, diagnosis)%>%
-  mutate(species="Human") %>%
-  mutate(county=recode(county, "Muranga"="Murang'a")) %>%
-  filter(diseases%in%"brucellosis") %>%
-  group_by(date, county) %>%
-  mutate(total_human=sum(disease_values, na.rm=T)) %>%
-  ungroup()
-  left_join(agro_zones, by="county")%>%
-  mutate(year=str_sub(date, 1, 4))%>%
-  mutate(year=as.numeric(year))%>%
-  left_join(human_pop, by=c("year")) %>%
-  mutate(incidence=round(total_human/total_pop*100000))
+# Cleaning the ecological zones
+df_zones = agro_zones |>
+  mutate(
+    split1 =  str_split(agro_zones$eco_zone, ";", simplify = T)[, 1] |> str_squish(),
+    split2 =  str_split(agro_zones$eco_zone, ";", simplify = T)[, 2] |> str_squish(),
+    farming = ifelse(split1 == "Farming" |
+                       split2 == "Farming", 1, 0),
+    agropastoral = ifelse(split1 == "Agropastoral" |
+                            split2 == "Agropastoral", 1, 0),
+    pastoral = ifelse(split1 == "Pastoral" |
+                        split2 == "Pastoral", 1, 0),
+    fishing = ifelse(split1 == "Fishing" |
+                       split2 == "Fishing", 1, 0),
+    riverine = ifelse(split1 == "Riverine" |
+                        split2 == "Riverine", 1, 0),
+  ) |>
+  dplyr::select(-eco_zone,-split1,-split2)
 
-## animal data
-animal_zoonoses <- read_csv("animal_zoonoses.csv") %>%
-  dplyr::select(date, county, disease_condition,species, no_sick, diagnosis) %>%
-  mutate(date=lubridate::ymd(date)) %>%
-  dplyr::rename(animal_diagnosis=diagnosis)%>%
-  filter(disease_condition%in%"Brucellosis")%>%
-  group_by(date, county)%>%
-  mutate(total_animal=sum(no_sick, na.rm=T)) %>%
-  ungroup()
+# Creating the zones as factors and defining the reference level
+df_zones <- df_zones %>%
+  mutate(across(
+    c(farming, agropastoral, fishing, riverine, pastoral),
+    ~ relevel(factor(
+      .x, levels = c(0, 1), labels = c("No", "Yes")
+    ), ref = "No")
+  ))
 
-
-brucellosis <- full_join(animal_zoonoses, human_zoonoses, by=c("county", "date")) %>%
-  dplyr::rename(cases_animals=no_sick, cases_human=disease_values) %>%
-  dplyr::select( -species.y, -diseases, -disease_condition, -cases_animals)#%>%
- 
-# group_by(date, eco_zone)
-
-#write_csv(brucellosis, "brucellosis.csv")
-
-### Univariable analysis
-## association1: monthly cases of brucellosis in humans and animals
-## weak association (p value= 0.056)
-## 1 month lag: 0.0724
-bruc_combined <- brucellosis %>%
-  dplyr::select(date, total_animal, incidence)%>%
-  distinct()%>%
-  group_by(date) %>%
-  mutate(total_human=sum(incidence, na.rm=T),
-         total_animal=sum(total_animal, na.rm=T)) %>%
-  ungroup()%>%
-  dplyr::select(-incidence)%>%
-  distinct() %>%
-  mutate(lag1_animal=lag(total_animal, n=1))%>%
-  mutate(lag2_animal=lag(total_animal, n=2)) %>%
-  mutate(lag3_animal=lag(total_animal, n=3))%>%
-  mutate(lag4_animal=lag(total_animal, n=4))
-
-ts_bruc_combined<- as_tsibble(bruc_combined, validate=T, index = date)
 ```
 
 
 
+```{r human data cleaning}
+
+# Importing data
+human_pop <- read_csv("pop_14-21.csv")
+
+# Cleaning data
+human_pop_kenya <- human_pop |> 
+  group_by(year) |> 
+  summarise(pop = sum(pop))
+
+## human data
+total_human_zoonoses <-
+  read_csv("Zoonosis_2014_2021_county.csv") %>%
+  janitor::clean_names() %>%
+  mutate(organisationunitname = str_remove(organisationunitname, "County")) %>%
+  mutate(organisationunitname = trimws(organisationunitname)) %>%
+  dplyr::rename(county = organisationunitname) %>%
+  pivot_longer(
+    cols = c(
+      "brucellosis",
+      "moh_705a_rev_2020_rift_valley_fever",
+      "moh_705a_rev_2020_suspected_anthrax",
+      "moh_706_brucella"
+    ),
+    names_to = "diseases",
+    values_to = "disease_values"
+  ) %>%
+  mutate(
+    diseases = recode(
+      diseases,
+      "moh_705a_rev_2020_rift_valley_fever" = "Rvf",
+      "moh_705a_rev_2020_suspected_anthrax" = "Anthrax",
+      "moh_706_brucella" = "Brucella"
+    )
+  ) %>%
+  mutate(diagnosis = ifelse(diseases %in% "Brucella", "Laboratory", "Clinical")) %>%
+  dplyr::select(periodname, county, diseases, disease_values, diagnosis) %>%
+  mutate(diseases = recode(diseases, "Brucella" = "brucellosis")) |> 
+  mutate(date = dmy(paste0("01", "-", periodname))) %>%
+  filter(!date < "2014-01-01") %>%
+  #filter(!is.na(disease_values)) %>%
+  dplyr::select(date, county, diseases, disease_values, diagnosis) |> 
+  mutate(species = "Human") %>%
+  mutate(county = recode(county, "Muranga" = "Murang'a")) %>%
+  filter(diseases %in% "brucellosis")  |> 
+  #group_by(date, county) %>%
+  #mutate(total_human=disease_values) %>%
+  #ungroup() %>%
+  left_join(df_zones, by = "county") %>%
+  mutate(year = str_sub(date, 1, 4)) %>%
+  mutate(year = as.numeric(year)) %>%
+  left_join(human_pop, by = c("year", "county"))
+
+# Zoonoses
+human_zoonoses <- total_human_zoonoses %>%
+  group_by(date, county, species) %>%
+  mutate(disease_values = sum(disease_values, na.rm = T)) %>%
+  dplyr::select(-diagnosis) %>%
+  distinct() %>%
+  mutate(incidence = round(disease_values / pop * 100000)) %>%
+  distinct() %>% 
+  ungroup() %>% 
+  dplyr::select(-diseases, -species)
+
+human_zoonoses_dx <- total_human_zoonoses %>%
+  mutate(incidence = round(disease_values / pop * 100000)) %>%
+  distinct()
+
+kenya_human_zoonoses <- human_zoonoses |> 
+  select(date, county, disease_values, pop) |> 
+  group_by(date) |> 
+  summarise(hum_cases = sum(disease_values),
+            ) |> 
+  mutate(year = year(date)) |> 
+  merge(human_pop_kenya, by = "year") |> 
+  select(-year) |> 
+  mutate(human_incidence = hum_cases/pop*1e3)
+
+```
 
 
 
-```{r}
+```{r, animal}
+
+animal_pop <- read_csv('animal_pop_2019.csv') %>% 
+  pivot_wider(
+    names_from = "species",
+    values_from = "species_num"
+  ) %>% 
+  setNames(c("county", paste0(colnames(.[,2:7]), "_pop") %>% str_to_lower()))
+
+kenya_animal_pop <- animal_pop |> 
+  summarise(across(where(is.numeric), ~sum(.))) |> 
+  select(-donkeys_pop, -pigs_pop)
+
+## animal data
+total_animal_zoonoses <- read_csv("animal_zoonoses.csv") %>%
+  dplyr::select(date, county, disease_condition,species, no_sick, diagnosis) %>%
+  mutate(date = lubridate::ymd(date)) %>%
+  #dplyr::rename(animal_diagnosis=diagnosis)%>%
+  filter(disease_condition %in% "Brucellosis") |> 
+  distinct()
+
+animal_zoonoses <-  total_animal_zoonoses %>%
+  group_by(date, county, species) %>%
+  summarise(total_animal = sum(no_sick, na.rm = T)) |>
+  mutate(
+    species = str_to_sentence(species),
+    species = case_when(
+      str_detect(species, "bovine|Bovine") ~ "Cattle",
+      str_detect(species, "Ovine|ovine") ~ "Sheep",
+      str_detect(species, "caprine|Caprine") ~ "Goats",
+      TRUE ~ species
+    ),
+    total_animal = as.numeric(total_animal)
+  ) |> 
+  filter(species %in% c("Cattle", "Sheep", "Goats", "Camel")) |> 
+  distinct() |> 
+  ungroup() |> 
+    pivot_wider(
+      id_cols = c("date", "county"),
+    values_from = total_animal,
+    names_from = species
+  ) |> 
+  distinct()
+
+animal_zoonoses_dx <- total_animal_zoonoses |> 
+  mutate(
+    species = str_to_sentence(species),
+    species = case_when(
+      str_detect(species, "bovine|Bovine") ~ "Cattle",
+      str_detect(species, "Ovine|ovine") ~ "Sheep",
+      str_detect(species, "caprine|Caprine") ~ "Goats",
+      TRUE ~ species
+    ),
+    no_sick = as.numeric(no_sick)
+  ) |> 
+  filter(species %in% c("Cattle", "Sheep", "Goats", "Camel")) |> 
+  distinct() |> 
+  pivot_wider(
+    id_cols = c("date", "county", "diagnosis"),
+    values_from = no_sick,
+    names_from = species,
+    values_fn = list(no_sick = sum)  # Use values_fn to summarize duplicates
+  )
+
+
+
+kenya_animal_zoonoses <- animal_zoonoses |> 
+  group_by(date) |> 
+  summarise(across(where(is.numeric), ~sum(., na.rm = T))) |> 
+  mutate(across(where(is.numeric), ~ifelse(. == 0, NA, .)))
+
+```
+
+```{r combining}
+
+brucellosis_kenya <- kenya_animal_zoonoses |>
+  merge(kenya_human_zoonoses, by = "date") |>
+  cbind(kenya_animal_pop) |>
+  mutate(
+    catt_incidence = round((Cattle / cattle_pop) * 1000000, 4),
+    cam_incidence = round((Camel / camels_pop) * 1000000, 4),
+    goat_incidence = round((Goats / goats_pop) * 1000000, 4),
+    shp_incidence = round((Sheep / sheep_pop) * 1000000, 4)
+  ) |> 
+  ungroup()
+
+brucellosis_kenya_combined <- brucellosis_kenya |> 
+  rowwise() |> 
+  mutate(
+    animal_pop = sum(cattle_pop, sheep_pop, camels_pop, goats_pop),
+    animal_cases = sum(Cattle, Sheep, Camel, Goats),
+    animal_incidence = animal_cases/animal_pop*1e6
+  ) |> 
+  ungroup() |> 
+  select(date, animal_cases, animal_pop, animal_incidence, human_incidence, pop)
+
+
+library(data.table)
+
+brucellosis <- animal_zoonoses %>% 
+  merge(human_zoonoses, by = c("county", "date"), all = T) %>% 
+  merge(animal_pop, by = "county") %>% 
+  mutate(
+    catt_incidence = round((Cattle / cattle_pop) * 1000000, 4),
+    cam_incidence = round((Camel / camels_pop) * 1000000, 4),
+    goat_incidence = round((Goats / goats_pop) * 1000000, 4),
+    shp_incidence = round((Sheep / sheep_pop) * 1000000, 4)
+  ) %>% 
+  mutate(human_incidence = incidence) |> 
+  distinct()
+
+brucellosis_full <- animal_zoonoses_dx %>% 
+  merge(human_zoonoses_dx, by = c("county", "date", "diagnosis"), all = T) %>% 
+  merge(animal_pop, by = "county") %>% 
+  mutate(
+    catt_incidence = round((Cattle / cattle_pop) * 1000000, 4),
+    cam_incidence = round((Camel / camels_pop) * 1000000, 4),
+    goat_incidence = round((Goats / goats_pop) * 1000000, 4),
+    shp_incidence = round((Sheep / sheep_pop) * 1000000, 4)
+  ) %>% 
+  mutate(human_incidence = incidence) |> 
+  distinct() |> 
+  rename(c(hum_cases = disease_values,
+            catt_cases = Cattle,
+            goat_cases = Goats,
+            shp_cases = Sheep,
+            cam_cases = Camel,
+           catt_pop = cattle_pop,
+           hum_pop = pop,
+           cam_pop = camels_pop,
+           goat_pop = goats_pop
+           ))
+
+write.csv(brucellosis_full, "all_bruc_incidence2.csv")
+
+brucellosis_total <- brucellosis %>% 
+  rowwise() %>% 
+  mutate(animal_cases = sum(Cattle, Camel, Goats, Sheep, na.rm = T),
+         animal_pop = sum(cattle_pop, camels_pop, goats_pop, sheep_pop, na.rm = T),
+         animal_incidence = animal_cases/animal_pop*1e6
+         ) %>% 
+  dplyr::select(date, county, animal_incidence, human_incidence)
+ 
+```
+
+
+```{r individual species}
+
+brucellosis_kenya_cattle_goats <- brucellosis_kenya |>
+  select(date, catt_incidence, goat_incidence, human_incidence) |>
+  mutate(
+      lag1_catt_incidence = lag(catt_incidence, n = 1),
+      lag2_catt_incidence = lag(catt_incidence, n = 2), 
+      lag3_catt_incidence = lag(catt_incidence, n = 3),
+      
+      lag1_goat_incidence = lag(goat_incidence, n = 1),
+      lag2_goat_incidence = lag(goat_incidence, n = 2), 
+      lag3_goat_incidence = lag(goat_incidence, n = 3)
+  ) |> 
+  as_tsibble()
+
+# At lag 0
+df_1_trend_complete %>%
+  as_tsibble() |> 
+  model(TSLM(human_incidence ~ catt_incidence + goat_incidence)) %>%
+  report() 
+
+# At lag 1
+brucellosis_kenya_cattle_goats %>%
+   filter(!is.na(lag1_catt_incidence) & lag1_catt_incidence > 0) |> 
+  model(TSLM(human_incidence ~ lag1_catt_incidence + lag1_goat_incidence)) %>%
+  report() 
+
+# At lag 2
+brucellosis_kenya_cattle_goats %>%
+  filter(!is.na(lag2_catt_incidence)) |> 
+  model(TSLM(human_incidence ~ lag2_catt_incidence + lag2_goat_incidence)) %>%
+  report() 
+
+# At lag 3
+brucellosis_kenya_cattle_goats %>%
+  filter(!is.na(lag3_catt_incidence)) |> 
+  model(TSLM(human_incidence ~ lag3_catt_incidence + lag3_goat_incidence)) %>%
+  report() 
+```
+
+
+```{r combined species}
 
 # lag 0 #0.056
-ts_bruc_combined %>%
-model(TSLM(total_human~total_animal)) %>%
+brucellosis_kenya_combined %>%
+  as_tsibble() |> 
+model(TSLM(human_incidence~animal_incidence)) %>%
   report() 
+
 # lag 1 # 0.0338
-ts_bruc_combined %>%
-model(TSLM(total_human~lag1_animal)) %>%
-  report()
-# lag 2 ##P value 0.0688
-ts_bruc_combined %>%
-model(TSLM(total_human~lag2_animal)) %>%
-  report()
-# lag 3 ##P value 0.0784
-ts_bruc_combined %>%
-model(TSLM(total_human~lag3_animal)) %>%
+brucellosis_kenya_combined %>%
+  filter(!is.na(lag1_animal)) |>
+  as_tsibble() |>
+  model(TSLM(human_incidence ~ lag1_animal)) %>%
   report()
 
-  # lag 4 ##P value 0.0572
-ts_bruc_combined %>%
-model(TSLM(total_human~lag4_animal)) %>%
+# lag 2 ##P value 0.0688
+brucellosis_kenya_combined %>%
+  filter(!is.na(lag2_animal)) |>
+  as_tsibble() |>
+  model(TSLM(human_incidence ~ lag2_animal)) %>%
   report()
+
+# lag 3 ##P value 0.0784
+brucellosis_kenya_combined %>%
+  filter(!is.na(lag3_animal)) |>
+  as_tsibble() |>
+  model(TSLM(human_incidence ~ lag3_animal)) %>%
+  report()
+
 ```
 
 

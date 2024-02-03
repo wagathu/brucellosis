@@ -1,0 +1,2 @@
+## Comments
+1. Run the models with the scanty data. Then step 2, filter out teh NA values and run the models, then step three lag of the complete cases and compare with the human cases.

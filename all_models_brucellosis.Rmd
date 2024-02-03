@@ -1,5 +1,14 @@
-# Importing Packages ------------------------------------------------------
+---
+title: "Mixed Effect Models"
+output: pdf_document
+date: "2024-01-28"
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r loading libraries}
 if (require(pacman))
 {
   p_load(
@@ -29,8 +38,9 @@ if (require(pacman))
   )
 }
 
-# Importing data ----------------------------------------------------------
+```
 
+```{r importing data sets}
 p09 <- read_excel("Projections.xlsx",
                   sheet = "2009")
 p19 <- read_excel("Projections.xlsx",
@@ -40,9 +50,9 @@ df_numbers <- fread("all_bruc_pop.csv")
 shp <- st_read("shapefiles/County.shp", quiet = T)
 eco_zones <- fread("eco_zones_county.csv")
 shp <- st_read("shapefiles/County.shp", quiet = T)
+```
 
-# Population --------------------------------------------------------------
-
+```{r cleaning population data}
 # 2009
 colnames(p09) <- p09[1,] #Make the 1st row the header
 p09 <- p09[-1, ]  #Remove the 1st row
@@ -147,9 +157,11 @@ pop <- rKenyaCensus::V1_T2.2 |>
     name == "pop2021" ~ 2021
   )) |> 
   select(county = County, year, pop)
-write.csv(pop, "population_county_2014_2021.csv")
+write.csv(pop, "pop_14-21.csv", row.names = F)
 
-# Grouping data -----------------------------------------------------------
+```
+
+```{r Grouping data}
 
 # Cases per year per county
 df_incidence2 <- df_incidence |> 
@@ -164,7 +176,8 @@ df_incidence2 <- df_incidence |>
          sheep_pop, 
          cam_pop) |>
   mutate(year = year(date)) |> 
-  merge(pop, by = c("county", "year"))
+  merge(pop, by = c("county", "year")) |> 
+  filter(!is.na(hum_cases))
  # mutate(across(where(is.numeric), ~ifelse(. == 0, NA, .)))
 
 # Identifying the outliers in the number of cases
@@ -274,7 +287,9 @@ df_cum_complete <- df_cum |>
   select(date, county, human_incidence, animal_incidence, animal_cases) |> 
   filter(animal_incidence > 0)
 
-# Trend -------------------------------------------------------------------
+```
+
+```{r trends}
 
 df_incidence2_trend <- df_incidence2 |> 
   #filter(diagnosis == "Lab confirmed") |>
@@ -327,12 +342,12 @@ df_1_trend <- df_tot_cases_trend |>
     
   )
 
-write.csv(df_1_trend, "individual_incidence.csv")
-
 df_1_trend_complete <- df_1_trend |>
   select(date, human_incidence, catt_incidence, goat_incidence) |> 
   filter(!is.na(catt_incidence)) |> 
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
+
+write.csv(df_1_trend, "individual_incidence.csv")
 
 # Cases
 df_1_trend_cases <- df_tot_cases_trend |>
@@ -482,7 +497,9 @@ humans_plt <- trend_data %>%
 humans_plt
 
 
-# Testing for stationary -------------------------------------------------
+```
+
+```{r Stationary}
 
 # At county Level
 adf1 <- adf.test(na.omit(df_1$human_incidence))
@@ -578,8 +595,9 @@ adf_combined_results <- data.frame(
   "P Value" = c(adf_combined$p.value, adf_combined_trend$p.value)
 )
 
-# Moving Average Smoothing ------------------------------------------------
+```
 
+```{r moving average}
 
 # Select columns containing "incidence"
 incidence_cols <- grep("incidence", names(df_1_trend), value = TRUE)
@@ -639,7 +657,7 @@ species_sm_plt
 species_sm_plt_points <- trend_data_smoothed |> 
   filter(name != "Human Incidence") |> 
   ggplot(aes(x = date)) +
-  geom_line(aes(y = value, col = name), linewidth = 1) +
+  geom_line(aes(y = value, col = name)) +
   geom_point(data = trend_data |> 
                mutate(value = ifelse(is.na(value), 0, value)) |> 
                filter(name != "Human Incidence"),
@@ -732,7 +750,9 @@ animal_sm_plt <- smoothed_df_combined |>
   labs(col = "Species", title = "Smoothed incidence rate for animal incidence combined")
 animal_sm_plt
 
-# Descriptive Statistics  -------------------------------------------------
+```
+
+```{r descriptive stats}
 
 table1.1 <- df_incidence |> 
   select(county, diagnosis, contains("cases")) |> 
@@ -790,7 +810,9 @@ table2 <- df_1 %>%
                format = "pipe", latex_options = "hold_position")
 
 
+```
 
+```{r spatial}
 
 # Spatial -----------------------------------------------------------------
 
@@ -799,22 +821,6 @@ df_tot_cases_spatial <- df_incidence2 |>
   group_by(year = year(date), county) |>
   summarise(across(contains("cases"), ~ sum(., na.rm = T))) |> 
   mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
-
-# Cases per year per county
-df_tot_cases_spatial <- df_incidence2 |>
-  group_by(year = year(date), county) |>
-  summarise(across(contains("cases"), ~ sum(., na.rm = T))) |> 
-  mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
-
-# Population per year, per county
-df_pop_spatial <- df_incidence2 |> 
-  select(date, county, contains("pop")) %>%
-  distinct(.) |>
-  as_tibble() |>
-  group_by(year = year(date), county) %>%
-  summarise(across(where(is.numeric), ~unique(.))) |> 
-  mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
-
 
 # Individual Cases per year per county month
 df_tot_cases_spatial_month <- df_incidence2 |>
@@ -1208,18 +1214,11 @@ all_plots <-
 
 
 
-# Correlation -------------------------------------------------------------
-# library(data.table)
-# urca::ca.jo(df[, .SD, .SDcols != ('human incidence')])
-# library(data.table)
-# 
-# dd = data.table::setDT(df_2)
-# 
-# dd = dd[, .SD, .SDcols = !c("human_incidence", 'date')]
-# 
-# library(urca)
-# KK = ca.jo(dd)
-# summary(KK)
+```
+
+
+
+```{r correlation}
 
 # Correlation Plot
 df_1_trend <- df_1_trend |> 
@@ -1508,8 +1507,7 @@ all_cols <- wrap_plots(
 all_cols <- all_cols + theme(plot.title = element_text(size = 16),
                              axis.text.y = element_text(color = 'black', size = 13))
 
-
-# Choosing the model with the highest correlation ----------------------------------------
+# Choosing the model with the highest correlation
 
 lag_values <- 0:6  # Assuming you want lag values from 0 to 6
 cor_dats <- list(
@@ -1536,71 +1534,16 @@ result_table <- tibble(
 print(result_table)
  # This helps us to choose the lag with the highest average correlation
 
-# Models --------------------------------------
+
+```
+
+```{r models}
+# General Model without and with differencing 
 
 ## This model fits the data without differencing, at difference lags, (0-6) and for individual 
 ## animal incidences.
 
-df_1_trend <- df_1_trend |> 
-  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
-
-# Models with NA
 run_lag_models <- function(df, max_lag = 3, ...) {
-  
-  result_df <- tibble()
-  
-  for (lag_value in 0:max_lag) {
-    df_lagged <- df |>
-      as_tibble() %>%
-      mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-                list( ~ lag(., n = lag_value))) |>
-      na.omit() |>
-      mutate(date = as.Date(date))
-    
-    mod <- df_lagged |>
-      as_tsibble() |>
-      model(
-        TSLM(
-          (human_incidence) ~ cam_incidence + shp_incidence + catt_incidence + goat_incidence
-        )
-      ) |>
-      report()
-    
-    mod_results <- tidy(mod) %>%
-      select(-.model) %>%
-      as_tibble() %>%
-      mutate(term = case_when(
-        term == "goat_incidence" ~ "Goat Incidence",
-        term == "catt_incidence" ~ "Cattle incidence",
-        term == "shp_incidence" ~ "Sheep incidence",
-        term == "cam_incidence" ~ "Camel incidence",
-        TRUE ~ as.character(term) 
-      ),
-      variable = term
-      ) |>  select(6, 2:5) |> 
-      group_by(variable) %>%
-      mutate(
-        conf_low = min(estimate - std.error * 1.645),
-        conf_high = max(estimate + std.error * 1.645)
-      ) %>%
-      mutate(lag = lag_value)
-    
-    adj_r_squared <- glance(mod) %>%
-      select(r_squared, AIC, adj_r_squared)
-    
-    mod_results <- bind_cols(mod_results, adj_r_squared) |>
-      mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high, adj_r_squared), ~round(., 3))) |>
-      mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
-      select(c(1:8, 12, 9:11))
-      
-    result_df <- bind_rows(result_df, mod_results)
-  }
-  
-  return(result_df)
-}
-
-# Models with complete cases
-complete_run_lag_models <- function(df, max_lag = 3, ...) {
   
   result_df <- tibble()
   
@@ -1609,7 +1552,7 @@ complete_run_lag_models <- function(df, max_lag = 3, ...) {
       as_tibble() %>%
       mutate_at(vars(catt_incidence, goat_incidence),
                 list( ~ lag(., n = lag_value))) |>
-      na.omit() |>
+      filter(!is.na(catt_incidence)) |> 
       mutate(date = as.Date(date))
     
     mod <- df_lagged |>
@@ -1652,52 +1595,64 @@ complete_run_lag_models <- function(df, max_lag = 3, ...) {
   return(result_df)
 }
 
-
-non_diff_indivi_with_NA <- run_lag_models(df_1_trend)
-  
-non_diff_indivi_without_NA <-
-  complete_run_lag_models(df_1_trend_complete)
-
+non_diff_indivi <- run_lag_models(df_1_trend_complete 
+                                    #mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .)))
+                                    )
 diff_indivi <- run_lag_models(df_1_trend_diff |> 
                                 mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .))))
-
-write_csv(non_diff_indivi_with_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_individual_with_NA.csv")
-write_csv(non_diff_indivi_without_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_individual_without_NA.csv")
-
+write_csv(non_diff_indivi, "non_diff_individual.csv")
 write_csv(diff_indivi, "diff_individual.csv")
 
+# If you want a model at a specific lag, you can use the following code
+df_2 <- df_1_trend |> 
+  as_tibble() %>%
+  mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
+            list( ~ lag(., n = 2))) |>
+  na.omit() |>
+  mutate(date = as.Date(date))
+
+mod_lag <- df_2 |> 
+  as_tsibble() |>
+  model(
+    TSLM(
+      (human_incidence) ~ cam_incidence + shp_incidence + catt_incidence + goat_incidence
+    )
+  ) |>
+  report()
 
 ## The following function fits the model, without differencing, at difference lags, (0-6) and for
 ## animal incidences combined
 
-lag_models_full <- function(df, max_lag = 3, ...) {
+lag_models_full <- function(df, max_lag = 6, ...) {
+  
   result_df <- tibble()
   
   for (lag_value in 0:max_lag) {
     df_lagged <- df |>
       as_tibble() %>%
       mutate_at(vars(animal_incidence),
-                list(~ lag(., n = lag_value))) |>
+                list( ~ lag(., n = lag_value))) |>
       na.omit() |>
       mutate(date = as.Date(date))
     
     mod <- df_lagged |>
       as_tsibble() |>
-      model(TSLM((human_incidence) ~ animal_incidence)) |>
+      model(
+        TSLM(
+          (human_incidence) ~ animal_incidence
+        )
+      ) |>
       report()
     
     mod_results <- tidy(mod) %>%
       select(-.model) %>%
       as_tibble() %>%
-      mutate(
-        term = case_when(
-          term == "animal_incidence" ~ "Animal Incidence",
-          TRUE ~ as.character(term)
-        ),
-        variable = term
-      ) |>  select(6, 2:5) |>
+      mutate(term = case_when(
+        term == "animal_incidence" ~ "Animal Incidence",
+        TRUE ~ as.character(term) 
+      ),
+      variable = term
+      ) |>  select(6, 2:5) |> 
       group_by(variable) %>%
       mutate(
         conf_low = min(estimate - std.error * 1.645),
@@ -1705,52 +1660,31 @@ lag_models_full <- function(df, max_lag = 3, ...) {
       ) %>%
       mutate(lag = lag_value)
     
-    adj_r_squared <- glance(mod) |>
-      select(r_squared, adj_r_squared, AIC) |>
-      as.data.frame()
+    adj_r_squared <- glance(mod) |> 
+      select(r_squared, adj_r_squared, AIC) |> 
+      mutate(lag = lag_value)
     
-    
-    mod_results <- bind_cols(mod_results, adj_r_squared) |>
-      mutate(across(
-        c(
-          estimate,
-          std.error,
-          statistic,
-          p.value,
-          conf_low,
-          conf_high,
-          adj_r_squared
-        ),
-        ~ round(., 3)
-      )) |>
+    result_df <- bind_rows(result_df, mod_results) |> 
+      mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high), ~round(., 3))) |> 
       mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
-    
-    result_df <- bind_rows(result_df, mod_results)
-    
+        result_df <- bind_rows(result_df, adj_r_squared)
+
   }
   
   return(result_df)
 }
 
-non_diff_full_with_NA <- lag_models_full(df_cum_trend |> 
+
+non_diff_full <- lag_models_full(df_cum_trend |> 
                                  mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .))))
-
-non_diff_full_without_NA <- lag_models_full(df = df_cum_trend)
-
 diff_full <- lag_models_full(df_cum_trend_diff)
-
-write.csv(non_diff_full_with_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_full_with_NA.csv")
-
-write.csv(non_diff_full_without_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_full_without_NA.csv")
 
 write_csv(non_diff_full, "non_diff_full.csv")
 write_csv(diff_full, "diff_full.csv")
 
 ## Getting the AIC, R-Squared and Adjusted R squared for each lag
 
-Table_lag_indivi_withoutNA <- non_diff_indivi_without_NA |> 
+Table_lag_indivi <- non_diff_indivi |> 
   select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
   mutate(across(c(`R-Squared(%)` , `Adjusted R-Squared(%)`, ), ~ (. * 100))) |> 
     mutate(across(where(is.numeric), ~round(., 2))) |> 
@@ -1764,7 +1698,7 @@ Table_lag_indivi_withoutNA <- non_diff_indivi_without_NA |>
   )
 
 
-Table_lag_full <- non_diff_full_without_NA |> 
+Table_lag_full <- non_diff_full |> 
   select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
   mutate(across(c(`R-Squared(%)` , `Adjusted R-Squared(%)`, ), ~ (. * 100))) |> 
     mutate(across(where(is.numeric), ~round(., 2))) |> 
@@ -1778,7 +1712,9 @@ Table_lag_full <- non_diff_full_without_NA |>
   )
 
 
-# All counties model (individual with NA) --------------------------------------------------------------
+```
+
+```{r county models}
 
 # Lag 2
 df_2_2 <- df_1 |> 
@@ -1937,7 +1873,10 @@ coefficients_df_lag4 <- coefficients_df_lag4 |>
   mutate(across(c(3:8), ~round(., 3)))
 write_csv(coefficients_df_lag4, "individual_animal_incidence_per_county_lag4.csv")
 
-# All counties model (combined with NA) -----------------------------------------------
+```
+
+```{r animal combined}
+# Animal incidence combined -----------------------------------------------
 
 # Lag 2
 df_cum_2_2 <- df_cum |> 
@@ -2026,161 +1965,6 @@ coefficients_df2_lag4 <- coefficients_df2_lag4 |>
   as_tibble()
 write_csv(coefficients_df2_lag4, "all_animal_incidence_per_county_lag4.csv")
 
-# All counties model (individual without NA-complete case) --------------------------------------------------------------
 
-# Lag 2
-df_2_2_complete <- df_1_complete |>
-  as_tibble() %>%
-  mutate_at(
-    vars(catt_incidence, goat_incidence),
-    list(~ dplyr::lag(., n = 2))
-  ) |>
-  na.omit() |>
-  mutate(date = as.Date(date))
+```
 
-# Lag 4
-df_2_4_complete  <- df_1_complete  |>
-  as_tibble() %>%
-  mutate_at(
-    vars(catt_incidence, goat_incidence),
-    list(~ dplyr::lag(., n = 4))
-  ) |>
-  na.omit() |>
-  mutate(date = as.Date(date))
-
-
-fit_county_model_complete <- function(county_name, data, type) {
-  # Subset the data for the specific county
-  county_data <- filter(data, county == county_name)
-  
-  if (type == "full")
-  {
-    # Check if all incidences are zero
-    if (all(county_data$animal_incidence == 0)) {
-      message(paste("Skipping model for", county_name, "as all incidences are zero."))
-      return(NULL)
-    }
-    
-    # Fit the model
-    mod_county <- county_data |>
-      as_tsibble() |>
-      model(
-        TSLM(
-          human_incidence ~ animal_incidence
-        )
-      ) |>
-      tidy() |>
-      select(-.model) |>
-      as_tibble() |>
-      mutate(term = case_when(
-        term == "animal_incidence" ~ "Animal Incidence",
-        TRUE ~ as.character(term) 
-      ),
-      variable = term
-      ) |>  
-      select(6, 2:5) |> 
-      group_by(variable) %>%
-      mutate(
-        conf_low = min(estimate - std.error * 1.645),
-        conf_high = max(estimate + std.error * 1.645)
-      )
-  }
-  else if (type == "individual") {
-  # Check if all incidences are zero
-  if (all(county_data$catt_incidence == 0 &
-          county_data$goat_incidence == 0 )) {
-    message(paste("Skipping model for", county_name, "as all incidences are zero."))
-    return(NULL)
-  }
-  
-  # Fit the model
-  mod_county <- county_data |>
-    as_tsibble() |>
-    model(
-      TSLM(
-        human_incidence ~ catt_incidence + goat_incidence
-      )
-    ) |>
-    tidy() |>
-    select(-.model) |>
-    as_tibble() |>
-    mutate(term = case_when(
-      term == "goat_incidence" ~ "Goat Incidence",
-      term == "catt_incidence" ~ "Cattle incidence",
-      TRUE ~ as.character(term) 
-    ),
-    variable = term
-    ) |>  
-    select(6, 2:5) |> 
-    group_by(variable) %>%
-    mutate(
-      conf_low = min(estimate - std.error * 1.645),
-      conf_high = max(estimate + std.error * 1.645)
-    )
-  }
-  return(mod_county)
-}
-
-county_names <- unique(df_2_2_complete$county)
-
-# Create a list to store the models for each county
-models_list <- list()
-
-# Initialize the data frame for each county
-coefficients_df_lag2_withoutNA <- data.frame(county = character(), 
-                              variable = character(),
-                              estimate = numeric(),
-                              stringsAsFactors = FALSE)
-
-# At lag 2
-for (county_name in county_names) {
-  message(paste("Fitting model for", county_name))
-  
-
-  
-  # Fit the model
-  mod_county <- fit_county_model_complete(county_name, df_2_2_complete, type = "individual")
-  
-  # Check if model fitting was successful
-  if (!is.null(mod_county)) {
-    # Extract coefficients, round off, and add to the data frame
-    coefficients_df_lag2_withoutNA <- bind_rows(coefficients_df_lag2, 
-                                 mod_county %>% 
-                                   mutate(county = county_name,
-                                          estimate = round(estimate, 3)))
-  }
-}
-
-coefficients_df_lag2_withoutNA <- coefficients_df_lag2_withoutNA |>
-  mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
-  mutate(across(c(3:8), ~round(., 3)))
-write_csv(coefficients_df_lag2_withoutNA, "individual_animal_incidence_per_county_lag2_withoutNA.csv")
-
-# At lag 4
-coefficients_df_lag4_withoutNA <- data.frame(county = character(), 
-                                   variable = character(),
-                                   estimate = numeric(),
-                                   stringsAsFactors = FALSE)
-
-for (county_name in county_names) {
-  message(paste("Fitting model for", county_name))
-  
-  
-  
-  # Fit the model
-  mod_county <- fit_county_model_complete(county_name, df_2_4_complete, type = "individual")
-  
-  # Check if model fitting was successful
-  if (!is.null(mod_county)) {
-    # Extract coefficients, round off, and add to the data frame
-    coefficients_df_lag4_withoutNA <- bind_rows(coefficients_df_lag4, 
-                                 mod_county %>% 
-                                   mutate(county = county_name,
-                                          estimate = round(estimate, 3)))
-  }
-}
-
-coefficients_df_lag4_withoutNA <- coefficients_df_lag4_withoutNA |>
-  mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
-  mutate(across(c(3:8), ~round(., 3)))
-write_csv(coefficients_df_lag4_withoutNA, "individual_animal_incidence_per_county_lag4_withoutNA.csv")

@@ -1,0 +1,13 @@
+"","variable","estimate","std.error","statistic","p.value","conf_low","conf_high","lag","significance"
+"1","(Intercept)",0.871,0.038,22.852,0,0.808,0.934,0,"Significant"
+"2","Animal Incidence",1.212,0.421,2.883,0.005,0.521,1.904,0,"Significant"
+"3",NA,NA,NA,NA,NA,NA,NA,0,NA
+"4","(Intercept)",0.892,0.038,23.457,0,0.83,0.955,1,"Significant"
+"5","Animal Incidence",0.935,0.431,2.17,0.033,0.226,1.644,1,"Significant"
+"6",NA,NA,NA,NA,NA,NA,NA,1,NA
+"7","(Intercept)",0.896,0.037,24.066,0,0.835,0.957,2,"Significant"
+"8","Animal Incidence",1.024,0.42,2.439,0.017,0.333,1.714,2,"Significant"
+"9",NA,NA,NA,NA,NA,NA,NA,2,NA
+"10","(Intercept)",0.9,0.036,24.711,0,0.84,0.96,3,"Significant"
+"11","Animal Incidence",1.115,0.408,2.732,0.008,0.444,1.787,3,"Significant"
+"12",NA,NA,NA,NA,NA,NA,NA,3,NA
