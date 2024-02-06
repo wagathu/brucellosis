@@ -41,163 +41,423 @@ df_incidence <- fread("all_bruc_incidence.csv")
 df_numbers <- fread("all_bruc_pop.csv")
 shp <- st_read("shapefiles/County.shp", quiet = T)
 eco_zones <- fread("eco_zones_county.csv")
+
 shp <- st_read("shapefiles/County.shp", quiet = T)
+
 individual <- fread("individual_incidence_cases.csv")
 combined <- fread("combined_incidence_cases.csv")
 individual_county <- fread("df_tot_cases_spatial_month.csv")
 combined_county <- fread("df_spatial_cum_month.csv")
 
 
+# Complete
+county_indivi_complete <- fread("df_1_complete.csv") |> 
+  mutate(hum_cases = round(hum_cases))
+county_comb_complete <- fread("df_cum_complete.csv") |> 
+  mutate(hum_cases = round(hum_cases))
+
 # Creating the proportion ----------------------------------------------------------------
 
-df_indivi_inci <- individual_county |> 
-  mutate(across(c(catt_incidence, cam_incidence, goat_incidence), ~ ./1e6)) |> 
+# Individual: Incidence
+# The cattle and goat incidence were calculated 10M per population
+df_indivi_inci <- county_indivi_complete |> 
+  mutate(across(c(catt_incidence, goat_incidence), ~ round(.*10))) |> 
+  mutate(human_incidence = round(human_incidence * 10)) |> 
+  select(date, county, contains("incidence")) |>
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
+
+# Individual: Proportion
+df_indivi_inci_prop <- county_indivi_complete |> 
+  mutate(across(c(catt_incidence, goat_incidence), ~ .*10)) |> 
   mutate(human_incidence = human_incidence/1e3) |> 
   select(date, county, contains("incidence")) |>
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
-df_indivi_cases <- individual_county |> 
-  mutate(across(c(catt_incidence, cam_incidence, goat_incidence), ~ ./1e6)) |> 
-  mutate(human_incidence = human_incidence/1e3) |> 
+# Individual: Cases
+df_indivi_cases <- county_indivi_complete |> 
   select(date, county, contains("cases")) |>
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
 
-# Combined
-df_comb_inci <- combined_county |> 
-  mutate(human_incidence = human_incidence/1e3,
-         animal_incidence = animal_incidence/1e6
+# Combined : Incidence
+df_comb_inci <- county_comb_complete |> 
+  mutate(human_incidence = round(human_incidence*10),
+         animal_incidence = round(animal_incidence*10)
          ) |> 
   select(date, county, animal_incidence, human_incidence) |> 
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
-
-df_comb_cases <- combined_county |> 
+# combined: Proportion
+df_comb_inci_prop <- county_comb_complete |> 
   mutate(human_incidence = human_incidence/1e3,
-         animal_incidence = animal_incidence/1e6
+         animal_incidence = animal_incidence*10
          ) |> 
-  select(date, county, animal_cases, hum_cases) |> 
+  select(date, county, animal_incidence, human_incidence) |> 
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
+# Combined: Cases
+df_comb_cases <- county_comb_complete |> 
+  select(date, county, animal_cases, hum_cases) 
+
+# Individual Incidence
+indivi_models <- function(df, type, max_lag, ...) {
+  # Type is either prop or incidence
+  result_df <- tibble()
+  if (type == "prop") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+            catt_incidence,
+            goat_incidence
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+        glmer(
+          human_incidence ~ catt_incidence + goat_incidence + 
+            (1 |
+               county),
+          data = df_lagged,
+          family = binomial(link = "logit"),
+          nAGQ = 0
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "goat_incidence" ~ "Goat Incidence",
+            term == "catt_incidence" ~ "Cattle incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log odds` = estimate) |> 
+        mutate(odds = exp(`log odds`),
+               odds = ifelse(effect == "Random", NA, odds)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log odds` - std.error * 1.645),
+          conf_high = max(`log odds` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+      
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log odds`,
+            odds,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 3)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  } else if (type == "inci") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+            catt_incidence,
+            goat_incidence
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+         glmer.nb(
+          human_incidence ~ catt_incidence + goat_incidence +
+            (1 |
+               county),
+          data = df_lagged,
+          nAGQ = 0
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "goat_incidence" ~ "Goat Incidence",
+            term == "catt_incidence" ~ "Cattle incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log IRR` = estimate) |> 
+        mutate(IRR = exp(`log IRR`),
+               IRR = ifelse(effect == "Random", NA, IRR)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log IRR` - std.error * 1.645),
+          conf_high = max(`log IRR` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log IRR`,
+            IRR,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 4)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant"))
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  }
+  
+  return(result_df)
+
+}
+
+df_indivi_model_inci = indivi_models(df = df_indivi_inci, type = "inci", max_lag = 3)
+#df_indivi_model_prop = indivi_models(df = df_indivi_inci_prop, type = "prop", max_lag = 3)
+write.csv(df_indivi_model_inci, "df_indivi_model_inci.csv")
+
+# Combined Cases
+comb_models <- function(df, type, max_lag, ...) {
+  # Type is either prop or incidence
+  result_df <- tibble()
+  if (type == "prop") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+            animal_incidence,
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+        glmer(
+          human_incidence ~ animal_incidence + 
+            (1 |
+               county),
+          data = df_lagged,
+          family = binomial(link = "logit"),
+          nAGQ = 0
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "animal_incidence" ~ "Animal incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log odds` = estimate) |> 
+        mutate(odds = exp(`log odds`),
+               odds = ifelse(effect == "Random", NA, odds)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log odds` - std.error * 1.645),
+          conf_high = max(`log odds` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+      
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log odds`,
+            odds,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 3)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  } else if (type == "inci") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+         animal_incidence
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+         glmer.nb(
+          human_incidence ~ animal_incidence +
+            (1 |
+               county),
+          data = df_lagged,
+          nAGQ = 0
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "animal_incidence" ~ "Animal incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log IRR` = estimate) |> 
+        mutate(IRR = exp(`log IRR`),
+               IRR = ifelse(effect == "Random", NA, IRR)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log IRR` - std.error * 1.645),
+          conf_high = max(`log IRR` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+      
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log IRR`,
+            IRR,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 4)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant"))
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  }
+  
+  return(result_df)
+
+}
+
+df_combined_model_inci = comb_models(df = df_comb_inci, type = "inci", max_lag = 3)
+#df_combined_model_prop = comb_models(df = df_comb_inci_prop, type = "prop", max_lag = 3)
+
+# Selecting counties with many rows ------------------------------------------------------
+
+arranged_table1 <- df_indivi_inci %>%
+  count(county) %>%
+  arrange(desc(n)) |> 
+  filter(n > 2)
+counties <- arranged_table1$county
+
+arranged_table2 <- df_comb_inci %>%
+  count(county) %>%
+  arrange(desc(n)) |> 
+  filter(n > 2)
+
+counties <- arranged_table1$county
+counties2 <- arranged_table2$county
+
+sub_indivi_inci <- df_indivi_inci |> 
+  filter(county %in% counties)
+
+sub_indivi_inci_prop <- df_indivi_inci_prop |> 
+  filter(county %in% counties)
+
+sub_comb_inci <- df_comb_inci |> 
+  filter(county %in% counties2)
+
+sub_comb_inci_prop <- df_comb_inci_prop |> 
+  filter(county %in% counties2)
+
+# Model for the subset data (individual incidence)
+subset_indivi_inci <- indivi_models(df = sub_indivi_inci, type = "inci", max_lag = 3)
+subset_indivi_prop <- indivi_models(df = sub_indivi_inci_prop, type = "prop", max_lag = 3)
 
 
-# Lags for individual incidence -----------------------------------------------------------------------------------
+# Model for the subset data (combined incidence)
+subset_comb_inci = comb_models(df = sub_comb_inci, type = "inci", max_lag = 3)
+subset_comb_prop = comb_models(df = sub_comb_inci_prop, type = "prop", max_lag = 3)
 
-# lag 1
-lag1_indivi_inci <- df_indivi_inci |> 
-  group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 1)))
-  # filter(!is.na(catt_incidence) & !is.na(cam_incidence) & !is.na(goat_incidence) & !is.na(shp_incidence) )
+# County with the highest data
 
-# Lag 2
-lag2_indivi_inci <- df_indivi_inci |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 2)))
+bomet_indivi <- df_indivi_inci |> 
+  filter(county == "Bomet")
 
-# lag 3
-lag3_indivi_inci <- df_indivi_inci |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 3)))
+bomet_comb <- df_comb_inci |> 
+  filter(county == "Bomet")
 
-# lag 4
-lag4_indivi_inci <- df_indivi_inci |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ lag(., n = 4)))
-
-# Lags for individual cases -----------------------------------------------------------------------------------
-
-# lag 1
-lag1_indivi_cases <- df_indivi_cases |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_cases, cam_cases, goat_cases, shp_cases),
-            list( ~ lag(., n = 1)))
-
-# Lag 2
-lag2_indivi_cases <- df_indivi_cases |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_cases, cam_cases, goat_cases, shp_cases),
-            list( ~ lag(., n = 2)))
-
-# lag 3
-lag3_indivi_cases <- df_indivi_cases |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_cases, cam_cases, goat_cases, shp_cases),
-            list( ~ lag(., n = 3)))
-
-# lag 4
-lag4_indivi_cases <- df_indivi_cases |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate_at(vars(catt_cases, cam_cases, goat_cases, shp_cases),
-            list( ~ lag(., n = 4)))
-
-# Lags for combined incidence -----------------------------------------------------------------------------------
-
-# lag 1
-lag1_comb_inci <- df_comb_inci |>
-    group_by(county) |> 
-  arrange(date) |> 
-  mutate(animal_incidence = lag(animal_incidence, n = 1))
-
-
-# Lag 2
-lag2_comb_inci <- df_comb_inci |>
-    group_by(county) |> 
-  arrange(date) |> 
-  mutate(animal_incidence = lag(animal_incidence, n = 2))
-
-# lag 3
-lag3_comb_inci <- df_comb_inci |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate(animal_incidence = lag(animal_incidence, n = 3))
-
-# lag 4
-lag4_comb_inci <- df_comb_inci |> 
-    group_by(county) |> 
-  arrange(date) |> 
-    mutate(animal_incidence = lag(animal_incidence, n = 4))
-
-# Lags for individual cases -----------------------------------------------------------------------------------
-
-# lag 1
-lag1_comb_cases <- df_comb_cases |>
-  mutate(animal_cases = lag(animal_cases, n = 1))
-
-# Lag 2
-lag2_comb_cases <- df_comb_cases |>
-  mutate(animal_cases = lag(animal_cases, n = 2))
-
-# lag 3
-lag3_comb_cases <- df_comb_cases |> 
-    mutate(animal_cases = lag(animal_cases, n = 3))
-
-# lag 4
-lag4_comb_cases <- df_comb_cases |> 
-    mutate(animal_cases = lag(animal_cases, n = 4))
-
-# Models ---------------------------------------------------------------------------------
-
-# Individual animal incidence
-## No mixed effect binomial
-binom_fixed_indi <- glm(human_incidence ~ catt_incidence + goat_incidence + cam_incidence + shp_incidence,
-                        family = binomial(link = "logit"),
-                        data = lag1_indivi_inci
-                        )
-summary(binom_fixed_indi)
-
-## mixed effect binomial
-binom_mixed_indi <- glmer(human_incidence ~ catt_incidence + goat_incidence + cam_incidence + 
-                            (1 | county + date), data = lag1_indivi_inci, family = binomial(link = "logit") )
-summary(binom_mixed_indi)

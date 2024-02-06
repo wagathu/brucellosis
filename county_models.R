@@ -235,8 +235,9 @@ df_1 <- df_tot_cases |>
   arrange(county)
 
 df_1_complete <- df_1 |> 
-  select(date, county, human_incidence, catt_incidence, goat_incidence) |> 
+  select(date, county, human_incidence, catt_incidence, goat_incidence, hum_cases, catt_cases, goat_cases) |> 
   filter(catt_incidence > 0)
+write.csv(df_1_complete, "df_1_complete.csv", row.names = F)
 
 # Outliers
 numeric_columns <- df_1 %>%
@@ -271,8 +272,9 @@ df_cum <- df_tot_cases |>
   mutate()
 
 df_cum_complete <- df_cum |> 
-  select(date, county, human_incidence, animal_incidence, animal_cases) |> 
+  select(date, county, human_incidence, animal_incidence, animal_cases, hum_cases) |> 
   filter(animal_incidence > 0)
+write.csv(df_cum_complete, "df_cum_complete.csv", row.names = F)
 
 # Trend -------------------------------------------------------------------
 
@@ -601,6 +603,10 @@ order <- c(
   "smoothed_cam_incidence"
 )
 
+
+order2 <- c("Human Incidence", "Cattle Incidence", "Camel Incidence", "Goat Incidence", 
+"Sheep Incidence")
+
 trend_data_smoothed <- smoothed_df %>%
   select(date, contains("smoothed")) %>%
   pivot_longer(cols = -date) %>%
@@ -612,10 +618,31 @@ trend_data_smoothed <- smoothed_df %>%
     ))
   ) 
 
+df_long <- df_1_trend %>%
+  mutate(across(incidence_cols, ~ifelse(is.na(.), 0, .))) |> 
+  select(date, contains("incidence")) %>%
+  pivot_longer(cols = -date) %>%
+  mutate(
+    name = case_when(
+    name == "human_incidence" ~ "Human Incidence",
+    name == "catt_incidence" ~ "Cattle Incidence",
+    name == "goat_incidence" ~ "Goat Incidence",
+    name == "shp_incidence" ~ "Sheep Incidence",
+    TRUE ~ "Camel Incidence"
+  )) |> 
+  mutate(
+    name = factor(name, levels = order2),
+    name = factor(name, labels = c(
+      "Human Incidence", "Cattle Incidence", "Goat Incidence",
+      "Sheep Incidence", "Camel Incidence"
+    ))
+  )
+
 species_sm_plt <- trend_data_smoothed |> 
   filter(name != "Human Incidence") |> 
   ggplot(aes(x = date)) +
   geom_line(aes(y = value, col = name), linewidth = 1) +
+  #geom_point(aes(y = value, col = name)) +
   # facet_wrap(~name, scales = "free", ncol = 3) +
   theme_light() +
   theme(
@@ -686,6 +713,29 @@ humans_sm_plt <- trend_data_smoothed |>
   xlab("Year") +
   labs(col = "Species", title = "Smoothed incidence rate for humans")
 humans_sm_plt
+
+humans_sm_plt_nopoints <- trend_data_smoothed |> 
+  filter(name == "Human Incidence") |> 
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = value), linewidth = 1) +
+  #geom_point(data = df_1_trend, aes(y = human_incidence), col = "red") +
+  # facet_wrap(~name, scales = "free", ncol = 3) +
+  theme_light() +
+  theme(
+    strip.background = element_rect(fill = "white", colour = "grey"),
+    strip.text = element_text(color = "black", size = 12),
+    axis.title = element_text(colour = "black"),
+    axis.text = element_text(color = "black"),
+    axis.ticks = element_line(color = "black", linewidth = 1),
+    plot.title = element_text(color = "black", hjust = 0.5, size = 12),
+    axis.title.y = element_text(color = "black", size = 10),
+    legend.position = "bottom",
+    legend.text = element_text(color = "black")
+  ) +
+  ylab("Incidence/1,000 population") +
+  xlab("Year") +
+  labs(col = "Species", title = "Smoothed incidence rate for humans")
+humans_sm_plt_nopoints
 
 ## For all animal incidence combined
 df_cum_trend <- df_cum_trend |> 
@@ -834,6 +884,13 @@ df_tot_cases_spatial_month <- df_incidence2 |>
   as_tibble()
 
 write.csv(df_tot_cases_spatial_month, "df_tot_cases_spatial_month.csv")
+
+df_tot_cases_spatial_month_complete <- df_tot_cases_spatial_month |> 
+  select(year, date, county, human_incidence, goat_incidence, catt_incidence,
+         goat_cases, catt_cases, hum_cases ) 
+
+write.csv(df_tot_cases_spatial_month_complete, "df_tot_cases_spatial_month_complete.csv")
+
 
 # Combined cases
 df_spatial_cum_month <- df_tot_cases_spatial_month |>
@@ -1745,8 +1802,8 @@ write.csv(non_diff_full_with_NA |>
 write.csv(non_diff_full_without_NA |>
   select(-r_squared, -AIC, -adj_r_squared), "non_diff_full_without_NA.csv")
 
-write_csv(non_diff_full, "non_diff_full.csv")
-write_csv(diff_full, "diff_full.csv")
+# write_csv(non_diff_full, "non_diff_full.csv")
+# write_csv(diff_full, "diff_full.csv")
 
 ## Getting the AIC, R-Squared and Adjusted R squared for each lag
 
@@ -1789,10 +1846,10 @@ df_2_2 <- df_1 |>
   mutate(date = as.Date(date))
 
 # Lag 4
-df_2_4 <- df_1 |> 
+df_2_3 <- df_1 |> 
   as_tibble() %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
-            list( ~ dplyr::lag(., n = 4))) |>
+            list( ~ dplyr::lag(., n = 3))) |>
   na.omit() |> 
   mutate(date = as.Date(date))
 
@@ -1909,7 +1966,7 @@ coefficients_df_lag2 <- coefficients_df_lag2 |>
 write_csv(coefficients_df_lag2, "individual_animal_incidence_per_county_lag2.csv")
 
 # At lag 4
-coefficients_df_lag4 <- data.frame(county = character(), 
+coefficients_df_lag3 <- data.frame(county = character(), 
                                    variable = character(),
                                    estimate = numeric(),
                                    stringsAsFactors = FALSE)
@@ -1920,22 +1977,22 @@ for (county_name in county_names) {
   
   
   # Fit the model
-  mod_county <- fit_county_model(county_name, df_2_4, type = "individual")
+  mod_county <- fit_county_model(county_name, df_2_3, type = "individual")
   
   # Check if model fitting was successful
   if (!is.null(mod_county)) {
     # Extract coefficients, round off, and add to the data frame
-    coefficients_df_lag4 <- bind_rows(coefficients_df_lag4, 
+    coefficients_df_lag3 <- bind_rows(coefficients_df_lag3, 
                                  mod_county %>% 
                                    mutate(county = county_name,
                                           estimate = round(estimate, 3)))
   }
 }
 
-coefficients_df_lag4 <- coefficients_df_lag4 |>
+coefficients_df_lag3 <- coefficients_df_lag3 |>
   mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
   mutate(across(c(3:8), ~round(., 3)))
-write_csv(coefficients_df_lag4, "individual_animal_incidence_per_county_lag4.csv")
+write_csv(coefficients_df_lag3, "individual_animal_incidence_per_county_lag3.csv")
 
 # All counties model (combined with NA) -----------------------------------------------
 
@@ -1947,10 +2004,10 @@ df_cum_2_2 <- df_cum |>
   na.omit() |>
   mutate(date = as.Date(date))
 
-df_cum_2_4 <- df_cum |> 
+df_cum_2_3 <- df_cum |> 
   as_tibble() %>%
   mutate_at(vars(animal_incidence),
-            list( ~ dplyr::lag(., n = 4))) |>
+            list( ~ dplyr::lag(., n = 3))) |>
   na.omit() |>
   mutate(date = as.Date(date))
 
@@ -1991,40 +2048,40 @@ coefficients_df2_lag2 <- coefficients_df2_lag2 |>
 write_csv(coefficients_df2_lag2, "all_animal_incidence_per_county_lag2.csv")
 
 # At lag 4
-county_names2_4 <- unique(df_cum_2_4$county)
+county_names2_3 <- unique(df_cum_2_3$county)
 
 # Create a list to store the models for each county
 models_list <- list()
 
 # Initialize the data frame for each county
-coefficients_df2_lag4 <- data.frame(county = character(), 
+coefficients_df2_lag3 <- data.frame(county = character(), 
                                     variable = character(),
                                     estimate = numeric(),
                                     stringsAsFactors = FALSE)
 
-for (county_name in county_names2_4) {
+for (county_name in county_names2_3) {
   message(paste("Fitting model for", county_name))
   
   
   
   # Fit the model
-  mod_county <- fit_county_model(county_name, df_cum_2_4, type = "full")
+  mod_county <- fit_county_model(county_name, df_cum_2_3, type = "full")
   
   # Check if model fitting was successful
   if (!is.null(mod_county)) {
     # Extract coefficients, round off, and add to the data frame
-    coefficients_df2_lag4 <- bind_rows(coefficients_df2_lag4, 
+    coefficients_df2_lag3 <- bind_rows(coefficients_df2_lag3, 
                                        mod_county %>% 
                                          mutate(county = county_name,
                                                 estimate = round(estimate, 3)))
   }
 }
 
-coefficients_df2_lag4 <- coefficients_df2_lag4 |>
+coefficients_df2_lag3 <- coefficients_df2_lag3 |>
   mutate(across(c(3:8), ~round(., 3))) |> 
   mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
   as_tibble()
-write_csv(coefficients_df2_lag4, "all_animal_incidence_per_county_lag4.csv")
+write_csv(coefficients_df2_lag3, "all_animal_incidence_per_county_lag3.csv")
 
 # All counties model (individual without NA-complete case) --------------------------------------------------------------
 
@@ -2039,7 +2096,7 @@ df_2_2_complete <- df_1_complete |>
   mutate(date = as.Date(date))
 
 # Lag 4
-df_2_4_complete  <- df_1_complete  |>
+df_2_3_complete  <- df_1_complete  |>
   as_tibble() %>%
   mutate_at(
     vars(catt_incidence, goat_incidence),
@@ -2124,7 +2181,7 @@ fit_county_model_complete <- function(county_name, data, type) {
 county_names <- unique(df_2_2_complete$county)
 
 # Create a list to store the models for each county
-models_list <- list()
+models_list_withouNA <- list()
 
 # Initialize the data frame for each county
 coefficients_df_lag2_withoutNA <- data.frame(county = character(), 
@@ -2144,7 +2201,7 @@ for (county_name in county_names) {
   # Check if model fitting was successful
   if (!is.null(mod_county)) {
     # Extract coefficients, round off, and add to the data frame
-    coefficients_df_lag2_withoutNA <- bind_rows(coefficients_df_lag2, 
+    coefficients_df_lag2_withoutNA <- bind_rows(coefficients_df_lag2_withoutNA, 
                                  mod_county %>% 
                                    mutate(county = county_name,
                                           estimate = round(estimate, 3)))
@@ -2156,8 +2213,8 @@ coefficients_df_lag2_withoutNA <- coefficients_df_lag2_withoutNA |>
   mutate(across(c(3:8), ~round(., 3)))
 write_csv(coefficients_df_lag2_withoutNA, "individual_animal_incidence_per_county_lag2_withoutNA.csv")
 
-# At lag 4
-coefficients_df_lag4_withoutNA <- data.frame(county = character(), 
+# At lag 3
+coefficients_df_lag3_withoutNA <- data.frame(county = character(), 
                                    variable = character(),
                                    estimate = numeric(),
                                    stringsAsFactors = FALSE)
@@ -2168,19 +2225,19 @@ for (county_name in county_names) {
   
   
   # Fit the model
-  mod_county <- fit_county_model_complete(county_name, df_2_4_complete, type = "individual")
+  mod_county <- fit_county_model_complete(county_name, df_2_3_complete, type = "individual")
   
   # Check if model fitting was successful
   if (!is.null(mod_county)) {
     # Extract coefficients, round off, and add to the data frame
-    coefficients_df_lag4_withoutNA <- bind_rows(coefficients_df_lag4, 
+    coefficients_df_lag3_withoutNA <- bind_rows(coefficients_df_lag3_withoutNA, 
                                  mod_county %>% 
                                    mutate(county = county_name,
                                           estimate = round(estimate, 3)))
   }
 }
 
-coefficients_df_lag4_withoutNA <- coefficients_df_lag4_withoutNA |>
+coefficients_df_lag3_withoutNA <- coefficients_df_lag3_withoutNA |>
   mutate(significant = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
   mutate(across(c(3:8), ~round(., 3)))
-write_csv(coefficients_df_lag4_withoutNA, "individual_animal_incidence_per_county_lag4_withoutNA.csv")
+write_csv(coefficients_df_lag3_withoutNA, "individual_animal_incidence_per_county_lag4_withoutNA.csv")
