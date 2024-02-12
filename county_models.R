@@ -286,7 +286,6 @@ df_county <- df_incidence |>
 # Trend -------------------------------------------------------------------
 
 df_incidence2_trend <- df_incidence2 |> 
-  #filter(diagnosis == "Lab confirmed") |>
   select(date, 
          county, 
          diseases, 
