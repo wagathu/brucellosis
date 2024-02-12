@@ -92,6 +92,7 @@ p19_clean2_kenya <- p19_clean |>
   select(County,Year, pop) |> 
   mutate(Year = str_replace(Year, "pop", "") |> str_squish() |> as.numeric())
 
+write.csv(p19_clean2_kenya, "kenya_pop_2020_2025.csv")
 # Growth Rate
 p19_growth <- p19_clean2 |> 
   group_by(County) |> 
@@ -121,7 +122,7 @@ pop <- rKenyaCensus::V1_T2.2 |>
     pop2015 = round(pop2016 * (1 - (growth_rate / 100))),
     pop2014 = round(pop2015 * (1 - (growth_rate / 100)))
   ) |> 
-  merge(p19_clean |> select(1:3), by = "County") |> 
+  merge(p19_clean |> select(1:4), by = "County") |> 
   select(County,
          pop2014,
          pop2015,
@@ -152,8 +153,7 @@ write.csv(pop, "population_county_2014_2021.csv")
 # Grouping data -----------------------------------------------------------
 
 # Cases per year per county
-df_incidence2 <- df_incidence |> 
-  #filter(diagnosis == "Lab confirmed") |>
+df_incidence2.1 <- df_incidence |> 
   select(date, 
          county, 
          diseases, 
@@ -164,8 +164,7 @@ df_incidence2 <- df_incidence |>
          sheep_pop, 
          cam_pop) |>
   mutate(year = year(date)) |> 
-  merge(pop, by = c("county", "year"))
- # mutate(across(where(is.numeric), ~ifelse(. == 0, NA, .)))
+  merge(pop, by = c("county", "year"), all = T)
 
 # Identifying the outliers in the number of cases
 numeric_columns <- df_incidence2 %>%
@@ -184,10 +183,10 @@ numeric_columns %>%
   )
 
 
-df_incidence2 <- df_incidence2 |> 
+df_incidence2 <- df_incidence2.1 |> 
   mutate(
-    catt_cases = ifelse(catt_cases >= 69, mean(catt_cases), catt_cases),
-    goat_cases = ifelse(goat_cases > 28, mean(goat_cases), goat_cases),
+    catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
+    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
   )
 
 numeric_columns <- df_incidence2 %>%
@@ -209,7 +208,6 @@ numeric_columns %>%
 df_tot_cases <- df_incidence2 |>
   group_by(date, county) |>
   summarise(across(contains("cases"), ~ sum(., na.rm = T))) 
-  #mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
 
 # Population per year, per county
 df_pop <- df_incidence2 |> 
@@ -230,7 +228,6 @@ df_1 <- df_tot_cases |>
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
   ) |>
   select(date, county, contains(c("incidence", "cases"))) |>
-  #mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .))) |> 
   as_tibble() |> 
   arrange(county)
 
@@ -275,6 +272,16 @@ df_cum_complete <- df_cum |>
   select(date, county, human_incidence, animal_incidence, animal_cases, hum_cases) |> 
   filter(animal_incidence > 0)
 write.csv(df_cum_complete, "df_cum_complete.csv", row.names = F)
+
+## County
+df_county <- df_incidence |> 
+  select(county, contains("cases")) |> 
+  mutate(
+    catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
+    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
+  ) |> 
+  group_by(county) |> 
+  summarise(across(where(is.numeric), ~round(sum(., na.rm = T))))
 
 # Trend -------------------------------------------------------------------
 
@@ -784,11 +791,16 @@ animal_sm_plt
 
 # Descriptive Statistics  -------------------------------------------------
 
-table1.1 <- df_incidence |> 
-  select(county, diagnosis, contains("cases")) |> 
+table1.1 <- df_incidence |>
+  select(county, diagnosis, contains("cases")) |>
+  mutate(
+    catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
+    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
+  ) |>
+  
   pivot_longer(cols = -c(county, diagnosis)) %>%
-  group_by(name) |> 
-  group_by(name, Diagnosis = diagnosis) |> 
+  group_by(name) |>
+  group_by(name, Diagnosis = diagnosis) |>
   summarise(Cases = sum(value, na.rm = T)) |> 
   mutate(
     Species = recode(
@@ -810,7 +822,30 @@ table1.1 <- df_incidence |>
                caption = "Number of cases according to the type of Diagnosis", 
                format = "pipe",
                latex_options = "hold_position")
-
+write.csv(table1.1 <- df_incidence |> 
+  select(county, diagnosis, contains("cases")) |> 
+  pivot_longer(cols = -c(county, diagnosis)) %>%
+  group_by(name) |> 
+  group_by(name, Diagnosis = diagnosis) |> 
+  summarise(Cases = sum(value, na.rm = T)) |> 
+  mutate(
+    Species = recode(
+      name,
+      "cam_cases" = 'Camels',
+      "hum_cases" = 'Humans',
+      "goat_cases" = 'Goats',
+      "shp_cases" = "Sheep",
+      "catt_cases" = "Cattle"
+    ) 
+  ) |> 
+  ungroup() |> 
+  select(-name) |> 
+  group_by(Species, Diagnosis) |> 
+  group_by(Species) |> 
+  mutate(`Percent(%)` = round((Cases/sum(Cases)) * 100, 2)) |> 
+  select(3, 1,2,4),
+  
+  "cases_table.csv")
 
 
 # The descriptive statistics are for the Incidence Rate National Wide
@@ -840,7 +875,29 @@ table2 <- df_1 %>%
                format = "pipe", latex_options = "hold_position")
 
 
-
+write.csv(table2 <- df_1 %>%
+  select(county, contains("incidence")) |> 
+  pivot_longer(cols = -1) %>%
+  group_by(name) %>%
+  summarise(
+    `Mean Incidence Rate` = mean(value, na.rm = TRUE),
+    minimum = min(value, na.rm = TRUE),
+    median = median(value, na.rm = TRUE),
+    max = max(value, na.rm = TRUE),
+    sd = sd(value, na.rm = TRUE)
+  ) %>%
+  arrange(desc(`Mean Incidence Rate`)) %>%
+  mutate(
+    name = c("Human", "Goat", "Cattle", "Camel", "Sheep"),
+    Cases = comma(`Mean Incidence Rate`),
+    Minimum = comma(minimum),
+    Median = comma(median),
+    Maximum = comma(max),
+    `Standard Deviation` = comma(sd)
+  ) %>%
+  select(Species = name, `Mean Incidence Rate`, Minimum, Median, Maximum, `Standard Deviation`),
+  
+  "descriptive_table.csv")
 
 # Spatial -----------------------------------------------------------------
 
@@ -1015,9 +1072,9 @@ animals <- df_spatial_merged_cum |>
       size = 16
     ),
     legend.position = "bottom",
-    legend.text = element_text(size = 10),
-    legend.title = element_text(size = 10, colour = "black"),
-    legend.key.size = unit(0.3, "cm"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 12, colour = "black"),
+    legend.key.size = unit(0.7, "cm"),
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Animals") +
@@ -1060,9 +1117,9 @@ humans <- df_spatial_merged_cum |>
       size = 16
     ),
     legend.position = "bottom",
-    legend.text = element_text(size = 10),
-    legend.title = element_text(size = 10, colour = "black"),
-    legend.key.size = unit(0.3, "cm"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 12, colour = "black"),
+    legend.key.size = unit(0.7, "cm"),
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Humans") +
@@ -1119,9 +1176,9 @@ cattle <- df_spatial_merged |>
       size = 16
     ),
     legend.position = "bottom",
-    legend.text = element_text(size = 10),
-    legend.title = element_text(size = 10, colour = "black"),
-    legend.key.size = unit(0.3, "cm"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 12, colour = "black"),
+    legend.key.size = unit(0.7, "cm"),
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Cattle") +
@@ -1159,9 +1216,9 @@ goat <- df_spatial_merged |>
       size = 16
     ),
     legend.position = "bottom",
-    legend.text = element_text(size = 10),
-    legend.title = element_text(size = 10, colour = "black"),
-    legend.key.size = unit(0.3, "cm"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 12, colour = "black"),
+    legend.key.size = unit(0.7, "cm"),
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Goats") +
@@ -1200,9 +1257,9 @@ sheep <- df_spatial_merged |>
       size = 16
     ),
     legend.position = "bottom",
-    legend.text = element_text(size = 10),
-    legend.title = element_text(size = 10, colour = "black"),
-    legend.key.size = unit(0.3, "cm"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 12, colour = "black"),
+    legend.key.size = unit(0.7, "cm"),
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Sheep") +
@@ -1240,9 +1297,9 @@ camels <- df_spatial_merged |>
       size = 16
     ),
     legend.position = "bottom",
-    legend.text = element_text(size = 10),
-    legend.title = element_text(size = 10, colour = "black"),
-    legend.key.size = unit(0.3, "cm"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 12, colour = "black"),
+    legend.key.size = unit(0.7, "cm"),
     strip.text = element_text(colour = "black", size = 16)
   ) +
   ggtitle("Camels") +
@@ -1257,13 +1314,10 @@ all_plots <-
              sheep,
              camels,
              ncol = 1,
-             guides = "keep") +
-  plot_annotation(caption = "For humans, the incidence rate is per 1,000 population while for other species,
-                  the incidence rate is per 1,000,000 population
-                  ") &
+             guides = "keep") &
   theme(plot.caption = element_text(size = 16, colour = "black"))
-
-
+dev.off()
+ggsave("all_plots.png", dpi = 1e3, height = 18, width = 20)
 
 # Correlation -------------------------------------------------------------
 # library(data.table)

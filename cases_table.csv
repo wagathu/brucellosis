@@ -1,0 +1,16 @@
+Species,Diagnosis,Cases,Percent(%)
+Camels,Clinically confirmed,21,91.3
+Camels,Lab confirmed,2,8.7
+Camels,Post Mortem,0,0
+Cattle,Clinically confirmed,228,55.34
+Cattle,Lab confirmed,170,41.26
+Cattle,Post Mortem,14,3.4
+Goats,Clinically confirmed,815,82.16
+Goats,Lab confirmed,177,17.84
+Goats,Post Mortem,0,0
+Humans,Clinically confirmed,945046,22.78
+Humans,Lab confirmed,3203162,77.22
+Humans,Post Mortem,0,0
+Sheep,Clinically confirmed,65,79.27
+Sheep,Lab confirmed,17,20.73
+Sheep,Post Mortem,0,0
