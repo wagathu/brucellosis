@@ -65,8 +65,11 @@ Nakuru,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 Nandi,(Intercept),1.587,NA,NA,NA,NA,NA,NA
 Nandi,Cattle incidence,1.685,NA,NA,NA,NA,NA,NA
 Nandi,Goat Incidence,-0.308,NA,NA,NA,NA,NA,NA
-Nyamira,(Intercept),1.61,0.309,5.209,0.035,1.102,2.119,Significant
-Nyamira,Cattle incidence,-0.013,0.063,-0.206,0.856,-0.117,0.091,Not Significant
+Narok,(Intercept),2.19,NA,NA,NA,NA,NA,NA
+Narok,Cattle incidence,NA,NA,NA,NA,NA,NA,NA
+Narok,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
+Nyamira,(Intercept),1.638,0.282,5.81,0.028,1.174,2.102,Significant
+Nyamira,Cattle incidence,-0.021,0.058,-0.352,0.758,-0.117,0.075,Not Significant
 Nyamira,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 Nyeri,(Intercept),0.156,NA,NA,NA,NA,NA,NA
 Nyeri,Cattle incidence,-0.002,NA,NA,NA,NA,NA,NA
@@ -83,11 +86,11 @@ Tharaka Nithi,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 Trans Nzoia,(Intercept),2.672,0.945,2.826,0.217,1.116,4.227,Significant
 Trans Nzoia,Cattle incidence,-0.151,0.243,-0.621,0.646,-0.552,0.249,Not Significant
 Trans Nzoia,Goat Incidence,0.442,0.336,1.316,0.414,-0.111,0.994,Not Significant
-Turkana,(Intercept),1.21,0.068,17.908,0,1.098,1.321,Significant
-Turkana,Cattle incidence,-0.015,0.005,-2.879,0.064,-0.024,-0.006,Significant
-Turkana,Goat Incidence,0.094,0.029,3.252,0.047,0.046,0.142,Significant
-Uasin Gishu,(Intercept),0.504,NA,NA,NA,NA,NA,NA
-Uasin Gishu,Cattle incidence,0.05,NA,NA,NA,NA,NA,NA
+Turkana,(Intercept),1.233,0.064,19.374,0,1.128,1.337,Significant
+Turkana,Cattle incidence,-0.015,0.006,-2.69,0.055,-0.024,-0.006,Significant
+Turkana,Goat Incidence,0.083,0.031,2.699,0.054,0.032,0.133,Significant
+Uasin Gishu,(Intercept),0.119,NA,NA,NA,NA,NA,NA
+Uasin Gishu,Cattle incidence,0.075,NA,NA,NA,NA,NA,NA
 Uasin Gishu,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 Vihiga,(Intercept),0.877,NA,NA,NA,NA,NA,NA
 Vihiga,Cattle incidence,-0.011,NA,NA,NA,NA,NA,NA

@@ -164,10 +164,11 @@ df_incidence2.1 <- df_incidence |>
          sheep_pop, 
          cam_pop) |>
   mutate(year = year(date)) |> 
-  merge(pop, by = c("county", "year"), all = T)
+  merge(pop, by = c("county", "year"), all = T) |> 
+  filter(!is.na(year))
 
 # Identifying the outliers in the number of cases
-numeric_columns <- df_incidence2 %>%
+numeric_columns <- df_incidence2.1 %>%
   select(contains('cases')) |> 
   keep(is.numeric)
 
@@ -849,7 +850,7 @@ write.csv(table1.1 <- df_incidence |>
 
 # The descriptive statistics are for the Incidence Rate National Wide
 table2 <- df_1 %>%
-  select(county, contains("incidence")) |> 
+  select(county, contains("incidence")) |>
   pivot_longer(cols = -1) %>%
   group_by(name) %>%
   summarise(
@@ -861,21 +862,35 @@ table2 <- df_1 %>%
   ) %>%
   arrange(desc(`Mean Incidence Rate`)) %>%
   mutate(
-    name = c("Human", "Goat", "Cattle", "Camel", "Sheep"),
+    name = case_when(
+     name ==  "human_incidence" ~   "Human",
+      name =="catt_incidence"  ~  "Cattle", 
+      name == "goat_incidence" ~  "Goat", 
+      name == "cam_incidence"  ~ "Camel", 
+      name == "shp_incidence" ~  "Sheep"
+     ),
     Cases = comma(`Mean Incidence Rate`),
     Minimum = comma(minimum),
     Median = comma(median),
     Maximum = comma(max),
     `Standard Deviation` = comma(sd)
-  ) %>%
-  select(Species = name, `Mean Incidence Rate`, Minimum, Median, Maximum, `Standard Deviation`) |> 
-  knitr::kable(align = "l", 
-               caption = "Descriptive Statistics for Incidence Rate", 
-               format = "pipe", latex_options = "hold_position")
+  ) |> 
+  select(Species = name,
+         `Mean Incidence Rate`,
+         Minimum,
+         Median,
+         Maximum,
+         `Standard Deviation`) |>
+  knitr::kable(
+    align = "l",
+    caption = "Descriptive Statistics for Incidence Rate",
+    format = "pipe",
+    latex_options = "hold_position"
+  )
 
 
-write.csv(table2 <- df_1 %>%
-  select(county, contains("incidence")) |> 
+write.csv(df_1 %>%
+  select(county, contains("incidence")) |>
   pivot_longer(cols = -1) %>%
   group_by(name) %>%
   summarise(
@@ -887,14 +902,25 @@ write.csv(table2 <- df_1 %>%
   ) %>%
   arrange(desc(`Mean Incidence Rate`)) %>%
   mutate(
-    name = c("Human", "Goat", "Cattle", "Camel", "Sheep"),
+    name = case_when(
+     name ==  "human_incidence" ~   "Human",
+      name =="catt_incidence"  ~  "Cattle", 
+      name == "goat_incidence" ~  "Goat", 
+      name == "cam_incidence"  ~ "Camel", 
+      name == "shp_incidence" ~  "Sheep"
+     ),
     Cases = comma(`Mean Incidence Rate`),
     Minimum = comma(minimum),
     Median = comma(median),
     Maximum = comma(max),
     `Standard Deviation` = comma(sd)
-  ) %>%
-  select(Species = name, `Mean Incidence Rate`, Minimum, Median, Maximum, `Standard Deviation`),
+  ) |> 
+  select(Species = name,
+         `Mean Incidence Rate`,
+         Minimum,
+         Median,
+         Maximum,
+         `Standard Deviation`),
   
   "descriptive_table.csv")
 
@@ -1083,6 +1109,7 @@ animals
 # Humans
 cate_human <-
   length(levels(df_spatial_merged_cum$human_incidence_range))
+
 humans <- df_spatial_merged_cum |>
   # mutate(human_incidence_range = ifelse(is.na(human_incidence_range),
   #                                        "0",

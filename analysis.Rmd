@@ -2,6 +2,7 @@
 title: "Analysis"
 author: ''
 output:
+  pdf_document: default
   word_document: default
 header-includes: \usepackage{lscape}
 ---

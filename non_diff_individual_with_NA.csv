@@ -1,21 +1,21 @@
 variable,estimate,std.error,statistic,p.value,conf_low,conf_high,lag,significance
-(Intercept),0.867,0.039,22.245,0,0.803,0.931,0,Significant
-Camel incidence,0.128,0.24,0.534,0.595,-0.267,0.523,0,Not Significant
-Sheep incidence,0.83,0.689,1.205,0.231,-0.303,1.963,0,Not Significant
-Cattle incidence,0.355,0.214,1.661,0.1,0.004,0.707,0,Significant
-Goat Incidence,0.252,0.404,0.622,0.535,-0.414,0.917,0,Not Significant
-(Intercept),0.89,0.039,22.897,0,0.826,0.954,1,Significant
-Camel incidence,0.12,0.24,0.499,0.619,-0.275,0.515,1,Not Significant
-Sheep incidence,0.827,0.7,1.181,0.241,-0.325,1.979,1,Not Significant
-Cattle incidence,0.118,0.227,0.521,0.604,-0.255,0.491,1,Not Significant
-Goat Incidence,0.435,0.485,0.897,0.372,-0.363,1.233,1,Not Significant
-(Intercept),0.892,0.038,23.484,0,0.83,0.955,2,Significant
-Camel incidence,0.124,0.233,0.53,0.598,-0.26,0.507,2,Not Significant
-Sheep incidence,1.021,0.68,1.502,0.137,-0.097,2.139,2,Not Significant
-Cattle incidence,0.183,0.22,0.832,0.408,-0.179,0.545,2,Not Significant
-Goat Incidence,0.34,0.471,0.722,0.472,-0.434,1.115,2,Not Significant
-(Intercept),0.895,0.037,24.028,0,0.834,0.956,3,Significant
-Camel incidence,0.144,0.227,0.634,0.528,-0.23,0.517,3,Not Significant
-Sheep incidence,0.884,0.662,1.336,0.185,-0.204,1.973,3,Not Significant
-Cattle incidence,0.314,0.214,1.466,0.146,-0.038,0.667,3,Not Significant
-Goat Incidence,0.188,0.458,0.41,0.683,-0.566,0.942,3,Not Significant
+(Intercept),0.866,0.039,22.14,0,0.802,0.93,0,Significant
+Camel incidence,0.127,0.24,0.531,0.597,-0.267,0.522,0,Not Significant
+Sheep incidence,0.894,0.679,1.317,0.191,-0.223,2.011,0,Not Significant
+Cattle incidence,0.381,0.226,1.683,0.096,0.009,0.753,0,Significant
+Goat Incidence,0.122,0.365,0.336,0.738,-0.478,0.723,0,Not Significant
+(Intercept),0.889,0.039,22.734,0,0.825,0.954,1,Significant
+Camel incidence,0.112,0.241,0.465,0.643,-0.284,0.508,1,Not Significant
+Sheep incidence,0.946,0.686,1.379,0.171,-0.182,2.074,1,Not Significant
+Cattle incidence,0.167,0.24,0.695,0.489,-0.228,0.563,1,Not Significant
+Goat Incidence,0.204,0.419,0.486,0.628,-0.485,0.893,1,Not Significant
+(Intercept),0.892,0.038,23.344,0,0.829,0.955,2,Significant
+Camel incidence,0.115,0.233,0.493,0.623,-0.269,0.499,2,Not Significant
+Sheep incidence,1.146,0.665,1.722,0.089,0.051,2.24,2,Significant
+Cattle incidence,0.248,0.233,1.061,0.292,-0.136,0.632,2,Not Significant
+Goat Incidence,0.083,0.406,0.204,0.839,-0.586,0.751,2,Not Significant
+(Intercept),0.894,0.037,23.924,0,0.832,0.955,3,Significant
+Camel incidence,0.14,0.227,0.619,0.537,-0.233,0.513,3,Not Significant
+Sheep incidence,0.944,0.646,1.46,0.148,-0.119,2.006,3,Not Significant
+Cattle incidence,0.343,0.227,1.514,0.134,-0.03,0.716,3,Not Significant
+Goat Incidence,0.07,0.395,0.176,0.86,-0.579,0.719,3,Not Significant

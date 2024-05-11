@@ -62,8 +62,11 @@ Nakuru,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 Nandi,(Intercept),6.586,0.609,10.815,0.059,5.585,7.588,Significant
 Nandi,Cattle incidence,-0.203,0.136,-1.499,0.375,-0.427,0.02,Not Significant
 Nandi,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
-Nyamira,(Intercept),3.046,1.418,2.148,0.165,0.713,5.378,Significant
-Nyamira,Cattle incidence,-0.686,0.65,-1.055,0.402,-1.756,0.384,Not Significant
+Narok,(Intercept),2.19,NA,NA,NA,NA,NA,NA
+Narok,Cattle incidence,NA,NA,NA,NA,NA,NA,NA
+Narok,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
+Nyamira,(Intercept),1.12,0.966,1.16,0.366,-0.469,2.709,Not Significant
+Nyamira,Cattle incidence,0.232,0.508,0.457,0.692,-0.603,1.068,Not Significant
 Nyamira,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 Nyeri,(Intercept),0.29,NA,NA,NA,NA,NA,NA
 Nyeri,Cattle incidence,-0.034,NA,NA,NA,NA,NA,NA
@@ -80,14 +83,14 @@ Tharaka Nithi,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 Trans Nzoia,(Intercept),2.453,0.314,7.822,0.016,1.937,2.969,Significant
 Trans Nzoia,Cattle incidence,NA,NA,NA,NA,NA,NA,NA
 Trans Nzoia,Goat Incidence,-0.251,0.269,-0.933,0.449,-0.693,0.191,Not Significant
-Turkana,(Intercept),1.221,0.19,6.427,0.008,0.909,1.534,Significant
-Turkana,Cattle incidence,0.013,0.039,0.329,0.764,-0.052,0.078,Not Significant
-Turkana,Goat Incidence,-0.031,0.068,-0.457,0.679,-0.143,0.081,Not Significant
-Uasin Gishu,(Intercept),1.55,NA,NA,NA,NA,NA,NA
-Uasin Gishu,Cattle incidence,-0.03,NA,NA,NA,NA,NA,NA
+Turkana,(Intercept),1.226,0.099,12.434,0,1.064,1.389,Significant
+Turkana,Cattle incidence,0.007,0.01,0.716,0.514,-0.009,0.023,Not Significant
+Turkana,Goat Incidence,-0.028,0.052,-0.537,0.62,-0.114,0.058,Not Significant
+Uasin Gishu,(Intercept),1.411,NA,NA,NA,NA,NA,NA
+Uasin Gishu,Cattle incidence,-0.09,NA,NA,NA,NA,NA,NA
 Uasin Gishu,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
-Vihiga,(Intercept),0.85,NA,NA,NA,NA,NA,NA
-Vihiga,Cattle incidence,-0.009,NA,NA,NA,NA,NA,NA
+Vihiga,(Intercept),0.918,NA,NA,NA,NA,NA,NA
+Vihiga,Cattle incidence,-0.013,NA,NA,NA,NA,NA,NA
 Vihiga,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
 West Pokot,(Intercept),5.596,0.32,17.511,0.003,5.07,6.121,Significant
 West Pokot,Cattle incidence,-0.07,0.04,-1.729,0.226,-0.136,-0.003,Significant

@@ -34,9 +34,9 @@ Kitui,Cattle incidence,0.052,0.294,0.177,0.86,-0.431,0.535,Not Significant
 Kitui,Goat Incidence,0.153,0.482,0.316,0.752,-0.641,0.946,Not Significant
 Kitui,Sheep incidence,NA,NA,NA,NA,NA,NA,NA
 Kitui,Camel incidence,NA,NA,NA,NA,NA,NA,NA
-Kwale,(Intercept),0.095,0.024,3.904,0,0.055,0.135,Significant
+Kwale,(Intercept),0.094,0.024,3.853,0,0.054,0.134,Significant
 Kwale,Cattle incidence,NA,NA,NA,NA,NA,NA,NA
-Kwale,Goat Incidence,-0.086,0.2,-0.428,0.67,-0.415,0.244,Not Significant
+Kwale,Goat Incidence,-0,0.007,-0.024,0.981,-0.012,0.012,Not Significant
 Kwale,Sheep incidence,NA,NA,NA,NA,NA,NA,NA
 Kwale,Camel incidence,NA,NA,NA,NA,NA,NA,NA
 Laikipia,(Intercept),0.905,0.057,15.957,0,0.812,0.998,Significant
@@ -54,10 +54,10 @@ Makueni,Cattle incidence,-0.189,0.114,-1.665,0.099,-0.376,-0.002,Significant
 Makueni,Goat Incidence,-0.207,0.472,-0.438,0.662,-0.984,0.57,Not Significant
 Makueni,Sheep incidence,-0.005,0.009,-0.515,0.608,-0.019,0.01,Not Significant
 Makueni,Camel incidence,NA,NA,NA,NA,NA,NA,NA
-Mandera,(Intercept),0.5,0.034,14.494,0,0.443,0.556,Significant
-Mandera,Cattle incidence,0.077,0.066,1.165,0.247,-0.032,0.187,Not Significant
-Mandera,Goat Incidence,0.179,0.272,0.658,0.512,-0.268,0.626,Not Significant
-Mandera,Sheep incidence,0.081,1.088,0.075,0.941,-1.708,1.871,Not Significant
+Mandera,(Intercept),0.505,0.035,14.59,0,0.448,0.562,Significant
+Mandera,Cattle incidence,0.087,0.066,1.322,0.189,-0.021,0.195,Not Significant
+Mandera,Goat Incidence,-0.079,0.127,-0.62,0.537,-0.287,0.13,Not Significant
+Mandera,Sheep incidence,0.829,0.827,1.003,0.319,-0.531,2.19,Not Significant
 Mandera,Camel incidence,NA,NA,NA,NA,NA,NA,NA
 Meru,(Intercept),0.337,0.02,16.696,0,0.304,0.37,Significant
 Meru,Cattle incidence,-0.005,0.123,-0.04,0.968,-0.207,0.197,Not Significant
@@ -74,6 +74,11 @@ Nakuru,Cattle incidence,0.134,0.158,0.852,0.397,-0.125,0.394,Not Significant
 Nakuru,Goat Incidence,-0.006,0.053,-0.121,0.904,-0.094,0.081,Not Significant
 Nakuru,Sheep incidence,NA,NA,NA,NA,NA,NA,NA
 Nakuru,Camel incidence,NA,NA,NA,NA,NA,NA,NA
+Narok,(Intercept),1.558,0.076,20.526,0,1.433,1.683,Significant
+Narok,Cattle incidence,0.985,0.548,1.797,0.076,0.084,1.886,Significant
+Narok,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
+Narok,Sheep incidence,NA,NA,NA,NA,NA,NA,NA
+Narok,Camel incidence,NA,NA,NA,NA,NA,NA,NA
 Samburu,(Intercept),1.234,0.068,18.162,0,1.123,1.346,Significant
 Samburu,Cattle incidence,NA,NA,NA,NA,NA,NA,NA
 Samburu,Goat Incidence,-0.009,0.094,-0.099,0.922,-0.164,0.145,Not Significant
@@ -94,10 +99,10 @@ Tharaka Nithi,Cattle incidence,0.009,0.09,0.105,0.916,-0.139,0.158,Not Significa
 Tharaka Nithi,Goat Incidence,0.124,0.172,0.718,0.475,-0.16,0.407,Not Significant
 Tharaka Nithi,Sheep incidence,NA,NA,NA,NA,NA,NA,NA
 Tharaka Nithi,Camel incidence,NA,NA,NA,NA,NA,NA,NA
-Turkana,(Intercept),0.964,0.041,23.691,0,0.897,1.031,Significant
-Turkana,Cattle incidence,0.017,0.016,1.076,0.285,-0.009,0.043,Not Significant
-Turkana,Goat Incidence,0.005,0.064,0.074,0.941,-0.1,0.11,Not Significant
-Turkana,Sheep incidence,0.103,0.077,1.339,0.184,-0.023,0.229,Not Significant
+Turkana,(Intercept),0.963,0.041,23.535,0,0.895,1.03,Significant
+Turkana,Cattle incidence,0.017,0.015,1.155,0.251,-0.007,0.041,Not Significant
+Turkana,Goat Incidence,0.006,0.051,0.119,0.905,-0.078,0.09,Not Significant
+Turkana,Sheep incidence,0.103,0.076,1.354,0.179,-0.022,0.228,Not Significant
 Turkana,Camel incidence,NA,NA,NA,NA,NA,NA,NA
 Uasin Gishu,(Intercept),2.138,0.116,18.478,0,1.947,2.328,Significant
 Uasin Gishu,Cattle incidence,-0.099,0.077,-1.296,0.198,-0.225,0.027,Not Significant
