@@ -164,8 +164,7 @@ df_incidence2.1 <- df_incidence |>
          sheep_pop, 
          cam_pop) |>
   mutate(year = year(date)) |> 
-  merge(pop, by = c("county", "year"), all = T) |> 
-  filter(!is.na(year))
+  merge(pop, by = c("county", "year"), all = T)
 
 # Identifying the outliers in the number of cases
 numeric_columns <- df_incidence2.1 %>%
@@ -1109,7 +1108,6 @@ animals
 # Humans
 cate_human <-
   length(levels(df_spatial_merged_cum$human_incidence_range))
-
 humans <- df_spatial_merged_cum |>
   # mutate(human_incidence_range = ifelse(is.na(human_incidence_range),
   #                                        "0",
