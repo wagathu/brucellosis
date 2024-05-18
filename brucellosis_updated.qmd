@@ -1,7 +1,7 @@
 ---
 title: "Brucellosis Codes"
 format:
-  html:
+  docx:
     toc: true
     toc-location: left
     code-fold: true
@@ -10,6 +10,8 @@ editor: visual
 ---
 
 ## Data Processing
+
+dfghjkl
 
 ```{r}
 source('clean_all_data.R')
@@ -2210,7 +2212,6 @@ ggsave(
 )
 ```
 
-
 ```{r All counties model (combined with NA) at 0 and 3}
 # Lag 2
 df_cum_2_0 <- df_cum |> 
@@ -2392,7 +2393,6 @@ ggsave(
 )
 
 ```
-
 
 ```{r # All counties model (individual without NA-complete case) at lag 2 and 3}
 # Lag 2
