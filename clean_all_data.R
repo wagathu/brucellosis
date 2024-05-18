@@ -62,11 +62,11 @@ p09_clean <- p09 |>
     )
   ) |> 
   distinct() |>
-  select(County, "2014", "2015") 
+  dplyr::select(County, "2014", "2015") 
 
 # 2019
 p19_clean <- p19 |>
-  select(County, "2020", "2021", "2022", "2023", "2024", "2025") |>
+  dplyr::select(County, "2020", "2021", "2022", "2023", "2024", "2025") |>
   setNames(c("County", "pop2020", "pop2021", "pop2022", "pop2023", "pop2024", "pop2025")) |> 
   na.omit() |> 
   mutate(across(2:7, ~ as.numeric(str_remove(., ","))),
@@ -90,7 +90,7 @@ p19_clean2_kenya <- p19_clean |>
     values_to = "pop"
   ) |>
   arrange() |> 
-  select(County,Year, pop) |> 
+  dplyr::select(County,Year, pop) |> 
   mutate(Year = str_replace(Year, "pop", "") |> str_squish() |> as.numeric())
 
 write.csv(p19_clean2_kenya, "kenya_pop_2020_2025.csv")
@@ -114,7 +114,7 @@ pop_22_23 <- p19_clean2 %>%
 
 # 2019 Population
 pop <- rKenyaCensus::V1_T2.2 |> 
-  select(County, pop2019 = Total) |> 
+  dplyr::select(County, pop2019 = Total) |> 
   filter(!County %in% c("Total")) |>
   arrange(County) |> 
   mutate(County = case_when(
@@ -132,8 +132,8 @@ pop <- rKenyaCensus::V1_T2.2 |>
     pop2015 = round(pop2016 * (1 - (growth_rate / 100))),
     pop2014 = round(pop2015 * (1 - (growth_rate / 100)))
   ) |> 
-  merge(p19_clean |> select(1:4), by = "County") |> 
-  select(County,
+  merge(p19_clean |> dplyr::select(1:4), by = "County") |> 
+  dplyr::select(County,
          pop2014,
          pop2015,
          pop2016,
@@ -157,7 +157,7 @@ pop <- rKenyaCensus::V1_T2.2 |>
     name == "pop2020" ~ 2020,
     name == "pop2021" ~ 2021
   )) |> 
-  select(county = County, year, pop) |> 
+  dplyr::select(county = County, year, pop) |> 
   rbind(pop_22_23 |>  filter(year != 2023))
 write.csv(pop, "population_county_2014_2021.csv")
 
@@ -167,13 +167,13 @@ animal_pop2019 <- read_csv('animal_pop_2019.csv') %>%
   pivot_wider(names_from = "species", values_from = "species_num") %>%
   setNames(c("county", paste0(colnames(.[, 2:7]), "_pop") %>% str_to_lower())) |>
   summarise(across(where(is.numeric), ~ sum(.))) |>
-  select(-pigs_pop, -donkeys_pop) |>
+  dplyr::select(-pigs_pop, -donkeys_pop) |>
   setNames(c('sheep_pop', 'goat_pop', 'cam_pop', 'catt_pop'))
 
 df22_human <- df_22_human |>
-  select(county = organisationunitname, periodname, Brucellosis, `MOH 706_Brucella`) |>
+  dplyr::select(county = organisationunitname, periodname, Brucellosis, `MOH 706_Brucella`) |>
   mutate(date = dmy(paste("01", periodname, sep = "-")) |> ymd()) |>
-  select(-periodname) |>
+  dplyr::select(-periodname) |>
   pivot_longer(
     cols = -c(county, date),
     names_to = 'diagnosis',
@@ -183,7 +183,7 @@ df22_human <- df_22_human |>
     diagnosis == 'Brucellosis' ~ 'Clinically confirmed',
     TRUE ~ 'Lab confirmed'
   )) |>
-  select(county, date, diagnosis, hum_cases) |>
+  dplyr::select(county, date, diagnosis, hum_cases) |>
   mutate(
     county = str_remove(county, ' County') %>%
       ifelse(. == "Muranga", "Murang'a", .),
@@ -193,7 +193,7 @@ df22_human <- df_22_human |>
   merge(pop_22_23, by = c('county', 'year'))
 
 df_2022 <- df_22_animal |>
-  select(
+  dplyr::select(
     county = County,
     month,
     year...13,
@@ -250,7 +250,7 @@ df_2022 <- df_22_animal |>
           filter(year == 2022),
         by = c('county', 'date', 'diagnosis', 'year'), all.y = T) |> 
   cbind(animal_pop2019) |> 
-  select(
+  dplyr::select(
     county,
     year,
     date,
@@ -273,7 +273,7 @@ df_2022 <- df_22_animal |>
 
 # Cases per year per county
 df_incidence2.1 <- df_incidence |>
-  select(
+  dplyr::select(
     date,
     county,
     diseases,

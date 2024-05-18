@@ -19,7 +19,7 @@ source('clean_all_data.R')
 
 # Identifying the outliers in the number of cases
 numeric_columns <- df_incidence2.1 %>%
-  select(contains('cases')) |> 
+  dplyr::select(contains('cases')) |> 
   keep(is.numeric)
 
 numeric_columns %>%
@@ -47,7 +47,7 @@ df_tot_cases <- df_incidence2 |>
 
 # Population per year, per county
 df_pop <- df_incidence2 |> 
-  select(date, county, contains("pop")) %>%
+  dplyr::select(date, county, contains("pop")) %>%
   distinct(.) |>
   as_tibble() |>
   group_by(date, county) %>%
@@ -63,17 +63,17 @@ df_1 <- df_tot_cases |>
     goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
   ) |>
-  select(date, county, contains(c("incidence", "cases"))) |>
+  dplyr::select(date, county, contains(c("incidence", "cases"))) |>
   as_tibble() |> 
   arrange(county)
 
 df_1_pop <- df_tot_cases |>
   merge(df_pop, by = c("date", "county")) |> 
-  select(date, county, pop)
+  dplyr::select(date, county, pop)
 write.csv(df_1_pop, 'county_humanpop.csv', row.names = F)
 
 df_1_complete <- df_1 |>
-  select(
+  dplyr::select(
     date,
     county,
     human_incidence,
@@ -88,7 +88,7 @@ write.csv(df_1_complete, "df_1_complete.csv", row.names = F)
 
 # Outliers
 numeric_columns <- df_1 %>%
-  select(contains('incidence')) |> 
+  dplyr::select(contains('incidence')) |> 
   keep(is.numeric)
 
 numeric_columns %>%
@@ -114,18 +114,18 @@ df_cum <- df_tot_cases |>
     animal_incidence = round((animal_cases / animal_pop) * 1000000, 4),
     human_incidence = round((hum_cases / pop) * 1000, 4)
   ) |> 
-  select(date, county, contains(c("incidence", 'cases'))) |> 
+  dplyr::select(date, county, contains(c("incidence", 'cases'))) |> 
   as_tibble() |> 
   mutate()
 
 df_cum_complete <- df_cum |> 
-  select(date, county, human_incidence, animal_incidence, animal_cases, hum_cases) |> 
+  dplyr::select(date, county, human_incidence, animal_incidence, animal_cases, hum_cases) |> 
   filter(animal_incidence > 0)
 write.csv(df_cum_complete, "df_cum_complete.csv", row.names = F)
 
 ## County
 df_county <- df_incidence2.1 |> 
-  select(county, contains("cases")) |> 
+  dplyr::select(county, contains("cases")) |> 
   mutate(
     catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
     goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
@@ -137,7 +137,7 @@ df_county <- df_incidence2.1 |>
 ```{r plotting the trends over time}
 
 df_incidence2_trend <- df_incidence2.1 |> 
-  select(date, 
+  dplyr::select(date, 
          county, 
          diseases, 
          diagnosis, 
@@ -155,7 +155,7 @@ df_tot_cases_trend <- df_incidence2_trend |>
   mutate(across(contains('cases'), ~ifelse(. == 0, NA, .)))
 
 df_tot_pop_trend <- df_incidence2_trend |>
-  select(date, county, contains("pop")) %>%
+  dplyr::select(date, county, contains("pop")) %>%
   distinct(.) |>
   as_tibble() |>
   group_by(date) %>%
@@ -180,7 +180,7 @@ df_1_trend <- df_tot_cases_trend |>
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4),
     date = as.Date(date)
   ) |>
-  select(date, contains("incidence")) |>
+  dplyr::select(date, contains("incidence")) |>
   as_tibble() |> 
   mutate(
     
@@ -189,7 +189,7 @@ df_1_trend <- df_tot_cases_trend |>
 write.csv(df_1_trend, "individual_incidence.csv")
 
 df_1_trend_complete <- df_1_trend |>
-  select(date, human_incidence, catt_incidence, goat_incidence) |> 
+  dplyr::select(date, human_incidence, catt_incidence, goat_incidence) |> 
   filter(!is.na(catt_incidence)) |> 
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
@@ -205,7 +205,7 @@ df_1_trend_cases <- df_tot_cases_trend |>
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4),
     date = as.Date(date)
   ) |>
-  select(date, contains(c("incidence", "cases"))) |>
+  dplyr::select(date, contains(c("incidence", "cases"))) |>
   as_tibble() |> 
   mutate(
     
@@ -230,7 +230,7 @@ df_cum_trend <- df_tot_cases_trend |>
          human_incidence = round((hum_cases / hum_pop) * 1000, 4),
          animal_incidence = round((animal_cases / animal_pop) * 1000000, 4)
   ) |> 
-  select(date, contains("incidence"))
+  dplyr::select(date, contains("incidence"))
 write.csv(df_cum_trend, "combined_incidence.csv")
 
 # Cases
@@ -244,7 +244,7 @@ df_cum_trend_cases <- df_tot_cases_trend |>
          human_incidence = round((hum_cases / hum_pop) * 1000, 4),
          animal_incidence = round((animal_cases / animal_pop) * 1000000, 4)
   ) |> 
-  select(date, contains(c("incidence", "cases")))
+  dplyr::select(date, contains(c("incidence", "cases")))
 write.csv(df_cum_trend_cases, "combined_incidence_cases.csv")
 
 # The differenced one
@@ -437,10 +437,10 @@ adf_combined_results <- data.frame(
 
 ```{r moving average smoothing}
 
-# Select columns containing "incidence"
+# dplyr::select columns containing "incidence"
 incidence_cols <- grep("incidence", names(df_1_trend), value = TRUE)
 
-# Apply moving average smoothing to selected columns
+# Apply moving average smoothing to dplyr::selected columns
 smoothed_df <- df_1_trend %>%
   mutate(across(incidence_cols, ~ifelse(is.na(.), 0, .))) |> 
   mutate(across(all_of(incidence_cols), ~zoo::rollmean(., k = 4, fill = NA), .names = "smoothed_{.col}")) |> 
@@ -462,7 +462,7 @@ order2 <- c("Human Incidence", "Cattle Incidence", "Camel Incidence", "Goat Inci
 "Sheep Incidence")
 
 trend_data_smoothed <- smoothed_df %>%
-  select(date, contains("smoothed")) %>%
+  dplyr::select(date, contains("smoothed")) %>%
   pivot_longer(cols = -date) %>%
   mutate(
     name = factor(name, levels = order),
@@ -474,7 +474,7 @@ trend_data_smoothed <- smoothed_df %>%
 
 df_long <- df_1_trend %>%
   mutate(across(incidence_cols, ~ifelse(is.na(.), 0, .))) |> 
-  select(date, contains("incidence")) %>%
+  dplyr::select(date, contains("incidence")) %>%
   pivot_longer(cols = -date) %>%
   mutate(
     name = case_when(
@@ -597,11 +597,11 @@ df_cum_trend <- df_cum_trend |>
 
 incidence_cols_cum <- grep("incidence", names(df_cum_trend), value = TRUE)
 
-# Apply moving average smoothing to selected columns
-# Select columns containing "incidence"
+# Apply moving average smoothing to dplyr::selected columns
+# dplyr::select columns containing "incidence"
 incidence_cols <- grep("incidence", names(df_cum_trend), value = TRUE)
 
-# Apply moving average smoothing to selected columns
+# Apply moving average smoothing to dplyr::selected columns
 smoothed_df_combined <- df_cum_trend %>%
   mutate(animal_incidence = ifelse(is.na(animal_incidence), 0, animal_incidence)) |> 
   as_tibble() |>
@@ -640,7 +640,7 @@ animal_sm_plt
 ```{r Descriptive statistics}
 
 table1.1 <- df_incidence2.1 |>
-  select(county, diagnosis, contains("cases")) |>
+  dplyr::select(county, diagnosis, contains("cases")) |>
   mutate(
     catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
     goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
@@ -660,12 +660,12 @@ table1.1 <- df_incidence2.1 |>
     ) 
   ) |> 
   ungroup() |> 
-  select(-name) |> 
+  dplyr::select(-name) |> 
   group_by(Species, Diagnosis) |> 
   group_by(Species) |> 
   mutate(`Percent(%)` = round((Cases/sum(Cases, na.rm = T)) * 100, 2)) |> 
   mutate(Cases = format(round(Cases), big.mark = ',') |> str_squish()) |> 
-  select(3, 1,2,4) |> 
+  dplyr::select(3, 1,2,4) |> 
   knitr::kable(align = "l", 
                caption = "Number of cases according to the type of Diagnosis", 
                format = "pipe",
@@ -674,7 +674,7 @@ table1.1
 
 
 write.csv( df_incidence |> 
-  select(county, diagnosis, contains("cases")) |> 
+  dplyr::select(county, diagnosis, contains("cases")) |> 
   pivot_longer(cols = -c(county, diagnosis)) %>%
   group_by(name) |> 
   group_by(name, Diagnosis = diagnosis) |> 
@@ -690,17 +690,17 @@ write.csv( df_incidence |>
     ) 
   ) |> 
   ungroup() |> 
-  select(-name) |> 
+  dplyr::select(-name) |> 
   group_by(Species, Diagnosis) |> 
   group_by(Species) |> 
   mutate(`Percent(%)` = round((Cases/sum(Cases)) * 100, 2)) |> 
-  select(3, 1,2,4),
+  dplyr::select(3, 1,2,4),
   
   "cases_table.csv")
 
 # The descriptive statistics are for the Incidence Rate National Wide
 table2 <- df_1 %>%
-  select(county, contains("incidence")) |>
+  dplyr::select(county, contains("incidence")) |>
   pivot_longer(cols = -1) %>%
   group_by(name) %>%
   summarise(
@@ -725,7 +725,7 @@ table2 <- df_1 %>%
     Maximum = comma(max),
     `Standard Deviation` = comma(sd)
   ) |> 
-  select(Species = name,
+  dplyr::select(Species = name,
          `Mean Incidence Rate`,
          Minimum,
          Median,
@@ -741,7 +741,7 @@ table2 <- df_1 %>%
 table2
 
 write.csv(df_1 %>%
-  select(county, contains("incidence")) |>
+  dplyr::select(county, contains("incidence")) |>
   pivot_longer(cols = -1) %>%
   group_by(name) %>%
   summarise(
@@ -766,7 +766,7 @@ write.csv(df_1 %>%
     Maximum = comma(max),
     `Standard Deviation` = comma(sd)
   ) |> 
-  select(Species = name,
+  dplyr::select(Species = name,
          `Mean Incidence Rate`,
          Minimum,
          Median,
@@ -785,7 +785,7 @@ df_tot_cases_spatial <- df_incidence2.1 |>
 
 # Population per year, per county
 df_pop_spatial <- df_incidence2.1 |>
-  select(date, county, contains("pop")) %>%
+  dplyr::select(date, county, contains("pop")) %>%
   distinct(.) |>
   as_tibble() |>
   group_by(year = year(as.Date(date)), county) %>%
@@ -806,14 +806,14 @@ df_tot_cases_spatial_month <- df_incidence2.1 |>
     goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
   ) |>
-  select(year, date, county, contains(c("incidence", "cases"))) |>
+  dplyr::select(year, date, county, contains(c("incidence", "cases"))) |>
   as_tibble()
 
 write.csv(df_tot_cases_spatial_month,
           "df_tot_cases_spatial_month.csv")
 
 df_tot_cases_spatial_month_complete <- df_tot_cases_spatial_month |>
-  select(
+  dplyr::select(
     year,
     date,
     county,
@@ -839,13 +839,13 @@ df_spatial_cum_month <- df_tot_cases_spatial_month |>
     animal_incidence = round((animal_cases / animal_pop) * 1000000, 4),
     human_incidence = round((hum_cases / pop) * 1000, 4)
   ) |>
-  select(date, year, county, contains(c("incidence", "cases"))) |>
+  dplyr::select(date, year, county, contains(c("incidence", "cases"))) |>
   as_tibble()
 write.csv(df_spatial_cum_month, "df_spatial_cum_month.csv")
 
 # Population per year, per county
 df_pop_spatial <- df_incidence2.1 |>
-  select(date, county, contains("pop")) %>%
+  dplyr::select(date, county, contains("pop")) %>%
   distinct(.) |>
   as_tibble() |>
   group_by(year = year(date), county) %>%
@@ -862,7 +862,7 @@ df_spatial <- df_tot_cases_spatial |>
     goat_incidence = round((goat_cases / goat_pop) * 1000000, 4),
     shp_incidence = round((shp_cases / sheep_pop) * 1000000, 4)
   ) |>
-  select(year, county, contains("incidence")) |>
+  dplyr::select(year, county, contains("incidence")) |>
   #mutate(across(is.numeric, ~ifelse(is.na(.), 0, .))) |>
   as_tibble()
 
@@ -877,7 +877,7 @@ df_spatial_cum <- df_tot_cases_spatial |>
     animal_incidence = round((animal_cases / animal_pop) * 1000000, 4),
     human_incidence = round((hum_cases / pop) * 1000, 4)
   ) |>
-  select(year, county, contains("incidence")) |>
+  dplyr::select(year, county, contains("incidence")) |>
   as_tibble()
 
 # Checking for mismatch of county names in the shapefiles and in our data
@@ -1218,7 +1218,7 @@ df_1_trend <- df_1_trend |>
 
 cor_lag <- df_1_trend %>%
   as_tibble() %>%
-  select(-date) %>%
+  dplyr::select(-date) %>%
   setNames(c("Human",
              "Cattle",
              "Camel",
@@ -1261,7 +1261,7 @@ cor_lag1 <- df_1_trend %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
             list( ~ lag(., n = 1))) |>
   na.omit() |>
-  select(-date) %>%
+  dplyr::select(-date) %>%
   setNames(c("Human",
              "Cattle",
              "Camel",
@@ -1299,7 +1299,7 @@ cor_lag2 <- df_1_trend %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
             list( ~ lag(., n = 2))) |>
   na.omit() |>
-  select(-date) %>%
+  dplyr::select(-date) %>%
   setNames(c("Human",
              "Cattle",
              "Camel",
@@ -1337,7 +1337,7 @@ cor_lag3 <- df_1_trend %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
             list( ~ lag(., n = 3))) |>
   na.omit() |>
-  select(-date) %>%
+  dplyr::select(-date) %>%
   setNames(c("Human",
              "Cattle",
              "Camel",
@@ -1375,7 +1375,7 @@ cor_lag4 <- df_1_trend %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
             list( ~ lag(., n = 4))) |>
   na.omit() |>
-  select(-date) %>%
+  dplyr::select(-date) %>%
   setNames(c("Human",
              "Cattle",
              "Camel",
@@ -1413,7 +1413,7 @@ cor_lag5 <- df_1_trend %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
             list( ~ lag(., n = 5))) |>
   na.omit() |>
-  select(-date) %>%
+  dplyr::select(-date) %>%
   setNames(c("Human",
              "Cattle",
              "Camel",
@@ -1451,7 +1451,7 @@ cor_lag6 <- df_1_trend %>%
   mutate_at(vars(catt_incidence, cam_incidence, goat_incidence, shp_incidence),
             list( ~ lag(., n = 6))) |>
   na.omit() |>
-  select(-date) %>%
+  dplyr::select(-date) %>%
   setNames(c("Human",
              "Cattle",
              "Camel",
@@ -1561,7 +1561,7 @@ run_lag_models <- function(df, max_lag = 3, ...) {
       report()
     
     mod_results <- tidy(mod) %>%
-      select(-.model) %>%
+      dplyr::select(-.model) %>%
       as_tibble() %>%
       mutate(term = case_when(
         term == "goat_incidence" ~ "Goat Incidence",
@@ -1571,7 +1571,7 @@ run_lag_models <- function(df, max_lag = 3, ...) {
         TRUE ~ as.character(term) 
       ),
       variable = term
-      ) |>  select(6, 2:5) |> 
+      ) |>  dplyr::select(6, 2:5) |> 
       group_by(variable) %>%
       mutate(
         conf_low = min(estimate - std.error * 1.645),
@@ -1580,12 +1580,12 @@ run_lag_models <- function(df, max_lag = 3, ...) {
       mutate(lag = lag_value)
     
     adj_r_squared <- glance(mod) %>%
-      select(r_squared, AIC, adj_r_squared)
+      dplyr::select(r_squared, AIC, adj_r_squared)
     
     mod_results <- bind_cols(mod_results, adj_r_squared) |>
       mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high, adj_r_squared), ~round(., 3))) |>
       mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
-      select(c(1:8, 12, 9:11))
+      dplyr::select(c(1:8, 12, 9:11))
       
     result_df <- bind_rows(result_df, mod_results)
   }
@@ -1616,7 +1616,7 @@ complete_run_lag_models <- function(df, max_lag = 3, ...) {
       report()
     
     mod_results <- tidy(mod) %>%
-      select(-.model) %>%
+      dplyr::select(-.model) %>%
       as_tibble() %>%
       mutate(term = case_when(
         term == "goat_incidence" ~ "Goat Incidence",
@@ -1624,7 +1624,7 @@ complete_run_lag_models <- function(df, max_lag = 3, ...) {
         TRUE ~ as.character(term) 
       ),
       variable = term
-      ) |>  select(6, 2:5) |> 
+      ) |>  dplyr::select(6, 2:5) |> 
       group_by(variable) %>%
       mutate(
         conf_low = min(estimate - std.error * 1.645),
@@ -1633,12 +1633,12 @@ complete_run_lag_models <- function(df, max_lag = 3, ...) {
       mutate(lag = lag_value)
     
     adj_r_squared <- glance(mod) %>%
-      select(r_squared, AIC, adj_r_squared)
+      dplyr::select(r_squared, AIC, adj_r_squared)
     
     mod_results <- bind_cols(mod_results, adj_r_squared) |>
       mutate(across(c(estimate, std.error, statistic, p.value, conf_low, conf_high, adj_r_squared), ~round(., 3))) |>
       mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) |> 
-      select(c(1:8, 12, 9:11))
+      dplyr::select(c(1:8, 12, 9:11))
       
     result_df <- bind_rows(result_df, mod_results)
   }
@@ -1655,9 +1655,9 @@ diff_indivi <- run_lag_models(df_1_trend_diff |>
                                 mutate(across(contains('incidence'), ~ifelse(is.na(.), 0, .))))
 
 write_csv(non_diff_indivi_with_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_individual_with_NA.csv")
+  dplyr::select(-r_squared, -AIC, -adj_r_squared), "non_diff_individual_with_NA.csv")
 write_csv(non_diff_indivi_without_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_individual_without_NA.csv")
+  dplyr::select(-r_squared, -AIC, -adj_r_squared), "non_diff_individual_without_NA.csv")
 
 write_csv(diff_indivi, "diff_individual.csv")
 
@@ -1682,7 +1682,7 @@ lag_models_full <- function(df, max_lag = 3, ...) {
       report()
     
     mod_results <- tidy(mod) %>%
-      select(-.model) %>%
+      dplyr::select(-.model) %>%
       as_tibble() %>%
       mutate(
         term = case_when(
@@ -1690,7 +1690,7 @@ lag_models_full <- function(df, max_lag = 3, ...) {
           TRUE ~ as.character(term)
         ),
         variable = term
-      ) |>  select(6, 2:5) |>
+      ) |>  dplyr::select(6, 2:5) |>
       group_by(variable) %>%
       mutate(
         conf_low = min(estimate - std.error * 1.645),
@@ -1699,7 +1699,7 @@ lag_models_full <- function(df, max_lag = 3, ...) {
       mutate(lag = lag_value)
     
     adj_r_squared <- glance(mod) |>
-      select(r_squared, adj_r_squared, AIC) |>
+      dplyr::select(r_squared, adj_r_squared, AIC) |>
       as.data.frame()
     
     
@@ -1733,17 +1733,17 @@ non_diff_full_without_NA <- lag_models_full(df = df_cum_trend)
 diff_full <- lag_models_full(df_cum_trend_diff)
 
 write.csv(non_diff_full_with_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_full_with_NA.csv")
+  dplyr::select(-r_squared, -AIC, -adj_r_squared), "non_diff_full_with_NA.csv")
 
 write.csv(non_diff_full_without_NA |>
-  select(-r_squared, -AIC, -adj_r_squared), "non_diff_full_without_NA.csv")
+  dplyr::select(-r_squared, -AIC, -adj_r_squared), "non_diff_full_without_NA.csv")
 
 # write_csv(non_diff_full, "non_diff_full.csv")
 # write_csv(diff_full, "diff_full.csv")
 
 ## Getting the AIC, R-Squared and Adjusted R squared for each lag
 Table_lag_indivi_withoutNA <- non_diff_indivi_without_NA |> 
-  select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
+  dplyr::select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
   mutate(across(c(`R-Squared(%)` , `Adjusted R-Squared(%)`, ), ~ (. * 100))) |> 
     mutate(across(where(is.numeric), ~round(., 2))) |> 
   unique() |> 
@@ -1758,7 +1758,7 @@ Table_lag_indivi_withoutNA
 
 
 Table_lag_full <- non_diff_full_without_NA |> 
-  select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
+  dplyr::select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
   mutate(across(c(`R-Squared(%)` , `Adjusted R-Squared(%)`, ), ~ (. * 100))) |> 
     mutate(across(where(is.numeric), ~round(., 2))) |> 
   unique() |> 
@@ -1812,7 +1812,7 @@ fit_county_model <- function(county_name, data, type) {
         )
       ) |>
       tidy() |>
-      select(-.model) |>
+      dplyr::select(-.model) |>
       as_tibble() |>
       mutate(term = case_when(
         term == "animal_incidence" ~ "Animal Incidence",
@@ -1820,7 +1820,7 @@ fit_county_model <- function(county_name, data, type) {
       ),
       variable = term
       ) |>  
-      select(6, 2:5) |> 
+      dplyr::select(6, 2:5) |> 
       group_by(variable) %>%
       mutate(
         conf_low = min(estimate - std.error * 1.645),
@@ -1846,7 +1846,7 @@ fit_county_model <- function(county_name, data, type) {
       )
     ) |>
     tidy() |>
-    select(-.model) |>
+    dplyr::select(-.model) |>
     as_tibble() |>
     mutate(term = case_when(
       term == "goat_incidence" ~ "Goat Incidence",
@@ -1857,7 +1857,7 @@ fit_county_model <- function(county_name, data, type) {
     ),
     variable = term
     ) |>  
-    select(6, 2:5) |> 
+    dplyr::select(6, 2:5) |> 
     group_by(variable) %>%
     mutate(
       conf_low = min(estimate - std.error * 1.645),
@@ -2066,7 +2066,7 @@ fit_county_model_complete <- function(county_name, data, type) {
         )
       ) |>
       tidy() |>
-      select(-.model) |>
+      dplyr::select(-.model) |>
       as_tibble() |>
       mutate(term = case_when(
         term == "animal_incidence" ~ "Animal Incidence",
@@ -2074,7 +2074,7 @@ fit_county_model_complete <- function(county_name, data, type) {
       ),
       variable = term
       ) |>  
-      select(6, 2:5) |> 
+      dplyr::select(6, 2:5) |> 
       group_by(variable) %>%
       mutate(
         conf_low = min(estimate - std.error * 1.645),
@@ -2098,7 +2098,7 @@ fit_county_model_complete <- function(county_name, data, type) {
       )
     ) |>
     tidy() |>
-    select(-.model) |>
+    dplyr::select(-.model) |>
     as_tibble() |>
     mutate(term = case_when(
       term == "goat_incidence" ~ "Goat Incidence",
@@ -2107,7 +2107,7 @@ fit_county_model_complete <- function(county_name, data, type) {
     ),
     variable = term
     ) |>  
-    select(6, 2:5) |> 
+    dplyr::select(6, 2:5) |> 
     group_by(variable) %>%
     mutate(
       conf_low = min(estimate - std.error * 1.645),
@@ -2247,20 +2247,20 @@ county_humanpop <- fread('county_humanpop.csv')
 df_indivi_inci <- county_indivi_complete |> 
   mutate(across(c(catt_incidence, goat_incidence), ~ round(.*10))) |> 
   mutate(human_incidence = round(human_incidence * 10)) |> 
-  select(date, county, contains("incidence")) |>
+  dplyr::select(date, county, contains("incidence")) |>
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
 # Individual: Proportion
 df_indivi_inci_prop <- county_indivi_complete |> 
   mutate(across(c(catt_incidence, goat_incidence), ~ .*10)) |> 
   mutate(human_incidence = human_incidence/1e3) |> 
-  select(date, county, contains("incidence")) |>
+  dplyr::select(date, county, contains("incidence")) |>
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .))) |> 
   merge(county_humanpop, by = c("county", "date"))
 
 # Individual: Cases
 df_indivi_cases <- county_indivi_complete |> 
-  select(date, county, contains("cases")) |>
+  dplyr::select(date, county, contains("cases")) |>
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
 
@@ -2269,7 +2269,7 @@ df_comb_inci <- county_comb_complete |>
   mutate(human_incidence = round(human_incidence*10),
          animal_incidence = round(animal_incidence*10)
          ) |> 
-  select(date, county, animal_incidence, human_incidence) |> 
+  dplyr::select(date, county, animal_incidence, human_incidence) |> 
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
 
@@ -2278,13 +2278,13 @@ df_comb_inci_prop <- county_comb_complete |>
   mutate(human_incidence = human_incidence/1e3,
          animal_incidence = animal_incidence*10
          ) |> 
-  select(date, county, animal_incidence, human_incidence) |> 
+  dplyr::select(date, county, animal_incidence, human_incidence) |> 
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))|> 
   merge(county_humanpop, by = c("county", "date"))
 
 # Combined: Cases
 df_comb_cases <- county_comb_complete |> 
-  select(date, county, animal_cases, hum_cases) 
+  dplyr::select(date, county, animal_cases, hum_cases) 
 ```
 
 ```{r Models for the mixed effects}
@@ -2337,7 +2337,7 @@ indivi_models <- function(df, type, max_lag, ...) {
         mutate(odds = exp(`log odds`),
                odds = ifelse(effect == "Random", NA, odds)
                ) |> 
-        select(1, 8,4, 9, 5:8) |> 
+        dplyr::select(1, 8,4, 9, 5:8) |> 
         group_by(variable) %>%
         mutate(
           conf_low = min(`log odds` - std.error * 1.645),
@@ -2346,7 +2346,7 @@ indivi_models <- function(df, type, max_lag, ...) {
         mutate(lag = lag_value)
       
       metrics <- broom.mixed::glance(mod) %>%
-        select(nobs, AIC, BIC)
+        dplyr::select(nobs, AIC, BIC)
       
       mod_results <- bind_cols(mod_results, metrics) |>
         mutate(across(
@@ -2410,7 +2410,7 @@ indivi_models <- function(df, type, max_lag, ...) {
         mutate(IRR = exp(`log IRR`),
                IRR = ifelse(effect == "Random", NA, IRR)
                ) |> 
-        select(1, 8,4, 9, 5:8) |> 
+        dplyr::select(1, 8,4, 9, 5:8) |> 
         group_by(variable) %>%
         mutate(
           conf_low = min(`log IRR` - std.error * 1.645),
@@ -2419,7 +2419,7 @@ indivi_models <- function(df, type, max_lag, ...) {
         mutate(lag = lag_value)
 
       metrics <- broom.mixed::glance(mod) %>%
-        select(nobs, AIC, BIC)
+        dplyr::select(nobs, AIC, BIC)
       
       mod_results <- bind_cols(mod_results, metrics) |>
         mutate(across(
@@ -2497,7 +2497,7 @@ comb_models <- function(df, type, max_lag, ...) {
         mutate(odds = exp(`log odds`),
                odds = ifelse(effect == "Random", NA, odds)
                ) |> 
-        select(1, 8,4, 9, 5:8) |> 
+        dplyr::select(1, 8,4, 9, 5:8) |> 
         group_by(variable) %>%
         mutate(
           conf_low = min(`log odds` - std.error * 1.645),
@@ -2506,7 +2506,7 @@ comb_models <- function(df, type, max_lag, ...) {
         mutate(lag = lag_value)
       
       metrics <- broom.mixed::glance(mod) %>%
-        select(nobs, AIC, BIC)
+        dplyr::select(nobs, AIC, BIC)
       
       mod_results <- bind_cols(mod_results, metrics) |>
         mutate(across(
@@ -2568,7 +2568,7 @@ comb_models <- function(df, type, max_lag, ...) {
         mutate(IRR = exp(`log IRR`),
                IRR = ifelse(effect == "Random", NA, IRR)
                ) |> 
-        select(1, 8,4, 9, 5:8) |> 
+        dplyr::select(1, 8,4, 9, 5:8) |> 
         group_by(variable) %>%
         mutate(
           conf_low = min(`log IRR` - std.error * 1.645),
@@ -2577,7 +2577,7 @@ comb_models <- function(df, type, max_lag, ...) {
         mutate(lag = lag_value)
       
       metrics <- broom.mixed::glance(mod) %>%
-        select(nobs, AIC, BIC)
+        dplyr::select(nobs, AIC, BIC)
       
       mod_results <- bind_cols(mod_results, metrics) |>
         mutate(across(
@@ -2833,7 +2833,7 @@ original_data <- df_xts |>
 
 fitted <- augment(model_sarima) |> 
   as.data.frame() %>%
-  select(date, fitted =.fitted, residuals = .resid) |> 
+  dplyr::select(date, fitted =.fitted, residuals = .resid) |> 
   mutate(date = ym(date) 
          ) 
 
@@ -2844,7 +2844,7 @@ CI80 <- CI$`80%` |>
   lapply(FUN = first) |> unlist() |>
   matrix(ncol = 3, byrow = T) |> 
   as.data.frame() |> 
-  select(-V3) |> 
+  dplyr::select(-V3) |> 
   setNames(c("Lo80", "Hi80"))
 
 
@@ -2852,7 +2852,7 @@ CI95 <- CI$`95%` |>
   lapply(FUN = first) |> unlist() |>
   matrix(ncol = 3, byrow = T) |> 
   as.data.frame() |> 
-  select(-V3) |> 
+  dplyr::select(-V3) |> 
   setNames(c("Lo95", "Hi95"))
 
 forecast_data_human_sarima <-
@@ -2914,7 +2914,7 @@ test_acc <- test |>
   as.data.frame() %>%
   mutate(date = rownames(.) |> ymd() |> yearmonth()) |>
   as_tsibble() |>
-  select(-animal_incidence)
+  dplyr::select(-animal_incidence)
   
 model_sarima_accuracy <- accuracy(forecast::forecast(model_sarima, h = nrow(test)), test_acc,
   measures = list(
@@ -2954,7 +2954,7 @@ We then forecasted and extracted values for the forecasted as follows;
 ```{r}
 fitted_covariate <- augment(model_sarima_covariates) |> 
   as.data.frame() %>%
-  select(date, fitted =.fitted, residuals = .resid) |> 
+  dplyr::select(date, fitted =.fitted, residuals = .resid) |> 
   mutate(date = ym(date) 
   ) 
 
@@ -2962,7 +2962,7 @@ test_tsibble <- test |>
   as.data.frame() %>%
   mutate(date = rownames(.) |> ymd() |> yearmonth()) |> 
   as_tsibble() |>
-  select(-human_incidence)
+  dplyr::select(-human_incidence)
   
 
 CI_covariate <- model_sarima_covariates |>
@@ -2974,7 +2974,7 @@ CI_covariate80 <- CI_covariate$`80%` |>
   unlist() |>
   matrix(ncol = 3, byrow = T) |> 
   as.data.frame() |> 
-  select(-V3) |> 
+  dplyr::select(-V3) |> 
   setNames(c("Lo80", "Hi80"))
 
 
@@ -2982,7 +2982,7 @@ CI_covariate95 <- CI_covariate$`95%` |>
   lapply(FUN = first) |> unlist() |>
   matrix(ncol = 3, byrow = T) |> 
   as.data.frame() |> 
-  select(-V3) |> 
+  dplyr::select(-V3) |> 
   setNames(c("Lo95", "Hi95"))
 
 forecast_data_covariate_sarima <-
@@ -3040,7 +3040,7 @@ The model metrics were calculated as follows:
 
 model_sarima_covariates_coefficients <-
   tidy(model_sarima_covariates) |>
-  select(-.model) %>%
+  dplyr::select(-.model) %>%
   as_tibble() %>%
   group_by(term) 
 
@@ -3050,7 +3050,7 @@ test_acc2 <- test |>
   as.data.frame() %>%
   mutate(date = rownames(.) |> ymd() |> yearmonth()) |>
   as_tsibble() |>
-  select(-animal_incidence)
+  dplyr::select(-animal_incidence)
 
 model_sarima_covariate_accuracy <-
   accuracy(
@@ -3074,13 +3074,13 @@ model_sarima_covariate_accuracy
 
 model_sarima_accuracy2 <- model_sarima_accuracy |> 
     mutate(model = "Model without Covariate") |> 
-  select(-.model, -.type) |> 
-  select(model, RMSE, MAE, MAPE)
+  dplyr::select(-.model, -.type) |> 
+  dplyr::select(model, RMSE, MAE, MAPE)
 
 model_sarima_covariate_accuracy2 <- model_sarima_covariate_accuracy |> 
   mutate(model = "Model with Covariate") |> 
-  select(-.model, -.type) |> 
-  select(model, RMSE, MAE, MAPE)
+  dplyr::select(-.model, -.type) |> 
+  dplyr::select(model, RMSE, MAE, MAPE)
 
 metrics_df <- rbind(model_sarima_accuracy2, model_sarima_covariate_accuracy2)
 write.csv(metrics_df, "metrics_df.csv", row.names = F)
@@ -3125,7 +3125,7 @@ Then, the forecasted data is curated as follows;
 ```{r}
 fitted_full <- augment(full.model) |> 
   as.data.frame() %>%
-  select(date, fitted =.fitted, residuals = .resid) |> 
+  dplyr::select(date, fitted =.fitted, residuals = .resid) |> 
   mutate(date = ym(date) 
   ) 
 
@@ -3138,7 +3138,7 @@ test_tsibble <- forecast.df |>
   as.data.frame() %>%
   mutate(date = rownames(.) |> ymd() |> yearmonth()) |> 
   as_tsibble() |>
-  select(-human_incidence)
+  dplyr::select(-human_incidence)
 
 
 CI_full <- full.model |>
@@ -3150,7 +3150,7 @@ CI_full80 <- CI_full$`80%` |>
   unlist() |>
   matrix(ncol = 3, byrow = T) |> 
   as.data.frame() |> 
-  select(-V3) |> 
+  dplyr::select(-V3) |> 
   setNames(c("Lo80", "Hi80"))
 
 
@@ -3158,7 +3158,7 @@ CI_full95 <- CI_full$`95%` |>
   lapply(FUN = first) |> unlist() |>
   matrix(ncol = 3, byrow = T) |> 
   as.data.frame() |> 
-  select(-V3) |> 
+  dplyr::select(-V3) |> 
   setNames(c("Lo95", "Hi95"))
 
 forecast_data_full_sarima <-
@@ -3216,7 +3216,7 @@ The model coefficients are;
 ```{r}
 full.model_coefficients <-
   tidy(full.model) |>
-  select(-.model) %>%
+  dplyr::select(-.model) %>%
   as_tibble() %>%
   group_by(term)
 knitr::kable(full.model_coefficients)
@@ -3231,7 +3231,7 @@ fore.actual <- forecast_data_full_sarima |>
          Date = as.Date(date) |> 
            zoo::as.yearmon() |>
            yearmonth()) |> 
-  select(Date = Date, 
+  dplyr::select(Date = Date, 
          Forecasted = PointForecast,
          Actual,
          `Lower 95% CI` = Lo95,
