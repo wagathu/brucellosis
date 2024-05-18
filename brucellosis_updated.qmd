@@ -2121,9 +2121,97 @@ write_csv(coefficients_df_lag3, "individual_animal_incidence_per_county_lag3.csv
 
 ```
 
+```{r forest plots at individual plot}
+# At lag 0
+indivi_lag0_df <- coefficients_df_lag0 %>% 
+  filter( variable != '(Intercept)' & !is.nan(conf_low) & !is.na(conf_low)) %>% 
+  filter(conf_high < 10 & conf_low > - 10)
 
 
-```{r All counties model (combined with NA) at at 0 and 3}
+indivi_lag0_plot <- indivi_lag0_df %>% 
+  #filter(!county %in% c('West Pokot', 'Nandi', 'Elgeyo Marakwet')) %>% 
+  ggplot(aes(x = county, y = estimate)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = conf_low, ymax = conf_high), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
+  coord_flip() +
+  facet_wrap(~variable, scales = 'free') +
+  labs(
+    #title = "Incidence Rate Ratios (IRRs) and Confidence Intervals",
+    x = "Variable at lag 0",
+    y = "Estimate"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 10, color = 'black'),
+    axis.title.x = element_text(size = 12, color = 'black'),
+    axis.title.y = element_text(size = 12),
+    plot.title = element_text(size = 16, hjust = 0.5, face = "bold"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    strip.text = element_text(color = 'black', hjust = .5, face = 'bold', size = 13)
+  ) +
+  ggtitle('Individual animal incidence at Lag 0')
+indivi_lag0_plot
+
+dev.off()
+ggsave(
+  "images/indivi_lag0_forest.png",
+  width = 18,
+  height = 10,
+  dpi = 1e3
+)
+
+
+
+# At lag 3
+indivi_lag3_df <- coefficients_df_lag3 %>% 
+  filter( variable != '(Intercept)' & !is.nan(conf_low) & !is.na(conf_low)) %>% 
+  filter(conf_high < 10 & conf_low > - 10)
+
+
+indivi_lag3_plot <- indivi_lag3_df %>% 
+  ggplot(aes(x = county, y = estimate)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = conf_low, ymax = conf_high), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
+  coord_flip() +
+  facet_wrap(~variable, scales = 'free') +
+  labs(
+    #title = "Incidence Rate Ratios (IRRs) and Confidence Intervals",
+    x = "Variable at lag 3",
+    y = "Estimate"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 10, color = 'black'),
+    axis.title.x = element_text(size = 12, color = 'black'),
+    axis.title.y = element_text(size = 12),
+    plot.title = element_text(size = 16, hjust = 0.5, face = "bold"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    strip.text = element_text(color = 'black', hjust = .5, face = 'bold', size = 13)
+  ) +
+  ggtitle('Individual animal incidence at Lag 3')
+indivi_lag3_plot
+
+dev.off()
+ggsave(
+  "images/indivi_lag3_forest.png",
+  width = 18,
+  height = 10,
+  dpi = 1e3
+)
+```
+
+
+```{r All counties model (combined with NA) at 0 and 3}
 # Lag 2
 df_cum_2_0 <- df_cum |> 
   as_tibble() %>%
@@ -2225,11 +2313,86 @@ lag3_county_significant_combined <- coefficients_df2_lag3 %>%
 write_csv(lag3_county_significant_combined,
           "lag3_county_significant_combined.csv")
 
-
-
-
 write_csv(coefficients_df2_lag3, "all_animal_incidence_per_county_lag3.csv")
 ```
+
+```{r forest plots for combined incidence}
+
+# At lag 0
+comb_lag0_df <- coefficients_df2_lag0 %>% 
+  filter( variable != '(Intercept)' & !is.nan(conf_low) & !is.na(conf_low)) 
+
+
+comb_lag0_plot <- comb_lag0_df %>% 
+  filter(county != 'Isiolo') %>% 
+  ggplot(aes(x = county, y = estimate)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = conf_low, ymax = conf_high), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
+  coord_flip() +
+  labs(
+    #title = "Incidence Rate Ratios (IRRs) and Confidence Intervals",
+    x = "Variable at lag 0",
+    y = "Estimate"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 10, color = 'black'),
+    axis.title.x = element_text(size = 12, color = 'black'),
+    axis.title.y = element_text(size = 12),
+    plot.title = element_text(size = 16, hjust = 0.5, face = "bold"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none"
+  ) +
+  ggtitle('Combined animal incidence at Lag 0')
+
+# At lag 3
+comb_lag3_df <- coefficients_df2_lag3 %>% 
+  filter( variable != '(Intercept)' & !is.nan(conf_low) & !is.na(conf_low)) 
+
+
+comb_lag3_plot <- comb_lag3_df %>% 
+  filter(county != 'Isiolo') %>% 
+  ggplot(aes(x = county, y = estimate)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = conf_low, ymax = conf_high), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
+  coord_flip() +
+  labs(
+    #title = "Incidence Rate Ratios (IRRs) and Confidence Intervals",
+    x = "Variable at lag 3",
+    y = "Estimate"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 10, color = 'black'),
+    axis.title.x = element_text(size = 12, color = 'black'),
+    axis.title.y = element_text(size = 12),
+    plot.title = element_text(size = 16, hjust = 0.5, face = "bold"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none"
+  ) +
+  ggtitle('Combined animal incidence at Lag 3')
+
+combined_forest <- comb_lag0_plot + comb_lag3_plot
+
+
+dev.off()
+ggsave(
+  "images/combined_forest.png",
+  width = 18,
+  height = 10,
+  dpi = 1e3
+)
+
+```
+
 
 ```{r # All counties model (individual without NA-complete case) at lag 2 and 3}
 # Lag 2
