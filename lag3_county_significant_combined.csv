@@ -1,0 +1,2 @@
+county,variable,estimate,std.error,statistic,p.value,conf_low,conf_high,significant
+Bungoma,Animal Incidence,3.296,0.11,29.967,0.021,3.115,3.477,Significant

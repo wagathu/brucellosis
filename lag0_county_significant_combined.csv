@@ -1,0 +1,8 @@
+county,variable,estimate,std.error,statistic,p.value,conf_low,conf_high,significant
+Nakuru,Animal Incidence,0.121,0.048,2.507,0.033,0.042,0.2,Significant
+Nandi,Animal Incidence,3.503,0.505,6.941,0.006,2.673,4.334,Significant
+Isiolo,Animal Incidence,4.598,2.757,1.668,0.344,0.064,9.133,Significant
+Turkana,Animal Incidence,0.057,0.025,2.287,0.035,0.016,0.097,Significant
+Machakos,Animal Incidence,0.253,0.134,1.882,0.119,0.032,0.474,Significant
+Kakamega,Animal Incidence,-0.054,0.017,-3.135,0.088,-0.082,-0.026,Significant
+Vihiga,Animal Incidence,0.115,0.024,4.836,0.04,0.076,0.154,Significant

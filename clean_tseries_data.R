@@ -30,7 +30,7 @@ df <- df1 |>
 
 human_pop <- fread("kenya_pop_2020_2025.csv") |> 
   filter(Year == "2022") |> 
-  select(pop)
+  dplyr::select(pop)
 
 animal_pop <- read_csv('animal_pop_2019.csv') %>% 
   pivot_wider(
@@ -39,25 +39,25 @@ animal_pop <- read_csv('animal_pop_2019.csv') %>%
   ) %>% 
   setNames(c("county", paste0(colnames(.[,2:7]), "_pop") %>% str_to_lower())) |> 
   summarise(across(where(is.numeric), ~sum(.))) |> 
-  select(-pigs_pop, -donkeys_pop)
+  dplyr::select(-pigs_pop, -donkeys_pop)
 
 # Cleaning 2022 and 2023 human brucella data -------------------------------------------------------------------
 
 ## Human
 df22_human <- human_22_23 |>
-  select(periodname, dataname, Kenya) |> 
+  dplyr::select(periodname, dataname, Kenya) |> 
   pivot_wider(id_cols = periodname, names_from = dataname, values_from = Kenya) |> 
   mutate(date = dmy(paste("01", periodname, sep = "-")) |> ymd()) |>
   rowwise() |>
   mutate(hum_cases = sum(Brucellosis, `MOH 706_Brucella`)) |> 
-  select(date, hum_cases) |> 
+  dplyr::select(date, hum_cases) |> 
   cbind(human_pop) |> 
   mutate(human_incidence = hum_cases/pop * 1e3) |> 
-  select(-hum_cases, -pop)
+  dplyr::select(-hum_cases, -pop)
 
 # Animals
 df22 <- df2022_animal |> 
-  select(month, year...13, `Nature of Diagnosis`, `Number Sick`, `Species Affected`) |> 
+  dplyr::select(month, year...13, `Nature of Diagnosis`, `Number Sick`, `Species Affected`) |> 
   mutate(month =
            ifelse(
              str_detect(month, "[:digit:]"),
@@ -100,7 +100,7 @@ df22 <- df2022_animal |>
 
 # Animals
 df23 <- df2023_animal |> 
-  select(month = Month, year...13 = Year, `Nature of Diagnosis`, `Number Sick`, `Species Affected`) |> 
+  dplyr::select(month = Month, year...13 = Year, `Nature of Diagnosis`, `Number Sick`, `Species Affected`) |> 
   mutate(month =
            ifelse(
              str_detect(month, "[:digit:]"),
@@ -141,10 +141,10 @@ df23 <- df2023_animal |>
 all_y <- df22 |> 
   rbind(df23) |> 
   merge(df22_human, by = "date") |> 
-  select(date, human_incidence, animal_incidence)
+  dplyr::select(date, human_incidence, animal_incidence)
 
 df_complete1 <- df |> 
-  select(-V1) |> 
+  dplyr::select(-V1) |> 
   mutate(date = ymd(date)) |> 
   rbind(all_y) |> 
   arrange(date) |> 

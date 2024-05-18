@@ -1,0 +1,5 @@
+county,variable,estimate,std.error,statistic,p.value,conf_low,conf_high,significant
+Elgeyo Marakwet,Cattle incidence,-31.654,17.6,-1.799,0.075,-60.606,-2.702,Significant
+Embu,Cattle incidence,0.155,0.072,2.148,0.034,0.036,0.274,Significant
+Mandera,Cattle incidence,0.142,0.062,2.287,0.024,0.04,0.245,Significant
+Siaya,Goat Incidence,-1.237,0.589,-2.099,0.065,-2.206,-0.267,Significant

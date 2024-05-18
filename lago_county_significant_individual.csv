@@ -1,0 +1,5 @@
+county,variable,estimate,std.error,statistic,p.value,conf_low,conf_high,significant
+Embu,Cattle incidence,0.134,0.073,1.842,0.068,0.014,0.253,Significant
+Kakamega,Goat Incidence,1.275,0.405,3.148,0.01,0.609,1.941,Significant
+Mandera,Cattle incidence,0.106,0.063,1.682,0.096,0.002,0.209,Significant
+Samburu,Goat Incidence,0.228,0.089,2.547,0.012,0.081,0.375,Significant
