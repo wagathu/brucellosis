@@ -1344,6 +1344,7 @@ ggsave("all_plots.png", dpi = 1e3, height = 18, width = 20)
 ```{r spatial plot, fig.height=18, fig.width=20}
 all_plots
 
+
 ```
 
 ```{r Correlation}
@@ -2790,7 +2791,7 @@ animal_pop <- read_csv('animal_pop_2019.csv') %>%
   summarise(across(where(is.numeric), ~sum(.))) |> 
   select(-pigs_pop, -donkeys_pop)
 ```
-
+http://127.0.0.1:15025/graphics/57f7ff83-beca-4f9e-a9e6-345dcd5660f2.png
 The data was the cleaned as follows;\
 \
 
@@ -2841,7 +2842,8 @@ df22 <- df2022_animal |>
   ) |> 
   rowwise() |> 
   mutate(animal_cases = sum(Cattle, Goats, Sheep, Camel, na.rm = T)) |> 
-  cbind(animal_pop) |> 
+  cbind(animal_pop) |>
+  rowwise() |> 
   mutate(
     animal_pop = sum(cattle_pop, goats_pop, sheep_pop, camels_pop, na.rm = T),
     animal_incidence = animal_cases/animal_pop*1e6,
@@ -3346,7 +3348,7 @@ model_sarima_covariate_accuracy <-
   accuracy(
     model_sarima_covariates |>
       forecast(new_data = test_tsibble) ,
-    test_acc,
+    test_acc2,
     measures = list(
       point_accuracy_measures,
       interval_accuracy_measures,

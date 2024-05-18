@@ -1,6 +1,11 @@
 ---
 title: "Brucellosis Codes"
-format: docx
+format:
+  html:
+    toc: true
+    toc-location: left
+    code-fold: true
+    code-summary: "Show the code"
 editor: visual
 ---
 
@@ -9,7 +14,6 @@ editor: visual
 ```{r}
 source('clean_all_data.R')
 ```
-
 
 ```{r Grouping the Data}
 
@@ -68,8 +72,17 @@ df_1_pop <- df_tot_cases |>
   select(date, county, pop)
 write.csv(df_1_pop, 'county_humanpop.csv', row.names = F)
 
-df_1_complete <- df_1 |> 
-  select(date, county, human_incidence, catt_incidence, goat_incidence, hum_cases, catt_cases, goat_cases) |> 
+df_1_complete <- df_1 |>
+  select(
+    date,
+    county,
+    human_incidence,
+    catt_incidence,
+    goat_incidence,
+    hum_cases,
+    catt_cases,
+    goat_cases
+  ) |>
   filter(catt_incidence > 0)
 write.csv(df_1_complete, "df_1_complete.csv", row.names = F)
 
@@ -206,7 +219,6 @@ date <- df_1_trend$date[-1]
 df_1_trend_diff <- df_1_trend |> 
   reframe(across(contains("incidence"), ~ diff(., na.rm = T))) |> 
   mutate(date = as.Date(date))
-
 
 df_cum_trend <- df_tot_cases_trend |>
   merge(df_tot_pop_trend, by = "date") |>
@@ -625,7 +637,7 @@ animal_sm_plt <- smoothed_df_combined |>
 animal_sm_plt
 ```
 
-```{r Descriptive statistics} 
+```{r Descriptive statistics}
 
 table1.1 <- df_incidence2.1 |>
   select(county, diagnosis, contains("cases")) |>
@@ -763,7 +775,7 @@ write.csv(df_1 %>%
   "descriptive_table.csv")
 ```
 
-```{r The spatial analysis/plotting} 
+```{r The spatial analysis/plotting}
 
 # Cases per year per county
 df_tot_cases_spatial <- df_incidence2.1 |>
@@ -929,10 +941,10 @@ animals <- df_spatial_merged_cum |>
       .,
       levels = c(
         "0",
-        "[0.0074,0.278]",
-        "(0.278,1.37]",
-        "(1.37,4.26]",
-        "(4.26,336]"
+        '[0.113,0.894]',
+        '(0.894,2.16]',
+        '(2.16,6]',
+        '(6,336]'
       )
     )) |>
   ggplot() +
@@ -1027,10 +1039,10 @@ cattle <- df_spatial_merged |>
                                          as.character(catt_incidence_range)) %>%
            factor(., levels = c(
              "0",
-             "[0.0317,1.26]",
-             "(1.26,2.94]", 
-             "(2.94,8.74]",
-             "(8.74,235]"
+             "[0.704,2.4]",
+             "(2.4,5.45]", 
+             "(5.45,11.9]",
+             "(11.9,235]"
            ))) |> 
   ggplot() +
   geom_sf(aes(fill = catt_incidence_range)) +
@@ -1067,10 +1079,10 @@ goat <- df_spatial_merged |>
                                          as.character(goat_incidence_range)) %>%
            factor(., levels = c(
              "0",
-             "[0.0178,0.259]",
-             "(0.259,1.09]", 
-             "(1.09,6.98]",
-             "(6.98,690]"
+      "[0.13,0.8]",
+      "(0.8,3.21]",
+      "(3.21,9.34]",
+      "(9.34,690]" 
            ))) |> 
   ggplot() +
   geom_sf(aes(fill = goat_incidence_range)) +
@@ -1107,10 +1119,10 @@ sheep <- df_spatial_merged |>
                                          as.character(shp_incidence_range)) %>%
            factor(., levels = c(
              "0",
-             "[0.0259,0.13]",
-             "(0.13,1.46]", 
-             "(1.46,3.85]",
-             "(3.85,45.1]"
+              "[0.182,0.701]",
+              "(0.701,2.48]",
+              "(2.48,4.65]",
+              "(4.65,45.1]"  
            ))) |> 
   ggplot() +
   geom_sf(aes(fill = shp_incidence_range)) +
@@ -1147,10 +1159,10 @@ camels <- df_spatial_merged |>
                                          as.character(cam_incidence_range)) %>%
            factor(., levels = c(
              "0",
-             "[0.613,0.97]",
-             "(0.97,2.32]", 
-             "(2.32,3.36]",
-             "(3.36,122]"
+              "[0.613,1.9]",
+              "(1.9,2.84]",
+              "(2.84,33]",
+              "(33,122]" 
            ))) |> 
   ggplot() +
   geom_sf(aes(fill = cam_incidence_range)) +
@@ -1582,7 +1594,6 @@ run_lag_models <- function(df, max_lag = 3, ...) {
 }
 
 # Models with complete cases
-
 complete_run_lag_models <- function(df, max_lag = 3, ...) {
   suppressMessages({
   result_df <- tibble()
@@ -1634,7 +1645,6 @@ complete_run_lag_models <- function(df, max_lag = 3, ...) {
   })
   return(result_df)
 }
-
 
 non_diff_indivi_with_NA <- run_lag_models(df_1_trend)
   
@@ -1732,7 +1742,6 @@ write.csv(non_diff_full_without_NA |>
 # write_csv(diff_full, "diff_full.csv")
 
 ## Getting the AIC, R-Squared and Adjusted R squared for each lag
-
 Table_lag_indivi_withoutNA <- non_diff_indivi_without_NA |> 
   select(Lag = lag, `R-Squared(%)` = r_squared, `Adjusted R-Squared(%)` = adj_r_squared, AIC) |> 
   mutate(across(c(`R-Squared(%)` , `Adjusted R-Squared(%)`, ), ~ (. * 100))) |> 
@@ -2176,8 +2185,1103 @@ write_csv(coefficients_df_lag3_withoutNA, "individual_animal_incidence_per_count
 
 Note: All counties model (combined without NA-complete case) at lag 2 and 3 was omitted as it had no difference to combined with NA
 
+# Mixed Effect Models
+
+The section includes the mixed effect modelling. The mixed effect was done for both the incidence (as integers), cases and the proportion, and at lags 0 to 3.
+
+```{r importing the data and packages for mixed effect modelling}
+
+# Importing packages
+if (require(pacman))
+{
+  p_load(
+    tidyverse,
+    tseries,
+    data.table,
+    scales,
+    zoo,
+    forecast,
+    sf,
+    patchwork,
+    grid,
+    fable,
+    patchwork,
+    xts,
+    feasts,
+    cowplot,
+    broom,
+    kableExtra,
+    readxl,
+    stringi,
+    stringr,
+    rKenyaCensus,
+    knitr,
+    purrr,
+    RColorBrewer,
+    tscount,
+    lme4
+  )
+}
+
+# Importing data
+individual <- fread("individual_incidence_cases.csv")
+combined <- fread("combined_incidence_cases.csv")
+individual_county <- fread("df_tot_cases_spatial_month.csv")
+combined_county <- fread("df_spatial_cum_month.csv")
 
 
+# Complete
+county_indivi_complete <- fread("df_1_complete.csv") |> 
+  mutate(hum_cases = round(hum_cases))
+
+county_comb_complete <- fread("df_cum_complete.csv") |> 
+  mutate(hum_cases = round(hum_cases))
+
+county_humanpop <- fread('county_humanpop.csv')
+```
+
+```{r Creating the proportion}
+
+# Individual: Incidence
+# The cattle and goat incidence were calculated 10M per population
+df_indivi_inci <- county_indivi_complete |> 
+  mutate(across(c(catt_incidence, goat_incidence), ~ round(.*10))) |> 
+  mutate(human_incidence = round(human_incidence * 10)) |> 
+  select(date, county, contains("incidence")) |>
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
+
+# Individual: Proportion
+df_indivi_inci_prop <- county_indivi_complete |> 
+  mutate(across(c(catt_incidence, goat_incidence), ~ .*10)) |> 
+  mutate(human_incidence = human_incidence/1e3) |> 
+  select(date, county, contains("incidence")) |>
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .))) |> 
+  merge(county_humanpop, by = c("county", "date"))
+
+# Individual: Cases
+df_indivi_cases <- county_indivi_complete |> 
+  select(date, county, contains("cases")) |>
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
 
+# Combined : Incidence
+df_comb_inci <- county_comb_complete |> 
+  mutate(human_incidence = round(human_incidence*10),
+         animal_incidence = round(animal_incidence*10)
+         ) |> 
+  select(date, county, animal_incidence, human_incidence) |> 
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
 
+
+# combined: Proportion
+df_comb_inci_prop <- county_comb_complete |> 
+  mutate(human_incidence = human_incidence/1e3,
+         animal_incidence = animal_incidence*10
+         ) |> 
+  select(date, county, animal_incidence, human_incidence) |> 
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))|> 
+  merge(county_humanpop, by = c("county", "date"))
+
+# Combined: Cases
+df_comb_cases <- county_comb_complete |> 
+  select(date, county, animal_cases, hum_cases) 
+```
+
+```{r Models for the mixed effects}
+
+# Individual Incidence
+indivi_models <- function(df, type, max_lag, ...) {
+  # Type is either prop or incidence
+  result_df <- tibble()
+  if (type == "prop") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+            catt_incidence,
+            goat_incidence
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+        glmer(
+          human_incidence ~ catt_incidence + goat_incidence + 
+            (1 |
+               county),
+          data = df_lagged,
+          family = binomial(link = "logit"),
+          nAGQ = 0,
+          weights = pop
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "goat_incidence" ~ "Goat Incidence",
+            term == "catt_incidence" ~ "Cattle incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log odds` = estimate) |> 
+        mutate(odds = exp(`log odds`),
+               odds = ifelse(effect == "Random", NA, odds)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log odds` - std.error * 1.645),
+          conf_high = max(`log odds` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+      
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log odds`,
+            odds,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 3)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  } else if (type == "inci") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+            catt_incidence,
+            goat_incidence
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+         glmer.nb(
+          human_incidence ~ catt_incidence + goat_incidence +
+            (1 |
+               county),
+          data = df_lagged,
+          nAGQ = 0
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "goat_incidence" ~ "Goat Incidence",
+            term == "catt_incidence" ~ "Cattle incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log IRR` = estimate) |> 
+        mutate(IRR = exp(`log IRR`),
+               IRR = ifelse(effect == "Random", NA, IRR)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log IRR` - std.error * 1.645),
+          conf_high = max(`log IRR` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log IRR`,
+            IRR,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 4)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant"))
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  }
+  
+  return(result_df)
+
+}
+
+df_indivi_model_inci = indivi_models(df = df_indivi_inci, type = "inci", max_lag = 3)
+df_indivi_model_prop = indivi_models(df = df_indivi_inci_prop, type = "prop", max_lag = 3)
+write.csv(df_indivi_model_inci, "df_indivi_model_inci.csv")
+
+# Combined Cases
+comb_models <- function(df, type, max_lag, ...) {
+  # Type is either prop or incidence
+  result_df <- tibble()
+  if (type == "prop") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+            animal_incidence,
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+        glmer(
+          human_incidence ~ animal_incidence + 
+            (1 |
+               county),
+          data = df_lagged,
+          family = binomial(link = "logit"),
+          nAGQ = 0,
+          weights = pop
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "animal_incidence" ~ "Animal incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log odds` = estimate) |> 
+        mutate(odds = exp(`log odds`),
+               odds = ifelse(effect == "Random", NA, odds)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log odds` - std.error * 1.645),
+          conf_high = max(`log odds` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+      
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log odds`,
+            odds,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 3)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant")) 
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  } else if (type == "inci") {
+    for (lag_value in 0:max_lag) {
+      df_lagged <- df |>
+        as_tibble() %>%
+        mutate_at(
+          vars(
+         animal_incidence
+          ),
+          list(~ lag(., n = lag_value))
+        ) |>
+        na.omit() |>
+        mutate(date = as.Date(date))
+      
+      mod <-
+         glmer.nb(
+          human_incidence ~ animal_incidence +
+            (1 |
+               county),
+          data = df_lagged,
+          nAGQ = 0
+        )
+      
+      mod_results <- broom.mixed::tidy(mod) %>%
+        as_tibble() %>%
+        mutate(
+          term = case_when(
+            term == "animal_incidence" ~ "Animal incidence",
+            term == "sd__(Intercept)" ~ "Sd - Random Intercept",
+            TRUE ~ as.character(term)
+          ),
+          effect = case_when(
+            effect == "ran_pars" ~ "Random",
+            TRUE ~ effect
+          ),
+          variable = term
+        ) |> 
+        rename(`log IRR` = estimate) |> 
+        mutate(IRR = exp(`log IRR`),
+               IRR = ifelse(effect == "Random", NA, IRR)
+               ) |> 
+        select(1, 8,4, 9, 5:8) |> 
+        group_by(variable) %>%
+        mutate(
+          conf_low = min(`log IRR` - std.error * 1.645),
+          conf_high = max(`log IRR` + std.error * 1.645)
+        ) %>%
+        mutate(lag = lag_value)
+      
+      metrics <- broom.mixed::glance(mod) %>%
+        select(nobs, AIC, BIC)
+      
+      mod_results <- bind_cols(mod_results, metrics) |>
+        mutate(across(
+          c(
+            `log IRR`,
+            IRR,
+            std.error,
+            statistic,
+            p.value,
+            conf_low,
+            conf_high,
+            AIC,
+            BIC
+          ),
+          ~ round(., 4)
+        )) |>
+        mutate(significance = ifelse(conf_low * conf_high > 0, "Significant", "Not Significant"))
+      cat(paste("Runnning model for lag", lag_value), "\n")
+      result_df <- bind_rows(result_df, mod_results)
+    }
+    
+  }
+  
+  return(result_df)
+
+}
+
+df_combined_model_inci = comb_models(df = df_comb_inci, type = "inci", max_lag = 3)
+df_combined_model_prop = comb_models(df = df_comb_inci_prop, type = "prop", max_lag = 3)
+```
+
+# Time Series Analysis
+
+The following section contains the codes for time series analysis. Data was imported as follows;
+
+```{r}
+source('clean_tseries_data.R')
+```
+
+Then we test for stationarity as follows;\
+
+```{r}
+# Testing for stationary ---------------------------------------------------------------------------
+# Test for human incidence
+adf.test(df_complete1$human_incidence) # Not stationary
+
+# Test for animal incidence
+adf.test(df_complete1$animal_incidence)
+```
+
+\
+Lag 3 had the highest correlation so we lagged the time series at lag 3.\
+\
+
+```{r}
+# Lagging ------------------------------------------------------------
+
+df2.1 <- df_complete1 |>
+  mutate(date = as.Date(date),
+         animal_incidence = lag(animal_incidence, 3)
+         ) |>
+  na.omit() |> 
+  distinct(date, .keep_all = T)
+adf.test(df2.1$human_incidence)
+
+
+df_xts1 <- as.xts(x = cbind(df2.1$human_incidence, df2.1$animal_incidence), order.by = df2.1$date) |>
+  setNames(c("human_incidence", "animal_incidence"))
+
+plot(df_xts1)
+
+# Data for train and testing -------------------------------------------------------------
+
+df_xts <- window(df_xts1, start ='2014-04-01', end = '2022-12-01')
+forecast.df <- window(df_xts1, start ='2023-01-01', end = '2023-12-01')
+
+df2 <- df2.1 |> 
+  filter(date < as.Date('2023-01-01'))
+# Our training and testing data reaches 2022-12-01
+
+
+```
+
+## Testing for several aspects of the time series
+
+### 1. Correlation of human incidence with it's past values
+
+```{r}
+# Correlation between human incidence and the previous lags
+dd = df_xts |>
+  data.frame(row.names = NULL) %>%
+  mutate(date = zoo::index(df_xts) |>
+           zoo::as.yearmon() |>
+           yearmonth()) |>
+  as_tsibble() 
+
+dd |>
+  gg_lag(human_incidence, geom = "point") +
+  theme_light()
+#> Lag 1 seems to have a strong correlation with the current value of human incidence
+
+```
+
+### 3. Decomposing the time series
+
+```{r}
+dcmp <- dd |>
+  model(stl = STL(human_incidence))
+```
+
+Below is the trend and the time series
+
+```{r}
+# The trend
+components(dcmp) |>
+  as_tsibble() |>
+  ggplot(aes(x = date)) +
+  geom_xspline(aes(y = human_incidence, colour = "Human Incidence")) +
+  geom_xspline(aes(y = trend, color = 'Trend')) +
+  labs(y = "Incidence (human cases per 1000 pop)",
+       title = "Human Brucellois incidence") +
+  theme_light() +
+  theme(
+    axis.title = element_text(color = 'black'),
+    axis.text = element_text(color = 'black'),
+    plot.title = element_text(color = 'black', hjust = .5),
+    legend.position = 'bottom'
+  ) +
+  scale_color_manual(values = c("Human Incidence" = "gray", "Trend" = "#D55E00")) +
+  labs(color = 'Series:')
+  
+```
+
+The time series seasonality
+
+```{r}
+# Seasonality
+components(dcmp) |>
+  as_tsibble() |>
+  ggplot(aes(x = date)) +
+  geom_xspline(aes(y = human_incidence, colour = "Human Incidence")) +
+  geom_xspline(aes(y = season_year, color = 'Season-year')) +
+  labs(y = "Incidence (human cases per 1000 pop)",
+       title = "Human Brucellois incidence") +
+  theme_light() +
+  theme(
+    axis.title = element_text(color = 'black'),
+    axis.text = element_text(color = 'black'),
+    plot.title = element_text(color = 'black', hjust = .5),
+    legend.position = 'bottom'
+  ) +
+  scale_color_manual(values = c("Human Incidence" = "gray", "Season-year" = "#D55E00")) +
+  labs(color = 'Series:')
+```
+
+All of them together
+
+```{r}
+# All of them together
+components(dcmp) |>
+  autoplot() +
+  theme_light()
+```
+
+Plot without seasonality and trend
+
+```{r}
+# The plot without seasonality and trend
+components(dcmp) |>
+  as_tsibble() |>
+  ggplot(aes(x = date)) +
+  #geom_xspline(aes(y = human_incidence, colour = "Human Incidence")) +
+  geom_xspline(aes(y = season_adjust - trend, color = 'Human Incidence without the seasonality')) +
+  labs(y = "Incidence (human cases per 1000 pop)",
+       title = "Human Brucellois incidence") +
+  theme_light() +
+  theme(
+    axis.title = element_text(color = 'black'),
+    axis.text = element_text(color = 'black'),
+    plot.title = element_text(color = 'black', hjust = .5),
+    legend.position = 'bottom'
+  ) +
+  scale_color_manual(values = c("Human Incidence" = "gray", "Human Incidence without the seasonality" = "#D55E00")) +
+  labs(color = 'Series:')
+
+```
+
+## Train and testing data
+
+We split our data into training and testing (80%, 20%) respectively as follows:\
+
+```{r}
+# Splitting ------------------------------------------------------------------------------
+
+# train <- window(ts_diff, start = as.Date("2014-04-01"), end = "2021-12-01")
+# test <- window(df_xts, start = as.Date("2022-01-01"), end = as.Date("2022-12-01"))
+
+# We will take 70% for training, 30% for validation.
+nrow(df_xts) # our data has 105 rows, thus 70% of this is 73 rows for training and 32 for testing.,
+# 0% is upto 2021-03-01 and then the rest for testing
+nrow_70 <- floor(.7 * nrow(df_xts))
+train <- df_xts[1:nrow_70,]
+test <- df_xts[(nrow_70 + 1):nrow(df_xts),]
+
+```
+
+The acf and pacf plot were as follows;\
+
+```{r}
+# ACF and PACF plots ---------------------------------------------------------------------
+
+acf(train$human_incidence)
+
+#> shows both trend and seasonality.
+#> The slow decrease in the ACF as the lags increase is due to the trend, while the “scalloped” shape
+#> is due to the seasonality. Time series that show no autocorrelation are called white noise. 
+
+pacf(train$human_incidence)
+
+```
+
+## Training the Models
+
+### 1. Model without the covariate
+
+The model without covariate was trained as follows;\
+\
+
+```{r}
+set.seed(123)
+model_sarima <- train |>
+  as.data.frame() %>%
+  mutate(date = row.names(.) |>
+           zoo::as.yearmon() |>
+           yearmonth()) |>
+  as_tsibble() |>
+  model(
+    ARIMA(human_incidence,
+          ic = "aic",
+          stepwise = T
+          )
+  ) |>
+  report()
+```
+
+We then forecasted and extracted values for the forecasted as follows;
+
+```{r}
+
+original_data <- df_xts |>
+  as.data.frame() %>%
+  mutate(date = row.names(.) |> ymd())
+
+fitted <- augment(model_sarima) |> 
+  as.data.frame() %>%
+  select(date, fitted =.fitted, residuals = .resid) |> 
+  mutate(date = ym(date) 
+         ) 
+
+CI <-  hilo(forecast::forecast(model_sarima, h = nrow(test))) |> 
+  as.data.frame()
+
+CI80 <- CI$`80%` |> 
+  lapply(FUN = first) |> unlist() |>
+  matrix(ncol = 3, byrow = T) |> 
+  as.data.frame() |> 
+  select(-V3) |> 
+  setNames(c("Lo80", "Hi80"))
+
+
+CI95 <- CI$`95%` |> 
+  lapply(FUN = first) |> unlist() |>
+  matrix(ncol = 3, byrow = T) |> 
+  as.data.frame() |> 
+  select(-V3) |> 
+  setNames(c("Lo95", "Hi95"))
+
+forecast_data_human_sarima <-
+  data.frame(
+    date = row.names(as.data.frame(test)) |>
+      ymd(),
+    PointForecast = CI$.mean,
+    CI80,
+    CI95
+  )
+```
+
+The above data gave the following plot
+
+```{r}
+forecast_plot_human_sarima <- ggplot(original_data) +
+  geom_ribbon(data = forecast_data_human_sarima, aes(date, ymin = Lo95, ymax = Hi95, fill = "95% CI"), alpha = 0.1) +
+  geom_xspline(data = fitted, aes(date, y = fitted, color = "fitted")) +
+  geom_ribbon(data = forecast_data_human_sarima, aes(date, ymin = Lo80, ymax = Hi80, fill = "80% CI"), alpha = .4) +
+  geom_xspline(data = forecast_data_human_sarima, aes(date, PointForecast, colour = "Predicted human incidence")) +
+  geom_xspline(aes(date, human_incidence, color = "Actual human incidence")) +
+  theme_light() +
+  theme(axis.text = element_text(color = "black"),
+        axis.title = element_text(color = "black"),
+        axis.ticks = element_line(color = "black"),
+        legend.position = "bottom",
+        plot.title = element_text(color = "black", hjust = .5)
+        ) +
+  xlab("Year") +
+  ylab("Human Incidence") +
+  scale_color_manual(
+    values = c(
+      "Predicted human incidence" = "red",
+      "Actual human incidence" = "black",
+      'fitted' = 'blue'
+    )
+  ) +
+  scale_fill_manual(
+    values = c(
+      "95% CI" = "blue",
+      "80% CI" = "blue"
+    ),
+        guide = guide_legend(
+      override.aes = list(alpha = c(0.25, 1))
+    )
+  ) +
+  labs(col = NULL, fill = NULL)
+#plotly::ggplotly( forecast_plot_human_sarima)
+forecast_plot_human_sarima
+
+```
+
+The model metrics were calculated as follows:\
+
+```{r}
+
+# Accuracy
+test_acc <- test |>
+  as.data.frame() %>%
+  mutate(date = rownames(.) |> ymd() |> yearmonth()) |>
+  as_tsibble() |>
+  select(-animal_incidence)
+  
+model_sarima_accuracy <- accuracy(forecast::forecast(model_sarima, h = nrow(test)), test_acc,
+  measures = list(
+    point_accuracy_measures,
+    interval_accuracy_measures,
+    distribution_accuracy_measures
+  )
+)
+
+model_sarima_accuracy
+
+```
+
+### 2. Model with the covariate
+
+The model without covariate was trained as follows;\
+
+```{r}
+set.seed(123)
+model_sarima_covariates <- train |>
+  as.data.frame() %>%
+  mutate(date = row.names(.) |>
+           zoo::as.yearmon() |>
+           yearmonth()) |>
+  as_tsibble() |>
+  model(ARIMA(
+    human_incidence ~ animal_incidence,
+    ic = "aic",
+    stepwise = T
+  )) |>
+  report()
+
+```
+
+We then forecasted and extracted values for the forecasted as follows;
+
+```{r}
+fitted_covariate <- augment(model_sarima_covariates) |> 
+  as.data.frame() %>%
+  select(date, fitted =.fitted, residuals = .resid) |> 
+  mutate(date = ym(date) 
+  ) 
+
+test_tsibble <- test |> 
+  as.data.frame() %>%
+  mutate(date = rownames(.) |> ymd() |> yearmonth()) |> 
+  as_tsibble() |>
+  select(-human_incidence)
+  
+
+CI_covariate <- model_sarima_covariates |>
+  forecast(new_data = test_tsibble) |> 
+  hilo()
+
+CI_covariate80 <- CI_covariate$`80%` |> 
+  lapply(FUN = first) |> 
+  unlist() |>
+  matrix(ncol = 3, byrow = T) |> 
+  as.data.frame() |> 
+  select(-V3) |> 
+  setNames(c("Lo80", "Hi80"))
+
+
+CI_covariate95 <- CI_covariate$`95%` |> 
+  lapply(FUN = first) |> unlist() |>
+  matrix(ncol = 3, byrow = T) |> 
+  as.data.frame() |> 
+  select(-V3) |> 
+  setNames(c("Lo95", "Hi95"))
+
+forecast_data_covariate_sarima <-
+  data.frame(
+    date = row.names(as.data.frame(test)) |>
+      ymd(),
+    PointForecast = CI_covariate$.mean,
+    CI_covariate80,
+    CI_covariate95
+  )
+
+```
+
+The above data gave the following plot
+
+```{r}
+forecast_plot_covariate_sarima <- ggplot(original_data) +
+  geom_ribbon(data = forecast_data_covariate_sarima, aes(date, ymin = Lo95, ymax = Hi95, fill = "95% CI"), alpha = 0.1) +
+  geom_ribbon(data = forecast_data_covariate_sarima, aes(date, ymin = Lo80, ymax = Hi80, fill = "80% CI"), alpha = .4) +
+  geom_xspline(data = fitted_covariate, aes(date, y = fitted, color = "Fitted")) +
+  geom_xspline(data = forecast_data_covariate_sarima, aes(date, PointForecast, colour = "Predicted human incidence")) +
+  geom_xspline(aes(date, human_incidence, color = "Actual human incidence")) +
+  theme_light() +
+  theme(axis.text = element_text(color = "black"),
+        axis.title = element_text(color = "black"),
+        axis.ticks = element_line(color = "black"),
+        legend.position = "bottom",
+                plot.title = element_text(color = "black", hjust = .5)
+        ) +
+  xlab("Year") +
+  ylab("Human Incidence") +
+  scale_color_manual(
+    values = c(
+      "Predicted human incidence" = "red",
+      "Actual human incidence" = "black",
+      'Fitted' = 'blue'
+    )
+  ) +
+  scale_fill_manual(
+    values = c(
+      "95% CI" = "blue",
+      "80% CI" = "blue"
+    ),
+    guide = guide_legend(
+      override.aes = list(alpha = c(0.25, 1))
+    )
+  ) +
+  labs(col = NULL, fill = NULL)
+forecast_plot_covariate_sarima
+```
+
+The model metrics were calculated as follows:
+
+```{r}
+
+model_sarima_covariates_coefficients <-
+  tidy(model_sarima_covariates) |>
+  select(-.model) %>%
+  as_tibble() %>%
+  group_by(term) 
+
+
+# Accuracy
+test_acc2 <- test |>
+  as.data.frame() %>%
+  mutate(date = rownames(.) |> ymd() |> yearmonth()) |>
+  as_tsibble() |>
+  select(-animal_incidence)
+
+model_sarima_covariate_accuracy <-
+  accuracy(
+    model_sarima_covariates |>
+      forecast(new_data = test_tsibble) ,
+    test_acc,
+    measures = list(
+      point_accuracy_measures,
+      interval_accuracy_measures,
+      distribution_accuracy_measures
+    )
+  )
+
+model_sarima_covariate_accuracy
+
+```
+
+### 3. Comparison of the Model with and Without a covariate
+
+```{r}
+
+model_sarima_accuracy2 <- model_sarima_accuracy |> 
+    mutate(model = "Model without Covariate") |> 
+  select(-.model, -.type) |> 
+  select(model, RMSE, MAE, MAPE)
+
+model_sarima_covariate_accuracy2 <- model_sarima_covariate_accuracy |> 
+  mutate(model = "Model with Covariate") |> 
+  select(-.model, -.type) |> 
+  select(model, RMSE, MAE, MAPE)
+
+metrics_df <- rbind(model_sarima_accuracy2, model_sarima_covariate_accuracy2)
+write.csv(metrics_df, "metrics_df.csv", row.names = F)
+
+kableExtra::kable(metrics_df)
+
+write.csv(metrics_df, "metrics_df_70_30.csv", row.names = F)
+
+
+#> We have saved the metrics df for several training set 70-30, 75-25, 80-20
+
+```
+
+The model with the covariate was better, based on the RMSE, MAE and MAPE. Thus, we used this to forecast the values for the year 2023,
+
+## Full model for forecasting 2023 data
+
+we fit a time series data with animal incidence as the covariate with data from 2014 to 2022 and then use it to forecast 2023 human brucellosis incidence. The model was fitted as follows;\
+\
+
+```{r}
+
+# Time series so that we can be able to forecast 2023.
+set.seed(123)
+full.model <- df_xts |> 
+  as.data.frame() %>%
+  mutate(date = row.names(.) |>
+           zoo::as.yearmon() |>
+           yearmonth()) |>
+  as_tsibble() |>
+  model(ARIMA(
+    human_incidence ~ animal_incidence,
+    ic = "aic",
+    stepwise = T
+  )) |>
+  report()
+
+```
+
+Then, the forecasted data is curated as follows;
+
+```{r}
+fitted_full <- augment(full.model) |> 
+  as.data.frame() %>%
+  select(date, fitted =.fitted, residuals = .resid) |> 
+  mutate(date = ym(date) 
+  ) 
+
+original_data2 <-   df_xts |>
+  rbind(forecast.df) |> 
+  as.data.frame() %>%
+  mutate(date = row.names(.) |> ymd())
+
+test_tsibble <- forecast.df |> 
+  as.data.frame() %>%
+  mutate(date = rownames(.) |> ymd() |> yearmonth()) |> 
+  as_tsibble() |>
+  select(-human_incidence)
+
+
+CI_full <- full.model |>
+  forecast(new_data = test_tsibble) |> 
+  hilo()
+
+CI_full80 <- CI_full$`80%` |> 
+  lapply(FUN = first) |> 
+  unlist() |>
+  matrix(ncol = 3, byrow = T) |> 
+  as.data.frame() |> 
+  select(-V3) |> 
+  setNames(c("Lo80", "Hi80"))
+
+
+CI_full95 <- CI_full$`95%` |> 
+  lapply(FUN = first) |> unlist() |>
+  matrix(ncol = 3, byrow = T) |> 
+  as.data.frame() |> 
+  select(-V3) |> 
+  setNames(c("Lo95", "Hi95"))
+
+forecast_data_full_sarima <-
+  data.frame(
+    date = row.names(as.data.frame(forecast.df)) |>
+      ymd(),
+    PointForecast = CI_full$.mean,
+    CI_full80,
+    CI_full95
+  )
+```
+
+The above gave the following results\
+
+```{r}
+
+forecast_plot_full_sarima <- ggplot(original_data2) +
+  geom_ribbon(data = forecast_data_full_sarima, aes(date, ymin = Lo95, ymax = Hi95, fill = "95% CI"), alpha = 0.1) +
+  geom_ribbon(data = forecast_data_full_sarima, aes(date, ymin = Lo80, ymax = Hi80, fill = "80% CI"), alpha = .4) +
+  geom_xspline(data = fitted_full, aes(date, y = fitted, color = "Fitted")) +
+  geom_xspline(data = forecast_data_full_sarima, aes(date, PointForecast, colour = "Predicted human incidence")) +
+  geom_xspline(aes(date, human_incidence, color = "Actual human incidence")) +
+  theme_light() +
+  theme(axis.text = element_text(color = "black"),
+        axis.title = element_text(color = "black"),
+        axis.ticks = element_line(color = "black"),
+        legend.position = "bottom",
+        plot.title = element_text(color = "black", hjust = .5)
+  ) +
+  xlab("Year") +
+  ylab("Human Incidence") +
+  scale_color_manual(
+    values = c(
+      "Predicted human incidence" = "red",
+      "Actual human incidence" = "black",
+      'Fitted' = 'blue'
+    )
+  ) +
+  scale_fill_manual(
+    values = c(
+      "95% CI" = "blue",
+      "80% CI" = "blue"
+    ),
+    guide = guide_legend(
+      override.aes = list(alpha = c(0.25, 1))
+    )
+  ) +
+  labs(col = NULL, fill = NULL)
+forecast_plot_full_sarima
+
+```
+
+The model coefficients are;
+
+```{r}
+full.model_coefficients <-
+  tidy(full.model) |>
+  select(-.model) %>%
+  as_tibble() %>%
+  group_by(term)
+knitr::kable(full.model_coefficients)
+```
+
+The results of the forecasted values versus the actual, together with the upper 95% CI were as follows;
+
+```{r}
+# Forecasted and Actual data
+fore.actual <- forecast_data_full_sarima |> 
+  mutate(Actual = as.vector(forecast.df$human_incidence),
+         Date = as.Date(date) |> 
+           zoo::as.yearmon() |>
+           yearmonth()) |> 
+  select(Date = Date, 
+         Forecasted = PointForecast,
+         Actual,
+         `Lower 95% CI` = Lo95,
+         `Upper 95% CI` = Hi95,
+         ) |> 
+  mutate(across(where(is.numeric), ~as.numeric(round(., 3)))) 
+knitr::kable(fore.actual)
+```
+
+## Supplementary Plots
+
+```{r}
+
+# Supplementary plots --------------------------------------------------------------------
+
+
+forecast_plot_covariate_sarima_title <- forecast_plot_covariate_sarima +
+  ggtitle("Forecast with exogenous variable")
+
+dev.off()
+ggsave(
+  "images/forecast_plot_covariate_sarima_title.png",
+  width = 13,
+  height = 6,
+  dpi = 1e3
+)
+
+require(patchwork)
+all <- forecast_plot_human_sarima/forecast_plot_covariate_sarima
+all
+dev.off()
+ggsave(
+  "images/all_without_title_sarima.png",
+  width = 13,
+  height = 10,
+  dpi = 1e3
+)
+
+forecast_plot_human_sarima_title <- forecast_plot_human_sarima +
+  ggtitle("Forecast without exogenous variable")
+
+all_title <- forecast_plot_human_sarima_title/forecast_plot_covariate_sarima_title
+all_title
+dev.off()
+ggsave(
+  "images/all_with_title_sarima.png",
+  width = 13,
+  height = 10,
+  dpi = 1e3
+)
+
+
+```

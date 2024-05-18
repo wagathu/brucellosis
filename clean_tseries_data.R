@@ -13,17 +13,20 @@ if (require(pacman)) {
     tsibble,
     readxl,
     stringi,
-    stringr
+    stringr,
+    forecast
   )
 }
 
 # Importing data -------------------------------------------------------------------------
 
-df <- fread("combined_incidence.csv")
+df1 <- fread("combined_incidence.csv")
 df2022_animal <- read_excel("animal_brucellosis_2022.xlsx")
 df2023_animal <- read_excel("animal_brucellosis_2023.xlsx")
 human_22_23 <- fread('brucella_2022_2023.csv')
 
+df <- df1 |> 
+  filter(date < '2022-01-01')
 
 human_pop <- fread("kenya_pop_2020_2025.csv") |> 
   filter(Year == "2022") |> 
@@ -85,6 +88,7 @@ df22 <- df2022_animal |>
   rowwise() |> 
   mutate(animal_cases = sum(Cattle, Goats, Sheep, Camel, na.rm = T)) |> 
   cbind(animal_pop) |> 
+  rowwise() |> 
   mutate(
     animal_pop = sum(cattle_pop, goats_pop, sheep_pop, camels_pop, na.rm = T),
     animal_incidence = animal_cases/animal_pop*1e6,
@@ -127,6 +131,7 @@ df23 <- df2023_animal |>
   rowwise() |> 
   mutate(animal_cases = sum(Cattle, Goats, Sheep, Camel, na.rm = T)) |> 
   cbind(animal_pop) |> 
+  rowwise() |> 
   mutate(
     animal_pop = sum(cattle_pop, goats_pop, sheep_pop, camels_pop, na.rm = T),
     animal_incidence = animal_cases/animal_pop*1e6,
@@ -137,8 +142,6 @@ all_y <- df22 |>
   rbind(df23) |> 
   merge(df22_human, by = "date") |> 
   select(date, human_incidence, animal_incidence)
-
-
 
 df_complete1 <- df |> 
   select(-V1) |> 

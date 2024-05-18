@@ -24,6 +24,9 @@ df2022_animal <- read_excel("animal_brucellosis_2022.xlsx")
 df2023_animal <- read_excel("animal_brucellosis_2023.xlsx")
 human_22_23 <- fread('brucella_2022_2023.csv')
 
+df <- df |> 
+  filter(date < '2022-01-01')
+
 
 human_pop <- fread("kenya_pop_2020_2025.csv") |> 
   filter(Year == "2022") |> 

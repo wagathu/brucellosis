@@ -3,7 +3,13 @@ Murang'a,(Intercept),0.107,NA,NA,NA,NA,NA,NA
 Murang'a,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
 Mandera,(Intercept),0.347,NA,NA,NA,NA,NA,NA
 Mandera,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
-Vihiga,(Intercept),0.712,NA,NA,NA,NA,NA,NA
-Vihiga,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
-West Pokot,(Intercept),4.902,NA,NA,NA,NA,NA,NA
-West Pokot,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Vihiga,(Intercept),0.412,0.044,9.414,0.067,0.34,0.484,Significant
+Vihiga,Animal Incidence,1.086,0.275,3.953,0.158,0.634,1.538,Significant
+West Pokot,(Intercept),4.105,NA,NA,NA,NA,NA,NA
+West Pokot,Animal Incidence,0.261,NA,NA,NA,NA,NA,NA
+Marsabit,(Intercept),1.264,NA,NA,NA,NA,NA,NA
+Marsabit,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Elgeyo Marakwet,(Intercept),3.33,NA,NA,NA,NA,NA,NA
+Elgeyo Marakwet,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Embu,(Intercept),0.91,NA,NA,NA,NA,NA,NA
+Embu,Animal Incidence,NA,NA,NA,NA,NA,NA,NA

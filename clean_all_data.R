@@ -216,7 +216,7 @@ df_2022 <- df_22_animal |>
     ),
     count = as.numeric(count)
   ) |>
-  filter(`Species Affected` %in% c("Cattle", "Goats", "Camel", "Sheep")) |>
+  filter(`Species Affected` %in% c("Cattle", "Goats", "Camel", "Sheep")) |> 
   mutate(
     `Species Affected` = case_when(
       `Species Affected` == 'Cattle' ~ 'catt',
@@ -230,9 +230,7 @@ df_2022 <- df_22_animal |>
       diagnosis == 'Clinical' ~ 'Clinically confirmed'
     ),
     diseases = str_to_sentence(diseases)
-  ) |>
-  ungroup() |>
-  distinct() |>
+  ) |> 
   pivot_wider(
     id_cols = c('county', 'year', "date", 'diagnosis', 'diseases'),
     values_from = count,
@@ -246,11 +244,12 @@ df_2022 <- df_22_animal |>
     'diagnosis',
     'diseases',
     str_to_lower(paste0(colnames(.[, 6:9]), '_cases'))
-  )) |>
-  cbind(animal_pop2019) |>
+  )) |> 
+  mutate(county = str_to_title(county)) |> 
   merge(df22_human |>
-          filter(date  <= as.Date('2022-12-01')),
-        by = c('county', 'date', 'diagnosis', 'year'), all.y = T) |>
+          filter(year == 2022),
+        by = c('county', 'date', 'diagnosis', 'year'), all.y = T) |> 
+  cbind(animal_pop2019) |> 
   select(
     county,
     year,

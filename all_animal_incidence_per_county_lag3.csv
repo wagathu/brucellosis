@@ -9,5 +9,11 @@ Nyamira,(Intercept),1.315,NA,NA,NA,NA,NA,NA
 Nyamira,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
 Vihiga,(Intercept),0.836,NA,NA,NA,NA,NA,NA
 Vihiga,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
-Bungoma,(Intercept),3.268,NA,NA,NA,NA,NA,NA
-Bungoma,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Bungoma,(Intercept),2.211,0.02,108.49,0.006,2.178,2.245,Significant
+Bungoma,Animal Incidence,3.296,0.11,29.967,0.021,3.115,3.477,Significant
+Marsabit,(Intercept),1.076,0.243,4.434,0.141,0.677,1.475,Significant
+Marsabit,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Embu,(Intercept),0.91,NA,NA,NA,NA,NA,NA
+Embu,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
+Isiolo,(Intercept),1.197,NA,NA,NA,NA,NA,NA
+Isiolo,Animal Incidence,NA,NA,NA,NA,NA,NA,NA

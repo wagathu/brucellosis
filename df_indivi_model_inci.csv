@@ -1,17 +1,17 @@
 "","effect","variable","log IRR","IRR","std.error","statistic","p.value","conf_low","conf_high","lag","nobs","AIC","BIC","significance"
-"1","fixed","(Intercept)",2.2108,9.123,0.1932,11.4404,0,1.8929,2.5287,0,94,576.2942,589.0107,"Significant"
-"2","fixed","Cattle incidence",-4e-04,0.9996,3e-04,-1.3001,0.1936,-9e-04,1e-04,0,94,576.2942,589.0107,"Not Significant"
-"3","fixed","Goat Incidence",0.001,1.001,0.001,0.9869,0.3237,-7e-04,0.0026,0,94,576.2942,589.0107,"Not Significant"
-"4","Random","Sd - Random Intercept",1.0456,NA,NA,NA,NA,NA,NA,0,94,576.2942,589.0107,NA
-"5","fixed","(Intercept)",2.1816,8.8606,0.2005,10.8828,0,1.8518,2.5114,1,93,571.9837,584.6467,"Significant"
-"6","fixed","Cattle incidence",-2e-04,0.9998,3e-04,-0.6969,0.4859,-6e-04,2e-04,1,93,571.9837,584.6467,"Not Significant"
-"7","fixed","Goat Incidence",-9e-04,0.9991,0.0011,-0.8188,0.4129,-0.0027,9e-04,1,93,571.9837,584.6467,"Not Significant"
-"8","Random","Sd - Random Intercept",1.0987,NA,NA,NA,NA,NA,NA,1,93,571.9837,584.6467,NA
-"9","fixed","(Intercept)",2.1927,8.959,0.1997,10.9813,0,1.8642,2.5211,2,92,559.8762,572.4852,"Significant"
-"10","fixed","Cattle incidence",-3e-04,0.9997,3e-04,-1.0459,0.2956,-8e-04,2e-04,2,92,559.8762,572.4852,"Not Significant"
-"11","fixed","Goat Incidence",0.0012,1.0012,6e-04,1.8478,0.0646,1e-04,0.0022,2,92,559.8762,572.4852,"Significant"
-"12","Random","Sd - Random Intercept",1.0923,NA,NA,NA,NA,NA,NA,2,92,559.8762,572.4852,NA
-"13","fixed","(Intercept)",2.1337,8.4458,0.2071,10.3011,0,1.7929,2.4744,3,91,553.9196,566.4739,"Significant"
-"14","fixed","Cattle incidence",0,1,1e-04,-0.4167,0.6769,-2e-04,1e-04,3,91,553.9196,566.4739,"Not Significant"
-"15","fixed","Goat Incidence",0,1,6e-04,0.0652,0.948,-0.001,0.0011,3,91,553.9196,566.4739,"Not Significant"
-"16","Random","Sd - Random Intercept",1.1223,NA,NA,NA,NA,NA,NA,3,91,553.9196,566.4739,NA
+"1","fixed","(Intercept)",2.2396,9.3893,0.1738,12.8853,0,1.9537,2.5255,0,127,812.2609,826.4818,"Significant"
+"2","fixed","Cattle incidence",-5e-04,0.9995,4e-04,-1.2482,0.2119,-0.0011,1e-04,0,127,812.2609,826.4818,"Not Significant"
+"3","fixed","Goat Incidence",0.0019,1.0019,0.0013,1.4384,0.1503,-3e-04,0.004,0,127,812.2609,826.4818,"Not Significant"
+"4","Random","Sd - Random Intercept",0.9714,NA,NA,NA,NA,NA,NA,0,127,812.2609,826.4818,NA
+"5","fixed","(Intercept)",2.1994,9.0199,0.1811,12.1416,0,1.9014,2.4974,1,126,809.7892,823.9706,"Significant"
+"6","fixed","Cattle incidence",-1e-04,0.9999,3e-04,-0.2314,0.817,-5e-04,4e-04,1,126,809.7892,823.9706,"Not Significant"
+"7","fixed","Goat Incidence",0,1,0.0014,0.0206,0.9836,-0.0023,0.0023,1,126,809.7892,823.9706,"Not Significant"
+"8","Random","Sd - Random Intercept",1.0291,NA,NA,NA,NA,NA,NA,1,126,809.7892,823.9706,NA
+"9","fixed","(Intercept)",2.2188,9.1966,0.1812,12.242,0,1.9207,2.517,2,125,801.797,815.9386,"Significant"
+"10","fixed","Cattle incidence",-2e-04,0.9998,3e-04,-0.6918,0.4891,-8e-04,3e-04,2,125,801.797,815.9386,"Not Significant"
+"11","fixed","Goat Incidence",-2e-04,0.9998,0.0014,-0.1277,0.8984,-0.0025,0.0022,2,125,801.797,815.9386,"Not Significant"
+"12","Random","Sd - Random Intercept",1.028,NA,NA,NA,NA,NA,NA,2,125,801.797,815.9386,NA
+"13","fixed","(Intercept)",2.1658,8.7215,0.1859,11.6481,0,1.8599,2.4717,3,124,791.9001,806.0015,"Significant"
+"14","fixed","Cattle incidence",1e-04,1.0001,1e-04,0.466,0.6412,-2e-04,3e-04,3,124,791.9001,806.0015,"Not Significant"
+"15","fixed","Goat Incidence",-9e-04,0.9991,0.0015,-0.5951,0.5518,-0.0033,0.0015,3,124,791.9001,806.0015,"Not Significant"
+"16","Random","Sd - Random Intercept",1.0471,NA,NA,NA,NA,NA,NA,3,124,791.9001,806.0015,NA
