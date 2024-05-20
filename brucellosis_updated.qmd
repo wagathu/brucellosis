@@ -11,8 +11,6 @@ editor: visual
 
 ## Data Processing
 
-dfghjkl
-
 ```{r}
 source('clean_all_data.R')
 ```
@@ -39,7 +37,8 @@ numeric_columns %>%
 df_incidence2 <- df_incidence2.1 |> 
   mutate(
     catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
-    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
+    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases),
+    shp_cases = ifelse(shp_cases > 12, round(mean(shp_cases, na.rm = T)), shp_cases)
   ) |> 
   mutate(date = as.Date(date))
 
@@ -149,7 +148,13 @@ df_incidence2_trend <- df_incidence2.1 |>
          sheep_pop, 
          cam_pop) |>
   mutate(year = year(as.Date(date))) |> 
-  merge(pop, by = c("county", "year")) 
+  merge(pop, by = c("county", "year")) |> 
+    mutate(
+    catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
+    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases),
+    shp_cases = ifelse(shp_cases > 12, round(mean(shp_cases, na.rm = T)), shp_cases)
+  ) 
+
 
 df_tot_cases_trend <- df_incidence2_trend |>
   group_by(date) |>
@@ -337,6 +342,11 @@ humans_plt <- trend_data %>%
   xlab("Year") +
   labs(col = "Species", title = "Incidence rate for humans")
 humans_plt
+
+
+humans_plt/species_plt
+dev.off()
+ggsave('images/humans_animal_trend.png', dpi = 1e3, bg = NULL, height = 10, width = 15)
 
 ```
 
