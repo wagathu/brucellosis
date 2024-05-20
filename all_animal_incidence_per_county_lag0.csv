@@ -77,8 +77,8 @@ Laikipia,(Intercept),0.757,NA,NA,NA,NA,NA,NA
 Laikipia,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
 Kajiado,(Intercept),0.282,NA,NA,NA,NA,NA,NA
 Kajiado,Animal Incidence,3.258,NA,NA,NA,NA,NA,NA
-Marsabit,(Intercept),1.178,0.074,15.966,0,1.056,1.299,Significant
-Marsabit,Animal Incidence,-0.027,0.039,-0.695,0.501,-0.09,0.037,Not Significant
+Marsabit,(Intercept),1.174,0.074,15.936,0,1.053,1.295,Significant
+Marsabit,Animal Incidence,-0.022,0.039,-0.578,0.575,-0.086,0.041,Not Significant
 Elgeyo Marakwet,(Intercept),3.825,0.495,7.728,0.082,3.011,4.639,Significant
 Elgeyo Marakwet,Animal Incidence,NA,NA,NA,NA,NA,NA,NA
 Homa Bay,(Intercept),1.032,NA,NA,NA,NA,NA,NA

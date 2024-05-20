@@ -580,6 +580,12 @@ humans_sm_plt <- trend_data_smoothed |>
   labs(col = "Species", title = "Smoothed incidence rate for humans")
 humans_sm_plt
 
+humans_sm_plt/species_sm_plt_points
+
+dev.off()
+ggsave('images/humans_animal_smoothed_trend.png', dpi = 1e3, bg = NULL, height = 10, width = 15)
+
+
 humans_sm_plt_nopoints <- trend_data_smoothed |> 
   filter(name == "Human Incidence") |> 
   ggplot(aes(x = date)) +

@@ -89,11 +89,11 @@ Mandera,Cattle incidence,0.106,0.063,1.682,0.096,0.002,0.209,Significant
 Mandera,Goat Incidence,-0.035,0.13,-0.267,0.79,-0.248,0.179,Not Significant
 Mandera,Sheep incidence,0.92,0.802,1.147,0.254,-0.399,2.239,Not Significant
 Mandera,Camel incidence,NA,NA,NA,NA,NA,NA,NA
-Marsabit,(Intercept),1.243,0.048,26.094,0,1.164,1.321,Significant
-Marsabit,Cattle incidence,-0.542,1.728,-0.313,0.755,-3.385,2.301,Not Significant
-Marsabit,Goat Incidence,0.015,0.162,0.092,0.927,-0.252,0.282,Not Significant
-Marsabit,Sheep incidence,-0.149,0.253,-0.587,0.558,-0.565,0.268,Not Significant
-Marsabit,Camel incidence,-0.195,1.104,-0.177,0.86,-2.012,1.621,Not Significant
+Marsabit,(Intercept),1.241,0.048,25.867,0,1.162,1.32,Significant
+Marsabit,Cattle incidence,-1.021,1.662,-0.614,0.54,-3.756,1.713,Not Significant
+Marsabit,Goat Incidence,0.011,0.205,0.052,0.958,-0.326,0.348,Not Significant
+Marsabit,Sheep incidence,0.11,1.747,0.063,0.95,-2.763,2.984,Not Significant
+Marsabit,Camel incidence,-0.168,1.405,-0.12,0.905,-2.479,2.142,Not Significant
 Meru,(Intercept),0.315,0.018,17.051,0,0.285,0.346,Significant
 Meru,Cattle incidence,0.122,0.12,1.016,0.312,-0.075,0.319,Not Significant
 Meru,Goat Incidence,NA,NA,NA,NA,NA,NA,NA
