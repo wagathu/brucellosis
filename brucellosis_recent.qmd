@@ -129,7 +129,8 @@ df_county <- df_incidence2.1 |>
   dplyr::select(county, contains("cases")) |> 
   mutate(
     catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
-    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
+    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases),
+    shp_cases = ifelse(shp_cases > 12, round(mean(shp_cases, na.rm = T)), shp_cases)
   ) |> 
   group_by(county) |> 
   summarise(across(where(is.numeric), ~round(sum(., na.rm = T))))
@@ -657,7 +658,7 @@ animal_sm_plt
 
 ```{r Descriptive statistics}
 
-table1.1 <- df_incidence2.1 |>
+table1.1 <- df_incidence2 |>
   dplyr::select(county, diagnosis, contains("cases")) |>
   mutate(
     catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
@@ -796,13 +797,13 @@ write.csv(df_1 %>%
 ```{r The spatial analysis/plotting}
 
 # Cases per year per county
-df_tot_cases_spatial <- df_incidence2.1 |>
+df_tot_cases_spatial <- df_incidence2 |>
   group_by(year = year(as.Date(date)), county) |>
   summarise(across(contains("cases"), ~ sum(., na.rm = T))) |>
   mutate(across(contains('cases'), ~ ifelse(. == 0, NA, .)))
 
 # Population per year, per county
-df_pop_spatial <- df_incidence2.1 |>
+df_pop_spatial <- df_incidence2 |>
   dplyr::select(date, county, contains("pop")) %>%
   distinct(.) |>
   as_tibble() |>
@@ -811,7 +812,7 @@ df_pop_spatial <- df_incidence2.1 |>
   mutate(across(contains('cases'), ~ ifelse(. == 0, NA, .)))
 
 # Individual Cases per year per county month
-df_tot_cases_spatial_month <- df_incidence2.1 |>
+df_tot_cases_spatial_month <- df_incidence2 |>
   group_by(date, county) |>
   summarise(across(contains("cases"), ~ sum(., na.rm = T))) |>
   mutate(year = year(as.Date(date))) |>
@@ -862,7 +863,7 @@ df_spatial_cum_month <- df_tot_cases_spatial_month |>
 write.csv(df_spatial_cum_month, "df_spatial_cum_month.csv")
 
 # Population per year, per county
-df_pop_spatial <- df_incidence2.1 |>
+df_pop_spatial <- df_incidence2 |>
   dplyr::select(date, county, contains("pop")) %>%
   distinct(.) |>
   as_tibble() |>
@@ -883,6 +884,25 @@ df_spatial <- df_tot_cases_spatial |>
   dplyr::select(year, county, contains("incidence")) |>
   #mutate(across(is.numeric, ~ifelse(is.na(.), 0, .))) |>
   as_tibble()
+
+# Calculating the descriptives
+county_desc_cases <- df_incidence2 |> 
+  select(county, contains('cases')) |> 
+  group_by(county) |> 
+  summarise(across(contains('cases'), ~sum(., na.rm = T)))
+
+county_desc_incidence <- df_spatial |> 
+  select(county, contains('incidence')) |> 
+  group_by(county) |> 
+  summarise(across(contains('incidence'), ~sum(., na.rm = T)))
+
+county_desc_incidence_combined <- df_spatial_cum |> 
+  group_by(county) |> 
+  summarise(across(contains('incidence'), ~sum(., na.rm = T)))
+
+fwrite(county_desc_cases, 'county_desc_cases.csv')
+fwrite(county_desc_incidence, 'county_desc_incidence.csv')
+fwrite(county_desc_incidence_combined, 'county_desc_incidence_combined.csv')
 
 df_spatial_cum <- df_tot_cases_spatial |>
   merge(df_pop_spatial, by = c("year", "county")) |>
@@ -957,11 +977,13 @@ animals <- df_spatial_merged_cum |>
   ) %>%
     factor(
       .,
-      levels = c("0",  # These are the quantiles
-                 "[0.0074,0.278]",
-                 "(0.278,1.37]" ,
-                 "(1.37,4.26]" ,
-                 "(4.26,336]")
+      levels = c(
+        "0",  
+        "[0.0074,0.256]",
+        "(0.256,1.29]",
+        "(1.29,4]" ,
+        "(4,67.4]" 
+        )
     )) |>
   ggplot() +
   geom_sf(aes(fill = animal_incidence_range)) +
@@ -1056,9 +1078,9 @@ cattle <- df_spatial_merged |>
            factor(., levels = c(
              "0",
              "[0.0317,1.26]",
-             "(1.26,2.94]",
-             "(2.94,8.74]",
-             "(8.74,235]" 
+             "(1.26,2.8]",
+             "(2.8,8.62]",
+             "(8.62,235]"  
            ))) |> 
   ggplot() +
   geom_sf(aes(fill = catt_incidence_range)) +
@@ -1095,10 +1117,10 @@ goat <- df_spatial_merged |>
                                          as.character(goat_incidence_range)) %>%
            factor(., levels = c(
              "0",
-"[0.0178,0.259]",
-"(0.259,1.09]",
-"(1.09,6.98]" ,
-"(6.98,690]" 
+             "[0.0178,0.259]",
+             "(0.259,1.09]",
+             "(1.09,6.13]" ,
+             "(6.13,27.5]"  
            ))) |> 
   ggplot() +
   geom_sf(aes(fill = goat_incidence_range)) +
@@ -1135,10 +1157,10 @@ sheep <- df_spatial_merged |>
                                          as.character(shp_incidence_range)) %>%
            factor(., levels = c(
              "0",
-"[0.0259,0.13]",
-"(0.13,1.46]",
-"(1.46,3.85]",
-"(3.85,45.1]" 
+             "[0.0259,0.13]",
+             "(0.13,0.855]" ,
+             "(0.855,3.85]",
+             "(3.85,45.1]"
            ))) |> 
   ggplot() +
   geom_sf(aes(fill = shp_incidence_range)) +

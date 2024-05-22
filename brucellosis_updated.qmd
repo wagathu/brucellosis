@@ -129,7 +129,8 @@ df_county <- df_incidence2.1 |>
   dplyr::select(county, contains("cases")) |> 
   mutate(
     catt_cases = ifelse(catt_cases >= 69, round(mean(catt_cases, na.rm = T)), catt_cases),
-    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases)
+    goat_cases = ifelse(goat_cases > 28, round(mean(goat_cases, na.rm = T)), goat_cases),
+        shp_cases = ifelse(shp_cases > 12, round(mean(shp_cases, na.rm = T)), shp_cases)
   ) |> 
   group_by(county) |> 
   summarise(across(where(is.numeric), ~round(sum(., na.rm = T))))
@@ -796,7 +797,7 @@ write.csv(df_1 %>%
 ```{r The spatial analysis/plotting}
 
 # Cases per year per county
-df_tot_cases_spatial <- df_incidence2.1 |>
+df_tot_cases_spatial <- df_incidence2 |>
   group_by(year = year(as.Date(date)), county) |>
   summarise(across(contains("cases"), ~ sum(., na.rm = T))) |>
   mutate(across(contains('cases'), ~ ifelse(. == 0, NA, .)))
@@ -908,6 +909,11 @@ shp <- shp |>
 setdiff(shp$Name, df_spatial$county)
 setdiff(df_spatial$county, shp$Name)
 length(unique(df_spatial$county))
+
+# Descriptive statistics for counties
+df_desc_inci <- df_spatial |> 
+  group_by(county) |> 
+  summarise(across(contains('incidence'), ~mean(., na.rm = T)))
 
 # Merging
 df_spatial_merged <- df_spatial |>
